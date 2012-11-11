@@ -1,15 +1,36 @@
 using UnityEngine;
 using System.Collections;
 
-public class ObjectManager : MonoBehaviour {
-    
-	// Use this for initialization
-	void Start () {
+
+public class ObjectManager {
+	private ArrayList selectedObjects = new ArrayList();
 	
+	public void addObject(GameObject gameObject){
+		selectedObjects.Add(gameObject);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	public void removeObject(GameObject gameObject){
+		selectedObjects.Remove(gameObject);
 	}
+	
+	public void action(Action action){
+		foreach(GameObject o in selectedObjects){
+			ActionBehaviour ap = (ActionBehaviour)o.GetComponent("ActionBehaviour");
+			if(ap != null){
+				action.setGameObject(o);
+				ap.addAction(action);
+			}
+		}
+	}
+	
+	
+	
+    public static ObjectManager _instance;
+	public static ObjectManager getInstance(){
+		if(_instance == null){
+			_instance = new ObjectManager();	
+		}
+		return _instance;
+	}
+	
 }
