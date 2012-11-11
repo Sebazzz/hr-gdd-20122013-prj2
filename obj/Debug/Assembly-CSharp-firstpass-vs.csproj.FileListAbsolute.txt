@@ -1,8 +1,0 @@
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\Temp\bin\Debug\UnityEditor.dll
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\Temp\bin\Debug\UnityEngine.dll
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\Temp\bin\Debug\nunit.framework.dll
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\obj\Debug\Assembly-CSharp-firstpass.dll
-C:\Users\Robin\projects\hr-gdd-20122013-prj2\obj\Debug\Assembly-CSharp-firstpass.pdb
