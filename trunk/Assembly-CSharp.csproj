@@ -44,9 +44,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Action.cs" />
+     <Compile Include="Assets\Scripts\ActionBehaviour.cs" />
+     <Compile Include="Assets\Scripts\ActionBuilding.cs" />
+     <Compile Include="Assets\Scripts\ActionWalk.cs" />
      <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\ObjectManager.cs" />
      <Compile Include="Assets\Scripts\RTSCameraBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SelectableBehaviour.cs" />
+     <Compile Include="Assets\Scripts\StateManager.cs" />
      <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
      <None Include="Assets\Standard Assets\Toon Shading\Sources\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
