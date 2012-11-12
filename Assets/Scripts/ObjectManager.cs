@@ -28,7 +28,7 @@ public class ObjectManager : ScriptableObject {
     public static ObjectManager _instance;
 	public static ObjectManager getInstance(){
 		if(_instance == null){
-			_instance = new ObjectManager();	
+			_instance = ScriptableObject.CreateInstance<ObjectManager>();	
 		}
 		return _instance;
 	}
