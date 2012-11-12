@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 
-public class ObjectManager {
+public class ObjectManager : ScriptableObject {
 	private ArrayList selectedObjects = new ArrayList();
 	
 	public void addObject(GameObject gameObject){
