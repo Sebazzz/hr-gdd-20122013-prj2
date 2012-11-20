@@ -18,10 +18,7 @@ public class RTSCameraBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		HandleCameraMove ();
-        
-		HandleCharacterSelection ();
-		
+		HandleCameraMove ();		
 		HandleCameraZoom ();
 	}
 
@@ -38,14 +35,6 @@ public class RTSCameraBehaviour : MonoBehaviour {
 		}
 	}
 
-	void HandleCharacterSelection ()
-	{
-		if(Input.GetMouseButtonDown(1)){
-			ShootRay();
-		}
-		
-		
-	}
 
 	void HandleCameraMove ()
 	{
@@ -58,26 +47,7 @@ public class RTSCameraBehaviour : MonoBehaviour {
 			cameraTransform.rotation = Quaternion.Lerp(cameraTransform.rotation, Quaternion.Euler(new Vector3(35f, cameraRotationY, 0f)), 1f);
 		}
 	}
-	
-	void ShootRay(){
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
- 		RaycastHit hit;
-		
-    	if(Physics.Raycast(ray, out hit)){
-			Vector3 point = hit.point;
-			// make sure objects dont move on the Y axis
-			point.y = 1;
-			
-			ActionWalk aw = new ActionWalk(point);
-        	ObjectManager.getInstance().action(aw);
-			if(hit.collider.gameObject.tag == "enterable"){
-				ActionBuilding ab = new ActionBuilding(hit.collider.gameObject);
-        		ObjectManager.getInstance().action(ab);
-			}
-		}
-
-	}
 
 	private void TurnCameraClockwise() {
 		switch(cameraDirection){
