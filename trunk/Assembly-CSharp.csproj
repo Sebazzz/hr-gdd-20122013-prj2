@@ -110,6 +110,7 @@
      <Compile Include="Assets\Scripts\ObjectManager.cs" />
      <Compile Include="Assets\Scripts\RTSCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\SelectableBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SelectionManager.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Readme_upgrading.txt" />
