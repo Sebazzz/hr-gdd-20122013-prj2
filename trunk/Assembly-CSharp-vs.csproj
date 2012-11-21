@@ -106,12 +106,14 @@
      <Compile Include="Assets\Scripts\ActionBuilding.cs" />
      <Compile Include="Assets\Scripts\ActionWalk.cs" />
      <Compile Include="Assets\Scripts\AstarAI.cs" />
+     <Compile Include="Assets\Scripts\Director.cs" />
      <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\ObjectManager.cs" />
      <Compile Include="Assets\Scripts\RTSCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\SelectableBehaviour.cs" />
      <Compile Include="Assets\Scripts\SelectionManager.cs" />
      <Compile Include="Assets\Scripts\StateManager.cs" />
+     <Compile Include="Assets\Scripts\WaveSpawnerGizmo.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Readme_upgrading.txt" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
