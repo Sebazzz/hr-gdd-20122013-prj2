@@ -6,6 +6,8 @@ public class SelectableBehaviour : MonoBehaviour {
 	private ObjectManager objectManager;
 	private bool selected;
 	
+	public ActionType MyAction;
+	
 	void Start () {
 		selected = false;
 		this.objectManager = ObjectManager.getInstance();

@@ -36,7 +36,7 @@ public class SelectionManager : MonoBehaviour {
             {
                 ActionBuilding ab = new ActionBuilding(hit.collider.gameObject);
                 ObjectManager.getInstance().action(ab);
-            }
+            } 
         }
 
     }

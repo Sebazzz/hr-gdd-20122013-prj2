@@ -5,7 +5,7 @@ public class ActionWalk : Action {
 	public Vector3 target;
 	
 	public ActionWalk(Vector3 target){
-		this.type = ActionType.ACTION_WALK;
+		this.type = ActionType.Walk;
 		this.target = target;
 	}
 	
