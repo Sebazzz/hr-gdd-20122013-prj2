@@ -21,7 +21,7 @@ public class RTSCameraBehaviour : MonoBehaviour {
 		HandleCameraMove ();		
 		HandleCameraZoom ();
 	}
-
+ 
 	void HandleCameraZoom ()
 	{
 		float scroll = Input.GetAxis("Mouse ScrollWheel") * zoomSpeed * Time.deltaTime;

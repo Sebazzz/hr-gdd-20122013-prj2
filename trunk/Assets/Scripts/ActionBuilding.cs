@@ -5,7 +5,7 @@ public class ActionBuilding : Action {
 	GameObject target;
 	
 	public ActionBuilding(GameObject target){
-		this.type = ActionType.ACTION_BUILDING;
+		this.type = ActionType.Building;
 		this.target = target;
 	}
 	

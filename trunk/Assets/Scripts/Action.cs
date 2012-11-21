@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class Action {
-	public string type;
+	public ActionType type;
 	public GameObject gameObject;
 	public bool done = false;
 	
@@ -15,7 +15,7 @@ public abstract class Action {
 	public static Action getNewAction(Action action){
 		Action a = null;
 		
-		if(action.type == ActionType.ACTION_WALK){
+		if(action.type == ActionType.Walk){
 			ActionWalk b = (ActionWalk)action;
 			a = new ActionWalk(b.target);
 		}
@@ -27,7 +27,7 @@ public abstract class Action {
 }
 
 
-public class ActionType {
-	public const string ACTION_WALK = "walk";
-	public const string ACTION_BUILDING = "building";
+public enum ActionType {
+	Walk,
+	Building,
 }

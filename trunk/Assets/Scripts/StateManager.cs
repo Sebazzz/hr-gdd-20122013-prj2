@@ -7,6 +7,8 @@ public class StateManager : MonoBehaviour {
 	public static string STATE_FIGHTING = "s_fighting";
 	public static string STATE_MOVING = "s_moving";
 	
+	public ActionType TypeStr;
+	
 	private string state;
     private bool alive = true;
 	// Use this for initialization
@@ -24,5 +26,5 @@ public class StateManager : MonoBehaviour {
 
     public bool getHealth(){
         return alive;
-    }
+    } 
 }
