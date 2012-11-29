@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\EmitterBehaviour.cs" />
      <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\RandomMoveBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Support\FollowFlockCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\Support\Timer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
