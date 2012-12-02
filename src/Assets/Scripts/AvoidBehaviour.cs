@@ -38,7 +38,7 @@ public class AvoidBehaviour : MonoBehaviour {
         {
             averagePosition /= herders;
 
-            //Look at far position in a Smoother Way
+            // look at far position in a Smoother Way
             Quaternion lookRotation = Quaternion.LookRotation(transform.position - averagePosition);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 2);

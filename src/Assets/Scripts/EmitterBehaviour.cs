@@ -3,27 +3,36 @@ using UnityEngine;
 using System.Collections;
 
 public class EmitterBehaviour : MonoBehaviour {
+    private GameObject groupObject;
     private Timer spawnTimer;
     private Timer waveTimer;
+    private Camera spawnCameraCheck;
     private int currentSpawnCount;
-
+    
     public int WaveTimeGap = 35;
     public float SpawnTimeGap = 1;
     public int SpawnCountTarget = 10;
     public bool DisableSpawnInCameraView = true;
     public GameObject ObjectToSpawn;
 
-    public Camera SpawnCameraCheck;
 
 	// Use this for initialization
 	void Start () {
-        waveTimer = new Timer(WaveTimeGap);
+        this.waveTimer = new Timer(WaveTimeGap);
+
+	    string groupName = ObjectToSpawn.name + Globals.GroupObjectNameSuffix;
+	    this.groupObject = GameObject.Find("/" + groupName);
+        if (this.groupObject == null) {
+            this.groupObject = new GameObject(groupName);
+        }
+
+	    this.spawnCameraCheck = Camera.mainCamera;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         // check if seen by camera
-        if (SpawnCameraCheck != null && DisableSpawnInCameraView && this.IsSeenInCamera()) {
+        if (this.spawnCameraCheck != null && DisableSpawnInCameraView && this.IsSeenInCamera()) {
             if (this.spawnTimer != null) {
                 this.FinishWave();
             }
@@ -44,7 +53,7 @@ public class EmitterBehaviour : MonoBehaviour {
 
             if (spawnTimer.IsTriggered) {
                 spawnTimer.Reset();
-
+                
                 this.SpawnObject();
                 currentSpawnCount++;
 
@@ -57,7 +66,7 @@ public class EmitterBehaviour : MonoBehaviour {
 
     // http://answers.unity3d.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
     private bool IsSeenInCamera() {
-        Vector3 res = SpawnCameraCheck.WorldToViewportPoint(this.transform.position);
+        Vector3 res = this.spawnCameraCheck.WorldToViewportPoint(this.transform.position);
 
         return res.x > 0 && res.x < 1 &&
                res.y > 0 && res.y < 1 &&
@@ -71,16 +80,15 @@ public class EmitterBehaviour : MonoBehaviour {
         this.waveTimer.Reset();
     }
 
-    public Color markerColor = new Color(255,255,255);
     private void SpawnObject() {
         GameObject newInstance = (GameObject) Instantiate(ObjectToSpawn, this.transform.position, this.transform.rotation);
 
-        // TODO: set any properties on new instance
-
-        newInstance.GetComponentsInChildren<MeshRenderer>().First().material.color = markerColor;
+        // set object as child of our grouping object
+        newInstance.transform.parent = this.groupObject.transform;
     }
 
     void OnDrawGizmos() {
         Gizmos.DrawIcon(transform.position, "Emitter-icon.png", true);
+        Gizmos.DrawWireCube(this.transform.position, new Vector3(5, 5));
     }
 }

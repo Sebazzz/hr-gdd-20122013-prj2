@@ -6,10 +6,10 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
 
     private Vector3 cameraLookAtTarget = Vector3.zero;
     private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
-    private Vector3 cameraToTargetDistance = new Vector3(0f, 20f, -7.5f);
 
     public const string FollowTag = Tags.Herder;
 
+    public Vector3 CameraToTargetDistance = new Vector3(0f, 20f, -7.5f);
     public float FollowThreshold = 15f;
 
     /// <summary>
@@ -17,9 +17,9 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
     /// </summary>
     private void Start(){
         transform.position = new Vector3(
-                cameraLookAtTarget.x + cameraToTargetDistance.x,
-                cameraLookAtTarget.y + cameraToTargetDistance.y,
-                cameraLookAtTarget.z + cameraToTargetDistance.z);
+                cameraLookAtTarget.x + this.CameraToTargetDistance.x,
+                cameraLookAtTarget.y + this.CameraToTargetDistance.y,
+                cameraLookAtTarget.z + this.CameraToTargetDistance.z);
         
         transform.LookAt(cameraLookAtTarget);
     }
@@ -33,9 +33,9 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
         transform.position = Vector3.Lerp(
             transform.position,
             new Vector3(
-                cameraLookAtTarget.x + cameraToTargetDistance.x,
-                cameraLookAtTarget.y + cameraToTargetDistance.y,
-                cameraLookAtTarget.z + cameraToTargetDistance.z),
+                cameraLookAtTarget.x + this.CameraToTargetDistance.x,
+                cameraLookAtTarget.y + this.CameraToTargetDistance.y,
+                cameraLookAtTarget.z + this.CameraToTargetDistance.z),
             0.1f);
     }
 
