@@ -5,11 +5,11 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{4CFFDA30-0E63-039E-0DCA-DAC117CE2649}</ProjectGuid>
+	<ProjectGuid>{E53CDB40-1DF9-8A61-5878-81243AFDF805}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
-	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
 	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
 	<FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,23 +44,8 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AvoidBehaviour.cs" />
-     <Compile Include="Assets\Scripts\ControlHerderBehaviour.cs" />
-     <Compile Include="Assets\Scripts\EmitterBehaviour.cs" />
-     <Compile Include="Assets\Scripts\FoxMoveBehaviour.cs" />
-     <Compile Include="Assets\Scripts\HerderLoopBehaviour.cs" />
-     <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
-     <Compile Include="Assets\Scripts\RemoveCollidersBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Support\FollowFlockCameraBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Support\Globals.cs" />
-     <Compile Include="Assets\Scripts\Support\GroupObjects.cs" />
-     <Compile Include="Assets\Scripts\Support\Tags.cs" />
-     <Compile Include="Assets\Scripts\Support\Timer.cs" />
+     <Compile Include="Assets\Standard Assets\Water (Basic)\Sources\Scripts\WaterSimple.cs" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{E53CDB40-1DF9-8A61-5878-81243AFDF805}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

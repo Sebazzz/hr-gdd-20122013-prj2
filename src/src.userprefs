@@ -4,6 +4,8 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint enabled="false" file="Z:\Developing\Visual Studio\Projects\hr-gdd-20122013-prj2\src\Assets\MoveBehaviour.cs" line="19" />
+      <Breakpoint file="Z:\Developing\Visual Studio\Projects\hr-gdd-20122013-prj2\src\Assets\Scripts\RemoveCollidersBehaviour.cs" line="12" />
+      <Breakpoint file="Z:\Developing\Visual Studio\Projects\hr-gdd-20122013-prj2\src\Assets\Scripts\EmitterBehaviour.cs" line="58" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
