@@ -56,6 +56,11 @@
      <Compile Include="Assets\Scripts\Support\GroupObjects.cs" />
      <Compile Include="Assets\Scripts\Support\Tags.cs" />
      <Compile Include="Assets\Scripts\Support\Timer.cs" />
+     <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
+      <Project>{E53CDB40-1DF9-8A61-5878-81243AFDF805}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
