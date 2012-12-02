@@ -13,12 +13,12 @@ public class AvoidBehaviour : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        avoid();
+        this.Avoid();
     }
 
 
     
-    private void avoid()
+    private void Avoid()
     {
         int herders = 0;
         Vector3 averagePosition = new Vector3();
