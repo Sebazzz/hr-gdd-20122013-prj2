@@ -90,5 +90,6 @@ public class EmitterBehaviour : MonoBehaviour {
     void OnDrawGizmos() {
         Gizmos.DrawIcon(transform.position, "Emitter-icon.png", true);
         Gizmos.DrawWireCube(this.transform.position, new Vector3(5, 5));
+        Gizmos.DrawRay(this.transform.position, this.transform.position + new Vector3(5,5,5));
     }
 }
