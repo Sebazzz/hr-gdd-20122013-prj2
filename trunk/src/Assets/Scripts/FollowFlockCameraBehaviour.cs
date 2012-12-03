@@ -69,4 +69,11 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
 
         return flockCenter;
     }
+
+	/// <summary>
+	/// Returns the cameraLookAtTarget Vector 3, so other objects can have the center point of the camera
+	/// </summary>
+	public Vector3 GetCameraLookAtTarget() {
+		return cameraLookAtTarget;
+	}
 }
