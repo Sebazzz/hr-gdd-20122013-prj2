@@ -7,7 +7,7 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
     private Vector3 cameraLookAtTarget = Vector3.zero;
     private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
 
-    public const string FollowTag = Tags.Herder;
+    public const string FollowTag = Tags.shepherd;
 
     public Vector3 CameraToTargetDistance = new Vector3(0f, 20f, -7.5f);
     public float FollowThreshold = 45f;
@@ -62,7 +62,6 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
                 if (sheepCount > 0) flockCenter /= sheepCount;
             }
         }
-		Debug.Log(sheepCount+" " + flockCenter);
 
 		if (sheepCount == 0) {
 			flockCenter = followObjects[0].transform.position;

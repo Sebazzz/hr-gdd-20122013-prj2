@@ -7,5 +7,5 @@ using System.Text;
 /// Contains definitions for tags. Makes it more easier to refactor tag names.
 /// </summary>
 static class Tags {
-    public const string Herder = "Herder";
+    public const string shepherd = "shepherd";
 }
