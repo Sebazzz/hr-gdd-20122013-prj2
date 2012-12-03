@@ -51,6 +51,7 @@
      <Compile Include="Assets\Scripts\HerderLoopBehaviour.cs" />
      <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\RemoveCollidersBehaviour.cs" />
+     <Compile Include="Assets\Scripts\RepelBehaviour.cs" />
      <Compile Include="Assets\Scripts\Support\FollowFlockCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\Support\Globals.cs" />
      <Compile Include="Assets\Scripts\Support\GroupObjects.cs" />
