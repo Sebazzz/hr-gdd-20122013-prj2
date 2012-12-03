@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class HerderLoopBehaviour : MonoBehaviour {
     public float speed = 0.4f;
+	public float acceptRadius = 5f; // Radius used for waypoints.
 
     private Queue<Vector3> trajectory;
     private Vector3 target = Vector3.zero;
@@ -22,18 +23,22 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
         if (walking && trajectory.Count == 0 && reachedTarget()) {
             walking = false;
+			GetComponent<ControlHerderBehaviour>().done();
         }
 	}
 
     void FixedUpdate() {
         if (walking) {
-            transform.LookAt(target);
+            var lookRotation = Quaternion.LookRotation(target - transform.position, Vector3.forward);
+    		lookRotation.x = 0;
+   			lookRotation.z = 0;
+    		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 20);
             transform.Translate(0, 0, speed);
         }
     }
 
     bool reachedTarget() {
-        if (Vector3.Distance(transform.position, target) < 2) {
+        if (Vector3.Distance(transform.position, target) < acceptRadius) {
             return true;
         }
 
