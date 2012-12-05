@@ -7,7 +7,7 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
     private Vector3 cameraLookAtTarget = Vector3.zero;
     private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
 
-    public const string FollowTag = Tags.shepherd;
+    public const string FollowTag = Tags.Shepherd;
 
     public Vector3 CameraToTargetDistance = new Vector3(0f, 20f, -7.5f);
     public float FollowThreshold = 45f;
@@ -44,7 +44,12 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
     /// </summary>
     private Vector3 GetFlockMidpoint(){
         Vector3 flockCenter = new Vector3();
+
         GameObject[] followObjects = GameObject.FindGameObjectsWithTag(FollowTag);
+        if (followObjects.Length == 0) {
+            Debug.DebugBreak();
+        }
+
         int sheepCount = 0;
 
         foreach (GameObject sheep in followObjects) {
