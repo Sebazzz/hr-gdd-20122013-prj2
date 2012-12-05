@@ -12,11 +12,15 @@ public class RemoveCollidersBehaviour : MonoBehaviour {
     /// </summary>
     public string TagToMatch = null;
 
+    void OnCollisionEnter(Collision collisionInfo) {
+        this.KillObjectIfRequired(collisionInfo.gameObject);
+    }
+
     void OnTriggerEnter (Collider collidingObject) {
         this.KillObjectIfRequired(collidingObject.gameObject);
     }
 
-    private void KillObjectIfRequired (GameObject gameObjectToCheck) {
+    protected void KillObjectIfRequired (GameObject gameObjectToCheck) {
         // determine if we should remove the object from the scene
         bool removeFromScene;
 
@@ -30,7 +34,15 @@ public class RemoveCollidersBehaviour : MonoBehaviour {
 
         // kill if required
         if (removeFromScene) {
-            Object.Destroy(gameObjectToCheck);
+            this.OnObjectCollision(gameObjectToCheck);
         }
+    }
+
+    /// <summary>
+    /// Kills the specified object. Derived classes can possibly override this behaviour or add custom logic.
+    /// </summary>
+    /// <param name="collidingObject"></param>
+    protected virtual void OnObjectCollision (GameObject collidingObject) {
+        Object.Destroy(collidingObject);
     }
 }

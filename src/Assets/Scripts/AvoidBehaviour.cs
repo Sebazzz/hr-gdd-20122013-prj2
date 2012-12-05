@@ -27,7 +27,7 @@ public class AvoidBehaviour : MonoBehaviour {
         {
             if (hit.gameObject != this.gameObject)
             {
-                if (hit.CompareTag("shepherd"))
+                if (hit.CompareTag(Tags.Shepherd))
                 {
                     averagePosition += hit.transform.position;
                     herders++;

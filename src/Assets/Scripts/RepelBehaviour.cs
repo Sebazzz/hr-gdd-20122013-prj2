@@ -11,7 +11,7 @@ public class RepelBehaviour : MonoBehaviour {
         Vector3 explosionPos = transform.position;
         Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
         foreach (Collider hit in colliders) {
-            if (hit.tag == "sheep")
+            if (hit.tag == Tags.Sheep)
                 hit.rigidbody.AddExplosionForce(power, explosionPos, radius, 0);
             
         }

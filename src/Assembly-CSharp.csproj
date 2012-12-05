@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AvoidBehaviour.cs" />
      <Compile Include="Assets\Scripts\ControlHerderBehaviour.cs" />
+     <Compile Include="Assets\Scripts\DeathOnEnemyCollisionBehaviour.cs" />
      <Compile Include="Assets\Scripts\EmitterBehaviour.cs" />
      <Compile Include="Assets\Scripts\FollowFlockCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\FoxMoveBehaviour.cs" />
@@ -53,6 +54,9 @@
      <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\RemoveCollidersBehaviour.cs" />
      <Compile Include="Assets\Scripts\RepelBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SheepBarnTouchBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SheepDeathOnEnemyCollisionBehaviour.cs" />
+     <Compile Include="Assets\Scripts\SheepIdleBehaviour.cs" />
      <Compile Include="Assets\Scripts\Support\Globals.cs" />
      <Compile Include="Assets\Scripts\Support\GroupObjects.cs" />
      <Compile Include="Assets\Scripts\Support\Tags.cs" />
