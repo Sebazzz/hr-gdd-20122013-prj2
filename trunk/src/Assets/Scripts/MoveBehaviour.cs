@@ -38,6 +38,13 @@ public class MoveBehaviour : MonoBehaviour {
         this.Target = target;
     }
 
+    /// <summary>
+    /// Stops the movement
+    /// </summary>
+    public void Stop() {
+        this.enabled = false;
+    }
+
     private float CalculateSpeed(float target, float current, float speed) {
         float calcSpeed = Mathf.Abs(target - current) < speed ? Mathf.Abs(target - current) : speed;
 
