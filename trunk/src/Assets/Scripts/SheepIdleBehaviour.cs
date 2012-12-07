@@ -5,7 +5,6 @@ public class SheepIdleBehaviour : MonoBehaviour {
 
 	public enum SheepState { inactive, active};
 	public SheepState sheepState = SheepState.inactive;
-	public Rigidbody rigidbody;
 
 	/// <summary>
 	/// Use this for initialization
