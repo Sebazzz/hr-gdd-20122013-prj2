@@ -2,17 +2,43 @@ using System.Linq;
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Game logic for behaviour of an emitter. This script is responsible for:
+/// - Timing waves 
+/// - Timing of spawning within waves
+/// - Drawing design-time gizmos
+/// </summary>
 public class EmitterBehaviour : MonoBehaviour {
+    /// <summary>Grouping object for objects spawned by this emitter </summary>
     private GameObject groupObject;
     private Timer spawnTimer;
     private Timer waveTimer;
     private Camera spawnCameraCheck;
     private int currentSpawnCount;
     
+    /// <summary>
+    /// Specifies the time gap between waves and also between the start of the game and the first wave
+    /// </summary>
     public int WaveTimeGap = 35;
+
+    /// <summary>
+    /// Specifies the time gap between each spawn in the wave
+    /// </summary>
     public float SpawnTimeGap = 1;
+
+    /// <summary>
+    /// Specifies the number of targets to spawn in the wave
+    /// </summary>
     public int SpawnCountTarget = 10;
+
+    /// <summary>
+    /// Specifies whether to disable the emitter once the emitter is in camera view
+    /// </summary>
     public bool DisableSpawnInCameraView = true;
+
+    /// <summary>
+    /// Specifies the game object to clone and spawn
+    /// </summary>
     public GameObject ObjectToSpawn;
 
 
@@ -88,8 +114,37 @@ public class EmitterBehaviour : MonoBehaviour {
     }
 
     void OnDrawGizmos() {
+        const float cubeSizeWidth = 5;
+        const float cubeSizeHeight = cubeSizeWidth / 2f;
+        const float vectorLength = 2.5f;
+        const float sphereSize = 0.5f;
+        const float sphereSizeIncrease = 0.25f;
+        const int numberOfSpheres = 3;
+
+        // draw basic icon
         Gizmos.DrawIcon(transform.position, "Emitter-icon.png", true);
-        Gizmos.DrawWireCube(this.transform.position, new Vector3(5, 5));
-        Gizmos.DrawRay(this.transform.position, this.transform.position + new Vector3(5,5,5));
+
+        // draw begin and end director cubes
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(this.transform.position + this.transform.TransformDirection(0, 0, 1), new Vector3(cubeSizeWidth, cubeSizeHeight));
+
+        // draw spheres for direction
+        Gizmos.color = Color.red;
+
+        float previousSphereSize = sphereSize + sphereSizeIncrease;
+        Vector3 position = this.transform.position - this.transform.TransformDirection(0, 0, previousSphereSize);
+        position.y -= 1;
+        for (int i = 0; i < numberOfSpheres; i++) {
+            position += this.transform.TransformDirection(0, 0, vectorLength);
+
+            previousSphereSize += sphereSizeIncrease;
+            Gizmos.DrawSphere(position, previousSphereSize / 2f);
+
+            if (numberOfSpheres == (i + 2)) {
+                Gizmos.color = Color.green;
+            } else {
+                Gizmos.color = Color.white;
+            }
+        }
     }
 }
