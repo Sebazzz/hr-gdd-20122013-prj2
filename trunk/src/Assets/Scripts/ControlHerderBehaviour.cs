@@ -50,7 +50,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             listening = false;
 			drawPath();
             float drawTime = endTime - startTime;
-            float speedSegment = HerderLoopBehaviour.MAX_DRAWTIME / 3;
+            float speedSegment = HerderLoopBehaviour.MAX_DRAWTIME / 3f;
             if (drawTime < speedSegment){
                 line.renderer.material = slow_material;
             }else if(drawTime < speedSegment*2){

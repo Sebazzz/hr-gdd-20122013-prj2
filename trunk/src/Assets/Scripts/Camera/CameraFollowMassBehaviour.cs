@@ -16,6 +16,11 @@ public class CameraFollowMassBehaviour : MonoBehaviour {
     public float FollowThreshold = 50;
 
     /// <summary>
+    /// Zoom factor for the case when all the dogs are spread out
+    /// </summary>
+    public float ZoomFactor = 10;
+
+    /// <summary>
     /// Specifies the camera to follow. By default is this the <see cref="Camera.mainCamera"/>, if this field is set to null.
     /// </summary>
     public Camera CameraToFollow = null;
@@ -77,6 +82,7 @@ public class CameraFollowMassBehaviour : MonoBehaviour {
             cameraPosition = new Vector3(xAvg, this.startCameraPosition.y, zAvg);
 
             // determine the min and max positions in the view port
+            // minY, minX, maxX, and maxY will be around -1 or 1
             bool first = true;
             float minX = 0, minY = 0, maxX = 0, maxY = 0;
             foreach (GameObject objectToFollow in objectsToFollow) {
@@ -84,11 +90,24 @@ public class CameraFollowMassBehaviour : MonoBehaviour {
 
                 if (first) {
                     first = false;
-
+                    maxX = minX = viewPortPoint.x;
+                    maxY = minY = viewPortPoint.y;
+                } else {
+                    minX = Mathf.Min(minX, viewPortPoint.x);
+                    minY = Mathf.Min(minY, viewPortPoint.y);
+                    maxX = Mathf.Max(maxX, viewPortPoint.x);
+                    maxY = Mathf.Max(maxY, viewPortPoint.y);
                 }
             }
 
-            // TODO: implement zooming so we can view all the objects except of the morst far object
+            // determine new position for camera
+            float zoomOutFactor = (maxX - minX) * ZoomFactor;
+            cameraPosition.y += zoomOutFactor;
+
+            float moveZfactor = (maxY - minY) * ZoomFactor;
+            cameraPosition.z += moveZfactor;
+
+            // TODO: implement proper zooming so we can view all the objects except of the morst far object
         } else {
             // substract each of the 'out of bounds' objects from the average to determine the new sum of positions
             foreach (GameObject objectsOutOfBound in objectsOutOfBounds) {

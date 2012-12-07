@@ -17,7 +17,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
         trajectory = t;
         target = trajectory.Dequeue();
         walking = true;
-        if(drawTime > MAX_DRAWTIME) drawTime = MAX_DRAWTIME;
+        //if(drawTime > MAX_DRAWTIME) drawTime = MAX_DRAWTIME;
         speed = MIN_SPEED + ( (MAX_DRAWTIME - drawTime) * SPEED_FACTOR );
 	}
 
@@ -43,7 +43,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
             var lookPos = target - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.fixedDeltaTime * 20);
             transform.Translate(0, 0, speed);
         }
     }
