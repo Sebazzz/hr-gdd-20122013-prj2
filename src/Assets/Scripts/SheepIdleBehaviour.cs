@@ -20,7 +20,7 @@ public class SheepIdleBehaviour : MonoBehaviour {
 	private void Update () {
 		
 		if (sheepState == SheepState.inactive) {
-			transform.LookAt(Camera.mainCamera.GetComponent<FollowFlockCameraBehaviour>().GetCameraLookAtTarget());
+			transform.LookAt(Camera.mainCamera.GetComponent<TouchDragCameraBehaviour>().GetCameraLookAtTarget());
 			Vector3 positionInSight = Camera.mainCamera.WorldToViewportPoint(transform.position);
 			if (positionInSight.x >= 0.1f && positionInSight.x <= 0.9f &&
 				positionInSight.y >= 0.1f && positionInSight.y <= 0.9f) {
