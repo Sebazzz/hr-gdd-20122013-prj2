@@ -7,6 +7,8 @@ using System.Collections.Generic;
 /// </summary>
 public class ControlHerderBehaviour : MonoBehaviour {
 	public float waypointSpacing = 5f;
+
+    
     
     private int layerMask = 1 << 8; // Layer 8 is de layer waar hij mee raycast.
     private float FAILSAFE = 50f; // Failsafe die er voor zorgt dat je geen rare paden krijgt. Stelt de Maximale afstand voor.
@@ -19,6 +21,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
 	private GameObject path;
 	
 	private LineRenderer line;
+
+    private float startTime, endTime = 0; // Tijd in seconden.
 	
 	void Start(){
 		path = (GameObject)GameObject.Instantiate(ShepherdPath);
@@ -33,14 +37,16 @@ public class ControlHerderBehaviour : MonoBehaviour {
         if (listening == false) { // Ingedrukt
             listening = true;
             trajectory = new Queue<Vector3>();
+            startTime = Time.time;
         }
     }
 
 	void Update () {
         if (listening && Input.GetMouseButton(0) == false) { // Ingedrukt, nu losgelaten
+            endTime = Time.time;
             listening = false;
 			drawPath();
-            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory);
+            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, endTime - startTime);
         }
 
         if (listening) {

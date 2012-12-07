@@ -3,17 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class HerderLoopBehaviour : MonoBehaviour {
-    public float speed = 0.4f;
+    public float SPEED_FACTOR = 0.1f; // MAX_DRAWTIME - Tijd wordt vermenigvuldigd met dit getal om zo een snelheid te creeeren.
+    public float MAX_DRAWTIME = 5; // Tijd in seconden.
 	public float acceptRadius = 5f; // Radius used for waypoints.
 
+    private float speed = 0;
     private Queue<Vector3> trajectory;
     private Vector3 target = Vector3.zero;
     private bool walking = false;
 
-	public void setTrajectory (Queue<Vector3> t) {
+	public void setTrajectory (Queue<Vector3> t, float drawTime) {
         trajectory = t;
         target = trajectory.Dequeue();
         walking = true;
+        if(drawTime > MAX_DRAWTIME) drawTime = MAX_DRAWTIME;
+        speed = (MAX_DRAWTIME - drawTime) * SPEED_FACTOR;
 	}
 
 	void Update () {
