@@ -29,10 +29,16 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     void FixedUpdate() {
         if (walking) {
-            var lookRotation = Quaternion.LookRotation(target - transform.position, Vector3.forward);
+            /*var lookRotation = Quaternion.LookRotation(target - transform.position, Vector3.forward);
     		lookRotation.x = 0;
    			lookRotation.z = 0;
-    		transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 20);
+            Debug.Log(lookRotation);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 20);
+            */
+            var lookPos = target - transform.position;
+            lookPos.y = 0;
+            var rotation = Quaternion.LookRotation(lookPos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 20);
             transform.Translate(0, 0, speed);
         }
     }

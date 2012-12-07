@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Bestuurt de herdershond. Heeft een getTrajectory functie die je aan kan roepen, om het huidige getekende path te krijgen.
+/// </summary>
 public class ControlHerderBehaviour : MonoBehaviour {
 	public float waypointSpacing = 5f;
     
@@ -46,30 +49,15 @@ public class ControlHerderBehaviour : MonoBehaviour {
                 trajectory.Enqueue(position);
                 lastAdded = position;
             }
-
+            
             if (Vector3.Distance(position, lastAdded) > waypointSpacing && Vector3.Distance(position, lastAdded) < FAILSAFE) {
                 trajectory.Enqueue(position);
+                lastAdded = position;
             }
        
         }
 
 	}
-
-    void OnDestroy() {
-        if (this.line == null) {
-            return;
-        }
-
-        this.line.SetVertexCount(0);
-        this.line = null;
-    }
-
-    void OnGUI() {
-        /*Vector2 pointA = Camera.main.WorldToViewportPoint(this.transform.position);
-        Vector2 pointB = Camera.main.WorldToViewportPoint(Vector3.zero);
-
-        Drawing.DrawLine(pointA, pointB);*/
-    }
 
 	private void drawPath(){
 		Vector3[] t = trajectory.ToArray();
