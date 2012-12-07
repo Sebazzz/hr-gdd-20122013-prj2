@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PhysicsTrog : MonoBehaviour
+public class PhysicsTrogBehaviour : MonoBehaviour
 {
 
 

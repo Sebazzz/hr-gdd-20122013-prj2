@@ -45,13 +45,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AvoidBehaviour.cs" />
+     <Compile Include="Assets\Scripts\CameraFollowMassBehaviour.cs" />
      <Compile Include="Assets\Scripts\ControlHerderBehaviour.cs" />
      <Compile Include="Assets\Scripts\DeathOnEnemyCollisionBehaviour.cs" />
      <Compile Include="Assets\Scripts\EmitterBehaviour.cs" />
+     <Compile Include="Assets\Scripts\FoeTurnAroundOnCollisionBehaviour.cs" />
      <Compile Include="Assets\Scripts\FollowFlockCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\FoxMoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\HerderLoopBehaviour.cs" />
      <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
+     <Compile Include="Assets\Scripts\PhysicsTrogBehaviour.cs" />
      <Compile Include="Assets\Scripts\RemoveCollidersBehaviour.cs" />
      <Compile Include="Assets\Scripts\RepelBehaviour.cs" />
      <Compile Include="Assets\Scripts\SheepBarnTouchBehaviour.cs" />
@@ -59,6 +62,7 @@
      <Compile Include="Assets\Scripts\SheepIdleBehaviour.cs" />
      <Compile Include="Assets\Scripts\Support\Globals.cs" />
      <Compile Include="Assets\Scripts\Support\GroupObjects.cs" />
+     <Compile Include="Assets\Scripts\Support\Layers.cs" />
      <Compile Include="Assets\Scripts\Support\Tags.cs" />
      <Compile Include="Assets\Scripts\Support\Timer.cs" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
