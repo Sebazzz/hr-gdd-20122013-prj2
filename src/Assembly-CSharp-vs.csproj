@@ -45,16 +45,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AvoidBehaviour.cs" />
-     <Compile Include="Assets\Scripts\CameraFollowMassBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraFollowMassBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Camera\FollowFlockCameraBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Camera\TouchDragCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\ControlHerderBehaviour.cs" />
-     <Compile Include="Assets\Scripts\EmitterBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\KillBehaviour.cs" />
      <Compile Include="Assets\Scripts\Enemies\WolfDeathBehaviour.cs" />
      <Compile Include="Assets\Scripts\FoeTurnAroundOnCollisionBehaviour.cs" />
-     <Compile Include="Assets\Scripts\FollowFlockCameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\FoxMoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\Friendlies\CanDieBehaviour.cs" />
      <Compile Include="Assets\Scripts\Friendlies\SheepDeathBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Helpers\EmitterBehaviour.cs" />
      <Compile Include="Assets\Scripts\HerderLoopBehaviour.cs" />
      <Compile Include="Assets\Scripts\MoveBehaviour.cs" />
      <Compile Include="Assets\Scripts\PhysicsTrogBehaviour.cs" />

@@ -59,9 +59,9 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
         MoveBehaviour mv = this.gameObject.GetComponent<MoveBehaviour>();
         mv.Stop();
 
-        FoxMoveBehaviour fmv = this.gameObject.GetComponent<FoxMoveBehaviour>();
-        fmv.DeltaX *= -1;
-        fmv.DeltaY *= -1;
-        fmv.DeltaZ *= -1;
+        // set the new rotation
+        Quaternion rotation = this.gameObject.transform.rotation;
+        rotation = Quaternion.Euler(rotation.eulerAngles.x, (rotation.eulerAngles.y + 180) % 360, rotation.eulerAngles.z);
+        mv.MoveToDirection(rotation);
     }
 }
