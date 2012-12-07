@@ -14,4 +14,7 @@ static class Tags {
     public const string Enemy = Foe;
 
     public const string Sheep = "Sheep";
+
+
+    public const string Untagged = "Untagged";
 }
