@@ -55,6 +55,15 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
 	}
 
+    void OnDestroy() {
+        if (this.line == null) {
+            return;
+        }
+
+        this.line.SetVertexCount(0);
+        this.line = null;
+    }
+
     void OnGUI() {
         /*Vector2 pointA = Camera.main.WorldToViewportPoint(this.transform.position);
         Vector2 pointB = Camera.main.WorldToViewportPoint(Vector3.zero);
