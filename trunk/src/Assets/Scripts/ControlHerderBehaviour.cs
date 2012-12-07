@@ -7,6 +7,9 @@ using System.Collections.Generic;
 /// </summary>
 public class ControlHerderBehaviour : MonoBehaviour {
 	public float waypointSpacing = 5f;
+    public Material slow_material;
+    public Material normal_material;
+    public Material fast_material;
 
     
     
@@ -46,7 +49,16 @@ public class ControlHerderBehaviour : MonoBehaviour {
             endTime = Time.time;
             listening = false;
 			drawPath();
-            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, endTime - startTime);
+            float drawTime = endTime - startTime;
+            float speedSegment = HerderLoopBehaviour.MAX_DRAWTIME / 3;
+            if (drawTime < speedSegment){
+                line.renderer.material = slow_material;
+            }else if(drawTime < speedSegment*2){
+                line.renderer.material = normal_material;
+            }else{
+                line.renderer.material = fast_material;
+            }
+            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, drawTime);
         }
 
         if (listening) {
