@@ -5,7 +5,7 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
 {
 
     private Vector3 cameraLookAtTarget = Vector3.zero;
-    private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
+    //private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
 
     public const string FollowTag = Tags.Shepherd;
 
