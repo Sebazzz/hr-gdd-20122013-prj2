@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-
 public class SheepBarnTouchBehaviour : RemoveCollidersBehaviour {
 
 	// Use this for initialization
@@ -9,12 +7,12 @@ public class SheepBarnTouchBehaviour : RemoveCollidersBehaviour {
 	}
 
     protected override void OnObjectCollision (GameObject collidingObject) {
-        // TODO: do something like ending the level
-
         AudioSource audioSource = this.GetComponent<AudioSource>();
         if (audioSource != null) {
             audioSource.Play();
         }
+
+        LevelBehaviour.Instance.OnSheepCollected();
 
         // call base logic
         base.OnObjectCollision(collidingObject);
