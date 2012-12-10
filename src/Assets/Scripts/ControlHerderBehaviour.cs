@@ -48,17 +48,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
         if (listening && Input.GetMouseButton(0) == false) { // Ingedrukt, nu losgelaten
             endTime = Time.time;
             listening = false;
-			drawPath();
-            float drawTime = endTime - startTime;
-            float speedSegment = HerderLoopBehaviour.MAX_DRAWTIME / 3f;
-            if (drawTime < speedSegment){
-                line.renderer.material = slow_material;
-            }else if(drawTime < speedSegment*2){
-                line.renderer.material = normal_material;
-            }else{
-                line.renderer.material = fast_material;
-            }
-            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, drawTime);
+
+            GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, calculateDrawTime());
         }
 
         if (listening) {
@@ -71,11 +62,16 @@ public class ControlHerderBehaviour : MonoBehaviour {
             if (Vector3.Distance(position, lastAdded) > waypointSpacing && Vector3.Distance(position, lastAdded) < FAILSAFE) {
                 trajectory.Enqueue(position);
                 lastAdded = position;
+                drawPath();
             }
-       
         }
 
 	}
+
+    private float calculateDrawTime() {
+        endTime = Time.time;
+        return (endTime - startTime) / trajectory.Count;
+    }
 
 	private void drawPath(){
 		Vector3[] t = trajectory.ToArray();
@@ -85,6 +81,16 @@ public class ControlHerderBehaviour : MonoBehaviour {
 			p.y += 0.2f;
         	line.SetPosition(i, p);
     	}
+
+        float drawTime = calculateDrawTime();
+        float speedSegment = HerderLoopBehaviour.MAX_DRAWTIME / 3;
+        if (drawTime < speedSegment) {
+            line.renderer.material = fast_material;
+        } else if (drawTime < speedSegment * 2) {
+            line.renderer.material = normal_material;
+        } else {
+            line.renderer.material = slow_material;
+        }
 	}
 	
 	public void done(){
