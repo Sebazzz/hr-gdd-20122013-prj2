@@ -31,12 +31,19 @@ public class MoveBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	   if (targetAsDirection) {
-	       this.MoveTowardsDirection();
-	   } else {
-	       this.MoveTowardsPoint();
-	   }
+	    this.MoveSingleStep();
 	}
+
+    /// <summary>
+    /// Executes a single movement after configuration via <see cref="MoveTo"/>, <see cref="MoveInCurrentDirection"/> or <see cref="MoveToDirection"/>
+    /// </summary>
+    public void MoveSingleStep() {
+        if (this.targetAsDirection) {
+            this.MoveTowardsDirection();
+        } else {
+            this.MoveTowardsPoint();
+        }
+    }
 
     /// <summary>
     /// Executes movement logic to move to a specific point as set in the <see cref="MoveTo"/> method (<see cref="target"/>)
