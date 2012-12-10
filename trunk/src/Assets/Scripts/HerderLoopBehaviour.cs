@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 public class HerderLoopBehaviour : MonoBehaviour {
     public float MIN_SPEED = 0.5f; // Minimal speed.
-    public float SPEED_FACTOR = 0.1f; // MAX_DRAWTIME - Tijd wordt vermenigvuldigd met dit getal om zo een snelheid te creeeren.
-    public static float MAX_DRAWTIME = 5; // Tijd in seconden.
+    public float SPEED_FACTOR = 2f; // MAX_DRAWTIME - Tijd wordt vermenigvuldigd met dit getal om zo een snelheid te creeeren.
+    public static float MAX_DRAWTIME = 0.5f; // Tijd in seconden voor 1 segment van de lijn.
 	public float acceptRadius = 5f; // Radius used for waypoints.
 
     private float speed = 0;
@@ -34,12 +34,6 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     void FixedUpdate() {
         if (walking) {
-            /*var lookRotation = Quaternion.LookRotation(target - transform.position, Vector3.forward);
-    		lookRotation.x = 0;
-   			lookRotation.z = 0;
-            Debug.Log(lookRotation);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 20);
-            */
             var lookPos = target - transform.position;
             lookPos.y = 0;
             var rotation = Quaternion.LookRotation(lookPos);
