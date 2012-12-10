@@ -15,7 +15,7 @@ static class Tags {
 
     public const string Sheep = "Sheep";
 
-    public const string Untagged = "Untagged";
+    public const string World = "World";
 
-	public const string CanFade = "CanFade";
+    public const string Untagged = "Untagged";
 }
