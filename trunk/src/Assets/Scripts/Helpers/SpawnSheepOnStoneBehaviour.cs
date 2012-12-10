@@ -14,6 +14,11 @@ public class SpawnSheepOnStoneBehaviour : MonoBehaviour {
 			ObjectToSpawn,
 			new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z),
 			transform.rotation);
+
+	    SheepIdleBehaviour idleBehaviour = instance.GetComponent<SheepIdleBehaviour>();
+        if (idleBehaviour != null) {
+            idleBehaviour.sheepState = SheepIdleBehaviour.SheepState.inactive;
+        }
 	}
 	
 	/// <summary>
