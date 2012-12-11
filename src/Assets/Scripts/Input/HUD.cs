@@ -19,7 +19,7 @@ public class HUD : MonoBehaviour {
         }
 
         if (GUI.Button(new Rect(10, 110, 100, 30), "Scene select")) {
-            Application.LoadLevel("MenuScene");
+            Application.LoadLevel(Scenes.MainMenu);
         }
     }
 }

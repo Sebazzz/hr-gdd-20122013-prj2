@@ -9,5 +9,7 @@ using System.Text;
 public class Scenes {
 
     public const string Playground = "Playground";
+
+    public const string MainMenu = "MainMenu";
 }
 

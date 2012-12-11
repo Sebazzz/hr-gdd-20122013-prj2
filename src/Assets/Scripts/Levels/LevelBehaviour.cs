@@ -46,7 +46,7 @@ public class LevelBehaviour : MonoBehaviour {
 
     private void OnLevelCompleted() {
         // TODO: show level end
-        Application.LoadLevel(Application.loadedLevel); // restart level
+        Application.LoadLevel(Scenes.MainMenu); // restart level
     }
 
     private void OnGameOver() {

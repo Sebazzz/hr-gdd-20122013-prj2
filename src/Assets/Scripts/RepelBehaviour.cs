@@ -16,4 +16,9 @@ public class RepelBehaviour : MonoBehaviour {
             
         }
     }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.grey;
+        Gizmos.DrawWireSphere(this.transform.position, this.radius);
+    }
 }
