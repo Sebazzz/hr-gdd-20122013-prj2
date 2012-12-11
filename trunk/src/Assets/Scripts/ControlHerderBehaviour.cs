@@ -11,7 +11,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
     public Material normal_material;
     public Material fast_material;
 
-    private float selectRadius = 2f; // Sphere radius for the dog selector.
+    public float selectRadius = 2f; // Sphere radius for the dog selector.
     private float range = 150f; // Sphere casting is heavy, so keep the range low
     
     private int layerMask = 1 << 8; // Layer 8 is de layer waar hij mee raycast.
@@ -124,5 +124,10 @@ public class ControlHerderBehaviour : MonoBehaviour {
             }
         }
         return null;
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(this.transform.position, this.selectRadius);
     }
 }
