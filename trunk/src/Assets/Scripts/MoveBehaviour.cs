@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -23,6 +24,45 @@ public class MoveBehaviour : MonoBehaviour {
     /// Defines the number of units to 
     /// </summary>
     public float TargetRadius = 2;
+
+    /// <summary>
+    /// Gets the current direction of movement. See also <see cref="GameObject.transform"/>.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">This object is currently moving towards an target and not towards a direction</exception>
+    public Quaternion MovementDirection {
+        get {
+            if (!this.targetAsDirection) {
+                throw new InvalidOperationException("This object is currently moving towards an target and not towards a direction");
+            }
+            
+            return this.transform.rotation;
+        }
+    }
+
+    /// <summary>
+    /// Gets if this object is moving towards a point and not towards a direction.
+    /// </summary>
+    /// <remarks>
+    /// If this property returns <c>true</c>, the <see cref="MovementDirection"/> property is not usable.
+    /// If this property returns <c>false</c>, the <see cref="MovementTarget"/> property is not usable.
+    /// </remarks>
+    public bool IsMovingToPoint {
+        get { return !this.targetAsDirection; }
+    }
+
+    /// <summary>
+    /// Gets the current movement target
+    /// </summary>
+    /// <exception cref="InvalidOperationException">This object is currently moving towards an direction and not towards a target</exception>
+    public Vector3 MovementTarget {
+        get {
+            if (this.targetAsDirection) {
+                throw new InvalidOperationException("This object is currently moving towards an direction and not towards a target");
+            }
+
+            return this.target;
+        }
+    }
 
 	// Use this for initialization
 	void Start () {
