@@ -22,9 +22,27 @@ static class GroupObjects
         }
     }
 
+    /// <summary>
+    /// Gets the object used for grouping enemies in
+    /// </summary>
+    public static GameObject EnemyGroupObject {
+        get {
+            const string objectName = Globals.EnemyRootGameObjectName;
+
+            var existingObject = GetOrCreateGroupObject(objectName);
+
+            return existingObject;
+        }
+    }
+
     private static GameObject GetOrCreateGroupObject (string objectName) {
         // find any root group object
-        GameObject existingObject = GameObject.Find("/" + objectName) ?? new GameObject(objectName);
+        GameObject existingObject = GameObject.Find("/" + objectName);
+
+        if (existingObject == null) {
+            existingObject = new GameObject(objectName);
+        }
+
         return existingObject;
     }
 }
