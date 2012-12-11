@@ -20,8 +20,6 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
 	/// </summary>
 	void Update () {
 
-		Debug.Log(alpha);
-
 		renderer = gameObject.collider.renderer;
 
 		if ((renderer.material.color.a >= alpha && alpha == alphaMax) ||
