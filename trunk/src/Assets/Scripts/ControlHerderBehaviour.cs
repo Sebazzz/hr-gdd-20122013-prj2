@@ -6,12 +6,13 @@ using System.Collections.Generic;
 /// Bestuurt de herdershond. Heeft een getTrajectory functie die je aan kan roepen, om het huidige getekende path te krijgen.
 /// </summary>
 public class ControlHerderBehaviour : MonoBehaviour {
-	public float waypointSpacing = 5f;
+	public float waypointSpacing = 5f; // Space between waypoints on the dogs.
     public Material slow_material;
     public Material normal_material;
     public Material fast_material;
 
-    
+    private float selectRadius = 2f; // Sphere radius for the dog selector.
+    private float range = 300f; // Sphere casting is heavy, so keep the range low
     
     private int layerMask = 1 << 8; // Layer 8 is de layer waar hij mee raycast.
     private float FAILSAFE = 50f; // Failsafe die er voor zorgt dat je geen rare paden krijgt. Stelt de Maximale afstand voor.
@@ -36,15 +37,16 @@ public class ControlHerderBehaviour : MonoBehaviour {
         return trajectory;
     }
 
-    void OnMouseDown() {
-        if (listening == false) { // Ingedrukt
-            listening = true;
-            trajectory = new Queue<Vector3>();
-            startTime = Time.time;
-        }
-    }
-
 	void Update () {
+        if (!listening && Input.GetMouseButton(0) == true) {
+            RaycastHit? hit = mouseSelect();
+            if (hit != null && hit.Value.collider.gameObject == this.gameObject) {
+                listening = true;
+                trajectory = new Queue<Vector3>();
+                startTime = Time.time;
+            } 
+        }
+
         if (listening && Input.GetMouseButton(0) == false) { // Ingedrukt, nu losgelaten
             endTime = Time.time;
             listening = false;
@@ -98,15 +100,29 @@ public class ControlHerderBehaviour : MonoBehaviour {
 	}
 	
     private Vector3 getPosition() {
-        Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-        RaycastHit hit;
+        RaycastHit? hit = mouseSelect(layerMask);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
-
-            return hit.point;
-
+        if (hit != null) {
+            return hit.Value.point;
         }
 
         return Vector3.zero;
+    }
+
+    private RaycastHit? mouseSelect() { return mouseSelect(-1, true); }
+    private RaycastHit? mouseSelect(int layerMask) { return mouseSelect(layerMask, false); }
+    private RaycastHit? mouseSelect(int layerMask, bool sphere) {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (sphere) {
+            if (Physics.SphereCast(ray, selectRadius, out hit, range, layerMask)) {
+                return hit;
+            }
+        } else {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
+                return hit;
+            }
+        }
+        return null;
     }
 }
