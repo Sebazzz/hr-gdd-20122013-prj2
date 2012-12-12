@@ -10,10 +10,12 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
     public bool RecursiveWalk = true;
 
     private bool processGameObjects = false;
-	private float alpha = 1f;
+    private bool currentlyMouseOver = false;
+    private float alpha = 1f;
 
 	public float alphaMin = 0.3f;
 	public float alphaMax = 1f;
+    public float FadeSpeed = 5f;
 
 	/// <summary>
 	/// Use this for initialization
@@ -33,8 +35,10 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
 	    GameObject gameObjectToProcess = this.gameObject;
 
 	    if (this.RecursiveWalk) {
-	        this.WalkAndProcessGameObject(gameObjectToProcess);
-	    } else {
+	        //this.WalkAndProcessGameObject(gameObjectToProcess);
+            Debug.LogWarning("Recursive walk currently not implemented");
+            this.processGameObjects = !this.ProcessGameObject(gameObjectToProcess);
+        } else {
 	        this.processGameObjects = !this.ProcessGameObject(gameObjectToProcess);
 	    }
 	}
@@ -91,16 +95,25 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
             return true;
         }
 
-        if ((currentRenderer.material.color.a >= this.alpha && Math.Abs(this.alpha - this.alphaMax) < 0.01) ||
-            (currentRenderer.material.color.a <= this.alpha && Math.Abs(this.alpha - this.alphaMax) < 0.01)) {
+        // determine if we're done
+        // ... check what our actual target is
+        bool targetIsUpper = Mathf.Abs(this.alpha - this.alphaMax) <= 0.1;
+        bool targetIsLower = Mathf.Abs(this.alpha - this.alphaMin) <= 0.1;
+
+        // ... check the difference to our target, example: if our target is high, check the difference between the current material color and the high target
+        bool targetAlphaUpperReached = targetIsUpper && Mathf.Abs(currentRenderer.material.color.a - this.alphaMax) < 0.001;
+        bool targetAlphaLowerReached = targetIsLower && Mathf.Abs(currentRenderer.material.color.a - this.alphaMin) < 0.001;
+        if (targetAlphaUpperReached || targetAlphaLowerReached) {
             return true;
         }
-
+		
+		Debug.Log("Processing " + gameObjectToProcess.name);
+		
         Color shadercolor = new Color(
                 currentRenderer.material.color.r,
                 currentRenderer.material.color.g,
                 currentRenderer.material.color.b,
-                Mathf.Lerp(currentRenderer.material.color.a, this.alpha, Time.deltaTime * 5f));
+                Mathf.Lerp(currentRenderer.material.color.a, this.alpha, Time.deltaTime * FadeSpeed));
         currentRenderer.material.shader = Shader.Find("Transparent/Diffuse");
         currentRenderer.material.color = shadercolor;
 
@@ -111,12 +124,18 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
 	/// On Mouse Over Collider of the game object
 	/// </summary>
 	void OnMouseOver() {
-		alpha = alphaMin;
+        if (this.currentlyMouseOver) {
+            return;
+        }
+
+		this.alpha = this.alphaMin;
         this.processGameObjects = true;
+        this.currentlyMouseOver = true;
     }
 
 	void OnMouseExit() {
-		alpha = alphaMax;
+		this.alpha = this.alphaMax;
 	    this.processGameObjects = true;
+	    this.currentlyMouseOver = false;
 	}
 }
