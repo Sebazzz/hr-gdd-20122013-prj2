@@ -25,6 +25,7 @@ public class MoveBehaviour : MonoBehaviour {
     /// </summary>
     public float TargetRadius = 2;
 
+
     /// <summary>
     /// Gets the current direction of movement. See also <see cref="GameObject.transform"/>.
     /// </summary>

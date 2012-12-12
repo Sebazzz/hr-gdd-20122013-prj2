@@ -43,7 +43,8 @@ public class HerderLoopBehaviour : MonoBehaviour {
     }
 
     bool reachedTarget() {
-        if (Vector3.Distance(transform.position, target) < acceptRadius) {
+        // ignore the Y
+        if (Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(target.x, target.z)) < acceptRadius) {
             return true;
         }
 
