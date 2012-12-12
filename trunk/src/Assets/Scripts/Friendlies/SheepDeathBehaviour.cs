@@ -7,7 +7,7 @@ using UnityEngine;
 public class SheepDeathBehaviour : CanDieBehaviour {
     public override void Die (GameObject causeOfDeath) {
         // we only die because of traps or enemies
-        if (causeOfDeath.tag != Tags.Enemy) {
+        if (causeOfDeath.tag != Tags.Enemy || causeOfDeath.tag != Tags.ElectricFence) {
             return;
         }
 

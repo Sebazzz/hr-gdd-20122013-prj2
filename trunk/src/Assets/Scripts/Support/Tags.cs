@@ -18,4 +18,6 @@ static class Tags {
     public const string World = "World";
 
     public const string Untagged = "Untagged";
+
+	public const string ElectricFence = "ElectricFence";
 }
