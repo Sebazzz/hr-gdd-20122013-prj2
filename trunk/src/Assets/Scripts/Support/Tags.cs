@@ -19,5 +19,5 @@ static class Tags {
 
     public const string Untagged = "Untagged";
 
-	public const string ElectricFence = "ElectricFence";
+    public const string Trap = "Trap";
 }
