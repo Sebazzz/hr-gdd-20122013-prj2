@@ -12,7 +12,7 @@ public class SpawnSheepOnStoneBehaviour : MonoBehaviour {
 	private void Start () {
 		GameObject instance = (GameObject)Instantiate(
 			ObjectToSpawn,
-			new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z),
+			new Vector3(transform.position.x+0.25f, transform.position.y + 1.5f, transform.position.z+0.25f),
 			transform.rotation);
 
 	    instance.transform.parent = GroupObjects.SheepGroupObject.transform;
