@@ -43,6 +43,18 @@ ModelImporter:
     100074: DraadPrikkel024
     100076: Paal
     100078: Paal001
+    100080: Box001
+    100082: Box002
+    100084: Cylinder001
+    100086: Cylinder002
+    100088: Cylinder003
+    100090: Cylinder004
+    100092: Cylinder005
+    100094: Cylinder006
+    100096: Cylinder007
+    100098: Cylinder008
+    100100: Cylinder009
+    100102: Cylinder010
     400000: //RootNode
     400002: Draad003
     400004: Draad004
@@ -83,6 +95,18 @@ ModelImporter:
     400074: DraadPrikkel024
     400076: Paal
     400078: Paal001
+    400080: Box001
+    400082: Box002
+    400084: Cylinder001
+    400086: Cylinder002
+    400088: Cylinder003
+    400090: Cylinder004
+    400092: Cylinder005
+    400094: Cylinder006
+    400096: Cylinder007
+    400098: Cylinder008
+    400100: Cylinder009
+    400102: Cylinder010
     2300000: Draad003
     2300002: Draad004
     2300004: Draad005
@@ -122,6 +146,18 @@ ModelImporter:
     2300072: DraadPrikkel024
     2300074: Paal
     2300076: Paal001
+    2300078: Box001
+    2300080: Box002
+    2300082: Cylinder001
+    2300084: Cylinder002
+    2300086: Cylinder003
+    2300088: Cylinder004
+    2300090: Cylinder005
+    2300092: Cylinder006
+    2300094: Cylinder007
+    2300096: Cylinder008
+    2300098: Cylinder009
+    2300100: Cylinder010
     3300000: Draad003
     3300002: Draad004
     3300004: Draad005
@@ -161,6 +197,18 @@ ModelImporter:
     3300072: DraadPrikkel024
     3300074: Paal
     3300076: Paal001
+    3300078: Box001
+    3300080: Box002
+    3300082: Cylinder001
+    3300084: Cylinder002
+    3300086: Cylinder003
+    3300088: Cylinder004
+    3300090: Cylinder005
+    3300092: Cylinder006
+    3300094: Cylinder007
+    3300096: Cylinder008
+    3300098: Cylinder009
+    3300100: Cylinder010
     4300000: DraadPrikkel
     4300002: Draad2
     4300004: Draad1
@@ -200,6 +248,18 @@ ModelImporter:
     4300072: Draad011
     4300074: Draad012
     4300076: DraadPrikkel024
+    4300078: Cylinder001
+    4300080: Cylinder002
+    4300082: Box001
+    4300084: Box002
+    4300086: Cylinder003
+    4300088: Cylinder004
+    4300090: Cylinder005
+    4300092: Cylinder006
+    4300094: Cylinder007
+    4300096: Cylinder008
+    4300098: Cylinder009
+    4300100: Cylinder010
     7400000: Take 001
     9500000: //RootNode
   materials:
