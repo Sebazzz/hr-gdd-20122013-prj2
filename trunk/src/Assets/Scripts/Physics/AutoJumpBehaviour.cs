@@ -55,7 +55,7 @@ public class AutoJumpBehaviour : MonoBehaviour {
         if (!Physics.Raycast(jumpZoneDetectionRay, out hit, this.DetectRange)) {
             return;
         }
-
+        
         // determine if we have information for jumping (i.e.: the other is a jumpzone)
         GameObject other = hit.collider.gameObject;
         JumpZoneConfiguration jumpZoneConfiguration = other.GetComponent<JumpZoneConfiguration>();
@@ -71,10 +71,10 @@ public class AutoJumpBehaviour : MonoBehaviour {
         }
 
         // ... check for rotation
-        // TODO: don't know how
+        // make positive
+        float myYpos = this.transform.position.y;
 
-        Vector3 v = this.rigidbody.GetPointVelocity(other.transform.position);
-        Debug.Log(v);
+        Debug.Log(this.transform.eulerAngles);
 
         this.ExecuteJump(jumpZoneConfiguration);
     }

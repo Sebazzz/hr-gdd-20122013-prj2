@@ -17,4 +17,17 @@ public class KillBehaviour : MonoBehaviour {
         // execute death logic
         dieComponent.Die(this.gameObject);
     }
+
+    private void OnTriggerEnter (Collider contextCollider) {
+        // check for the 'can die' component
+        GameObject collidingGameObject = contextCollider.gameObject;
+        CanDieBehaviour dieComponent = collidingGameObject.GetComponent<CanDieBehaviour>();
+
+        if (dieComponent == null) {
+            return;
+        }
+
+        // execute death logic
+        dieComponent.Die(this.gameObject);
+    }
 }
