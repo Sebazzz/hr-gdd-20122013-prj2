@@ -4,6 +4,8 @@ using UnityEngine;
 /// <summary>
 ///     Executes specific death logic for a wolf
 /// </summary>
+/// <dependency cref="CanDieBehaviour"/>
+/// <dependend cref="KillBehaviour"/>
 public class WolfDeathBehaviour : CanDieBehaviour {
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         Destroy(this.gameObject);
@@ -14,8 +16,8 @@ public class WolfDeathBehaviour : CanDieBehaviour {
             this.ExecuteDirectDeath();
         }
 
-        if (this.DisableMovementWhenDying) {
-            this.DisableScriptIfExists<FoxMoveBehaviour>(causeOfDeath);
+        if (this.DisableScriptsWhenDying) {
+            this.DisableScriptIfExists<FoxMoveBehaviour>();
         }
 
         base.OnStartDying(causeOfDeath);

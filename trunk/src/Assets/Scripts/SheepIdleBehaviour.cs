@@ -34,6 +34,8 @@ public class SheepIdleBehaviour : MonoBehaviour {
 				sheepState = SheepState.active;
 				rigidbody.isKinematic = false;
 				rigidbody.AddForce(transform.forward*JumpForce, ForceMode.Impulse);
+
+			    this.enabled = false;
 			}
 
 			return; 

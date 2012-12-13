@@ -13,9 +13,9 @@ public abstract class CanDieBehaviour : MonoBehaviour {
     public float KillDelay = 0;
 
     /// <summary>
-    /// Defines whether or not to disable any movement scripts when dying
+    /// Defines whether or not to disable any (by default movement) scripts when dying
     /// </summary>
-    public bool DisableMovementWhenDying = true;
+    public bool DisableScriptsWhenDying = true;
     
     /// <summary>
     /// Causes the object to which this script is attached to die. Custom logic is implemented in derived classes. 
@@ -50,15 +50,13 @@ public abstract class CanDieBehaviour : MonoBehaviour {
     /// </summary>
     /// <param name="causeOfDeath"></param>
     protected virtual void OnStartDying (GameObject causeOfDeath) {
-        if (this.DisableMovementWhenDying) {
-
-            this.DisableScriptIfExists<MoveBehaviour>(causeOfDeath);
-            
+        if (this.DisableScriptsWhenDying) {
+            this.DisableScriptIfExists<MoveBehaviour>();
         }
     }
 
-    protected void DisableScriptIfExists<T>(GameObject contextObject) where T : MonoBehaviour {
-        T scriptObject = contextObject.GetComponent<T>();
+    protected void DisableScriptIfExists<T>() where T : MonoBehaviour {
+        T scriptObject = this.gameObject.GetComponent<T>();
 
         if (scriptObject != null) {
             scriptObject.enabled = false;
