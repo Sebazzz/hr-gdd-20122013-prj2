@@ -41,9 +41,11 @@ public class ControlHerderBehaviour : MonoBehaviour {
         if (!listening && Input.GetMouseButton(0) == true) {
             RaycastHit? hit = mouseSelect();
             if (hit != null && hit.Value.collider.gameObject == this.gameObject) {
-                listening = true;
-                trajectory = new Queue<Vector3>();
-                startTime = Time.time;
+                if (MouseManager.TryAcquireLock(this)) {
+                    listening = true;
+                    trajectory = new Queue<Vector3>();
+                    startTime = Time.time;
+                }
             } 
         }
 
@@ -52,6 +54,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             listening = false;
 
             GetComponent<HerderLoopBehaviour>().setTrajectory(trajectory, calculateDrawTime());
+            MouseManager.ReleaseLock(this);
         }
 
         if (listening) {
