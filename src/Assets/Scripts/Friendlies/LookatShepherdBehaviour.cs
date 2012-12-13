@@ -22,15 +22,20 @@ public class LookatShepherdBehaviour : MonoBehaviour {
 	GameObject[] shepherd = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
 	     
 		///INIT COMPARE
+		GameObject closestshepherd = shepherd[0];
 		Vector3 vecmem = shepherd[0].transform.position -transform.position;
 		for( int i = 0 ; i < shepherd.Length ; i ++ )
 		{
 			Vector3 vec =  shepherd[i].transform.position - transform.position;
-			if(vec.magnitude.CompareTo(vecmem.magnitude) < 1  ){ vecmem = vec;}
+			if(vec.sqrMagnitude.CompareTo(vecmem.sqrMagnitude) < 1  ){ 
+				vecmem = vec;
+			closestshepherd = shepherd[i];
+			}
 		}
 		
 		///LOOKAT POS
-		transform.LookAt(vecmem);
+		transform.LookAt(closestshepherd.transform);
+		print(" LOOKING AT "  + closestshepherd.transform.position);
 		
 		
 	}
