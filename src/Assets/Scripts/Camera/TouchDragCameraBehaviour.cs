@@ -38,16 +38,19 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 	/// Update is called once per frame
 	/// </summary>
 	private void Update () {
-		if (Input.GetMouseButtonDown(0)) {
-			RaycastHit hit = new RaycastHit();
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out hit)) {
-				foreach (GameObject go in GameObject.FindGameObjectsWithTag(Tags.Shepherd)) {
-					if (hit.collider.gameObject == go.gameObject) return;
-				}
-			}
-		}
+		//if (Input.GetMouseButtonDown(0)) {
+		//    RaycastHit hit = new RaycastHit();
+		//    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		//    if (Physics.Raycast(ray, out hit)) {
+		//        foreach (GameObject go in GameObject.FindGameObjectsWithTag(Tags.Shepherd)) {
+		//            if (hit.collider.gameObject == go.gameObject) return;
+		//        }
+		//    }
+		//}
 
+		if (Input.GetMouseButtonDown(0) && !MouseManager.TryAcquireLock(this)) {
+			return;
+		}
 
 		if (Input.GetMouseButtonDown(0)) OnMouseDown();
 		if (Input.GetMouseButton(0) && OnMouseDownCameraPosition != Vector3.zero) OnMouse();
@@ -79,6 +82,9 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 	/// </summary>
 	private void OnMouseUp() {
 		OnMouseDownCameraPosition = Vector3.zero;
+		
+		if(MouseManager.CurrentLockOwner == this)
+			MouseManager.ReleaseLock(this);
 	}
 
 	/// <summary>
