@@ -18,10 +18,10 @@ public class LookatShepherdBehaviour : MonoBehaviour {
 	}
 
 	void LookAtClosestDog(){
-		///FIND SHPEHERD
+		//FIND SHPEHERD
 	GameObject[] shepherd = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
 	     
-		///INIT COMPARE
+		//INIT COMPARE
 		GameObject closestshepherd = shepherd[0];
 		Vector3 vecmem = shepherd[0].transform.position -transform.position;
 		for( int i = 0 ; i < shepherd.Length ; i ++ )
@@ -33,9 +33,9 @@ public class LookatShepherdBehaviour : MonoBehaviour {
 			}
 		}
 		
-		///LOOKAT POS
+		//LOOKAT POS
 		transform.LookAt(closestshepherd.transform);
-		print(" LOOKING AT "  + closestshepherd.transform.position);
+		//print(" LOOKING AT "  + closestshepherd.transform.position);
 		
 		
 	}

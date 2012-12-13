@@ -5,17 +5,26 @@ using UnityEngine;
 ///     Implements specific logic for the sheep when death is triggered
 /// </summary>
 public class SheepDeathBehaviour : CanDieBehaviour {
-
-    
-
-    public override void Die (GameObject causeOfDeath) {
-        // we only die because of traps or enemies
-        if (causeOfDeath.tag != Tags.Enemy && 
-            causeOfDeath.tag != Tags.Trap) {
-            return;
-        }
-
+    protected override void OnExecuteDeath (GameObject causeOfDeath) {
         LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
+    }
+
+    protected override void OnStartDying (GameObject causeOfDeath) {
+        if (causeOfDeath.layer != Layers.Water) {
+            this.ExecuteDirectDeath();
+        }
+
+        base.OnStartDying(causeOfDeath);
+    }
+
+    protected override bool CanDie (GameObject causeOfDeath, string causeOfDeathTag, int causeOfDeathLayer) {
+        // we only die because of traps or enemies
+        if (causeOfDeath.tag != Tags.Enemy &&
+            causeOfDeath.tag != Tags.Trap) {
+            return false;
+        }
+
+        return true;
     }
 }
