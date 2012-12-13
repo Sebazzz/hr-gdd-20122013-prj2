@@ -35,7 +35,11 @@ public class LookatShepherdBehaviour : MonoBehaviour {
 		
 		//LOOKAT POS
 		transform.LookAt(closestshepherd.transform);
+
+		///Debug.Log(" LOOKING AT "  + closestshepherd.ToString);
+
 		//print(" LOOKING AT "  + closestshepherd.transform.position);
+
 		
 		
 	}
