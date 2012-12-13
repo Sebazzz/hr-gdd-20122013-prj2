@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TerrainSurface {
 
-    public static float[] GetTextureMix(Vector3 worldPos) {
+    private static float[] GetTextureMix(Vector3 worldPos) {
 
         // returns an array containing the relative mix of textures
         // on the main terrain at this world position.
@@ -19,6 +19,11 @@ public class TerrainSurface {
         int mapX = (int)(((worldPos.x - terrainPos.x) / terrainData.size.x) * terrainData.alphamapWidth);
         int mapZ = (int)(((worldPos.z - terrainPos.z) / terrainData.size.z) * terrainData.alphamapHeight);
 
+        // Return nothing if the map position is out of bounds
+        if(mapX < 0 || mapX > terrainData.alphamapWidth || mapZ < 0 || mapZ > terrainData.alphamapHeight){
+            return null;
+        }
+
         // get the splat data for this cell as a 1x1xN 3d array (where N = number of textures)
         float[, ,] splatmapData = terrainData.GetAlphamaps(mapX, mapZ, 1, 1);
 
@@ -32,13 +37,20 @@ public class TerrainSurface {
 
     }
 
+    /// <summary>
+    /// Get main texture under worldpos
+    /// </summary>
+    /// <param name="worldPos">Position to get.</param>
+    /// <returns>Returns highest ID, or -1 if current index is out of bounds</returns>
     public static int GetMainTexture(Vector3 worldPos) {
 
         // returns the zero-based index of the most dominant texture
         // on the main terrain at this world position.
 
         float[] mix = GetTextureMix(worldPos);
-
+        if (mix == null) {
+            return -1;
+        }
 
         float maxMix = 0;
         int maxIndex = 0;
