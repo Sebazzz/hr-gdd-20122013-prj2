@@ -6,6 +6,18 @@ using UnityEngine;
 /// </summary>
 public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
     /// <summary>
+    /// Specifies how long to ignore collision events after colliding with something. This prevents being stuck or still going through an object
+    /// </summary>
+    public float IgnoreTime = 1.500f;
+
+    /// <summary>
+    /// Specifies how many times to step 'back' when colliding
+    /// </summary>
+    public int NumberOfStepBacks = 4;
+
+    private float lastTurnAroundTime;
+
+    /// <summary>
     /// Specifies the tags to ignore for this behaviour
     /// </summary>
     private readonly IEnumerable<string> ignoreTags = new [] {
@@ -56,6 +68,11 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
     }
 
     private void TurnAround() {
+        if ((Time.time - this.lastTurnAroundTime) < this.IgnoreTime) {
+            return;
+        }
+        this.lastTurnAroundTime = Time.time;
+
         MoveBehaviour mv = this.gameObject.GetComponent<MoveBehaviour>();
         mv.Stop();
 
@@ -64,7 +81,9 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
         rotation = Quaternion.Euler(rotation.eulerAngles.x, (rotation.eulerAngles.y + 180) % 360, rotation.eulerAngles.z);
         mv.MoveToDirection(rotation);
 
-        // execute a single step to prevent being stuck
-        mv.MoveSingleStep();
+        for (int i = 0; i < this.NumberOfStepBacks; i++) {
+            // execute a single step to prevent being stuck
+            mv.MoveSingleStep();
+        }
     }
 }
