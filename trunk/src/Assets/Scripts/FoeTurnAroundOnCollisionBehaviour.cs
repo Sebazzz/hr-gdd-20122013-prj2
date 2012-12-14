@@ -15,6 +15,11 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
     /// </summary>
     public int NumberOfStepBacks = 4;
 
+    /// <summary>
+    /// Specifies the time the thing take to turn around after collision
+    /// </summary>
+    public float TurnAroundTime = 1;
+
     private float lastTurnAroundTime;
 
     /// <summary>
