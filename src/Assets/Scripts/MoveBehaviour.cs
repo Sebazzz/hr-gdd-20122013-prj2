@@ -80,16 +80,27 @@ public class MoveBehaviour : MonoBehaviour {
     /// </summary>
     public void MoveSingleStep() {
         if (this.targetAsDirection) {
-            this.MoveTowardsDirection();
+            this.MoveTowardsDirection(false);
         } else {
-            this.MoveTowardsPoint();
+            this.MoveTowardsPoint(false);
+        }
+    }
+
+    /// <summary>
+    /// Executes a single movement after configuration via <see cref="MoveTo"/>
+    /// </summary>
+    public void MoveSingleStepBackup() {
+        if (this.targetAsDirection) {
+            this.MoveTowardsDirection(true);
+        } else {
+            this.MoveTowardsPoint(true);
         }
     }
 
     /// <summary>
     /// Executes movement logic to move to a specific point as set in the <see cref="MoveTo"/> method (<see cref="target"/>)
     /// </summary>
-    private void MoveTowardsPoint() {
+    private void MoveTowardsPoint(bool inverse) {
         Vector3 currentPosition = this.gameObject.transform.position;
 
         // check if we reached the target
@@ -106,15 +117,25 @@ public class MoveBehaviour : MonoBehaviour {
         // check if we will not cross over the target
         Vector3 targetAfterMovement = currentPosition + currentMovement;
 
+        if (inverse) {
+            targetAfterMovement *= -1;
+        }
+
         this.transform.position = targetAfterMovement;
     }
 
     /// <summary>
     /// Executes movement logic to move to a specific direction as set in the <see cref="MoveToDirection"/> method (<see cref="target"/>)
     /// </summary>
-    private void MoveTowardsDirection() {
+    private void MoveTowardsDirection(bool inverse) {
+        float finalSpeed = this.Speed * Time.deltaTime;
+
+        if (inverse) {
+            finalSpeed *= -1;
+        }
+
         // calculate movement
-        this.gameObject.transform.Translate(0, 0, this.Speed * Time.deltaTime);
+        this.gameObject.transform.Translate(0, 0, finalSpeed);
     }
 
     /// <summary>
