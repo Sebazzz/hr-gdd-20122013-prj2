@@ -89,7 +89,7 @@ public class AutoJumpBehaviour : MonoBehaviour
 		
 		float angle = Vector2.Angle (ray2D, jumpzone2D);
 				
-		///if( (angle < 90 - range || angle >  270.0F + range )||( angle > 90.0F + range  && angle < 270.0F - range ) ){
+		///will be executed if anglerange is between given values;
 		
 		if (angle < 90.0F - angleRange) {
 			this.ExecuteJump (jumpZoneConfiguration);	
