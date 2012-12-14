@@ -92,7 +92,7 @@ public class LookatShepherdBehaviour : MonoBehaviour
 	
 	public void loosFocus(){
 	
-		transform.Rotate(Vector3.up, pre
+		//transform.Rotate(Vector3.up, pre
 			
 			
 		
