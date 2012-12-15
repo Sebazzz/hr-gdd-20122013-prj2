@@ -5,7 +5,7 @@ using System.Collections;
 ///     Executes specific death logic for a shepard dog
 /// </summary>
 /// <dependency cref="CanDieBehaviour"/>
-/// <dependency cref="ControlHerderBehaviour"/>
+/// <dependency cref="HerderLoopBehaviour"/>
 /// <dependend cref="KillBehaviour"/>
 public class DogDeathBehaviour : CanDieBehaviour {
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
@@ -24,10 +24,9 @@ public class DogDeathBehaviour : CanDieBehaviour {
 
         if (this.DisableScriptsWhenDying) {
             // kill any path
-            ControlHerderBehaviour ch = this.gameObject.GetComponent<ControlHerderBehaviour>();
+            HerderLoopBehaviour ch = this.gameObject.GetComponent<HerderLoopBehaviour>();
             if (ch != null) {
-                ch.done();
-                ch.enabled = false;
+                ch.CancelWalk();
             }
         }
 
