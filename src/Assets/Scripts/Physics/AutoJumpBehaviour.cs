@@ -8,7 +8,7 @@ using System.Collections;
 /// </summary>
 /// <dependency cref="JumpZoneConfiguration" />
 public class AutoJumpBehaviour : MonoBehaviour {
-    private const float JumpCheckThreshold = 1f;
+    private const float JumpCheckThreshold = 0.5f;
     private float jumpStartY = Single.NaN;
     private bool isJumping = false;
 
@@ -61,10 +61,10 @@ public class AutoJumpBehaviour : MonoBehaviour {
 	{
         if (this.isJumping) {
             // check if we're still jumping
-            bool doneJumping = Math.Abs(this.transform.position.y - this.jumpStartY) < JumpCheckThreshold;
+            bool doneJumping = this.rigidbody.velocity.y < 0 && Math.Abs(this.transform.position.y - this.jumpStartY) < JumpCheckThreshold;
 
             if (doneJumping) {
-                this.isJumping = false;
+                this.isJumping = false;Debug.Log("Jumping done");
                 this.jumpStartY = Single.NaN;
             } else {
                 return; // don't jump while jumping
