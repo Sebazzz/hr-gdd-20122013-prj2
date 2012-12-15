@@ -86,6 +86,8 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
         rotation = Quaternion.Euler(rotation.eulerAngles.x, (rotation.eulerAngles.y + 180) % 360, rotation.eulerAngles.z);
         mv.MoveToDirection(rotation);
 
+        this.transform.Translate(2, 0, 0);
+
         for (int i = 0; i < this.NumberOfStepBacks; i++) {
             // execute a single step to prevent being stuck
             mv.MoveSingleStep();

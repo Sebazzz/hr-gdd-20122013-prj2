@@ -16,10 +16,17 @@ using UnityEngine;
 ///         The trajectory walked by this script can be disabled by calling <see cref="CancelWalk"/>. Please note the <see cref="ControlHerderBehaviour.OnPathFinished"/> method 
 ///         will still be called, to make sure any resources from the walking process are properly cleaned up.
 ///     </para>
+///     <para>
+///         The script checks the <see cref="AutoJumpBehaviour.IsCurrentlyJumping"/> property to check if the dog is currently jumping. If it is, movement will be temporary disabled 
+///         to make sure the jumping is done in a natural way.
+///     </para>
 /// </remarks>
 /// <dependency cref="ControlHerderBehaviour"/>
+/// <dependency cref="AutoJumpBehaviour"/>
 /// <dependend cref="ControlHerderBehaviour"/>
 public class HerderLoopBehaviour : MonoBehaviour {
+    private AutoJumpBehaviour jumpController;
+
     private Queue<Vector3> currentTrajectory;
     private Vector3 currentTarget = Vector3.zero;
     private float desiredSpeed;
@@ -81,6 +88,8 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     private void Start() {
         this.stuckCheckTimer = new Timer(StuckCheckTime);
+
+        this.jumpController = this.GetComponent<AutoJumpBehaviour>();
     }
 
     /// <summary>
@@ -143,11 +152,17 @@ public class HerderLoopBehaviour : MonoBehaviour {
             return;
         }
 
-        // do some checks
+        
+        // do check if we either reached the end of the path or the target
         bool trajectoryFinished = this.currentTrajectory.Count <= 0;
         bool targetReached = this.CheckReachedTarget();
 
         if (!targetReached) {
+            // check if we're not jumping
+            if (this.jumpController != null && this.jumpController.IsCurrentlyJumping) {
+                return;
+            }
+
             this.stuckCheckTimer.Update();
 
             if (this.stuckCheckTimer.IsTriggered) {
@@ -197,6 +212,10 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     private void FixedUpdate() {
         System.Diagnostics.Debug.Assert(this.enabled);
+
+        if (this.jumpController != null && this.jumpController.IsCurrentlyJumping) {
+            return;
+        }
 
         // calculate a new rotation position
         Vector3 lookPos = this.currentTarget - this.transform.position;

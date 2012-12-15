@@ -46,7 +46,7 @@ public class EmitterBehaviour : MonoBehaviour {
 	void Start () {
         this.waveTimer = new Timer(WaveTimeGap);
 
-	    string groupName = ObjectToSpawn.name + Globals.GroupObjectNameSuffix;
+	    string groupName = Globals.GroupObjectPrefix + ObjectToSpawn.name + Globals.GroupObjectNameSuffix;
 	    this.groupObject = GameObject.Find("/" + groupName);
         if (this.groupObject == null) {
             this.groupObject = new GameObject(groupName);

@@ -75,7 +75,7 @@ public class MoveBehaviour : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 	    this.MoveSingleStep();
 	}
 
@@ -117,7 +117,7 @@ public class MoveBehaviour : MonoBehaviour {
 
         // calculate the movement 
         Vector3 difference = target - currentPosition;
-        Vector3 currentMovement = difference * Time.deltaTime * Speed;
+        Vector3 currentMovement = difference * Time.fixedDeltaTime * Speed;
 
         // check if we will not cross over the target
         Vector3 targetAfterMovement = currentPosition + currentMovement;
@@ -137,7 +137,7 @@ public class MoveBehaviour : MonoBehaviour {
     /// Executes movement logic to move to a specific direction as set in the <see cref="MoveToDirection"/> method (<see cref="target"/>)
     /// </summary>
     private void MoveTowardsDirection(bool inverse) {
-        float finalSpeed = this.Speed * Time.deltaTime;
+        float finalSpeed = this.Speed * Time.fixedDeltaTime;
 
         if (inverse) {
             finalSpeed *= -1;
