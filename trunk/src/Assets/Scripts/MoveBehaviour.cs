@@ -25,6 +25,10 @@ public class MoveBehaviour : MonoBehaviour {
     /// </summary>
     public float TargetRadius = 2;
 
+    /// <summary>
+    /// Defines if this script should ignore the Y-axis for moving
+    /// </summary>
+    public bool IgnoreYAxis = true;
 
     /// <summary>
     /// Gets the current direction of movement. See also <see cref="GameObject.transform"/>.
@@ -104,7 +108,8 @@ public class MoveBehaviour : MonoBehaviour {
         Vector3 currentPosition = this.gameObject.transform.position;
 
         // check if we reached the target
-        if (Vector3.Distance(currentPosition, target) < TargetRadius) {
+        if ((!IgnoreYAxis && Vector3.Distance(currentPosition, target) < TargetRadius) ||
+            (IgnoreYAxis && Vector2.Distance(new Vector2(currentPosition.x, currentPosition.z), new Vector2(target.x, target.z)) < TargetRadius)) {
             // we're done
             this.Stop();
             return;
@@ -119,6 +124,10 @@ public class MoveBehaviour : MonoBehaviour {
 
         if (inverse) {
             targetAfterMovement *= -1;
+        }
+
+        if (this.IgnoreYAxis) {
+            targetAfterMovement.y = this.transform.position.y;
         }
 
         this.transform.position = targetAfterMovement;
