@@ -7,9 +7,11 @@ using System.Text;
 /// Defines global constants
 /// </summary>
 static class Globals {
-    public const string GroupObjectNameSuffix = "_collection";
+    public const string GroupObjectPrefix = "Group: ";
 
-    public const string SheepRootGameObjectName = "Sheep" + GroupObjectNameSuffix;
+    public const string GroupObjectNameSuffix = " (generated)";
 
-    public const string EnemyRootGameObjectName = "Enemy" + GroupObjectNameSuffix;
+    public const string SheepRootGameObjectName = GroupObjectPrefix + "Sheep" + GroupObjectNameSuffix;
+
+    public const string EnemyRootGameObjectName = GroupObjectPrefix + "Enemy" + GroupObjectNameSuffix;
 }

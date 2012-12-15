@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -6,8 +7,11 @@ using System.Collections;
 /// These object
 /// </summary>
 /// <dependency cref="JumpZoneConfiguration" />
-public class AutoJumpBehaviour : MonoBehaviour
-{
+public class AutoJumpBehaviour : MonoBehaviour {
+    private const float JumpCheckThreshold = 1f;
+    private float jumpStartY = Single.NaN;
+    private bool isJumping = false;
+
 	/// <summary>
 	/// Defines how much the force applied as configured in <see cref="JumpZoneConfiguration.ForceUp"/> is multiplied for this object
 	/// </summary>
@@ -39,6 +43,13 @@ public class AutoJumpBehaviour : MonoBehaviour
 	/// </summary>
 	public bool JumpTriggerOnlyOutsideZone = true;
 
+    /// <summary>
+    /// Gets a value indicating if the object is currently jumping
+    /// </summary>
+    public bool IsCurrentlyJumping {
+        get { return isJumping; }
+    }
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -48,6 +59,18 @@ public class AutoJumpBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        if (this.isJumping) {
+            // check if we're still jumping
+            bool doneJumping = Math.Abs(this.transform.position.y - this.jumpStartY) < JumpCheckThreshold;
+
+            if (doneJumping) {
+                this.isJumping = false;
+                this.jumpStartY = Single.NaN;
+            } else {
+                return; // don't jump while jumping
+            }
+        }
+
 		this.DetectJump ();
 	}
 
@@ -116,5 +139,8 @@ public class AutoJumpBehaviour : MonoBehaviour
 
 		this.rigidbody.AddForce (Vector3.up * finalForceUp, ForceMode.VelocityChange);
 		this.rigidbody.AddForce (Vector3.forward * finalForceForward, ForceMode.VelocityChange);
+
+	    this.isJumping = true;
+	    this.jumpStartY = this.transform.position.y;
 	}
 }
