@@ -270,8 +270,13 @@ public class ControlHerderBehaviour : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (sphere) {
-            if (Physics.SphereCast(ray, this.SelectRadius, out hit, SelectionRange, layerToCheck)) {
-                return hit;
+            RaycastHit[] hits = Physics.SphereCastAll(ray, this.SelectRadius, SelectionRange, layerToCheck);
+            if (hits.Length != 0) {
+                foreach (RaycastHit hitTest in hits) {
+                    if (hitTest.collider.CompareTag(Tags.Shepherd)) {
+                        return hitTest;
+                    }
+                }
             }
         } else {
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerToCheck)) {
