@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class LookatShepherdBehaviour : MonoBehaviour
 {
@@ -11,17 +12,18 @@ public class LookatShepherdBehaviour : MonoBehaviour
 	/// The update delay.
 	/// </summary>
 	public  float UpdateDelay = 0.6F;
-	
 	/// <summary>
 	/// The minimum watch distance.
 	/// </summary>
-	public float minWatchDistance = 4.0F;
-	
-	public float prevangle ;
+	public float minWatchDistance = 20F;
+	/// <summary>
+	/// The previous position.
+	/// </summary>
+	public Quaternion prevPosition= new Quaternion();
 	/// <summary>
 	/// The follow speed.
 	/// </summary>
-	public int followSpeed =20;
+	public int followSpeed = 20;
 	/// <summary>
 	/// The closestshepherd.
 	/// </summary>
@@ -40,62 +42,76 @@ public class LookatShepherdBehaviour : MonoBehaviour
 		if (Time.time - lastUpdate > UpdateDelay) {
 			lastUpdate = Time.time;
 			if (gameObject.GetComponent<SheepIdleBehaviour> ().sheepState.Equals (SheepIdleBehaviour.SheepState.active)) {
-				closestshepherd  = FindClosestDog ();	
-				if(closestshepherd != null) {
-				prevangle = transform.rotation.y;	
-				}
+				FindClosestDog ();				
 			} 
 		}
 		if (gameObject.GetComponent<SheepIdleBehaviour> ().sheepState.Equals (SheepIdleBehaviour.SheepState.active)) {
-			LookAtClosestDog (closestshepherd );	
+			LookAtClosestDog ();	
 		} 
 	}
-
-	GameObject FindClosestDog ()
+	
+	/// <summary>
+	/// Finds the closest dog.
+	/// </summary>
+	void FindClosestDog ()
 	{
 		//FIND SHPEHERD
 		GameObject[] shepherd = GameObject.FindGameObjectsWithTag (Tags.Shepherd);
 
 		if (shepherd.Length == 0) {
-			return null;
+			return ;
 		}
 	     
-		//INIT COMPARE
-		closestshepherd = shepherd [0];
+		//INITIATE COMPARE
 		Vector3 vecmem = shepherd [0].transform.position - transform.position;
+		prevPosition = transform.rotation;	
 		for (int i = 0; i < shepherd.Length; i ++) {
 			Vector3 vec = shepherd [i].transform.position - transform.position;
 			if (vec.sqrMagnitude.CompareTo (vecmem.sqrMagnitude) < 1) { 
 				vecmem = vec;
 				closestshepherd = shepherd [i];
-			}
+				}
 		}
-		return closestshepherd;
+		
 	}
 	
 	/// <summary>
 	/// Looks at closest dog.
 	/// </summary>
-	/// <param name='LookAt'>
-	/// Look at : The transform to look at
-	/// .
-	/// </param>
-	public void LookAtClosestDog (GameObject LookAt)
-	{		
-		if (Vector3.Distance(LookAt.transform.position,transform.position) < minWatchDistance ) {
-			Vector3 lookPos = closestshepherd.transform.position - transform.position;
-			lookPos.y = 0;
-			Quaternion rotation = Quaternion.LookRotation (lookPos);
-			transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * followSpeed);		
+	 void LookAtClosestDog ()
+	{	
+		try{
+		if (closestshepherd !=null) {
+			print (gameObject.ToString());
+			Vector3 distance = closestshepherd.transform.position - transform.position;
+			print (distance.magnitude + " magnitude" + minWatchDistance + "min watchdist");
+				
+			if (distance.magnitude < minWatchDistance) {
+				distance.y = 0;
+				prevPosition= transform.rotation;		
+				Quaternion rotation = Quaternion.LookRotation (distance);
+				transform.rotation = Quaternion.Slerp (transform.rotation, rotation, Time.fixedDeltaTime * followSpeed);	
+			 	
+			}
+			else{
+			loosFocus();
+			closestshepherd = null;	
+			}
+		}
+		}
+		catch(Exception e){
+			print(e.Message);
+			
 		}
 	}
 	
-	public void loosFocus(){
 	
-		//transform.Rotate(Vector3.up, pre
-			
-			
-		
+	/// <summary>
+	/// Looses the focus on the closest dogg.
+	/// </summary>
+	void loosFocus ()
+	{
+		transform.rotation = Quaternion.Slerp (transform.rotation, prevPosition, Time.fixedDeltaTime * followSpeed);	
 	}
 	
 
