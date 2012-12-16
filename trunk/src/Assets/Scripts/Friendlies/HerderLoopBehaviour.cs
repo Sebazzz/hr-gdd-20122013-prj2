@@ -22,7 +22,7 @@ using UnityEngine;
 ///     </para>
 /// </remarks>
 /// <dependency cref="ControlHerderBehaviour"/>
-/// <dependency cref="AutoJumpBehaviour"/>
+/// <dependency cref="AutoJumpBehaviour" type="optional"/>
 /// <dependend cref="ControlHerderBehaviour"/>
 public class HerderLoopBehaviour : MonoBehaviour {
     private AutoJumpBehaviour jumpController;

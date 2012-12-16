@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 
 /// <summary>
-/// Helper class for level-global behaviour.
+/// Helper class for level-global behaviour. Also handles cleaning up resources.
 /// </summary>
 /// <remarks>
 /// This script should be executed as last.
@@ -23,6 +23,12 @@ public class LevelBehaviour : MonoBehaviour {
             throw new UnityException("There are more sheep to collect than sheep available");
         }
 	}
+
+
+    void OnLevelWasLoaded(int index) {
+        // release any existing lock on the mouse
+        MouseManager.ReleaseLock(this);
+    }
 	
     /// <summary>
     /// Call this when a sheep has been collected

@@ -11,11 +11,18 @@ using System.Collections;
 public class EmitterBehaviour : MonoBehaviour {
     /// <summary>Grouping object for objects spawned by this emitter </summary>
     private GameObject groupObject;
+    private Timer initialOffsetTimer;
     private Timer spawnTimer;
     private Timer waveTimer;
     private Camera spawnCameraCheck;
     private int currentSpawnCount;
-    
+
+
+    /// <summary>
+    /// Specifies the initial time offset. This allows other emitters with the same settings not to emit at the same time.
+    /// </summary>
+    public float InitialTimeOffset = 0;
+
     /// <summary>
     /// Specifies the time gap between waves and also between the start of the game and the first wave
     /// </summary>
@@ -44,6 +51,7 @@ public class EmitterBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        this.initialOffsetTimer = new Timer(this.InitialTimeOffset);
         this.waveTimer = new Timer(WaveTimeGap);
 
 	    string groupName = Globals.GroupObjectPrefix + ObjectToSpawn.name + Globals.GroupObjectNameSuffix;
@@ -57,6 +65,16 @@ public class EmitterBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        if (this.initialOffsetTimer != null) {
+            this.initialOffsetTimer.Update();
+            
+            if (this.initialOffsetTimer.IsTriggered) {
+                this.initialOffsetTimer = null;
+            }
+
+            return;
+        }
+
         // check if seen by camera
         if (this.spawnCameraCheck != null && DisableSpawnInCameraView && this.IsSeenInCamera()) {
             if (this.spawnTimer != null) {

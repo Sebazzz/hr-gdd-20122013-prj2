@@ -47,7 +47,7 @@ public static class MouseManager {
             throw new ArgumentNullException("requestee");
         }
 
-        if (!ReferenceEquals(CurrentLockOwner, requestee)) {
+        if (!(requestee is LevelBehaviour) && !ReferenceEquals(CurrentLockOwner, requestee)) {
             throw new InvalidOperationException("Wrong owner requesting lock clearance");
         }
 
