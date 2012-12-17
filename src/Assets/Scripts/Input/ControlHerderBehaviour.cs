@@ -75,8 +75,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// <summary>
     /// Specifies the sphere casting range for selecting the dog
     /// </summary>
-    /// <remarks>Sphere casting is heavy, so keep the range low</remarks>
-    private const float SelectionRange = 150f;
+    /// <remarks>Sphere casting is heavy, so keep the range low for a better performance</remarks>
+    public float SelectionRange = 150f;
 
     /// <summary>
     /// Specifies the layer the path is drawn on
