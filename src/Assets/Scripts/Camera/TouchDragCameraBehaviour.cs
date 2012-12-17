@@ -94,6 +94,6 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 
 
     void OnDrawGizmos() {
-        
+        //Gizmos.
     }
 }
