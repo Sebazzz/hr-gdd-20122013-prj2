@@ -91,4 +91,9 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 		if(MouseManager.CurrentLockOwner == this)
 			MouseManager.ReleaseLock(this);
 	}
+
+
+    void OnDrawGizmos() {
+        
+    }
 }
