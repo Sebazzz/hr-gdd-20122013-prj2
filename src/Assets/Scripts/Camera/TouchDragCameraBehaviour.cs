@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Camera))]
 public class TouchDragCameraBehaviour : MonoBehaviour {
 
 	////The target which the camera is set to look at from the start of the script.
@@ -93,7 +94,30 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 	}
 
 
-    void OnDrawGizmos() {
-        //Gizmos.
+    void OnDrawGizmosSelected() {
+        //Vector2 topLeft = new Vector2(this.BoundingBoxBottomLeft.x, this.BoundingBoxTopRight.y);
+        //Vector2 bottomRight = new Vector2(this.BoundingBoxTopRight.x, this.BoundingBoxBottomLeft.y);
+
+        Vector3 center = (this.BoundingBoxTopRight / 2f) + this.BoundingBoxBottomLeft;
+        Vector3 size = this.BoundingBoxTopRight - this.BoundingBoxBottomLeft;
+
+        // actually the Y is the Z-axis, so swap it 
+        center.z = center.y;
+        size.z = size.y;
+
+        // calculate y size by finding the terrain
+        Terrain t = FindObjectOfType(typeof (Terrain)) as Terrain;
+        if (t != null) {
+            size.y = 50;  //this.transform.position.y - t.transform.position.y;
+        } else {
+            size.y = 50;
+        }
+
+        center.y = this.transform.position.y - (size.y / 2f);
+
+        Gizmos.DrawWireCube(center, size);
+        Gizmos.DrawWireCube(this.transform.position, new Vector3(6,6,6));
     }
+
+    
 }
