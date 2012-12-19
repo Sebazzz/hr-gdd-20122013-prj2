@@ -48,7 +48,7 @@ public static class MouseManager {
         }
 
         if (!(requestee is LevelBehaviour) && !ReferenceEquals(CurrentLockOwner, requestee)) {
-            throw new InvalidOperationException("Wrong owner requesting lock clearance");
+            throw new InvalidOperationException("Wrong owner requesting lock release");
         }
 
         IsMouseLocked = false;

@@ -95,17 +95,16 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 
 
     void OnDrawGizmosSelected() {
-        //Vector2 topLeft = new Vector2(this.BoundingBoxBottomLeft.x, this.BoundingBoxTopRight.y);
-        //Vector2 bottomRight = new Vector2(this.BoundingBoxTopRight.x, this.BoundingBoxBottomLeft.y);
-
+        // draw the bounding box for the camera
+        // ... calculate center and size
         Vector3 center = (this.BoundingBoxTopRight / 2f) + this.BoundingBoxBottomLeft;
         Vector3 size = this.BoundingBoxTopRight - this.BoundingBoxBottomLeft;
 
-        // actually the Y is the Z-axis, so swap it 
+        // ... actually the Y is the Z-axis, so swap it 
         center.z = center.y;
         size.z = size.y;
 
-        // calculate y size by finding the terrain
+        // ... calculate y size by finding the terrain
         Terrain t = FindObjectOfType(typeof (Terrain)) as Terrain;
         if (t != null) {
             size.y = 50;  //this.transform.position.y - t.transform.position.y;
@@ -117,6 +116,9 @@ public class TouchDragCameraBehaviour : MonoBehaviour {
 
         Gizmos.DrawWireCube(center, size);
         Gizmos.DrawWireCube(this.transform.position, new Vector3(6,6,6));
+
+        // draw the rays for each of the sides
+        // TODO
     }
 
     
