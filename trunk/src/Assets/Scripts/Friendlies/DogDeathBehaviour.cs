@@ -14,7 +14,7 @@ public class DogDeathBehaviour : CanDieBehaviour {
     }
 
     protected override bool CanDie (GameObject causeOfDeath, string causeOfDeathTag, int causeOfDeathLayer) {
-        return causeOfDeathLayer == Layers.Water;
+        return causeOfDeathLayer == Layers.Water || causeOfDeathTag == Tags.Trap;
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
