@@ -15,7 +15,11 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
         {KeyCode.UpArrow, new Vector3(0, 0, 1)},
         {KeyCode.DownArrow, new Vector3(0, 0, -1)},
         {KeyCode.LeftArrow, new Vector3(-1, 0, 0)},
-        {KeyCode.RightArrow, new Vector3(1, 0, 0)}
+        {KeyCode.RightArrow, new Vector3(1, 0, 0)},
+        {KeyCode.W, new Vector3(0, 0, 1)},
+        {KeyCode.S, new Vector3(0, 0, -1)},
+        {KeyCode.A, new Vector3(-1, 0, 0)},
+        {KeyCode.D, new Vector3(1, 0, 0)}
     }; 
 
     /// <summary>
