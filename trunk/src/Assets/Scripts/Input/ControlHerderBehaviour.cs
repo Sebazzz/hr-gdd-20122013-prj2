@@ -15,14 +15,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
     private const float RedrawPathTime = 0.100f;
     
     /// <summary>
-    /// Defines mouse buttons
-    /// </summary>
-    public enum MouseButton {
-        Left = 0,
-        Right = 1
-    }
-
-    /// <summary>
     /// Specifies the drawing mode for the herder
     /// </summary>
     public enum DrawMode {
@@ -42,8 +34,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// <summary>
     /// Specifies the mouse button to check. By default, the left mouse button.
     /// </summary>
-    /// <seealso cref="MouseButton"/>
-    public MouseButton MouseButtonToCheck = MouseButton.Left;
+    /// <seealso cref="MouseManager.MouseButton"/>
+    public MouseManager.MouseButton MouseButtonToCheck = MouseManager.MouseButton.Left;
 
     /// <summary>
     /// Specifies the control mode for the dog

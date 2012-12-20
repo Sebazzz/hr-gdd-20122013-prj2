@@ -7,6 +7,14 @@ using UnityEngine;
 /// </summary>
 public static class MouseManager {
     /// <summary>
+    /// Defines mouse buttons
+    /// </summary>
+    public enum MouseButton {
+        Left = 0,
+        Right = 1
+    }
+
+    /// <summary>
     ///     Gets if the mouse is locked currently
     /// </summary>
     public static bool IsMouseLocked { get; private set; }
@@ -28,6 +36,10 @@ public static class MouseManager {
         if (requestee == null) {
             throw new ArgumentNullException("requestee");
         }
+        if (CurrentLockOwner == requestee) {
+            return true;
+        }
+
         if (IsMouseLocked) {
             return false;
         }
@@ -63,6 +75,9 @@ public static class MouseManager {
     /// </summary>
     /// <param name="requestee">The current instance calling this script. Pass 'this' to this parameter.</param>
     public static void AcquireLock (MonoBehaviour requestee) {
+        if (CurrentLockOwner == requestee) {
+            return;
+        }
         if (IsMouseLocked) {
             throw new InvalidOperationException("Lock is already acquired by " + CurrentLockOwner.GetType());
         }
