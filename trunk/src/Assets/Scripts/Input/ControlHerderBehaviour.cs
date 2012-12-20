@@ -86,7 +86,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// <summary>
     /// Specifies the fail safe value used for detecting buggy paths, this is the maximum distance for two waypoints.
     /// </summary>
-    private const float WaypointDistanceFailsafeThreshold = 50f;
+    private const float WaypointDistanceFailsafeThreshold = 15f;
 
     /// <summary>
     /// The base object to draw a path with. Should be an object with a LineRenderer.
