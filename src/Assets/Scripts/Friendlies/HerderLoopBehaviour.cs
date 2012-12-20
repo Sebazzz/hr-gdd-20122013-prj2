@@ -80,6 +80,11 @@ public class HerderLoopBehaviour : MonoBehaviour {
     public float StuckCheckTime = 0.5f;
 
     /// <summary>
+    /// Specifies the velocity to use for a single speed
+    /// </summary>
+    public float SingleSpeedVelocity = 10f;
+
+    /// <summary>
     /// Gets the current target the dog walks to
     /// </summary>
     public Vector3 CurrentTarget {
@@ -95,10 +100,11 @@ public class HerderLoopBehaviour : MonoBehaviour {
     /// <summary>
     /// Starts walking the specified trajectory. Defines the time used for drawing the path. This will be used to calculate the speed of traversing the path.
     /// </summary>
+    /// <param name="controlMode"></param>
     /// <param name="trajectory"></param>
     /// <param name="totalDrawingTime"></param>
     /// <param name="totalPathLength"></param>
-    public void StartWalking (Queue<Vector3> trajectory, float totalDrawingTime, float totalPathLength) {
+    public void StartWalking (ControlHerderBehaviour.DrawMode controlMode, Queue<Vector3> trajectory, float totalDrawingTime, float totalPathLength) {
         if (this.enabled) {
             throw new Exception("Currently already running a path. Call CancelWalk first.");
         }
@@ -112,13 +118,15 @@ public class HerderLoopBehaviour : MonoBehaviour {
         this.walkStartTime = Time.time;
 
         // calculate speed per unit and correct accordingly
-        float speedPerUnit = totalPathLength / (totalDrawingTime/this.TimeDivider);
-        speedPerUnit *= this.MovementSpeedFactor;
-        speedPerUnit = Math.Max(speedPerUnit, this.MinimumSpeedPerUnit);
-        speedPerUnit = Math.Min(speedPerUnit, this.MaximumSpeedPerUnit);
-
-        // calculate the final speed
-        this.desiredSpeed = speedPerUnit;
+        if (controlMode == ControlHerderBehaviour.DrawMode.SingleSpeed) {
+            this.desiredSpeed = this.SingleSpeedVelocity;
+        } else {
+            float speedPerUnit = totalPathLength / (totalDrawingTime / this.TimeDivider);
+            speedPerUnit *= this.MovementSpeedFactor;
+            speedPerUnit = Math.Max(speedPerUnit, this.MinimumSpeedPerUnit);
+            speedPerUnit = Math.Min(speedPerUnit, this.MaximumSpeedPerUnit);
+            this.desiredSpeed = speedPerUnit;
+        }
 
     //    Debug.Log(
     //String.Format(

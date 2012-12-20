@@ -7,6 +7,8 @@ MonoImporter:
   - NormalPathMaterial: {fileID: 2100000, guid: 2f8498125b517934aa6a1058571ba0b1,
       type: 2}
   - FastPathMaterial: {fileID: 2100000, guid: 77d5a0a54e74cfa44b1d57a85a7a24ec, type: 2}
+  - SingleSpeedPathMaterial: {fileID: 2100000, guid: 52b7d70b1de7c4ce09662b77c14d9fda,
+      type: 2}
   - ShepherdPathPrefab: {fileID: 100000, guid: 3af257aa396063245bdf86b24c723f70, type: 2}
   executionOrder: 1
   icon: {instanceID: 0}
