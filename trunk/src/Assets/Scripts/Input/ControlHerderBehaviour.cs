@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
-/// Script with the purpose of enabling a player to control a dog. 
+/// Script with the purpose of enabling a player to control a dog. Whether the dog runs at a slow/normal/fast or a single speed is determined by <see cref="ControlMode"/>.
 /// </summary>
 /// <dependency cref="HerderLoopBehaviour" />
 /// <dependend cref="HerderLoopBehaviour" />
@@ -23,6 +23,14 @@ public class ControlHerderBehaviour : MonoBehaviour {
     }
 
     /// <summary>
+    /// Specifies the drawing mode for the herder
+    /// </summary>
+    public enum DrawMode {
+        SingleSpeed = 0,
+        MultipleSpeed = 1
+    }
+
+    /// <summary>
     /// Defines the number of different shaders used for drawing the road
     /// </summary>
     public const int NumberOfWayShaders = 3;
@@ -36,6 +44,11 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// </summary>
     /// <seealso cref="MouseButton"/>
     public MouseButton MouseButtonToCheck = MouseButton.Left;
+
+    /// <summary>
+    /// Specifies the control mode for the dog
+    /// </summary>
+    public DrawMode ControlMode = DrawMode.MultipleSpeed;
 
     /// <summary>
     /// Specifies the minimum distance in units for each individual waypoint
@@ -65,6 +78,11 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// 
     /// </remarks>
     public Material FastPathMaterial;
+
+    /// <summary>
+    /// Specifies the material used for drawing the single speed path
+    /// </summary>
+    public Material SingleSpeedPathMaterial;
 
     /// <summary>
     /// Specifies the radius around the dog that allows the user to select the dog. 
@@ -135,7 +153,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         if (this.isCurrentlyDrawing && this.IsMouseButtonUp()) {
             this.isCurrentlyDrawing = false;
 
-            this.herderLoopController.StartWalking(this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
+            this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
 
             MouseManager.ReleaseLock(this);
             return;
@@ -212,6 +230,11 @@ public class ControlHerderBehaviour : MonoBehaviour {
     	}
 
         // determine which shader to use for drawing the line
+        if (this.ControlMode == DrawMode.SingleSpeed) {
+            this.lineRenderer.renderer.material = this.SingleSpeedPathMaterial;
+            return;
+        }
+
         // ... calculate speed per unit
         float drawTime = this.CalculateTotalDrawTime() / this.herderLoopController.TimeDivider;
         float speedPerUnit = this.totalPathLength / drawTime;
