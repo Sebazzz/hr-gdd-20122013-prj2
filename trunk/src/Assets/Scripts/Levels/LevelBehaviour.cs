@@ -14,6 +14,11 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public int NumberOfSheepToCollect = 1;
 
+    /// <summary>
+    /// Defines the maximum height for drawing
+    /// </summary>
+    public float MaxDogHeight = 10f;
+
 	// Use this for initialization
 	void Start () {
 	    // sanity check

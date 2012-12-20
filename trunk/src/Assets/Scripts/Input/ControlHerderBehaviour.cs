@@ -91,7 +91,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
     public float SelectRadius = 2f; // Sphere radius for the dog selector.
 
     /// <summary>
-    /// Specifies the sphere casting range for selecting the dog
+    /// Specifies the sphere casting range for selecting the dog. The length of the cast.
     /// </summary>
     /// <remarks>Sphere casting is heavy, so keep the range low for a better performance</remarks>
     public float SelectionRange = 150f;
@@ -133,7 +133,19 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
     private float totalPathLength;
 
+    // Maximum height
+    private float maxHeight;
+
     void Start(){
+        // Find the worldobject
+        GameObject w = GameObject.Find("World");
+        if (w != null) {
+            maxHeight = w.GetComponent<LevelBehaviour>().MaxDogHeight;
+        } else {
+            throw new Exception("No World found. This is required by ControlHerderBehaviour");
+        }
+
+
         // get a line renderer
 		GameObject pathRenderingObject = (GameObject) Instantiate(this.ShepherdPathPrefab);
         this.lineRenderer = pathRenderingObject.GetComponent<LineRenderer>();
@@ -152,9 +164,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         // end the draw of an existing path
         if (this.isCurrentlyDrawing && this.IsMouseButtonUp()) {
             this.isCurrentlyDrawing = false;
-
             this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
-
             MouseManager.ReleaseLock(this);
             return;
         }
@@ -164,7 +174,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             // get the position of the mouse in the world and check if we are hit
             RaycastHit? hit = this.GetMousePosition();
 
-            if (hit != null && hit.Value.collider.gameObject == this.gameObject) {
+            if (hit != null && hit.Value.collider.gameObject == this.gameObject && hit.Value.point.y < maxHeight) {
                 // acquire mouse lock and enable drawing state
                 if (MouseManager.TryAcquireLock(this)) {
                     this.herderLoopController.CancelWalk();
@@ -185,6 +195,13 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
             // get the current mouse position, and seed the path if there is none
             Vector3 position = this.GetTerrainMousePosition();
+
+            // Check if the position is above height treshold
+            if (position.y > maxHeight) {
+                //this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
+                return;
+
+            }
             if (this.currentTrajectory.Count == 0) {
                 this.currentTrajectory.Enqueue(position);
                 this.lastAddedPosition = position;
@@ -291,6 +308,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
     private RaycastHit? GetMousePosition(int layerToCheck, bool sphere) {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+       
         RaycastHit hit;
         if (sphere) {
             RaycastHit[] hits = Physics.SphereCastAll(ray, this.SelectRadius, SelectionRange, layerToCheck);
