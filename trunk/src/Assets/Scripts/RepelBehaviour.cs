@@ -28,7 +28,7 @@ public class RepelBehaviour : MonoBehaviour {
         // Calculate direction
         average /= amount;
         Vector3 dir = (average - transform.position).normalized;
-
+        dir.y = 0; // Negeer de hoogte
         // Apply forces
         foreach (Collider hit in colliders) {
             if (hit.tag == Tags.Sheep) {
