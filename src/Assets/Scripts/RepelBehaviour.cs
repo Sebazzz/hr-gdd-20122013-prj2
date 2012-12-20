@@ -8,13 +8,37 @@ public class RepelBehaviour : MonoBehaviour {
     
 	
 	void Update() {
-        Vector3 explosionPos = transform.position;
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+        // Get average sheep position
+        Vector3 average = new Vector3();
+        float amount = 0;
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (Collider hit in colliders) {
-            if (hit.tag == Tags.Sheep)
-                hit.rigidbody.AddExplosionForce(power, explosionPos, radius, 0);
-            
+            if (hit.tag == Tags.Sheep) {
+                average += hit.transform.position;
+                amount++;
+            }
         }
+
+        // If no sheep are found, we can stop here
+        if (amount == 0) {
+            return;
+        }
+
+        // Calculate direction
+        average /= amount;
+        Vector3 dir = (average - transform.position).normalized;
+
+        // Apply forces
+        foreach (Collider hit in colliders) {
+            if (hit.tag == Tags.Sheep) {
+                applyForce(dir * power, hit.rigidbody);
+            }
+        }
+    }
+
+    private void applyForce(Vector3 direction, Rigidbody body) {
+        body.AddForce(direction);
     }
 
     private void OnDrawGizmosSelected() {
