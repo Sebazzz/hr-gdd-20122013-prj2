@@ -24,6 +24,6 @@ public class WolfDeathBehaviour : CanDieBehaviour {
     }
 
     protected override bool CanDie (GameObject causeOfDeath, string causeOfDeathTag, int causeOfDeathLayer) {
-        return causeOfDeath.tag == Tags.Sheep || causeOfDeath.layer == Layers.Water;
+        return causeOfDeath.tag == Tags.Sheep || causeOfDeath.tag == Tags.Trap || causeOfDeath.layer == Layers.Water;
     }
 }
