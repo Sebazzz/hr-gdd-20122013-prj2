@@ -18,6 +18,47 @@ ModelImporter:
     100024: transform3
     100026: transform4
     100028: //RootNode
+    100030: group2
+    100032: group3
+    100034: group4
+    100036: pasted__group1
+    100038: pasted__group2
+    100040: pasted__pasted__pCube1
+    100042: pasted__pasted__pCylinder2
+    100044: pasted__pCube1 1
+    100046: pasted__pCylinder1
+    100048: pasted__pCylinder2
+    100050: pasted__pCylinder2 1
+    100052: pasted__polySurface1
+    100054: pasted__polySurface2
+    100056: pasted__polySurface3
+    100058: pasted__polySurface4
+    100060: pasted__polySurface5
+    100062: pasted__polySurface9
+    100064: pasted__transform1
+    100066: pasted__transform10
+    100068: pasted__transform2
+    100070: pasted__transform3
+    100072: pasted__transform4
+    100074: pasted__transform5
+    100076: pasted__transform6
+    100078: pasted__transform7
+    100080: pasted__transform8
+    100082: pasted__transform9
+    100084: pCylinder2
+    100086: polySurface10
+    100088: polySurface5
+    100090: polySurface6
+    100092: polySurface7
+    100094: polySurface9
+    100096: transform10
+    100098: transform11
+    100100: transform12
+    100102: transform5
+    100104: transform6
+    100106: transform7
+    100108: transform8
+    100110: transform9
     400000: group
     400002: group1
     400004: pasted__pCube1
@@ -33,18 +74,68 @@ ModelImporter:
     400024: transform3
     400026: transform4
     400028: //RootNode
+    400030: group2
+    400032: group3
+    400034: group4
+    400036: pasted__group1
+    400038: pasted__group2
+    400040: pasted__pasted__pCube1
+    400042: pasted__pasted__pCylinder2
+    400044: pasted__pCube1 1
+    400046: pasted__pCylinder1
+    400048: pasted__pCylinder2
+    400050: pasted__pCylinder2 1
+    400052: pasted__polySurface1
+    400054: pasted__polySurface2
+    400056: pasted__polySurface3
+    400058: pasted__polySurface4
+    400060: pasted__polySurface5
+    400062: pasted__polySurface9
+    400064: pasted__transform1
+    400066: pasted__transform10
+    400068: pasted__transform2
+    400070: pasted__transform3
+    400072: pasted__transform4
+    400074: pasted__transform5
+    400076: pasted__transform6
+    400078: pasted__transform7
+    400080: pasted__transform8
+    400082: pasted__transform9
+    400084: pCylinder2
+    400086: polySurface10
+    400088: polySurface5
+    400090: polySurface6
+    400092: polySurface7
+    400094: polySurface9
+    400096: transform10
+    400098: transform11
+    400100: transform12
+    400102: transform5
+    400104: transform6
+    400106: transform7
+    400108: transform8
+    400110: transform9
     2300000: polySurface2
     2300002: polySurface3
     2300004: polySurface4
     2300006: pPlane2
+    2300008: polySurface10
+    2300010: polySurface6
+    2300012: polySurface7
     3300000: polySurface2
     3300002: polySurface3
     3300004: polySurface4
     3300006: pPlane2
+    3300008: polySurface10
+    3300010: polySurface6
+    3300012: polySurface7
     4300000: polySurface2
     4300002: polySurface3
     4300004: polySurface4
     4300006: pPlane2
+    4300008: polySurface6
+    4300010: polySurface7
+    4300012: polySurface10
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -62,7 +153,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .400000006
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     swapUVChannels: 0
