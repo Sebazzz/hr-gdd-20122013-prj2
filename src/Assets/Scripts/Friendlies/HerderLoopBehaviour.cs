@@ -214,6 +214,11 @@ public class HerderLoopBehaviour : MonoBehaviour {
         float distance = GetDistanceWithoutY(this.transform.position, this.lastTarget);
         float speedPerUnit = distance / timeDiff;
 
+        // ... fail safe for something that tends to happen
+        if (speedPerUnit < 0.001f) {
+            return false;
+        }
+
         Debug.Log(String.Format("Desired speed: {2}; Speed per unit: {0}; Allowable speed: {1}", speedPerUnit, minimalAllowableSpeed, this.desiredSpeed));
         return speedPerUnit < minimalAllowableSpeed;
     }
