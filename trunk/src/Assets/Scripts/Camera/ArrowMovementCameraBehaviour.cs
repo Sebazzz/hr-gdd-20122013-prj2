@@ -42,6 +42,11 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
     /// </summary>
     public float MovementSpeed = 5f;
 
+    /// <summary>
+    /// Specifies how sensitive the scroll wheel should be
+    /// </summary>
+    public float ScrollSensitivity = 5f;
+
 	/// <summary>
 	/// Use this for initialization
 	/// </summary>
@@ -54,17 +59,8 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// </summary>
 	private void Update () {
         // execute mouse movement
-        //if (this.IsMouseButtonDown() && !MouseManager.TryAcquireLock(this)) {
-        //} else {
-        //    if (this.IsMouseButtonDown()) OnMouseDown();
-
-        //    if (this.IsMouseButton() && this.onMouseDownCameraPosition != Vector3.zero) OnMouse();
-
-        //    if (this.IsMouseButtonUp()) OnMouseUp();
-        //}
-
 	    if (Input.GetMouseButtonDown((int) this.MouseButtonToCheck) && !MouseManager.TryAcquireLock(this)) {
-
+            // nothing
 	    } else {
 
 	        if (this.IsMouseButtonDown())
@@ -74,6 +70,10 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	        if (this.IsMouseButtonUp())
 	            OnMouseUp();
 	    }
+
+        // execute zoom
+	    float yAxis = Input.GetAxis("Mouse ScrollWheel");
+        this.transform.Rotate(yAxis * this.ScrollSensitivity, 0, 0);
 
         // execute keyboard movement
         if (!this.isCurrentlyDragging) {
