@@ -24,7 +24,10 @@ public class PhysicsTrogBehaviour : MonoBehaviour
 			Vector3 direction = transform.position - other.transform.position;
 			if (direction.sqrMagnitude <= (this.MagneticStrength * this.MagneticStrength)) {
 				other.rigidbody.AddForce (direction.normalized * this.MagneticStrength);
-                other.transform.LookAt(this.transform);
+
+			    Vector3 worldPos = this.transform.position;
+			    worldPos.y = other.transform.position.y;
+                other.transform.LookAt(worldPos);
 
 			}
 
