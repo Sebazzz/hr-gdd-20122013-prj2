@@ -52,6 +52,10 @@ public sealed class MagneticBehaviour : MonoBehaviour {
     }
 
     void OnDrawGizmosSelected() {
+        if (!this.enabled) {
+            return;
+        }
+
         // draw radius gizmo
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.Radius);
