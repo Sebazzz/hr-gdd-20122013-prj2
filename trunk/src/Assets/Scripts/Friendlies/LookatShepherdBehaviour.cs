@@ -20,10 +20,8 @@ public class LookatShepherdBehaviour : MonoBehaviour
     /// The follow speed.
     /// </summary>
     public int followSpeed = 20;
-    /// <summary>
-    /// The closestshepherd.
-    /// </summary>
-    public GameObject closestshepherd = null;
+
+    private GameObject closestShepherd = null;
 
     /// <summary>
     /// Finds the closest dog.
@@ -32,7 +30,7 @@ public class LookatShepherdBehaviour : MonoBehaviour
     {
         //FIND SHPEHERD
         GameObject[] shepherd = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
-        closestshepherd = null;
+        this.closestShepherd = null;
         if (shepherd.Length == 0)
         {
             return;
@@ -46,7 +44,7 @@ public class LookatShepherdBehaviour : MonoBehaviour
             if (vec.sqrMagnitude.CompareTo(vecmem.sqrMagnitude) < 1)
             {
                 vecmem = vec;
-                closestshepherd = shepherd[i];
+                this.closestShepherd = shepherd[i];
               //  Debug.Log("closest is " +i + "Shepherd");
             }
         }
@@ -57,9 +55,9 @@ public class LookatShepherdBehaviour : MonoBehaviour
     {
         if (gameObject.GetComponent<SheepIdleBehaviour>().sheepState.Equals(SheepIdleBehaviour.SheepState.active))
         {
-            if (closestshepherd != null)
+            if (this.closestShepherd != null)
             {
-                Vector3 distance = closestshepherd.transform.position - transform.position;
+                Vector3 distance = this.closestShepherd.transform.position - transform.position;
                 if (distance.magnitude < minWatchDistance)
                 {
                  
