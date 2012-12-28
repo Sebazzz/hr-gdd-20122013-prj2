@@ -25,6 +25,13 @@ using UnityEngine;
 /// <dependency cref="AutoJumpBehaviour" type="optional"/>
 /// <dependend cref="ControlHerderBehaviour"/>
 public class HerderLoopBehaviour : MonoBehaviour {
+    private enum State {
+        idle = 0,
+        walking = 1,
+        gliding = 2
+    }
+    private State currentState = State.idle;
+
     private AutoJumpBehaviour jumpController;
 
     private Queue<Vector3> currentTrajectory;
@@ -105,11 +112,12 @@ public class HerderLoopBehaviour : MonoBehaviour {
     /// <param name="totalDrawingTime"></param>
     /// <param name="totalPathLength"></param>
     public void StartWalking (ControlHerderBehaviour.DrawMode controlMode, Queue<Vector3> trajectory, float totalDrawingTime, float totalPathLength) {
-        if (this.enabled) {
-            throw new Exception("Currently already running a path. Call CancelWalk first.");
+        if (this.currentState != State.idle) {
+            return; // We should not do anything. Could be on ice!
         }
 
-        this.enabled = true;
+        setState(State.walking);
+
         this.currentTrajectory = trajectory;
 
         // seed the state
@@ -147,20 +155,27 @@ public class HerderLoopBehaviour : MonoBehaviour {
     }
 
     private void FinishWalk(bool cancel) {
-        this.enabled = false;
+        if (currentState == State.walking) {
+            setState(State.idle);
+        }
 
         this.currentTrajectory = null;
         this.GetComponent<ControlHerderBehaviour>().OnPathFinished(cancel);
     }
     
     private void Update() {
+        if (this.gameObject.rigidbody.drag == 0 && currentState == State.walking) {
+            setState(State.gliding);
+        } else if (this.gameObject.rigidbody.drag != 0 && currentState == State.gliding) {
+            setState(State.idle);
+        }
+
         // no trajectory to walk, nothing to do
         if (this.currentTrajectory == null) {
             // we even shouldn't be here: if state management were handled properly currentTrajectory would never be null when the script is enabled
             return;
         }
 
-        
         // do check if we either reached the end of the path or the target
         bool trajectoryFinished = this.currentTrajectory.Count <= 0;
         bool targetReached = this.CheckReachedTarget();
@@ -224,25 +239,30 @@ public class HerderLoopBehaviour : MonoBehaviour {
         return speedPerUnit < minimalAllowableSpeed;
     }
 
+    private Vector3 speed;
     private void FixedUpdate() {
-        System.Diagnostics.Debug.Assert(this.enabled);
 
         if (this.jumpController != null && this.jumpController.IsCurrentlyJumping) {
             return;
         }
 
-        // calculate a new rotation position
-        Vector3 lookPos = this.currentTarget - this.transform.position;
-        lookPos.y = 0;
+        if (currentState == State.walking) {
+            // calculate a new rotation position
+            Vector3 lookPos = this.currentTarget - this.transform.position;
+            lookPos.y = 0;
 
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
+            Quaternion rotation = Quaternion.LookRotation(lookPos);
 
-        // apply an rotation that is smoothly interpreted to the target
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, Time.fixedDeltaTime * 20);
+            // apply an rotation that is smoothly interpreted to the target
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, rotation, Time.fixedDeltaTime * 20);
 
-        // calculate speed and execute
-        Vector3 speed = this.transform.TransformDirection(Vector3.forward) * this.desiredSpeed * Time.fixedDeltaTime;
-        this.transform.position += speed;
+            // calculate speed and execute
+            speed = this.transform.TransformDirection(Vector3.forward) * this.desiredSpeed * Time.fixedDeltaTime;
+        }
+
+        if (currentState != State.idle) {
+            this.transform.position += speed;
+        }
     }
 
     /// <summary>
@@ -260,5 +280,21 @@ public class HerderLoopBehaviour : MonoBehaviour {
         Vector2 targetPosition2 = new Vector2(targetPosition.x, targetPosition.z);
 
         return Vector2.Distance(currentPosition2, targetPosition2);
+    }
+
+    private void setState(State state) {
+        currentState = state;
+
+        // Handle enabled
+        if (currentState != State.idle) {
+            this.enabled = true;
+        } else {
+            this.enabled = false;
+        }
+
+        // Handle clearing the path on State.gliding
+        if (currentState == State.gliding) {
+            this.CancelWalk();
+        }
     }
 }
