@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 
-	public string level = Levels.Playground;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +15,6 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton() {
-		Application.LoadLevel(level);
+		Application.LoadLevel(Levels.getLevelByName("Playground").name);
 	}
 }
