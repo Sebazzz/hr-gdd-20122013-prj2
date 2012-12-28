@@ -200,6 +200,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
         this.walkStartTime = Time.time;
         this.lastTarget = this.transform.position;
     }
+
     
     /// <summary>
     /// Returns a value indicating if we are now stuck.
