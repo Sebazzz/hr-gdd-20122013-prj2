@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
@@ -47,6 +48,16 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
     /// </summary>
     public float ScrollSensitivity = 5f;
 
+    /// <summary>
+    /// Specifies the maximum rotation to allow
+    /// </summary>
+    public float MaximumRotation = 90f;
+
+    /// <summary>
+    /// Specifies the mimimum rotation to allow
+    /// </summary>
+    public float MinimumRotation = 30f;
+
 	/// <summary>
 	/// Use this for initialization
 	/// </summary>
@@ -71,9 +82,12 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	            OnMouseUp();
 	    }
 
-        // execute zoom
+        // execute rotation
 	    float yAxis = Input.GetAxis("Mouse ScrollWheel");
-        this.transform.Rotate(yAxis * this.ScrollSensitivity, 0, 0);
+        if (Math.Abs(yAxis - 0f) > 0.00001)
+        {
+            this.ExecuteRotation(yAxis);
+        }
 
         // execute keyboard movement
         if (!this.isCurrentlyDragging) {
@@ -101,7 +115,36 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 
 	}
 
-	/// <summary>
+    private void ExecuteRotation(float yAxis) {
+        float xRot = this.transform.rotation.eulerAngles.x;
+        bool minReached = Mathf.Approximately(xRot, this.MinimumRotation);
+        bool maxReached = Mathf.Approximately(xRot, this.MaximumRotation);
+
+        Debug.Log(String.Format("{0};{1};{2}", minReached, maxReached, yAxis));
+        // check if we have already rotated 'enough'
+        if (minReached && yAxis < 0 ||
+            maxReached && yAxis > 0) {
+            return;
+        }
+
+        // get a point on the terrain we can rotate around
+        Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
+        RaycastHit terrainPositionHit;
+        if (!Physics.Raycast(r, out terrainPositionHit, Mathf.Infinity))
+        {
+            return;
+        }
+
+        // execute rotation
+        float rotationSpeed = yAxis*this.ScrollSensitivity;
+        Vector3 point = terrainPositionHit.point;
+
+        this.transform.RotateAround(point, Vector3.right, rotationSpeed);
+
+        // TODO/FIXME: when MinimumAngle is set to a low level and camera is front of a cliff we get strange results
+    }
+
+    /// <summary>
 	/// Called when MouseButton is pressed for the first time
 	/// Creates an offset with which you can calculate the camera movement
 	/// </summary>
