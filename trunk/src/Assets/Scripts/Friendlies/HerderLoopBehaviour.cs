@@ -164,9 +164,9 @@ public class HerderLoopBehaviour : MonoBehaviour {
     }
     
     private void Update() {
-        if (this.gameObject.rigidbody.drag == 0 && currentState == State.walking) {
+        if (Math.Abs(this.gameObject.rigidbody.drag - 0) < 0.001 && currentState == State.walking) {
             setState(State.gliding);
-        } else if (this.gameObject.rigidbody.drag != 0 && currentState == State.gliding) {
+        } else if (Math.Abs(this.gameObject.rigidbody.drag - 0) > 0.001 && currentState == State.gliding) {
             setState(State.idle);
         }
 
@@ -260,8 +260,14 @@ public class HerderLoopBehaviour : MonoBehaviour {
             speed = this.transform.TransformDirection(Vector3.forward) * this.desiredSpeed * Time.fixedDeltaTime;
         }
 
-        if (currentState != State.idle) {
+        if (currentState != State.idle && currentState != State.gliding) {
             this.transform.position += speed;
+        }
+        
+        Vector3 v1 = this.transform.InverseTransformDirection(this.rigidbody.velocity);
+        Vector3 v2 = this.transform.InverseTransformDirection(speed);
+        if (currentState == State.gliding && v2.magnitude > v1.magnitude) {
+            this.rigidbody.AddForce(speed * 25f/*magic*/, ForceMode.VelocityChange);
         }
     }
 
@@ -284,7 +290,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     private void setState(State state) {
         currentState = state;
-
+        Debug.Log(state);
         // Handle enabled
         if (currentState != State.idle) {
             this.enabled = true;
@@ -294,6 +300,8 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
         // Handle clearing the path on State.gliding
         if (currentState == State.gliding) {
+            this.transform.position += speed;
+            this.rigidbody.AddForce(speed, ForceMode.VelocityChange);
             this.CancelWalk();
         }
     }

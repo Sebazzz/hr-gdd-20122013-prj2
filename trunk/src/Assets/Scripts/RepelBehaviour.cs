@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -14,7 +15,7 @@ public class RepelBehaviour : MonoBehaviour {
 
         foreach (Collider hit in colliders) {
 
-            if (hit.tag == Tags.Sheep)
+            if (hit.tag == Tags.Sheep && Math.Abs(hit.rigidbody.drag - 0) > 0.01)
 
                 hit.rigidbody.AddExplosionForce(power, explosionPos, radius, 0);
 
