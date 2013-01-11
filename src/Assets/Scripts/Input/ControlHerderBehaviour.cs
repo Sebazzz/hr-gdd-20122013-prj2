@@ -148,13 +148,24 @@ public class ControlHerderBehaviour : MonoBehaviour {
             throw new Exception("This component cannot function without a HerderLoopBehaviour");
         }
 
+        (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
+
         // set-up path redraw timer
         this.redrawPathTimer = new Timer(RedrawPathTime);
 	}
 
+    void OnMouseOver() {
+        (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
+    }
+
+    void OnMouseExit() {
+        (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
+    }
+
 	void Update () {
         // end the draw of an existing path
         if (this.isCurrentlyDrawing && this.IsMouseButtonUp()) {
+            (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
             this.isCurrentlyDrawing = false;
             this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
             MouseManager.ReleaseLock(this);
@@ -169,6 +180,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             if (hit != null && hit.Value.collider.gameObject == this.gameObject && hit.Value.point.y < maxHeight) {
                 // acquire mouse lock and enable drawing state
                 if (MouseManager.TryAcquireLock(this)) {
+                    (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
                     this.herderLoopController.CancelWalk();
 
                     this.isCurrentlyDrawing = true;
@@ -184,6 +196,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         // continue drawing of current path
         if (this.isCurrentlyDrawing) {
             this.redrawPathTimer.Update();
+            (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
 
             // get the current mouse position, and seed the path if there is none
             Vector3 position = this.GetTerrainMousePosition();
