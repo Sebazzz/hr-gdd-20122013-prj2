@@ -1,39 +1,48 @@
 using UnityEngine;
-using System.Collections;
 
 public class Level {
-    public static Level NONE = new Level("None");
+    #region LevelStatus enum
 
-    public static int STATE_LOCKED = 0;
-    public static int STATE_UNLOCKED = 1;
-    public static int STATE_DONE = 2;
-
-    public string name = "";
-    private string lockstate_key = "_lockstate";
-
-    public Level(string name) {
-        this.name = name;
+    public enum LevelStatus {
+        Locked = 0,
+        Unlocked = 1,
+        Done = 2
     }
+
+    #endregion
+
+    private const string SettingsLockStateKey = "_lockstate";
+    public static Level None = new Level("None");
+
+    /// <summary>
+    /// Initializes the instance
+    /// </summary>
+    /// <param name="name"></param>
+    public Level(string name) {
+        this.Name = name;
+    }
+
+    public string Name { get; set; }
 
     /// <summary>
     /// Returns the state of this level.
     /// </summary>
     /// <returns>One of the static state variables</returns>
-    public int getState() {
-        return PlayerPrefs.GetInt(name + lockstate_key, STATE_LOCKED);
+    public LevelStatus GetState() {
+        return (LevelStatus) PlayerPrefs.GetInt(this.Name + SettingsLockStateKey, (int) LevelStatus.Locked);
     }
 
     /// <summary>
     /// Call this once this level must be unlocked. Eg. when the previous level is set to done.
     /// </summary>
-    public void unlock() {
-        PlayerPrefs.SetInt(name + lockstate_key, STATE_UNLOCKED);
+    public void Unlock() {
+        PlayerPrefs.SetInt(this.Name + SettingsLockStateKey, (int) LevelStatus.Unlocked);
     }
 
     /// <summary>
     /// Call this when a level is done
     /// </summary>
-    public void setFinished() {
-        PlayerPrefs.SetInt(name + lockstate_key, STATE_DONE);
+    public void SetFinished() {
+        PlayerPrefs.SetInt(this.Name + SettingsLockStateKey, (int) LevelStatus.Done);
     }
 }
