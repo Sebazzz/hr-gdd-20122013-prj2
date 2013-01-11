@@ -56,6 +56,12 @@ public sealed class MagneticBehaviour : MonoBehaviour {
             if (collidingBody == null) {
                 continue;
             }
+           
+            // check if it has drag, else we cannot do anything
+            if (Math.Abs(collidingBody.drag - 0) < 0.001) {
+                //Debug.Log("NO "+ collidingBody.drag.ToString());
+                continue;
+            }
 
             this.AttractObject(col.gameObject, collidingBody);
         }
