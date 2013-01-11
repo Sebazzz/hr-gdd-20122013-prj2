@@ -87,7 +87,7 @@ public sealed class MagneticBehaviour : MonoBehaviour {
 
     private void AttractObject (GameObject collidingObject, Rigidbody collidingBody) {
         Vector3 targetPosition = this.transform.position - collidingObject.transform.position;
-        targetPosition.y = -0.1f;
+        targetPosition.y = -0.25f;
 
         collidingBody.AddForce(targetPosition * this.MagneticForce, ForceMode.Impulse);
     }
@@ -103,7 +103,9 @@ public sealed class MagneticBehaviour : MonoBehaviour {
 
         // draw inner radius
         if (this.InnerRadius >= MinimumInnerRadius) {
-            Gizmos.color = Color.black;
+            Color c2 = Color.black;
+            c2.a = 0.5f;
+            Gizmos.color = c2;
             Gizmos.DrawWireSphere(this.transform.position, this.InnerRadius);
         }
 

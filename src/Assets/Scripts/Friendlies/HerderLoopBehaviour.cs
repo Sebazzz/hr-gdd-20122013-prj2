@@ -267,7 +267,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
         Vector3 v1 = this.transform.InverseTransformDirection(this.rigidbody.velocity);
         Vector3 v2 = this.transform.InverseTransformDirection(speed);
         if (currentState == State.gliding && v2.magnitude > v1.magnitude) {
-            this.rigidbody.AddForce(speed * 25f/*magic*/, ForceMode.VelocityChange);
+            this.rigidbody.AddForce(speed * 50f/*magic*/, ForceMode.VelocityChange);
         }
     }
 
