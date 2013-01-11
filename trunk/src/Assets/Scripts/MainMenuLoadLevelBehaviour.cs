@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class MainMenuLoadLevelBehaviour : MonoBehaviour {
-
+    public string LevelName = "Playground";
 
 	// Use this for initialization
 	void Start () {
@@ -15,6 +15,6 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton() {
-		Application.LoadLevel(Levels.getLevelByName("Playground").name);
+		Application.LoadLevel(Levels.GetLevelByName(this.LevelName).Name);
 	}
 }

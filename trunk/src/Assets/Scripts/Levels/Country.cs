@@ -1,32 +1,40 @@
-using System.Collections;
-
+/// <summary>
+/// Represents a country that can be unlocked
+/// </summary>
 public class Country {
-    public Level[] levels;
-
+    /// <summary>
+    /// Initializes this instance
+    /// </summary>
+    /// <param name="levels"></param>
     public Country(Level[] levels) {
-        this.levels = levels;
+        this.Levels = levels;
     }
+
+    /// <summary>
+    /// Gets or sets the levels associated to this country
+    /// </summary>
+    public Level[] Levels { get; set; }
 
     /// <summary>
     /// Has this country been completed
     /// </summary>
     /// <returns>True if completed, false if not</returns>
-    public bool hasCompleted() {
-        return (levels[levels.Length].getState() == Level.STATE_UNLOCKED);
+    public bool HasBeenCompleted() {
+        return (this.Levels[this.Levels.Length].GetState() == Level.LevelStatus.Unlocked);
     }
 
     /// <summary>
     /// Gets the only unlocked level in the array. 
     /// </summary>
     /// <returns>Only unlocked level, Level.none if there are none</returns>
-    public Level getLatestLevel(){
-        foreach (Level level in levels) {
-            if (level.getState() == Level.STATE_UNLOCKED) {
+    public Level GetLatestLevel() {
+        foreach (Level level in this.Levels) {
+            if (level.GetState() == Level.LevelStatus.Unlocked) {
                 return level;
             }
         }
 
-        return Level.NONE;
+        return Level.None;
     }
 
     /// <summary>
@@ -34,15 +42,13 @@ public class Country {
     /// </summary>
     /// <param name="name">Name of the level</param>
     /// <returns>Returns the level, returns Level.none if it doesnt exist</returns>
-    public Level getLevelByName(string name) {
-        foreach (Level level in levels) {
-            if (level.name == name) {
+    public Level GetLevelByName(string name) {
+        foreach (Level level in this.Levels) {
+            if (level.Name == name) {
                 return level;
             }
         }
 
-        return Level.NONE;
+        return Level.None;
     }
-
 }
-
