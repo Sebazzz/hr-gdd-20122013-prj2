@@ -4,6 +4,7 @@ using System;
 
 public class CursorController : MonoBehaviour {
     public Texture cursorImage;
+    public Vector2 offset;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +18,7 @@ public class CursorController : MonoBehaviour {
 	// Update is called once per frame
 	void OnGUI () {
 	    Vector3 mousePos = Input.mousePosition;
-        Rect position = new Rect(mousePos.x, Screen.height - mousePos.y, cursorImage.width, cursorImage.height);
+        Rect position = new Rect(mousePos.x + offset.x, (Screen.height - mousePos.y) + offset.y, cursorImage.width, cursorImage.height);
         GUI.Label(position, cursorImage);
 	}
 }
