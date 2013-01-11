@@ -297,4 +297,8 @@ public class HerderLoopBehaviour : MonoBehaviour {
             this.CancelWalk();
         }
     }
+
+    public bool AcceptsNewPath() {
+        return (currentState != State.gliding);
+    }
 }

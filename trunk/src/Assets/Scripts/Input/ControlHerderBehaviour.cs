@@ -162,7 +162,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         }
 
         // start drawing of a new path
-        if (!MouseManager.IsMouseLocked && !this.isCurrentlyDrawing && this.IsMouseButtonDown()) {
+        if (!MouseManager.IsMouseLocked && !this.isCurrentlyDrawing && this.IsMouseButtonDown() && this.herderLoopController.AcceptsNewPath()) {
             // get the position of the mouse in the world and check if we are hit
             RaycastHit? hit = this.GetMousePosition();
 
