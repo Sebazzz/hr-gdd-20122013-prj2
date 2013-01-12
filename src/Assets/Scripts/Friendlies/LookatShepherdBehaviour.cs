@@ -71,8 +71,8 @@ public class LookatShepherdBehaviour : MonoBehaviour
             }
             else if(Time.time - lastUpdate > UpdateDelay)
             {
-                Debug.Log(lastUpdate + "lastupdate" + ", formule dif :" + (Time.time - lastUpdate) + "  > delta * delat " + UpdateDelay);
-                Debug.Log("findingdog");
+                //Debug.Log(lastUpdate + "lastupdate" + ", formule dif :" + (Time.time - lastUpdate) + "  > delta * delat " + UpdateDelay);
+                //Debug.Log("findingdog");
                 this.lastUpdate = Time.time;
                 FindClosestDog();
             }

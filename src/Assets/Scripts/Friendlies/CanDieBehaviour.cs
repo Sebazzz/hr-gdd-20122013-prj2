@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -76,7 +77,9 @@ public abstract class CanDieBehaviour : MonoBehaviour {
             Debug.LogWarning("Dying a second time while already dying.");            
         }
 
+        this.currentCauseOfDeath = causeOfDeath;
         this.OnStartDying(causeOfDeath);
+        this.currentCauseOfDeath = null;
 
         if (this.KillDelay < -100) {
             // death already executed

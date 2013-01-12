@@ -235,7 +235,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
             return false;
         }
 
-        Debug.Log(String.Format("Desired speed: {2}; Speed per unit: {0}; Allowable speed: {1}", speedPerUnit, minimalAllowableSpeed, this.desiredSpeed));
+        //Debug.Log(String.Format("Desired speed: {2}; Speed per unit: {0}; Allowable speed: {1}", speedPerUnit, minimalAllowableSpeed, this.desiredSpeed));
         return speedPerUnit < minimalAllowableSpeed;
     }
 
@@ -290,7 +290,7 @@ public class HerderLoopBehaviour : MonoBehaviour {
 
     private void setState(State state) {
         currentState = state;
-        Debug.Log(state);
+        
         // Handle enabled
         if (currentState != State.idle) {
             this.enabled = true;

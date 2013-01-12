@@ -117,7 +117,7 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 
     private void ExecuteRotation(float yAxis) {
         float xRot = this.transform.rotation.eulerAngles.x;
-        bool minReached = Mathf.Approximately(xRot, this.MinimumRotation);
+        bool minReached = Mathf.Approximately(xRot, this.MinimumRotation) || xRot < this.MinimumRotation;
         bool maxReached = Mathf.Approximately(xRot, this.MaximumRotation);
 
         Debug.Log(String.Format("{0};{1};{2}", minReached, maxReached, yAxis));

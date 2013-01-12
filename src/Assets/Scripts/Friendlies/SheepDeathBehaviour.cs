@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -8,14 +9,27 @@ using UnityEngine;
 /// <dependency cref="CanDieBehaviour"/>
 /// <dependend cref="KillBehaviour"/>
 public class SheepDeathBehaviour : CanDieBehaviour {
+
+    public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 1f);
+
+    public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(4f, true, 5f);
+
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
+
+        // execute object specific behaviour
+        // ... electric fence
+        if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
+            DeathEffects.RagdollFenceTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+        }
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
         if (causeOfDeath.layer != Layers.Water) {
             this.ExecuteDirectDeath();
+        } else {
+            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
         }
 
         if (this.DisableScriptsWhenDying) {
