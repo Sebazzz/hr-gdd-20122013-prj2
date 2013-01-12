@@ -58,7 +58,7 @@ class CameraZoomStartController : MonoBehaviour {
     void Update() {
         // smoothly set the new rotation
         float rotationSpeed = this.RotateSpeed * Time.deltaTime;
-        Quaternion newRotation = Quaternion.Slerp(this.transform.rotation, this.targetCameraRotation, this.RotateSpeed * Time.deltaTime);
+        Quaternion newRotation = Quaternion.Slerp(this.transform.rotation, this.targetCameraRotation, rotationSpeed);
         this.transform.rotation = newRotation;
 
         // smoothly set the new position
@@ -77,7 +77,7 @@ class CameraZoomStartController : MonoBehaviour {
         // check if we're reached the position, and then enable control scripts
         bool positionReached = Vector3.Distance(this.transform.position, this.targetCameraPosition) < 1f;
         bool rotationReached = Quaternion.Angle(this.transform.rotation, this.targetCameraRotation) < 2f;
-        Debug.Log(String.Format("Position OK: {0}; Rotation OK: {1}", positionReached, rotationReached));
+        
         if (positionReached && rotationReached) {
             this.cameraControllerScript.enabled = true;
             this.enabled = false;
