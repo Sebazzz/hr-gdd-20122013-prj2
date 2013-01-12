@@ -14,6 +14,8 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(4f, true, 5f);
 
+    public DeathEffects.DeathEffectConfiguration FireDeathEffect = new DeathEffects.DeathEffectConfiguration(6f, true, 3f);
+
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
@@ -21,7 +23,13 @@ public class SheepDeathBehaviour : CanDieBehaviour {
         // execute object specific behaviour
         // ... electric fence
         if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            DeathEffects.RagdollFenceTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+        }
+
+        // ... fire
+        if (causeOfDeath.name.IndexOf("fire", StringComparison.InvariantCultureIgnoreCase) != -1 ||
+            causeOfDeath.name.IndexOf("flame", StringComparison.InvariantCultureIgnoreCase) != -1) {
+            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
         }
     }
 
