@@ -10,7 +10,7 @@ using UnityEngine;
 /// <dependend cref="KillBehaviour"/>
 public class SheepDeathBehaviour : CanDieBehaviour {
 
-    public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 1f);
+    public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
 
     public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(4f, true, 5f);
 
@@ -37,7 +37,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
         if (causeOfDeath.layer != Layers.Water) {
             this.ExecuteDirectDeath();
         } else {
-            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
         }
 
         if (this.DisableScriptsWhenDying) {
