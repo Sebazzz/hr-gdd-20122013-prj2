@@ -8,7 +8,10 @@ using System.Collections;
 /// <dependency cref="HerderLoopBehaviour"/>
 /// <dependend cref="KillBehaviour"/>
 public class DogDeathBehaviour : CanDieBehaviour {
-    protected override void OnExecuteDeath (GameObject causeOfDeath) {
+    public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
+
+
+    protected override void OnExecuteDeath(GameObject causeOfDeath) {
         // kill the dog
         Destroy(this.gameObject);
     }
@@ -20,6 +23,8 @@ public class DogDeathBehaviour : CanDieBehaviour {
     protected override void OnStartDying (GameObject causeOfDeath) {
         if (causeOfDeath.layer != Layers.Water) {
             this.ExecuteDirectDeath();
+        } else {
+            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
         }
 
         if (this.DisableScriptsWhenDying) {
