@@ -50,7 +50,7 @@ public static class DeathEffects {
     /// <summary>
     /// Logic for death by fence touch by placing a ragdoll
     /// </summary>
-    public static class RagdollFenceTouchDeathEffect {
+    public static class RagdollTouchDeathEffect {
         public static void Execute(GameObject context, GameObject causeOfDeath, DeathEffectConfiguration deathEffect) {
             // checks if the death effect is actually enabled
             if (deathEffect == null || deathEffect.EffectTemplate == null) {
