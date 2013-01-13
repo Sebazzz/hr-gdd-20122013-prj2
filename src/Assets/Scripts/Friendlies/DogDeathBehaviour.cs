@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 
@@ -21,7 +22,7 @@ public class DogDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
-        if (causeOfDeath.layer != Layers.Water) {
+        if (causeOfDeath.layer != Layers.Water && causeOfDeath.name.IndexOf("hole", StringComparison.CurrentCultureIgnoreCase) != -1) {
             this.ExecuteDirectDeath();
         } else {
             DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
