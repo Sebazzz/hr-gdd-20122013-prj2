@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using Object = UnityEngine.Object;
 
 /// <summary>
 ///     Executes specific death logic for a shepard dog
@@ -14,7 +15,10 @@ public class DogDeathBehaviour : CanDieBehaviour {
 
     protected override void OnExecuteDeath(GameObject causeOfDeath) {
         // kill the dog
-        Destroy(this.gameObject);
+        Object.Destroy(this.gameObject);
+
+        // notify level manager
+        LevelBehaviour.Instance.OnDogKilled();
     }
 
     protected override bool CanDie (GameObject causeOfDeath, string causeOfDeathTag, int causeOfDeathLayer) {

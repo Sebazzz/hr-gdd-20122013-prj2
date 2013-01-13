@@ -120,7 +120,6 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
         bool minReached = Mathf.Approximately(xRot, this.MinimumRotation) || xRot < this.MinimumRotation;
         bool maxReached = Mathf.Approximately(xRot, this.MaximumRotation);
 
-        Debug.Log(String.Format("{0};{1};{2}", minReached, maxReached, yAxis));
         // check if we have already rotated 'enough'
         if (minReached && yAxis < 0 ||
             maxReached && yAxis > 0) {

@@ -14,7 +14,7 @@ class CameraZoomStartController : MonoBehaviour {
     /// <summary>
     /// Specifies the zoom start camera position
     /// </summary>
-    public Vector3 StartCameraRotation;
+    public Vector3 StartCameraRotation = new Vector3();
 
     /// <summary>
     /// Specifies the start camera position to zoom in from

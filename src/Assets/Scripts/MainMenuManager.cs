@@ -3,7 +3,6 @@ using System.Collections;
 
 public class MainMenuManager : MonoBehaviour {
 
-	public GameObject camera;
 	public enum MenuIndex { TitleScreen, LevelSelect, Credits}
 	public MenuIndex menuIndex = MenuIndex.TitleScreen;
 	private float cameraRotation = 180f;
@@ -20,7 +19,7 @@ public class MainMenuManager : MonoBehaviour {
 	/// </summary>
 	private void Update () {
 
-		camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f); 
+		Camera.mainCamera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f); 
 	
 	}
 
