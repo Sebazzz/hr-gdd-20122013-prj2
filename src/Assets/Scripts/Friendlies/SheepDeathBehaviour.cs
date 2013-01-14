@@ -16,6 +16,8 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
 
+    public DeathEffects.DeathEffectConfiguration HoleDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
+
     public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(4f, true, 5f);
 
     public DeathEffects.DeathEffectConfiguration FireDeathEffect = new DeathEffects.DeathEffectConfiguration(6f, true, 3f);
@@ -36,7 +38,10 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
         }
 
-        // ... wolf
+        // ... hole
+        if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
+            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
+        }
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
