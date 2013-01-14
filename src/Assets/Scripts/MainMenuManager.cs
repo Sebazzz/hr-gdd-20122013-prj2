@@ -3,9 +3,10 @@ using System.Collections;
 
 public class MainMenuManager : MonoBehaviour {
 
-	public enum MenuIndex { TitleScreen, LevelSelect, Credits}
+	public enum MenuIndex { TitleScreen, LevelSelect, Options}
 	public MenuIndex menuIndex = MenuIndex.TitleScreen;
 	private float cameraRotation = 180f;
+	public Camera camera;
 
 	/// <summary>
 	/// Use this for initialization
@@ -19,7 +20,7 @@ public class MainMenuManager : MonoBehaviour {
 	/// </summary>
 	private void Update () {
 
-		Camera.mainCamera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f); 
+		camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f); 
 	
 	}
 
@@ -35,7 +36,7 @@ public class MainMenuManager : MonoBehaviour {
 			case MenuIndex.LevelSelect:
 				cameraRotation = 270f;
 				break;
-			case MenuIndex.Credits:
+			case MenuIndex.Options:
 				cameraRotation = 45f;
 				break;
 			default:
