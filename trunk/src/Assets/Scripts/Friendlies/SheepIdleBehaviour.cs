@@ -37,7 +37,7 @@ public class SheepIdleBehaviour : MonoBehaviour {
 
         if (sheepState == SheepState.active) {
             if (Time.time - lastBlaatTime >= blaatTime) {
-                audio.PlayOneShot(SOUND_BLAAT);
+                //audio.PlayOneShot(SOUND_BLAAT);
                 blaatTime = Random.Range(MinBlaatFrequency, MaxBlaatFrequency);
                 lastBlaatTime = Time.time;
             }

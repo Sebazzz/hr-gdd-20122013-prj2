@@ -29,10 +29,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
-        LevelBehaviour.Instance.OnSheepDeath();
-        Destroy(this.gameObject);
-
-
         // execute object specific behaviour
         // ... electric fence
         if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
@@ -51,6 +47,9 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             audio.PlayOneShot(SOUND_FALLHOLE);
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
         }
+
+        LevelBehaviour.Instance.OnSheepDeath();
+        Destroy(this.gameObject);
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
