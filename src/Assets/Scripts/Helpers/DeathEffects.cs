@@ -45,6 +45,30 @@ public static class DeathEffects {
             DeathEffectController.FadeOutAnimationConfiguration? animationConfig = deathEffect;
             DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, animationConfig);
         }
+
+        public static void ExecuteExtra(GameObject context, GameObject causeOfDeath, DeathEffectConfiguration deathEffect, GameObject extraTemplate) {
+            // checks if the death effect is actually enabled
+            if (deathEffect == null || deathEffect.EffectTemplate == null) {
+                return;
+            }
+
+            // instantiate the template
+            GameObject splashObject = (GameObject)Object.Instantiate(extraTemplate);
+
+            // set positional information
+            Quaternion targetRotation = causeOfDeath.transform.rotation;
+            splashObject.transform.rotation = targetRotation;
+
+            // ... add information of velocity, makes sure the effect is placed on the proper position
+            Vector3 targetPosition = CalculatePositionWithBodyVelocity(context);
+            targetPosition.y = causeOfDeath.transform.position.y- 2f;
+
+            splashObject.transform.position = targetPosition;
+            splashObject.transform.Translate(Vector3.up * 0.1f, Space.Self);
+
+            DeathEffectController.FadeOutAnimationConfiguration? animationConfig = deathEffect;
+            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, animationConfig);
+        }
     }
 
     /// <summary>

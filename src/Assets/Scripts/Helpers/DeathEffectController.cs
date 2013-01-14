@@ -36,7 +36,14 @@ public sealed class DeathEffectController : MonoBehaviour {
                     continue;
                 }
                 
-                Object.Destroy(deathRegisteredObject.ObjectToDestroy);
+                // check for fade out or execute direct destroy
+                FadeOutOfSceneAbility fadeOutScript =
+                    deathRegisteredObject.ObjectToDestroy.GetComponent<FadeOutOfSceneAbility>();
+                if (fadeOutScript != null) {
+                    fadeOutScript.Enable(deathRegisteredObject.ObjectToDestroy);
+                } else {
+                    Object.Destroy(deathRegisteredObject.ObjectToDestroy);
+                }
             }
         }
     }
