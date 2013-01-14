@@ -42,8 +42,7 @@ public static class DeathEffects {
             splashObject.transform.position = targetPosition;
             splashObject.transform.Translate(Vector3.up * 0.1f, Space.Self);
 
-            DeathEffectController.FadeOutAnimationConfiguration? animationConfig = deathEffect;
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, animationConfig);
+            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
         }
 
         public static void ExecuteExtra(GameObject context, GameObject causeOfDeath, DeathEffectConfiguration deathEffect, GameObject extraTemplate) {
@@ -66,8 +65,7 @@ public static class DeathEffects {
             splashObject.transform.position = targetPosition;
             splashObject.transform.Translate(Vector3.up * 0.1f, Space.Self);
 
-            DeathEffectController.FadeOutAnimationConfiguration? animationConfig = deathEffect;
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, animationConfig);
+            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
         }
     }
 
@@ -93,8 +91,60 @@ public static class DeathEffects {
 
             splashObject.transform.position = targetPosition;
 
-            DeathEffectController.FadeOutAnimationConfiguration? animationConfig = deathEffect;
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, animationConfig);
+            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
+        }
+    }
+
+    /// <summary>
+    /// Logic for death by touching an enemy
+    /// </summary>
+    public static class EnemyTouchDeadEffect {
+        public static void Execute(GameObject context, GameObject causeOfDeath, DeathEffectConfiguration deathEffect) {
+            // checks if the death effect is actually enabled
+            if (deathEffect == null || deathEffect.EffectTemplate == null) {
+                return;
+            }
+
+            // instantiate the template
+            GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+
+            // set positional information
+            Quaternion targetRotation = context.transform.rotation;
+            splashObject.transform.rotation = targetRotation;
+
+            // ... add information of velocity, makes sure the effect is placed on the proper position
+            Vector3 targetPosition = context.transform.position;
+            targetPosition += deathEffect.EffectOffset;
+
+            // ... disable wolf movement
+            MonoBehaviour beh = causeOfDeath.GetComponent<MoveBehaviour>();
+            if (beh != null) {
+                beh.enabled = false;
+            }
+            MonoBehaviour beh2 = causeOfDeath.GetComponent<FoxMoveBehaviour>();
+            if (beh2 != null) {
+                beh2.enabled = false;
+            }
+
+            // ... disable sheep movement
+            Rigidbody rb = context.GetComponent<Rigidbody>();
+            if (rb != null) {
+                rb.isKinematic = true;
+            }
+
+            splashObject.transform.position = targetPosition;
+
+            deathEffect.AnimateOutCallback = delegate {
+                if (beh != null) {
+                    beh.enabled = true;
+                }
+                if (beh2 != null) {
+                    beh2.enabled = true;
+                }
+                Object.Destroy(context);
+                                             };
+
+            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
         }
     }
 
@@ -120,9 +170,26 @@ public static class DeathEffects {
         public float InitialDelay;
 
         /// <summary>
+        /// Defines the callback that is executed when the particles are animated out
+        /// </summary>
+        [NonSerialized]
+        public Action AnimateOutCallback;
+
+        /// <summary>
+        /// Defines the callback that is executed when the object is destroyed
+        /// </summary>
+        [NonSerialized]
+        public Action DeleteCallback;
+
+        /// <summary>
         /// Defines the object to spawn
         /// </summary>
         public GameObject EffectTemplate;
+
+        /// <summary>
+        /// Gets the offset of the main effect template
+        /// </summary>
+        public Vector3 EffectOffset;
 
         public DeathEffectConfiguration() {}
 

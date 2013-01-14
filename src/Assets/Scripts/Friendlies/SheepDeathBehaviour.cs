@@ -12,6 +12,8 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     public GameObject GenericDeadSheep = null;
 
+    public DeathEffects.DeathEffectConfiguration WolfDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 1f);
+
     public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
 
     public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(4f, true, 5f);
@@ -33,16 +35,26 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             causeOfDeath.name.IndexOf("flame", StringComparison.InvariantCultureIgnoreCase) != -1) {
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
         }
+
+        // ... wolf
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
-        if (causeOfDeath.layer != Layers.Water) {
+        if (causeOfDeath.layer != Layers.Water && causeOfDeath.tag != Tags.Enemy) {
             this.ExecuteDirectDeath();
         } else {
-            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
+            // execute water behaviour
+            if (causeOfDeath.layer == Layers.Water) {
+                DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
 
-            if (this.GenericDeadSheep != null) {
-                DeathEffects.WaterDeathEffect.ExecuteExtra(this.gameObject, causeOfDeath, this.WaterDeathEffect, this.GenericDeadSheep);
+                if (this.GenericDeadSheep != null) {
+                    DeathEffects.WaterDeathEffect.ExecuteExtra(this.gameObject, causeOfDeath, this.WaterDeathEffect, this.GenericDeadSheep);
+                }
+            }
+
+            // execute enemy behaviour
+            if (causeOfDeath.tag == Tags.Enemy) {
+                DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
             }
         }
 
