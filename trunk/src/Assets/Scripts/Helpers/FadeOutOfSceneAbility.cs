@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public sealed class FadeOutOfSceneAbility : MonoBehaviour {
     private const float RotationSpeed = 0.5f;
-    private const float Distance = 500f;
+    private const float DistanceOffset = 25f;
     private const float AcceptDistance = 5f;
     private static readonly Vector3 DefaultDirection = Vector3.up;
 
@@ -27,7 +27,7 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
 
         // move towards until deleted
         Vector3 currentPos = this.transform.position;
-        Vector3 newTarget = Vector3.Lerp(currentPos, this.targetPosition, Time.deltaTime*MovementSpeed);
+        Vector3 newTarget = Vector3.Lerp(currentPos, this.targetPosition, Time.deltaTime*MovementSpeed*10);
 
         this.transform.position = newTarget;
 
@@ -57,7 +57,8 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
         }
 
         // find a point
-        Vector3 target = this.transform.position + (DefaultDirection * Distance);
+        float distance = Camera.mainCamera.transform.position.y + DistanceOffset;
+        Vector3 target = this.transform.position + (DefaultDirection * distance);
 
         this.rootGameObject = targetGameObject;
         this.targetPosition = target;
