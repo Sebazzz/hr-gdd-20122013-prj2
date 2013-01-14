@@ -245,5 +245,5 @@ ModelImporter:
     rootMotionBoneName: transform14
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   additionalBone: 1
-  animationType: 1
+  animationType: 2
   userData: 
