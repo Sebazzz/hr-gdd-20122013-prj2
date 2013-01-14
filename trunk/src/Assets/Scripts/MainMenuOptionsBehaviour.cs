@@ -39,7 +39,8 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	void Update () {
 
 		audioMesh.text = "Audio : " + audio;
-		resolutionMesh.text = "Resolutie : " +resolutions[resolution].width + " x " + resolutions[resolution].height;
+		try { resolutionMesh.text = "Resolutie : " + resolutions[resolution].width + " x " + resolutions[resolution].height; }
+		catch { resolutionMesh.text = "Resolutie : " + resolutions[0].width + " x " + resolutions[0].height; }
 		windowedMesh.text = "Fullscreen : " + windowed;
 		qualityMesh.text = "Kwaliteit : " + qualityOptions[quality];
 	
