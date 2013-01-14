@@ -9,6 +9,7 @@ using UnityEngine;
 /// <dependency cref="CanDieBehaviour"/>
 /// <dependend cref="KillBehaviour"/>
 public class SheepDeathBehaviour : CanDieBehaviour {
+    public AudioClip SOUND_KILL;
 
     public GameObject GenericDeadSheep = null;
 
@@ -22,9 +23,11 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     public DeathEffects.DeathEffectConfiguration FireDeathEffect = new DeathEffects.DeathEffectConfiguration(6f, true, 3f);
 
+
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
+
 
         // execute object specific behaviour
         // ... electric fence
@@ -40,6 +43,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
         // ... hole
         if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
+            //audio.PlayOneShot();
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
         }
     }
@@ -59,6 +63,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
             // execute enemy behaviour
             if (causeOfDeath.tag == Tags.Enemy) {
+                audio.PlayOneShot(SOUND_KILL);
                 DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
             }
         }
