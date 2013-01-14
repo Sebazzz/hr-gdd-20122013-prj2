@@ -3,22 +3,26 @@ using System.Collections;
 using System;
 
 public class CursorController : MonoBehaviour {
-    public Texture cursorImage;
+    public Texture2D cursorImage;
     public Vector2 offset;
 
 	// Use this for initialization
 	void Start () {
-	    Screen.showCursor = false;
 
         if (cursorImage == null) {
             throw new Exception("A cursor image is needed.");
         }
+
+        if (cursorImage.height != 32 || cursorImage.width != 32) {
+            throw new Exception("The cursor image needs to be 32x32");
+        }
 	}
-	
-	// Update is called once per frame
-	void OnGUI () {
-	    Vector3 mousePos = Input.mousePosition;
-        Rect position = new Rect(mousePos.x + offset.x, (Screen.height - mousePos.y) + offset.y, cursorImage.width, cursorImage.height);
-        GUI.Label(position, cursorImage);
-	}
+
+    void OnMouseEnter() {
+        Cursor.SetCursor(cursorImage, offset, CursorMode.Auto);
+    }
+
+    void OnMouseExit() {
+        Cursor.SetCursor(cursorImage, offset, CursorMode.Auto);
+    }
 }

@@ -17,7 +17,7 @@ public class HUD : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        dialogRect = new Rect(Screen.width/2 - 150, Screen.height/2-100, 300, 200);
+        dialogRect = new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 200);
 	}
 	
 	// Update is called once per frame
