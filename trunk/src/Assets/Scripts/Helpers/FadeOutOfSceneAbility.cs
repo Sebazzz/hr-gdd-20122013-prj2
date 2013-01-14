@@ -5,6 +5,7 @@ using UnityEngine;
 /// Helper script for fading out an object of a scene. Note: this script handles its own state and should by default be disabled.
 /// </summary>
 public sealed class FadeOutOfSceneAbility : MonoBehaviour {
+    private const float RotationSpeed = 0.5f;
     private const float Distance = 500f;
     private const float AcceptDistance = 5f;
     private static readonly Vector3 DefaultDirection = Vector3.up;
@@ -18,6 +19,12 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
     private Vector3 targetPosition;
 
     private void Update() {
+        // set rotation
+        Quaternion targetRotation = Quaternion.LookRotation(targetPosition - rootGameObject.transform.position);
+        Quaternion currentRotation = rootGameObject.transform.rotation;
+        Quaternion newRotation = Quaternion.Lerp(currentRotation, targetRotation, Time.deltaTime * RotationSpeed);
+        rootGameObject.transform.rotation = newRotation;
+
         // move towards until deleted
         Vector3 currentPos = this.transform.position;
         Vector3 newTarget = Vector3.Lerp(currentPos, this.targetPosition, Time.deltaTime*MovementSpeed);
@@ -43,9 +50,14 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
             halo.enabled = true;
         }
 
+        // disable any rigid body
+        Rigidbody rb = targetGameObject.GetComponent<Rigidbody>();
+        if (rb != null) {
+            rb.isKinematic = true;
+        }
+
         // find a point
         Vector3 target = this.transform.position + (DefaultDirection * Distance);
-        this.transform.LookAt(target);
 
         this.rootGameObject = targetGameObject;
         this.targetPosition = target;
