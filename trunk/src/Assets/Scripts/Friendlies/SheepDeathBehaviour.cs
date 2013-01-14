@@ -11,6 +11,9 @@ using UnityEngine;
 public class SheepDeathBehaviour : CanDieBehaviour {
     public AudioClip SOUND_KILL;
     public AudioClip SOUND_FALLHOLE;
+    public AudioClip SOUND_FALLWATER;
+    public AudioClip SOUND_SPLASH;
+    public AudioClip SOUND_ELECTRIC;
 
     public GameObject GenericDeadSheep = null;
 
@@ -33,6 +36,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
         // execute object specific behaviour
         // ... electric fence
         if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
+            audio.PlayOneShot(SOUND_ELECTRIC);
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
         }
 
@@ -55,6 +59,8 @@ public class SheepDeathBehaviour : CanDieBehaviour {
         } else {
             // execute water behaviour
             if (causeOfDeath.layer == Layers.Water) {
+                audio.PlayOneShot(SOUND_SPLASH);
+                audio.PlayOneShot(SOUND_FALLWATER);
                 DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
 
                 if (this.GenericDeadSheep != null) {
