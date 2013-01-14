@@ -10,6 +10,7 @@ using UnityEngine;
 /// <dependend cref="KillBehaviour"/>
 public class SheepDeathBehaviour : CanDieBehaviour {
     public AudioClip SOUND_KILL;
+    public AudioClip SOUND_FALLHOLE;
 
     public GameObject GenericDeadSheep = null;
 
@@ -43,7 +44,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
         // ... hole
         if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            //audio.PlayOneShot();
+            audio.PlayOneShot(SOUND_FALLHOLE);
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
         }
     }
