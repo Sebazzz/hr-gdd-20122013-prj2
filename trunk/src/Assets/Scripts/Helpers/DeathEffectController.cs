@@ -21,19 +21,29 @@ public sealed class DeathEffectController : MonoBehaviour {
             if (deathRegisteredObject.TargetRemovalTime < Time.time) {
                 this.registeredObjects.Remove(deathRegisteredObject);
 
-                if (deathRegisteredObject.AnimationConfiguration != null && deathRegisteredObject.AnimationConfiguration.Value.FirstDisableParticleSystem) {
+                if (deathRegisteredObject.AnimationConfiguration.AnimateParticlesSmoothlyOut) {
                     // disable emitting
                     RecursiveDisableEmitting(deathRegisteredObject.ObjectToDestroy);
 
+                    if (deathRegisteredObject.AnimationConfiguration.AnimateOutCallback != null) {
+                        deathRegisteredObject.AnimationConfiguration.AnimateOutCallback.Invoke();
+                    }
+
                     // re-register
-                    FadeOutAnimationConfiguration animConfig = deathRegisteredObject.AnimationConfiguration.Value;
+                    DeathEffects.DeathEffectConfiguration animConfig = deathRegisteredObject.AnimationConfiguration;
 
                     DeathRegisteredObject newReg = deathRegisteredObject;
-                    newReg.AnimationConfiguration = null;
-                    newReg.TargetRemovalTime = Time.time + animConfig.ParticleFadeTime;
+                    newReg.AnimationConfiguration = deathRegisteredObject.AnimationConfiguration;
+                    newReg.AnimationConfiguration.AnimateParticlesSmoothlyOut = false;
+                    newReg.TargetRemovalTime = Time.time + animConfig.AnimateOutTime;
 
                     this.registeredObjects.Add(newReg);
                     continue;
+                }
+
+                // execute deletion callback
+                if (deathRegisteredObject.AnimationConfiguration.DeleteCallback != null) {
+                    deathRegisteredObject.AnimationConfiguration.DeleteCallback.Invoke();
                 }
                 
                 // check for fade out or execute direct destroy
@@ -85,7 +95,7 @@ public sealed class DeathEffectController : MonoBehaviour {
     /// <param name="objectToRegister"></param>
     /// <param name="removalDelay"></param>
     /// <param name="animationConfiguration"></param>
-    public void Register(GameObject objectToRegister, float removalDelay, FadeOutAnimationConfiguration? animationConfiguration) {
+    public void Register(GameObject objectToRegister, float removalDelay, DeathEffects.DeathEffectConfiguration animationConfiguration) {
         if (objectToRegister == null) {
             throw new ArgumentNullException("objectToRegister");
         }
@@ -127,7 +137,7 @@ public sealed class DeathEffectController : MonoBehaviour {
     #region Nested type: DeathRegisteredObject
 
     private struct DeathRegisteredObject {
-        public FadeOutAnimationConfiguration? AnimationConfiguration;
+        public DeathEffects.DeathEffectConfiguration AnimationConfiguration;
         public GameObject ObjectToDestroy;
         public float TargetRemovalTime;
     }
@@ -135,20 +145,6 @@ public sealed class DeathEffectController : MonoBehaviour {
     #endregion
 
     #region Nested type: FadeOutAnimationConfiguration
-
-    public struct FadeOutAnimationConfiguration {
-        public bool FirstDisableParticleSystem;
-        public float ParticleFadeTime;
-
-
-        public static implicit operator FadeOutAnimationConfiguration(DeathEffects.DeathEffectConfiguration deathEffectControl) {
-            FadeOutAnimationConfiguration c = new FadeOutAnimationConfiguration();
-            c.FirstDisableParticleSystem = deathEffectControl.AnimateParticlesSmoothlyOut;
-            c.ParticleFadeTime = deathEffectControl.AnimateOutTime;
-
-            return c;
-        }
-    }
 
     #endregion
 }
