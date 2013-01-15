@@ -131,15 +131,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
     private float maxHeight;
 
     void Start(){
-        // Find the worldobject
-        GameObject w = GameObject.Find("World");
-        if (w != null) {
-            maxHeight = w.GetComponent<LevelBehaviour>().MaxDogHeight;
-        } else {
-            throw new Exception("No World found. This is required by ControlHerderBehaviour");
-        }
-
-
         // get a line renderer
 		GameObject pathRenderingObject = (GameObject) Instantiate(this.ShepherdPathPrefab);
         this.lineRenderer = pathRenderingObject.GetComponent<LineRenderer>();
@@ -150,18 +141,22 @@ public class ControlHerderBehaviour : MonoBehaviour {
             throw new Exception("This component cannot function without a HerderLoopBehaviour");
         }
 
-        (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
+        this.Halo.enabled = false;
 
         // set-up path redraw timer
         this.redrawPathTimer = new Timer(RedrawPathTime);
 	}
 
     void OnMouseOver() {
-        (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
+        this.Halo.enabled = true;
+    }
+
+    private Behaviour Halo {
+        get { return ((Behaviour) this.gameObject.GetComponent("Halo")); }
     }
 
     void OnMouseExit() {
-        (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
+        this.Halo.enabled = false;
     }
 
 	void Update () {
