@@ -90,9 +90,9 @@ public class SheepBarnTouchBehaviour : MonoBehaviour {
         if (collidingObject.tag == Tags.Sheep) {
             LevelBehaviour.Instance.OnSheepCollected();
 
-            var audioSource = this.GetComponent<AudioSource>();
+            var audioSource = this.GetComponent<BarnAudioController>();
             if (audioSource != null) {
-                audioSource.Play();
+                audioSource.SheepBarnEnterSound.Play();
             }
         }
 

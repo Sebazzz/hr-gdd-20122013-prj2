@@ -28,9 +28,14 @@ public class LevelBehaviour : MonoBehaviour {
     }
 
     /// <summary>
-    /// Defines the minimum number of sheep to collect in the level
+    /// Specifies the minimum number of sheep to collect in the level
     /// </summary>
     public int NumberOfSheepToCollect = 1;
+
+    /// <summary>
+    /// Specifies the global sound volume for this level. Is a value between 0 and 1.
+    /// </summary>
+    public float GlobalSoundVolume = 1f;
 
 
 	// Use this for initialization
@@ -42,6 +47,18 @@ public class LevelBehaviour : MonoBehaviour {
 
         if (sheep.Length < NumberOfSheepToCollect) {
             throw new UnityException("There are more sheep to collect than sheep available");
+        }
+
+        if (this.GlobalSoundVolume < 0 || this.GlobalSoundVolume > 1) {
+            throw new UnityException("Global Sound Volume should be a number between 0 and 1");
+        }
+
+        // make sure the music has the correct priority
+	    AudioSource music = Camera.mainCamera.GetComponent<AudioSource>();
+        if (music == null) {
+            Debug.LogError("The level doesn't have any music. Please attach a working audio source to the main camera. Is this correct?", Camera.mainCamera);
+        } else {
+            music.priority = 0;
         }
 
         // count our objects

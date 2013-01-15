@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -40,10 +41,46 @@ public abstract class CanDieBehaviour : MonoBehaviour {
     /// Allows derived scripts to call this for death to execute directly. This is usually called in <see cref="OnStartDying"/>. 
     /// </summary>
     protected void ExecuteDirectDeath() {
-        this.KillDelay = -1000;
-        this.OnExecuteDeath(this.currentCauseOfDeath);
+        //this.KillDelay = -1000;
+        //this.OnExecuteDeath(this.currentCauseOfDeath);
+
+        // for the audio of death to be able to play, we need to keep the object alive
+        // so we just disable colliders, rigidbody and renderer. it exists, but it doesnt influence the game world anymore
+        RecursiveDisableInfluence(this.gameObject);
 
         this.currentCauseOfDeath = null;
+    }
+
+
+    private static void RecursiveDisableInfluence(GameObject rootObject) {
+        Stack<GameObject> gameObjects = new Stack<GameObject>();
+        gameObjects.Push(rootObject);
+
+        while (gameObjects.Count > 0) {
+            GameObject current = gameObjects.Pop();
+
+            Rigidbody rb = current.GetComponent<Rigidbody>();
+            if (rb != null) {
+                rb.isKinematic = true;
+            }
+
+            Collider c = current.GetComponent<Collider>();
+            if (c != null) {
+                c.enabled = false;
+            }
+
+            Renderer r = current.GetComponent<Renderer>();
+            if (r != null) {
+                r.enabled = false;
+            }
+
+            // search for additional
+            foreach (Transform childTransform in current.transform) {
+                GameObject child = childTransform.gameObject;
+
+                gameObjects.Push(child);
+            }
+        }
     }
 
     /// <summary>

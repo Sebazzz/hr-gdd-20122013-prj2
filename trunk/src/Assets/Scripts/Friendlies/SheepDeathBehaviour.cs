@@ -9,11 +9,7 @@ using UnityEngine;
 /// <dependency cref="CanDieBehaviour"/>
 /// <dependend cref="KillBehaviour"/>
 public class SheepDeathBehaviour : CanDieBehaviour {
-    public AudioClip SOUND_KILL;
-    public AudioClip SOUND_FALLHOLE;
-    public AudioClip SOUND_FALLWATER;
-    public AudioClip SOUND_SPLASH;
-    public AudioClip SOUND_ELECTRIC;
+    private SheepAudioController audioController;
 
     public GameObject GenericDeadSheep = null;
 
@@ -27,12 +23,15 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     public DeathEffects.DeathEffectConfiguration FireDeathEffect = new DeathEffects.DeathEffectConfiguration(6f, true, 3f);
 
+    void Awake() {
+        this.audioController = this.GetComponent<SheepAudioController>();
+    }
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         // execute object specific behaviour
         // ... electric fence
         if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            audio.PlayOneShot(SOUND_ELECTRIC);
+            this.audioController.ElectricFenceTouchSound.Play();
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
         }
 
@@ -44,7 +43,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
         // ... hole
         if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            audio.PlayOneShot(SOUND_FALLHOLE);
+            this.audioController.FallInHoleSound.Play();
             DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
         }
 
@@ -58,8 +57,8 @@ public class SheepDeathBehaviour : CanDieBehaviour {
         } else {
             // execute water behaviour
             if (causeOfDeath.layer == Layers.Water) {
-                audio.PlayOneShot(SOUND_SPLASH);
-                audio.PlayOneShot(SOUND_FALLWATER);
+                this.audioController.FallInWaterSound.Play();
+                this.audioController.DrowningSound.Play();
                 DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
 
                 if (this.GenericDeadSheep != null) {
@@ -69,7 +68,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
             // execute enemy behaviour
             if (causeOfDeath.tag == Tags.Enemy) {
-                audio.PlayOneShot(SOUND_KILL);
+                 this.audioController.KilledSound.Play();
                 DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
             }
         }

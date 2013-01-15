@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class SheepIdleBehaviour : MonoBehaviour {
-    public AudioClip SOUND_BLAAT; // Het blaatgeluid.
+    private SheepAudioController audioController;
+
     public float MinBlaatFrequency = 10; // In seconds
     public float MaxBlaatFrequency = 25;
 
@@ -16,6 +17,10 @@ public class SheepIdleBehaviour : MonoBehaviour {
 
     private float lastBlaatTime = 0;
     private float blaatTime = 0;
+
+    void Awake() {
+        this.audioController = this.GetComponent<SheepAudioController>();
+    }
 
 	/// <summary>
 	/// Use this for initialization
@@ -36,8 +41,9 @@ public class SheepIdleBehaviour : MonoBehaviour {
 	private void Update () {
 
         if (sheepState == SheepState.active) {
-            if (Time.time - lastBlaatTime >= blaatTime) {
-                //audio.PlayOneShot(SOUND_BLAAT);
+            if (Time.time - lastBlaatTime >= blaatTime && this.IsInCameraView()) {
+                this.audioController.IdleSound.Play();
+
                 blaatTime = Random.Range(MinBlaatFrequency, MaxBlaatFrequency);
                 lastBlaatTime = Time.time;
             }
@@ -59,4 +65,11 @@ public class SheepIdleBehaviour : MonoBehaviour {
 		}
 
 	}
+
+    private bool IsInCameraView() {
+        Vector3 positionInSight = Camera.mainCamera.WorldToViewportPoint(transform.position);
+
+        return positionInSight.x >= minDistance && positionInSight.x <= maxDistance &&
+               positionInSight.y >= minDistance && positionInSight.y <= maxDistance;
+    }
 }
