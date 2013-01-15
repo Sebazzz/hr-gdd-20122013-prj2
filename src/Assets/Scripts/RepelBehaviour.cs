@@ -1,38 +1,41 @@
 using System;
 using UnityEngine;
-using System.Collections;
 
 public class RepelBehaviour : MonoBehaviour {
-    public AudioClip SOUND_DOGBARK;
+    private DogAudioController audioController;
 
-    public float radius = 10.0F;
+    private bool hasBarked;
     public float power = 50.0F;
+    public float radius = 10.0F;
 
-    private bool hasBarked = false;
-    void Update() {
+    private void Awake() {
+        this.audioController = this.GetComponent<DogAudioController>();
+    }
 
-        Vector3 explosionPos = transform.position;
+    private void Update() {
+        Vector3 explosionPos = this.transform.position;
 
-        Collider[] colliders = Physics.OverlapSphere(explosionPos, radius);
+        Collider[] colliders = Physics.OverlapSphere(explosionPos, this.radius);
 
         bool hasSeenSheep = false;
         foreach (Collider hit in colliders) {
-
             if (hit.tag == Tags.Sheep && Math.Abs(hit.rigidbody.drag - 0) > 0.01) {
-                hit.rigidbody.AddExplosionForce(power, explosionPos, radius, 0);
+                hit.rigidbody.AddExplosionForce(this.power, explosionPos, this.radius, 0);
                 hasSeenSheep = true;
             }
         }
 
-        if (!hasBarked && hasSeenSheep) {
-            audio.PlayOneShot(SOUND_DOGBARK);
-            hasBarked = true;
-        }
+        if (this.audioController != null) {
+            if (!this.hasBarked && hasSeenSheep) {
+                this.audioController.SheepProximitySound.Play();
+                this.hasBarked = true;
+            }
 
-        if (hasBarked && !hasSeenSheep) { // Reset bark
-            hasBarked = false;
+            if (this.hasBarked && !hasSeenSheep) {
+                // Reset bark
+                this.hasBarked = false;
+            }
         }
-
     }
 
     private void OnDrawGizmosSelected() {
@@ -40,4 +43,3 @@ public class RepelBehaviour : MonoBehaviour {
         Gizmos.DrawWireSphere(this.transform.position, this.radius);
     }
 }
-
