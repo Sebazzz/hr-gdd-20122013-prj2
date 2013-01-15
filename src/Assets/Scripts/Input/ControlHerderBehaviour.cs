@@ -127,8 +127,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
     private float totalPathLength;
 
-    // Maximum height
-    private float maxHeight;
 
     void Start(){
         // get a line renderer
@@ -174,7 +172,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             // get the position of the mouse in the world and check if we are hit
             RaycastHit? hit = this.GetMousePosition();
 
-            if (hit != null && hit.Value.collider.gameObject == this.gameObject && hit.Value.point.y < maxHeight) {
+            if (hit != null && hit.Value.collider.gameObject == this.gameObject ) {
                 // acquire mouse lock and enable drawing state
                 if (MouseManager.TryAcquireLock(this)) {
                     (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
@@ -199,12 +197,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
             // get the current mouse position, and seed the path if there is none
             Vector3 position = this.GetTerrainMousePosition();
 
-            // Check if the position is above height treshold
-            if (position.y > maxHeight) {
-                //this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
-                return;
-
-            }
             if (this.currentTrajectory.Count == 0) {
                 this.currentTrajectory.Enqueue(position);
                 this.lastAddedPosition = position;
