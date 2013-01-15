@@ -32,12 +32,6 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public int NumberOfSheepToCollect = 1;
 
-    /// <summary>
-    /// Defines the maximum height for drawing
-    /// </summary>
-    public float MaxDogHeight = 10f;
-
-
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +47,8 @@ public class LevelBehaviour : MonoBehaviour {
         // count our objects
 	    this.numberOfDogs = GameObject.FindGameObjectsWithTag(Tags.Shepherd).Length;
 	    this.numberOfSheep = GameObject.FindGameObjectsWithTag(Tags.Sheep).Length;
+
+        Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.numberOfDogs, this.numberOfSheep, this.minimumNumberOfSheepToCollect));
 	}
 
 
