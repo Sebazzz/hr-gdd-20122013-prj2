@@ -3,6 +3,9 @@ using System.Collections;
 using System;
 
 public class HUD : MonoBehaviour {
+    // Skin data
+    public GUISkin skin;
+
 
     private bool showDialog = false; // Is set to true once a dialog is shown
     private Rect dialogRect;
@@ -15,10 +18,31 @@ public class HUD : MonoBehaviour {
     private Action action_yes;
     private Action action_no;
 
+    private Texture2D timeTexture;
+    private Texture2D goalTexture;
+    private Texture2D sheepTexture;
+
+    private float time = 0;
+    private int goal = 0;
+    private int collected = 0;
+    private int maxCollected = 0;
+
 	// Use this for initialization
 	void Start () {
         dialogRect = new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 200);
+
+        if (skin == null) {
+            throw(new Exception("GUISkin is needed for the HUD"));
+        }
+
+        loadTextures();
 	}
+
+    private void loadTextures() {
+        timeTexture = Resources.Load("Hud/hud-time") as Texture2D;
+        goalTexture = Resources.Load("Hud/hud-goal") as Texture2D;
+        sheepTexture = Resources.Load("Hud/hud-sheep") as Texture2D;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -32,6 +56,22 @@ public class HUD : MonoBehaviour {
             drawDialog();
         }
         
+    }
+
+    public void setTime(float seconds) {
+        time = seconds;
+    }
+
+    public void setGoal(int goal) {
+        this.goal = goal;
+    }
+
+    public void setCollected(int amount) {
+        collected = amount;
+    }
+
+    public void setMaxCollected(int amount) {
+        maxCollected = amount;
     }
 
     /// <summary>
@@ -68,16 +108,48 @@ public class HUD : MonoBehaviour {
     }
 
     private void drawTopBar() {
-        GUI.Label(new Rect(25, 15, 100, 30), "1/5 Schapen");
+        GUI.DrawTexture(new Rect(pixelsFromLeft(20), 20, 115, 59), timeTexture, ScaleMode.StretchToFill, true, 0);
+        GUI.Label(new Rect(pixelsFromLeft(70), 35, 100, 40), getTime(), skin.label);
 
-        GUI.Label(new Rect(125, 15, 100, 30), "00:12");
+        GUI.DrawTexture(new Rect(pixelsFromLeft(155), 20, 145, 59), goalTexture, ScaleMode.StretchToFill, true, 0);
+        GUI.Label(new Rect(pixelsFromLeft(246), 35, 10, 30), getGoal(), skin.GetStyle("LabelWhite"));
 
-        if (GUI.Button(new Rect(10, 70, 100, 30), "Restart")) {
+        GUI.DrawTexture(new Rect(pixelsFromLeft(320), 20, 230, 59), sheepTexture, ScaleMode.StretchToFill, true, 0);
+        GUI.Label(new Rect(pixelsFromLeft(445), 35, 50, 40), getCollected(), skin.GetStyle("LabelRed"));// x = 465 maar omdat we rechts uitlijnen is het x - width
+        GUI.Label(new Rect(pixelsFromLeft(495), 35, 100, 40), getMaxCollected(), skin.GetStyle("LabelBlack"));
+
+        if (GUI.Button(new Rect(pixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {
             Application.LoadLevel(Application.loadedLevel);
         }
 
-        if (GUI.Button(new Rect(10, 110, 100, 30), "Level select")) {
+        if (GUI.Button(new Rect(pixelsFromRight(115), 20, 95, 59), "", skin.GetStyle("MenuButton"))) {
             Application.LoadLevel(Scenes.MainMenu);
         }
+    }
+
+    private string getTime(){
+        string minutes = Math.Floor(time / 60).ToString("00");
+        string seconds = Math.Floor(time % 60).ToString("00");
+        return minutes + ":" + seconds;
+    }
+
+    private string getGoal(){
+        return goal.ToString();
+    }
+
+    private string getCollected() {
+        return collected.ToString("00");
+    }
+
+    private string getMaxCollected() {
+        return "/" + maxCollected.ToString("00");
+    }
+
+    private float pixelsFromLeft(float pixels) {
+        return pixels;
+    }
+
+    private float pixelsFromRight(float pixels) {
+        return Screen.width - pixels;
     }
 }
