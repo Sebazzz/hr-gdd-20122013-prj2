@@ -36,6 +36,7 @@ public class HUD : MonoBehaviour {
         }
 
         loadTextures();
+
 	}
 
     private void loadTextures() {
@@ -172,5 +173,26 @@ public class HUD : MonoBehaviour {
 
     private float pixelsFromRight(float pixels) {
         return Screen.width - pixels;
+    }
+
+    /// <summary>
+    /// Gets the current HUD
+    /// </summary>
+    public static HUD Instance {
+        get {
+            GameObject worldObject = GameObject.FindGameObjectWithTag(Tags.World);
+
+            if (worldObject == null) {
+                throw new UnityException("No World found or object with tag 'World'");
+            }
+
+            HUD hudscript = worldObject.GetComponent<HUD>();
+
+            if (hudscript == null) {
+                throw new UnityException("World object does not contain 'HUD'");
+            }
+
+            return hudscript;
+        }
     }
 }

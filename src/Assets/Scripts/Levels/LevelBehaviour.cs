@@ -28,6 +28,23 @@ public class LevelBehaviour : MonoBehaviour {
     }
 
     /// <summary>
+    /// Number of collected sheep
+    /// </summary>
+    private int numberOfSheepCollected = 0;
+    public int NumberOfSheepCollected {
+        get { return numberOfSheepCollected; }
+    }
+
+    /// <summary>
+    /// Number of sheep that died
+    /// </summary>
+    private int numberOfDeadSheep = 0;
+    public int NumberOfDeadSheep {
+        get { return numberOfDeadSheep; }
+    }
+
+
+    /// <summary>
     /// Specifies the minimum number of sheep to collect in the level
     /// </summary>
     public int NumberOfSheepToCollect = 1;
@@ -69,6 +86,11 @@ public class LevelBehaviour : MonoBehaviour {
 	    this.numberOfDogs = GameObject.FindGameObjectsWithTag(Tags.Shepherd).Length;
 	    this.numberOfSheep = GameObject.FindGameObjectsWithTag(Tags.Sheep).Length;
 
+        // Set the HUD
+        HUD.Instance.setGoal(LevelBehaviour.Instance.NumberOfSheepToCollect);
+        HUD.Instance.setCollected(LevelBehaviour.Instance.NumberOfSheepCollected);
+        HUD.Instance.setMaxCollected(LevelBehaviour.Instance.NumberOfSheep);
+
         Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.numberOfDogs, this.numberOfSheep, this.minimumNumberOfSheepToCollect));
 	}
 
@@ -83,6 +105,10 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
 	public void OnSheepCollected() {
         this.minimumNumberOfSheepToCollect--;
+        this.numberOfSheepCollected++;
+
+        //Update hud
+        HUD.Instance.setCollected(LevelBehaviour.Instance.NumberOfSheepCollected);
 
         if (this.minimumNumberOfSheepToCollect > (this.NumberOfSheepToCollect - this.numberOfSheep)) {
             // check if all other sheep are dead
@@ -131,9 +157,12 @@ public class LevelBehaviour : MonoBehaviour {
     /// Call this when a sheep has died
     /// </summary>
     public void OnSheepDeath() {
+        this.numberOfDeadSheep++;
         // check if all other sheep are dead
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
         Debug.Log("Sheep killed, left: " + sheep.Length);
+        HUD.Instance.setMaxCollected(this.NumberOfSheep - this.NumberOfDeadSheep);
+
         if (sheep.Length - 1 == 0 && this.minimumNumberOfSheepToCollect > 0) {
             // since there are sheep left to collect and no sheep are alive, we're game over
             this.OnGameOver();
