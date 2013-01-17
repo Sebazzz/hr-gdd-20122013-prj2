@@ -58,18 +58,34 @@ public class HUD : MonoBehaviour {
         
     }
 
+    /// <summary>
+    /// Sets played time in seconds.
+    /// </summary>
+    /// <param name="seconds"></param>
     public void setTime(float seconds) {
         time = seconds;
     }
 
+    /// <summary>
+    /// Sets goal
+    /// </summary>
+    /// <param name="goal"></param>
     public void setGoal(int goal) {
         this.goal = goal;
     }
 
+    /// <summary>
+    /// Sets collected.
+    /// </summary>
+    /// <param name="amount">Is value 0 in "sheep 0/10"</param>
     public void setCollected(int amount) {
         collected = amount;
     }
 
+    /// <summary>
+    /// Sets maxCollected
+    /// </summary>
+    /// <param name="amount">Is value 10 in "sheep 0/10"</param>
     public void setMaxCollected(int amount) {
         maxCollected = amount;
     }
