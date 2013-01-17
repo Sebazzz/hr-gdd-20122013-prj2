@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="be642c72-22a4-4a91-8d03-e6fc319f68fa" name="Input" linkedPackageId="4c593f81-aeb3-4ef0-b645-7687880b5cee" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="ac8900bf-bd08-4287-8e11-8a27629c7d92">
+      <profileInstance Id="d9fd09ed-7a5e-4ffc-87b5-cbac1c9e495a" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f765d4c7-df16-4458-8e78-339f33474911">
+      <profileInstance Id="b23db960-5112-4264-acf0-fa9730c7af7d" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <package Id="4c593f81-aeb3-4ef0-b645-7687880b5cee" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</logicalClassDesignerModel>
