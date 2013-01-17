@@ -135,11 +135,16 @@ public class HUD : MonoBehaviour {
         GUI.Label(new Rect(pixelsFromLeft(495), 35, 100, 40), getMaxCollected(), skin.GetStyle("LabelBlack"));
 
         if (GUI.Button(new Rect(pixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {
-            Application.LoadLevel(Application.loadedLevel);
+            DisplayDialog("Restart", "Would you like to restart this level?", delegate() {
+                Application.LoadLevel(Application.loadedLevel);
+            }, delegate() { });
         }
 
         if (GUI.Button(new Rect(pixelsFromRight(115), 20, 95, 59), "", skin.GetStyle("MenuButton"))) {
-            Application.LoadLevel(Scenes.MainMenu);
+            DisplayDialog("Return to menu", "Would you like to return to the menu?", delegate() {
+                Application.LoadLevel(Scenes.MainMenu);
+            }, delegate() { });
+            
         }
     }
 
