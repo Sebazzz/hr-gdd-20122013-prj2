@@ -11,7 +11,7 @@ static class Tags {
 
     public const string Foe = "Foe";
 
-    public const string Enemy = Foe;
+    public const string Enemy = Tags.Foe;
 
     public const string Sheep = "Sheep";
 
