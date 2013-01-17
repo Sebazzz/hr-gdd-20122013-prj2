@@ -28,7 +28,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
-        LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
     }
 
@@ -77,6 +76,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             this.DisableScriptIfExists<LookatShepherdBehaviour>();
         }
 
+        LevelBehaviour.Instance.OnSheepDeath();
         base.OnStartDying(causeOfDeath);
     }
 
