@@ -55,9 +55,13 @@ public class LevelBehaviour : MonoBehaviour {
 
         // make sure the music has the correct priority
 	    AudioSource music = Camera.mainCamera.GetComponent<AudioSource>();
-        if (music == null) {
-            Debug.LogError("The level doesn't have any music. Please attach a working audio source to the main camera. Is this correct?", Camera.mainCamera);
+        if (music == null || music.clip == null) {
+            Debug.LogError("The level doesn't have any music. Please attach a working audio source with some music to the main camera. Is this correct?", Camera.mainCamera);
         } else {
+            if (!music.loop || !music.playOnAwake) {
+                Debug.LogError("The level music is not configured correctly. Please check 'Loop' and 'Play On Awake'.");
+            }
+
             music.priority = 0;
         }
 
@@ -80,10 +84,7 @@ public class LevelBehaviour : MonoBehaviour {
 	public void OnSheepCollected() {
         this.minimumNumberOfSheepToCollect--;
 
-        if (this.minimumNumberOfSheepToCollect <= (this.NumberOfSheepToCollect - this.numberOfSheep)) {
-            // end level
-            this.OnLevelCompleted();
-        } else {
+        if (this.minimumNumberOfSheepToCollect > (this.NumberOfSheepToCollect - this.numberOfSheep)) {
             // check if all other sheep are dead
             GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
@@ -130,16 +131,12 @@ public class LevelBehaviour : MonoBehaviour {
     /// Call this when a sheep has died
     /// </summary>
     public void OnSheepDeath() {
-        if (this.minimumNumberOfSheepToCollect <= (this.NumberOfSheepToCollect - this.numberOfSheep)) {
-            this.OnLevelCompleted();
-        } else {
-            // check if all other sheep are dead
-            GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+        // check if all other sheep are dead
+        GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
-            if (sheep.Length - 1 == 0 && this.minimumNumberOfSheepToCollect > 0) {
-                // since there are sheep left to collect and no sheep are alive, we're game over
-                this.OnGameOver();
-            } 
+        if (sheep.Length - 1 == 0 && this.minimumNumberOfSheepToCollect > 0) {
+            // since there are sheep left to collect and no sheep are alive, we're game over
+            this.OnGameOver();
         }
     }
 
