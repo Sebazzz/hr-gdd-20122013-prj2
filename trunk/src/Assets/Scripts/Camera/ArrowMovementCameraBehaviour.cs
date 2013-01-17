@@ -49,6 +49,16 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
     public float ScrollSensitivity = 5f;
 
     /// <summary>
+    /// Specfies the scroll point to take to rotate around while scrolling
+    /// </summary>
+    public float ScrollPointDistance = 50f;
+
+    /// <summary>
+    /// Specifies whether to detect <see cref="AutoDetectScrollPointDistance"/>
+    /// </summary>
+    public bool AutoDetectScrollPointDistance = true;
+
+    /// <summary>
     /// Specifies the maximum rotation to allow
     /// </summary>
     public float MaximumRotation = 90f;
@@ -62,7 +72,17 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	private void Start () {
+        if (this.AutoDetectScrollPointDistance) {
+            // get a point on the terrain for scroll distance
+            Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
+            RaycastHit terrainPositionHit;
+            if (!Physics.Raycast(r, out terrainPositionHit, Mathf.Infinity)) {
+                Debug.LogError("Could not detect a proper scroll distance");
+                return;
+            }
 
+            this.ScrollPointDistance = Vector3.Distance(this.transform.position, terrainPositionHit.point);
+        }
 	}
 	
 	/// <summary>
@@ -127,16 +147,12 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
         }
 
         // get a point on the terrain we can rotate around
-        Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
-        RaycastHit terrainPositionHit;
-        if (!Physics.Raycast(r, out terrainPositionHit, Mathf.Infinity))
-        {
-            return;
-        }
+        Vector3 point = this.transform.TransformDirection(Vector3.forward)*this.ScrollPointDistance;
+        point = this.transform.position + point;
 
         // execute rotation
         float rotationSpeed = yAxis*this.ScrollSensitivity;
-        Vector3 point = terrainPositionHit.point;
+        //Vector3 point = terrainPositionHit.point;
 
         // calculate the right axis based on the current X rotation
         this.transform.RotateAround(point, this.transform.TransformDirection(Vector3.right), rotationSpeed);
@@ -160,10 +176,12 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// Used to calculate the movement of the camera
 	/// </summary>
 	private void OnMouse() {
-		transform.position = new Vector3(
-			this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x) * -0.1f),
-			this.onMouseDownCameraPosition.y,
-			this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y) * -0.1f));
+	    float x = this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x)*-0.1f);
+	    float y = this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y)*-0.1f);
+
+	    Vector3 newPos = new Vector3(x*this.transform.position.normalized.x, this.onMouseDownCameraPosition.y, y);
+
+	    transform.position = newPos;
 	}
 
 	/// <summary>
@@ -211,6 +229,10 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 
         Gizmos.DrawWireCube(center, size);
         Gizmos.DrawWireCube(this.transform.position, new Vector3(6,6,6));
+
+        // draw scroll around point
+        Gizmos.color = Color.white;
+        Gizmos.DrawSphere(this.transform.position + this.transform.TransformDirection(Vector3.forward) * this.ScrollPointDistance, 5);
 
         // draw the rays for each of the sides
         // TODO

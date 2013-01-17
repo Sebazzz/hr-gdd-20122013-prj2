@@ -28,25 +28,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
-        // execute object specific behaviour
-        // ... electric fence
-        if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            this.audioController.ElectricFenceTouchSound.Play();
-            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
-        }
-
-        // ... fire
-        if (causeOfDeath.name.IndexOf("fire", StringComparison.InvariantCultureIgnoreCase) != -1 ||
-            causeOfDeath.name.IndexOf("flame", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
-        }
-
-        // ... hole
-        if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            this.audioController.FallInHoleSound.Play();
-            DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
-        }
-
         LevelBehaviour.Instance.OnSheepDeath();
         Destroy(this.gameObject);
     }
@@ -54,6 +35,25 @@ public class SheepDeathBehaviour : CanDieBehaviour {
     protected override void OnStartDying (GameObject causeOfDeath) {
         if (causeOfDeath.layer != Layers.Water && causeOfDeath.tag != Tags.Enemy) {
             this.ExecuteDirectDeath();
+
+            // execute object specific behaviour
+            // ... electric fence
+            if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                this.audioController.ElectricFenceTouchSound.Play();
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+            }
+
+            // ... fire
+            if (causeOfDeath.name.IndexOf("fire", StringComparison.InvariantCultureIgnoreCase) != -1 ||
+                causeOfDeath.name.IndexOf("flame", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
+            }
+
+            // ... hole
+            if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                this.audioController.FallInHoleSound.Play();
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
+            }
         } else {
             // execute water behaviour
             if (causeOfDeath.layer == Layers.Water) {
@@ -69,7 +69,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             // execute enemy behaviour
             if (causeOfDeath.tag == Tags.Enemy) {
                  this.audioController.KilledSound.Play();
-                DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
+                 DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
             }
         }
 
