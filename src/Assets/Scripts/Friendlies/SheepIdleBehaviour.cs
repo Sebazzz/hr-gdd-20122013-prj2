@@ -15,8 +15,7 @@ public class SheepIdleBehaviour : MonoBehaviour {
 	private float minDistance;
 	private float maxDistance;
 
-    private float lastBlaatTime = 0;
-    private float blaatTime = 0;
+    private Timer blaatTimer;
 
     void Awake() {
         this.audioController = this.GetComponent<SheepAudioController>();
@@ -31,27 +30,25 @@ public class SheepIdleBehaviour : MonoBehaviour {
 
 		if(sheepState == SheepState.inactive)rigidbody.isKinematic = true;
 
-        lastBlaatTime = Time.time;
-        blaatTime = Random.Range(MinBlaatFrequency, MaxBlaatFrequency);
+        blaatTimer = new Timer(Random.Range(MinBlaatFrequency, MaxBlaatFrequency));
 	}
 	
 	/// <summary>
 	/// Update is called once per frame
 	/// </summary>
 	private void Update () {
+        Vector3 positionInSight = Camera.mainCamera.WorldToViewportPoint(transform.position);
 
-        if (sheepState == SheepState.active) {
-            if (Time.time - lastBlaatTime >= blaatTime && this.IsInCameraView()) {
-                this.audioController.IdleSound.Play();
-
-                blaatTime = Random.Range(MinBlaatFrequency, MaxBlaatFrequency);
-                lastBlaatTime = Time.time;
+        if (sheepState == SheepState.active && ((positionInSight.x >= minDistance && positionInSight.x <= maxDistance && positionInSight.y >= minDistance && positionInSight.y <= maxDistance))) {
+            blaatTimer.Update();
+            if (blaatTimer.IsTriggered) {
+                audioController.IdleSound.Play();
+                blaatTimer = new Timer(Random.Range(MinBlaatFrequency, MaxBlaatFrequency));
             }
         }
 		
 		if (sheepState == SheepState.inactive) {
 			transform.LookAt(new Vector3(Camera.mainCamera.transform.position.x, transform.position.y, Camera.mainCamera.transform.position.z));
-			Vector3 positionInSight = Camera.mainCamera.WorldToViewportPoint(transform.position);
 			if (positionInSight.x >= minDistance && positionInSight.x <= maxDistance &&
 				positionInSight.y >= minDistance && positionInSight.y <= maxDistance) {
 				sheepState = SheepState.active;
