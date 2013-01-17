@@ -16,7 +16,8 @@ public class ApplyPhysicsBehaviour : MonoBehaviour {
 	void Start () {
 	    // Set textures
         textures.Add(0, new PhysicsProperties("GrassPhysics"));
-        textures.Add(1, new PhysicsProperties("IcePhysics" , 0));
+        textures.Add(1, new PhysicsProperties("IcePhysics", 0));
+        textures.Add(2, new PhysicsProperties("SnowPhysics", 0.5f));
 	}
 	
 	void FixedUpdate () {
