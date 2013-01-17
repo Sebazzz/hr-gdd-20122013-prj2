@@ -133,7 +133,7 @@ public class LevelBehaviour : MonoBehaviour {
     public void OnSheepDeath() {
         // check if all other sheep are dead
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
-
+        Debug.Log("Sheep killed, left: " + sheep.Length);
         if (sheep.Length - 1 == 0 && this.minimumNumberOfSheepToCollect > 0) {
             // since there are sheep left to collect and no sheep are alive, we're game over
             this.OnGameOver();
