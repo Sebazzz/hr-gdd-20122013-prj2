@@ -176,12 +176,27 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// Used to calculate the movement of the camera
 	/// </summary>
 	private void OnMouse() {
-	    float x = this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x)*-0.1f);
-	    float y = this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y)*-0.1f);
+		//float x = this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x)*-0.1f);
+		//float y = this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y)*-0.1f);
 
-	    Vector3 newPos = new Vector3(x, this.onMouseDownCameraPosition.y, y);
+		//Vector3 newPos = new Vector3(x, this.onMouseDownCameraPosition.y, y);
 
-	    transform.position = newPos;
+		//transform.position = newPos;
+		
+		//transform.position = new Vector3(
+		//    this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x) * -0.1f),
+		//    this.onMouseDownCameraPosition.y,
+		//    this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y) * -0.1f));
+
+		
+		Vector3 v = new Vector3(
+			this.onMouseDownCameraPosition.x + ((Input.mousePosition.x - this.onMouseDownCursorPoint.x) * -0.1f),
+			this.onMouseDownCameraPosition.y,
+			this.onMouseDownCameraPosition.z + ((Input.mousePosition.y - this.onMouseDownCursorPoint.y) * -0.1f));
+
+		v = Quaternion.AngleAxis(transform.rotation.y, Vector3.up) * v;
+		transform.position = v;
+
 	}
 
 	/// <summary>
