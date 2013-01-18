@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 
 /// <summary>
@@ -29,7 +30,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
         Debug.Log("KILLL2" + causeOfDeath.name);
-        Destroy(this.gameObject);
+        Object.Destroy(this.gameObject);
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
@@ -87,7 +88,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             causeOfDeath.tag != Tags.Trap) {
             return false;
         }
-
+		Debug.Log("CanDie? " + causeOfDeath.name);
         return true;
     }
 }
