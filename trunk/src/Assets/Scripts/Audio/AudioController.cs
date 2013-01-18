@@ -45,7 +45,6 @@ public abstract class AudioController : MonoBehaviour {
 
         // initialize each audio effect
         FieldInfo[] fields = this.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
-        int numberOfEffectsFound = 0;
         foreach (FieldInfo fieldInfo in fields) {
             // filter on 'AudioClip' 
             if (!fieldInfo.FieldType.IsAssignableFrom(typeof (AudioEffectConfiguration))) {
@@ -70,17 +69,22 @@ public abstract class AudioController : MonoBehaviour {
                 try {
                     effectConfiguration.SelfValidate();
                 } catch(UnityException ex) {
-                    throw new UnityException("One of the AudioEffectConfiguration objects was incorrectly configured: "+ fieldInfo.Name, ex);
+                    Debug.LogWarning(
+                        String.Format("One of the AudioEffectConfiguration objects was incorrectly configured: {0}{1}{2}", 
+                                      fieldInfo.Name, Environment.NewLine, ex));
                 }
             }
 
-            numberOfEffectsFound++;
         }
-
-        //Debug.Log("Found "+numberOfEffectsFound+" audio effects");
     }
 
     private void Play(AudioEffectConfiguration audioEffectConfiguration) {
+        // check if the sound effect can play
+        if (audioEffectConfiguration.SoundEffect.Length == 0) {
+            Debug.LogWarning("No sound clips found in a Sound Effect. Object: "+ this.gameObject.name);
+            return;
+        }
+
         // find an available audio channel
         AudioSource availableChannel = null;
 

@@ -77,7 +77,7 @@ public class SheepBarnTouchBehaviour : MonoBehaviour {
 
         bool isSheep = collidingObjectTag == Tags.Sheep;
 
-        bool shouldProcessDogs = LevelBehaviour.Instance.MinimumNumberOfSheepLeft <= 0;
+        bool shouldProcessDogs = LevelBehaviour.Instance.CanLevelBeCompleted;
         bool isDog = collidingObjectTag == Tags.Shepherd;
 
         if (isSheep || (shouldProcessDogs && isDog)) {

@@ -29,12 +29,11 @@ public class SheepDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
-        Debug.Log("KILLL2 " + causeOfDeath.name);
         Object.Destroy(this.gameObject);
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
-        if (causeOfDeath.layer != Layers.Water && causeOfDeath.tag != Tags.Enemy) {
+        if (causeOfDeath.layer != Layers.Water) {
             this.ExecuteDirectDeath();
 
             // execute object specific behaviour
@@ -55,6 +54,13 @@ public class SheepDeathBehaviour : CanDieBehaviour {
                 this.audioController.FallInHoleSound.Play();
                 DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
             }
+
+
+            // execute enemy behaviour
+            if (causeOfDeath.tag == Tags.Enemy) {
+                this.audioController.KilledSound.Play();
+                DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
+            }
         } else {
             // execute water behaviour
             if (causeOfDeath.layer == Layers.Water) {
@@ -67,11 +73,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
                 }
             }
 
-            // execute enemy behaviour
-            if (causeOfDeath.tag == Tags.Enemy) {
-                 this.audioController.KilledSound.Play();
-                 DeathEffects.EnemyTouchDeadEffect.Execute(this.gameObject, causeOfDeath, this.WolfDeathEffect);
-            }
         }
 
         if (this.DisableScriptsWhenDying) {
