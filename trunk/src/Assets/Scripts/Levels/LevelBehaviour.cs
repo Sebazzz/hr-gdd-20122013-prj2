@@ -9,6 +9,8 @@ using System.Collections;
 /// This script should be executed as last.
 /// </remarks>
 public class LevelBehaviour : MonoBehaviour {
+    private WorldAudioController audioController;
+
     private int minimumNumberOfSheepToCollect;
     private int numberOfDogs;
     private int numberOfSheep;
@@ -57,6 +59,8 @@ public class LevelBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        this.audioController = this.GetComponent<WorldAudioController>();
+
 	    this.minimumNumberOfSheepToCollect = this.NumberOfSheepToCollect;
 
 	    // sanity check
@@ -171,11 +175,13 @@ public class LevelBehaviour : MonoBehaviour {
 
     private void OnLevelCompleted() {
         // TODO: show level end
-        Application.LoadLevel(Scenes.MainMenu); // restart level
+        this.audioController.GameWonSound.Play();
+        Application.LoadLevel(Scenes.MainMenu); // Go to main menu
     }
 
     private void OnGameOver() {
         // TODO: show level failure end
+        this.audioController.GameLostSound.Play();
         Application.LoadLevel(Application.loadedLevel); // restart level
     }
 
