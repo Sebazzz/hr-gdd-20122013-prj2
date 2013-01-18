@@ -47,5 +47,37 @@ static class Levels{
 
         throw new Exception("Level with name: " + name + " does not exist.");
     }
+
+    /// <summary>
+    /// Gets the level after the level that has been supplied
+    /// </summary>
+    /// <param name="current">The level from which the next one should be found</param>
+    /// <returns>The next level. Smaakt naar gravel. Will return Level.none if there is no next level.</returns>
+    public static Level GetNextLevel(Level current) {
+        Boolean foundCurrent = false;
+        for (int countryIterator = 0; countryIterator < Countries.Length; countryIterator++) {
+            for (int levelIterator = 0; levelIterator < Countries[countryIterator].Levels.Length; levelIterator++) {
+                // Gets the current level from the iteration
+                Level level = Countries[countryIterator].Levels[levelIterator];
+
+                // If foundCurrent is true we found it one iteration ago, and we can safely return this one
+                if (foundCurrent) {
+                    return level;
+                }
+
+                // If the current one is the one we are looking for, set foundCurrent
+                if (current == level) {
+                    foundCurrent = true;
+                }
+            }
+        }
+
+        // If foundCurrent is true, but we came here, we reached the end and the player won the last level.
+        if (foundCurrent) {
+            return Level.None;
+        }
+
+        throw new Exception("Level does not exist.");
+    }
 }
 
