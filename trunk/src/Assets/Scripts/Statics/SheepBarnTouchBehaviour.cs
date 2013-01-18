@@ -83,6 +83,12 @@ public class SheepBarnTouchBehaviour : MonoBehaviour {
         if (isSheep || (shouldProcessDogs && isDog)) {
             this.OnObjectCollision(gameObjectToCheck);
         }
+
+        if ((shouldProcessDogs && isDog)) {
+            // disable dog specific scripts
+            gameObjectToCheck.GetComponent<HerderLoopBehaviour>().CancelWalk();
+            gameObjectToCheck.GetComponent<ControlHerderBehaviour>().enabled = false;
+        }
     }
 
     protected void OnObjectCollision(GameObject collidingObject) {

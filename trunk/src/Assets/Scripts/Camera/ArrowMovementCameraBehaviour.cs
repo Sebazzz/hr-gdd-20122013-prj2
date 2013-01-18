@@ -155,12 +155,9 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 
         // execute rotation
         float rotationSpeed = yAxis*this.ScrollSensitivity;
-        //Vector3 point = terrainPositionHit.point;
 
         // calculate the right axis based on the current X rotation
         this.transform.RotateAround(point, this.transform.TransformDirection(Vector3.right), rotationSpeed);
-
-        // TODO/FIXME: when MinimumAngle is set to a low level and camera is front of a cliff we get strange results
     }
 
     /// <summary>
