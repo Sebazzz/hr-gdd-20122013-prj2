@@ -29,7 +29,7 @@ public class SheepDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnExecuteDeath (GameObject causeOfDeath) {
-        Debug.Log("KILLL2" + causeOfDeath.name);
+        Debug.Log("KILLL2 " + causeOfDeath.name);
         Object.Destroy(this.gameObject);
     }
 

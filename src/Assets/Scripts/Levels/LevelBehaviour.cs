@@ -175,7 +175,13 @@ public class LevelBehaviour : MonoBehaviour {
 
     private void OnLevelCompleted() {
         // TODO: show level end
-        this.audioController.GameWonSound.Play();
+        // Save level state
+        Level current = Levels.GetLevelByName(Application.loadedLevelName);
+        current.SetFinished();
+        // Unlock new level
+        Levels.GetNextLevel(current).Unlock();
+
+        //this.audioController.GameWonSound.Play();
         Application.LoadLevel(Scenes.MainMenu); // Go to main menu
     }
 
