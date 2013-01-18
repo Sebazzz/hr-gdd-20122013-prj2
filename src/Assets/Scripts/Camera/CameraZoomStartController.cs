@@ -8,8 +8,13 @@ using UnityEngine;
 [RequireComponent(typeof(ArrowMovementCameraBehaviour))]
 class CameraZoomStartController : MonoBehaviour {
     private MonoBehaviour cameraControllerScript;
+
+    private Vector3 startPoint;
+    private Quaternion startRot;
     private Vector3 targetCameraPosition;
     private Quaternion targetCameraRotation;
+
+    private float startTime;
 
     /// <summary>
     /// Specifies the zoom start camera position
@@ -29,19 +34,23 @@ class CameraZoomStartController : MonoBehaviour {
     /// <summary>
     /// Specifies the speed used for zooming in to the correct camera position
     /// </summary>
-    public float ZoomSpeed = 1;
+    public float ZoomTime = 5;
 
     /// <summary>
     /// Specifies the speed used for zooming in to the correct camera rotation
     /// </summary>
-    public float RotateSpeed = 1;
+    public float RotateTime = 5;
 
-
-    void Start() {
-        // get the start state
+    void Awake() {
+        // disable camera script
         this.cameraControllerScript = this.GetComponent<ArrowMovementCameraBehaviour>();
         this.cameraControllerScript.enabled = false;
+    }
 
+    void Start() {
+        this.startTime = Time.time;
+
+        // get start rotation/position
         this.targetCameraPosition = this.transform.position;
         this.targetCameraRotation = this.transform.rotation;
 
@@ -52,32 +61,27 @@ class CameraZoomStartController : MonoBehaviour {
             this.transform.position = this.StartCameraPosition;
         }
         this.transform.rotation = Quaternion.Euler(this.StartCameraRotation);
+
+        this.startPoint = this.transform.position;
+        this.startRot = this.transform.rotation;
     }
 
 
     void Update() {
+        float timeDiff = Time.time - startTime;
+
         // smoothly set the new rotation
-        float rotationSpeed = this.RotateSpeed * Time.deltaTime;
-        Quaternion newRotation = Quaternion.Slerp(this.transform.rotation, this.targetCameraRotation, rotationSpeed);
+        Quaternion newRotation = Quaternion.Slerp(this.startRot, this.targetCameraRotation, timeDiff / this.RotateTime);
         this.transform.rotation = newRotation;
 
         // smoothly set the new position
-        float zoomSpeed = this.ZoomSpeed * Time.deltaTime;
-        Vector3 newPosition = Vector3.Lerp(this.transform.position, this.targetCameraPosition, zoomSpeed);
-
-        // ... if the distance for the rotation is too small, we speed it up a little bit because it takes too long otherwise
-        float diffDistance = Vector3.Distance(newPosition, this.transform.position);
-        if (diffDistance < 0.5f) {
-            newPosition = Vector3.Slerp(this.transform.position, this.targetCameraPosition, (1f / diffDistance) * 0.5f * zoomSpeed);
-        }
+        Vector3 newPosition = Vector3.Lerp(this.startPoint, this.targetCameraPosition, timeDiff / this.ZoomTime);
         this.transform.position = newPosition;
-
-        //this.transform.position = Vector3.MoveTowards(this.transform.position, this.targetCameraPosition, this.ZoomSpeed);
 
         // check if we're reached the position, and then enable control scripts
         bool positionReached = Vector3.Distance(this.transform.position, this.targetCameraPosition) < 1f;
-        bool rotationReached = Quaternion.Angle(this.transform.rotation, this.targetCameraRotation) < 2f;
-        
+        bool rotationReached = Quaternion.Angle(this.transform.rotation, this.targetCameraRotation) < 0.25f;
+
         if (positionReached && rotationReached) {
             this.cameraControllerScript.enabled = true;
             this.enabled = false;
