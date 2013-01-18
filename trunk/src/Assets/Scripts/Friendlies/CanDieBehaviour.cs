@@ -24,7 +24,7 @@ public abstract class CanDieBehaviour : MonoBehaviour {
     /// Don't call this directly, use <see cref="ExecuteDirectDeath"/>
     /// </summary>
     /// <param name="causeOfDeath"></param>
-    protected abstract void OnExecuteDeath(GameObject causeOfDeath);
+    protected virtual void OnExecuteDeath(GameObject causeOfDeath) {}
 
     /// <summary>
     /// Returns a value indicating if the object can die with the game object specified
