@@ -193,8 +193,6 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 			this.onMouseDownCameraPosition.z + v.z);
 
 		transform.position = v;
-
-		Debug.Log(transform.position);
 	}
 
 	/// <summary>

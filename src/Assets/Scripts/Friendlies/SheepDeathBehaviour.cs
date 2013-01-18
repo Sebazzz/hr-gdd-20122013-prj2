@@ -88,7 +88,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
             causeOfDeath.tag != Tags.Trap) {
             return false;
         }
-		Debug.Log("CanDie? " + causeOfDeath.name);
         return true;
     }
 }

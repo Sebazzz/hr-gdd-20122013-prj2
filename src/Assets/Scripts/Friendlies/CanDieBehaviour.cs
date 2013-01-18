@@ -133,15 +133,13 @@ public abstract class CanDieBehaviour : MonoBehaviour {
             return;
         }
 
-        KillDelay -= Time.deltaTime;
+        this.KillDelay -= Time.deltaTime;
 
-        if (KillDelay < 0) {
-            KillDelay = -1000;
-            Debug.Log("KILLL1" + this.currentCauseOfDeath.name);
+        if (this.KillDelay < 0) {
             this.OnExecuteDeath(this.currentCauseOfDeath);
-            Debug.Log("KILLL3" + this.currentCauseOfDeath.name);
-            this.currentCauseOfDeath = null;
 			
+            this.KillDelay = -1000;
+            this.currentCauseOfDeath = null;
         }
     }
 

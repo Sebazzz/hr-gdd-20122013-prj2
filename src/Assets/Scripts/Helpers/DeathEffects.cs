@@ -141,8 +141,8 @@ public static class DeathEffects {
                 if (beh2 != null) {
                     beh2.enabled = true;
                 }
-                Object.Destroy(context);
-                                             };
+              
+           };
 
             DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
         }
