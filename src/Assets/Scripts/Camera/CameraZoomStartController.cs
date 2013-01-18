@@ -42,12 +42,11 @@ class CameraZoomStartController : MonoBehaviour {
     public float RotateTime = 5;
 
     void Awake() {
-        // disable camera script
         this.cameraControllerScript = this.GetComponent<ArrowMovementCameraBehaviour>();
-        this.cameraControllerScript.enabled = false;
     }
 
     void Start() {
+        this.cameraControllerScript.enabled = false;
         this.startTime = Time.time;
 
         // get start rotation/position
