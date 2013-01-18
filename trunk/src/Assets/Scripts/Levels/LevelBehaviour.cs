@@ -69,7 +69,7 @@ public class LevelBehaviour : MonoBehaviour {
         HUD.Instance.setCollected(this.sheepCounter.CurrentSafeCount);
         HUD.Instance.setMaxCollected(this.sheepCounter.CurrentCount);
 
-        Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.dogCounter.StartCount, this.sheepCounter.CurrentCount, this.sheepCounter.MinimumSafeCount));
+        Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.dogCounter.StartCount,        this.sheepCounter.CurrentCount, this.sheepCounter.MinimumSafeCount));
 	}
 
 
@@ -119,7 +119,7 @@ public class LevelBehaviour : MonoBehaviour {
         HUD.Instance.setMaxCollected(this.sheepCounter.CurrentCount);
 
         // check if all other sheep are dead
-        if (this.sheepCounter.CurrentCount == 0 && this.sheepCounter.CurrentSafeCount < this.sheepCounter.MinimumSafeCount) {
+        if (this.sheepCounter.CurrentSafeCount + this.sheepCounter.CurrentCount < this.sheepCounter.MinimumSafeCount) {
             // since there are sheep left to collect and no sheep are alive, we're game over
             this.OnGameOver();
         }
@@ -133,7 +133,7 @@ public class LevelBehaviour : MonoBehaviour {
         // Unlock new level
         Levels.GetNextLevel(current).Unlock();
 
-        //this.audioController.GameWonSound.Play();
+        this.audioController.GameWonSound.Play();
         Application.LoadLevel(Scenes.MainMenu); // Go to main menu
     }
 
