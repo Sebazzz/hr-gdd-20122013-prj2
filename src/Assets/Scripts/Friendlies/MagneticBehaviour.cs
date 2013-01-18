@@ -36,7 +36,7 @@ public sealed class MagneticBehaviour : MonoBehaviour {
     public bool Perform2DInnerRadiusCheck = true;
 
 
-    void FixedUpdate() {
+    void Update() {
         Collider[] collidersInRadius = Physics.OverlapSphere(this.transform.position, this.Radius, Layers.Default);
 
         // process each collider that meet the condition
