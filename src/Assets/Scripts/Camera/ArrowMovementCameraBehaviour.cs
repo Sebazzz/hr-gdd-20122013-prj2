@@ -115,9 +115,12 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
                 KeyCode code = controlPair.Key;
 
                 if (Input.GetKey(code)) {
-                    Vector3 movementSpeed = controlPair.Value * this.MovementSpeed;
+					//Vector3 movementSpeed = controlPair.Value * this.MovementSpeed;
 
-                    this.transform.Translate(movementSpeed, Space.World);
+					Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
+					movementSpeed = movementSpeed * this.MovementSpeed;
+                    
+					this.transform.Translate(movementSpeed, Space.World);
                 }
             }
         }
