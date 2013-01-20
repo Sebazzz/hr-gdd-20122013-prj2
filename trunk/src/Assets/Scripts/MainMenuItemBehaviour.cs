@@ -4,6 +4,7 @@ using System.Collections;
 public class MainMenuItemBehaviour : MonoBehaviour {
 
 	public MainMenuManager.MenuIndex TargetIndex;
+	public MainMenuManager.Worlds TargetWorld;
 	public GameObject SceneManager;
 
 	// Use this for initialization
@@ -20,5 +21,6 @@ public class MainMenuItemBehaviour : MonoBehaviour {
 		MainMenuManager manager;
 		manager = SceneManager.GetComponent("MainMenuManager") as MainMenuManager;
 		manager.SetMenuIndex(TargetIndex);
+		manager.SetSelectedWorld(TargetWorld);
 	}
 }

@@ -5,18 +5,39 @@ using System.Text;
 
 static class Levels{
     // Create an array of Levels for one country. 
-    public static Level[] PlayCountry = {
+    public static Level[] Scotland = {
                                             new Level("Playground"),
                                             new Level("Scotland_lvl1"),
                                             new Level("Scotland_lvl2"),
                                             new Level("Scotland_lvl3"),
                                             new Level("Scotland_lvl4")
                                         };
+
+	public static Level[] Holland = {
+											new Level("Holland_lvl1"),
+											new Level("Holland_lvl2"),
+											new Level("Holland_lvl3"),
+											new Level("Holland_lvl4")
+										};
+
+	public static Level[] Canada = {
+										   new Level("Level1"),
+										   new Level("Level2"),
+										   new Level("Level3"),
+										   new Level("Level4")
+										};
+
+	public static Level[] Australia = {
+											new Level("Australia_lvl1"),
+											new Level("Australia_lvl2"),
+											new Level("Australia_lvl3"),
+											new Level("Australia_lvl4")
+										};
     //Example of another country:
     //public static Level[] anotherCountry = { new Level("Cheese"), new Level("Bacon") };
 
     // Add levelarray to countries to add a country
-    public static Country[] Countries = { new Country(PlayCountry) };
+    public static Country[] Countries = { new Country(Scotland), new Country(Holland), new Country(Canada), new Country(Australia) };
     
     /// <summary>
     /// Get the current level
