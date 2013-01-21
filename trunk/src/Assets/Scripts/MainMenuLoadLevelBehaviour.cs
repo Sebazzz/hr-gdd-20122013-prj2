@@ -30,10 +30,11 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 
 	void OnMouseUpAsButton() {
 
+       
 		//Debug.Log(Levels.GetLevelByName(this.LevelName).GetState());
 
 		if (Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) return;
 		
-		Application.LoadLevel(Levels.GetLevelByName(this.LevelName).Name);
+		 AsyncSceneLoader.Load(Levels.GetLevelByName(this.LevelName).Name);
 	}
 }

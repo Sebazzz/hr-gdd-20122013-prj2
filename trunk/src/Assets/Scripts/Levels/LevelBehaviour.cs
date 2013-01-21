@@ -114,7 +114,7 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public void OnDogBarnEntered() {
         // sanity check
-        if (this.sheepCounter.CurrentSafeCount > this.sheepCounter.MinimumSafeCount) {
+        if (this.sheepCounter.CurrentSafeCount >= this.sheepCounter.MinimumSafeCount) {
             throw new Exception("Still sheep left.. programming error?");
         }
 
@@ -165,7 +165,7 @@ public class LevelBehaviour : MonoBehaviour {
 
         yield return new WaitForSeconds(5f);
 
-        Application.LoadLevel(Scenes.MainMenu); // Go to main menu
+        AsyncSceneLoader.Load(Scenes.MainMenu);
 
         yield break;
     }
@@ -176,7 +176,8 @@ public class LevelBehaviour : MonoBehaviour {
 
         yield return new WaitForSeconds(5f);
 
-        Application.LoadLevel(Application.loadedLevel); // restart level
+        AsyncSceneLoader.Load(Application.loadedLevelName);
+
         yield break;
     }
 

@@ -79,6 +79,10 @@ public abstract class AudioController : MonoBehaviour {
     }
 
     private void Play(AudioEffectConfiguration audioEffectConfiguration) {
+        if (this.enabled == false) {
+            return;
+        }
+
         // check if the sound effect can play
         if (audioEffectConfiguration.SoundEffect.Length == 0) {
             Debug.LogWarning("No sound clips found in a Sound Effect. Object: "+ this.gameObject.name);

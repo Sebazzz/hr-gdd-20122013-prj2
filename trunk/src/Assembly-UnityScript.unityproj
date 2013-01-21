@@ -45,9 +45,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Camera_movement.js" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
+     <None Include="Assets\Resources\CloudsToy Shaders\CloudRealistic.shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Resources\CloudsToy Shaders\CloudBright.shader" />
      <None Include="Assets\Standard Assets\Water (Basic)\Sources\Shaders\FX-Water Simple.shader" />
+     <None Include="Assets\Volumetric Clouds\Instructions.txt" />
+ <Reference Include="CloudsToy">
+ <HintPath>Assets\Volumetric Clouds\DLL\CloudsToy.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
