@@ -114,7 +114,7 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public void OnDogBarnEntered() {
         // sanity check
-        if (this.sheepCounter.CurrentSafeCount >= this.sheepCounter.MinimumSafeCount) {
+        if (this.sheepCounter.CurrentSafeCount < this.sheepCounter.MinimumSafeCount) {
             throw new Exception("Still sheep left.. programming error?");
         }
 

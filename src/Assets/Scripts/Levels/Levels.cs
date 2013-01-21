@@ -6,7 +6,6 @@ using System.Text;
 static class Levels{
     // Create an array of Levels for one country. 
     public static Level[] Scotland = {
-                                            new Level("Playground"),
                                             new Level("Scotland_lvl1"),
                                             new Level("Scotland_lvl2"),
                                             new Level("Scotland_lvl3"),
