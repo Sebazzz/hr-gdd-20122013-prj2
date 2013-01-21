@@ -24,7 +24,32 @@ public class MainMenuManager : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	private void Start () {
-	
+
+		switch (MainMenuReturnToLevelSelectBehaviour.selectedWorld) {
+			case MainMenuReturnToLevelSelectBehaviour.SelectedWorld.None:
+				SetMenuIndex(MenuIndex.TitleScreen);
+				SetSelectedWorld(Worlds.None);
+				break;
+			case MainMenuReturnToLevelSelectBehaviour.SelectedWorld.Scotland:
+				SetMenuIndex(MenuIndex.LevelSelect);
+				SetSelectedWorld(Worlds.Scotland);
+				break;
+			case MainMenuReturnToLevelSelectBehaviour.SelectedWorld.Holland:
+				SetMenuIndex(MenuIndex.LevelSelect);
+				SetSelectedWorld(Worlds.Netherlands);
+				break;
+			case MainMenuReturnToLevelSelectBehaviour.SelectedWorld.Canada:
+				SetMenuIndex(MenuIndex.LevelSelect);
+				SetSelectedWorld(Worlds.Canada);
+				break;
+			case MainMenuReturnToLevelSelectBehaviour.SelectedWorld.Australia:
+				SetMenuIndex(MenuIndex.LevelSelect);
+				SetSelectedWorld(Worlds.Australia);
+				break;
+		}
+
+		camera.transform.rotation = Quaternion.Euler(0f, cameraRotation, 0f);
+		camera.transform.position = new Vector3(camera.transform.position.x, cameraYPosition, camera.transform.position.z);
 	}
 	
 	/// <summary>
