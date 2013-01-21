@@ -3,18 +3,37 @@ using System.Collections;
 
 public class MainMenuLoadLevelBehaviour : MonoBehaviour {
     public string LevelName = "Playground";
+	public Material levelUnlocked;
+	public Material levelLocked;
+	public MeshRenderer planeMesh;
 
 	// Use this for initialization
 	void Start () {
-	
+		//PlayerPrefs.DeleteAll();
+
+		//Levels.GetLevelByName("Scotland_lvl1").SetFinished();
+		//Levels.GetLevelByName("Scotland_lvl2").SetFinished();
+		//Levels.GetLevelByName("Scotland_lvl3").SetFinished();
+		//Levels.GetLevelByName("Scotland_lvl4").Unlock();
+
+		if (LevelName == "Scotland_lvl1" && Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) {
+			Levels.GetLevelByName(this.LevelName).Unlock();
+		}
+
+		if (Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) planeMesh.material = levelLocked;
+		else planeMesh.material = levelUnlocked;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
 	void OnMouseUpAsButton() {
+
+		//Debug.Log(Levels.GetLevelByName(this.LevelName).GetState());
+
+		if (Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) return;
+		
 		Application.LoadLevel(Levels.GetLevelByName(this.LevelName).Name);
 	}
 }

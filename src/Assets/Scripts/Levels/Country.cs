@@ -20,7 +20,7 @@ public class Country {
     /// </summary>
     /// <returns>True if completed, false if not</returns>
     public bool HasBeenCompleted() {
-        return (this.Levels[this.Levels.Length].GetState() == Level.LevelStatus.Unlocked);
+        return (this.Levels[this.Levels.Length-1].GetState() == Level.LevelStatus.Done);
     }
 
     /// <summary>
