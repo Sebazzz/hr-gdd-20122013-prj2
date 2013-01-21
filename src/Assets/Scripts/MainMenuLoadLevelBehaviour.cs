@@ -29,7 +29,9 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton() {
-
+        if (Debug.isDebugBuild && Input.GetKey(KeyCode.RightShift)) {
+            Levels.GetLevelByName(this.LevelName).Unlock();
+        }
        
 		//Debug.Log(Levels.GetLevelByName(this.LevelName).GetState());
 
