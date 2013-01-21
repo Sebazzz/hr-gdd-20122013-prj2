@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class Level {
     #region LevelStatus enum
@@ -11,7 +12,18 @@ public class Level {
 
     #endregion
 
+    [Flags]
+    public enum Score {
+        None = 0,
+        MinSheep = 1,
+        MaxSheep = 2,
+        MaxSheepWithinTime = 4
+    }
+
+    private Score score = Score.None;
+
     private const string SettingsLockStateKey = "_lockstate";
+    private const string SettingsScoresKey = "_scores";
     public static Level None = new Level("None");
 
     /// <summary>
@@ -30,6 +42,28 @@ public class Level {
     /// <returns>One of the static state variables</returns>
     public LevelStatus GetState() {
         return (LevelStatus) PlayerPrefs.GetInt(this.Name + SettingsLockStateKey, (int) LevelStatus.Locked);
+    }
+
+    /// <summary>
+    /// Adds one of the score flags
+    /// </summary>
+    /// <param name="score">Flag</param>
+    public void AddScoreFlag(Score score) {
+        Score s = GetScore();
+        s |= score;
+        PlayerPrefs.SetInt(this.Name + SettingsScoresKey, (int)s);
+    }
+
+    public Boolean HasFlag(Score flag) {
+        return ((GetScore() & flag) != 0);
+    }
+
+    /// <summary>
+    /// Gets the full score. For simple tests, use HasFlag for boolean
+    /// </summary>
+    /// <returns>Score</returns>
+    public Score GetScore() {
+        return (Score)PlayerPrefs.GetInt(this.Name + SettingsScoresKey, (int)Score.None);
     }
 
     /// <summary>
