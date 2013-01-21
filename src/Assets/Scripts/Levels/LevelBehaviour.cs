@@ -30,6 +30,10 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public float GlobalSoundVolume = 1f;
 
+    void Awake() {
+        this.OnLevelWasLoaded(Application.loadedLevel);
+    }
+
 
 	// Use this for initialization
 	void Start () {
@@ -95,7 +99,7 @@ public class LevelBehaviour : MonoBehaviour {
 
         if (this.dogCounter.CurrentCount == 0) {
             // since no dogs can be used anymore, the level is over
-            this.OnGameOver();
+            this.StartCoroutine(this.OnGameOver());
         }
     }
 
@@ -108,7 +112,7 @@ public class LevelBehaviour : MonoBehaviour {
             throw new Exception("Still sheep left.. programming error?");
         }
 
-        this.OnLevelCompleted();
+        this.StartCoroutine(this.OnLevelCompleted());
     }
 
     /// <summary>
@@ -121,11 +125,11 @@ public class LevelBehaviour : MonoBehaviour {
         // check if all other sheep are dead
         if (this.sheepCounter.CurrentSafeCount + this.sheepCounter.CurrentCount < this.sheepCounter.MinimumSafeCount) {
             // since there are sheep left to collect and no sheep are alive, we're game over
-            this.OnGameOver();
+            this.StartCoroutine(this.OnGameOver());
         }
     }
 
-    private void OnLevelCompleted() {
+    private IEnumerator OnLevelCompleted() {
         // TODO: show level end
         // Save level state
         Level current = Levels.GetLevelByName(Application.loadedLevelName);
@@ -134,13 +138,22 @@ public class LevelBehaviour : MonoBehaviour {
         Levels.GetNextLevel(current).Unlock();
 
         this.audioController.GameWonSound.Play();
+
+        yield return new WaitForSeconds(5f);
+
         Application.LoadLevel(Scenes.MainMenu); // Go to main menu
+
+        yield break;
     }
 
-    private void OnGameOver() {
+    private IEnumerator OnGameOver() {
         // TODO: show level failure end
         this.audioController.GameLostSound.Play();
+
+        yield return new WaitForSeconds(5f);
+
         Application.LoadLevel(Application.loadedLevel); // restart level
+        yield break;
     }
 
 
