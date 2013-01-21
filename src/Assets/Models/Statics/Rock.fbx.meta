@@ -7,22 +7,34 @@ ModelImporter:
     100002: pCube3
     100004: pPyramid1
     100006: //RootNode
+    100008: polySurface1
+    100010: transform1
+    100012: transform2
+    100014: transform3
     400000: pCube2
     400002: pCube3
     400004: pPyramid1
     400006: //RootNode
+    400008: polySurface1
+    400010: transform1
+    400012: transform2
+    400014: transform3
     2300000: pCube2
     2300002: pCube3
     2300004: pPyramid1
+    2300006: polySurface1
     3300000: pCube2
     3300002: pCube3
     3300004: pPyramid1
+    3300006: polySurface1
     4300000: pPyramid1
     4300002: pCube2
     4300004: pCube3
+    4300006: polySurface1
     6400000: pCube2
     6400002: pCube3
     6400004: pPyramid1
+    6400006: polySurface1
     9500000: //RootNode
   materials:
     importMaterials: 1
