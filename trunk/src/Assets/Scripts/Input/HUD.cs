@@ -3,9 +3,9 @@ using System.Collections;
 using System;
 
 public class HUD : MonoBehaviour {
+
     // Skin data
     public GUISkin skin;
-
 
     private bool showDialog = false; // Is set to true once a dialog is shown
     private Rect dialogRect;
@@ -47,7 +47,7 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        setTime(Time.timeSinceLevelLoad);
+        setTime(this.time-Time.deltaTime);
 	}
 
     void OnGUI() {
@@ -126,7 +126,7 @@ public class HUD : MonoBehaviour {
 
     private void drawTopBar() {
         GUI.DrawTexture(new Rect(pixelsFromLeft(20), 20, 115, 59), timeTexture, ScaleMode.StretchToFill, true, 0);
-        GUI.Label(new Rect(pixelsFromLeft(70), 35, 100, 40), getTime(), skin.label);
+        GUI.Label(new Rect(pixelsFromLeft(70), 35, 100, 40), getTime(), time > 0 ? skin.label : skin.GetStyle("LabelRedTime"));
 
         GUI.DrawTexture(new Rect(pixelsFromLeft(155), 20, 145, 59), goalTexture, ScaleMode.StretchToFill, true, 0);
         GUI.Label(new Rect(pixelsFromLeft(246), 35, 10, 30), getGoal(), skin.GetStyle("LabelWhite"));
@@ -150,6 +150,10 @@ public class HUD : MonoBehaviour {
     }
 
     private string getTime(){
+        if (time <= 0) {
+            return "xx:xx";
+        }
+
         string minutes = Math.Floor(time / 60).ToString("00");
         string seconds = Math.Floor(time % 60).ToString("00");
         return minutes + ":" + seconds;

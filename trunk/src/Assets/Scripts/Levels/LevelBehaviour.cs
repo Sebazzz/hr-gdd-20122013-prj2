@@ -26,6 +26,11 @@ public class LevelBehaviour : MonoBehaviour {
     public int NumberOfSheepToCollect = 1;
 
     /// <summary>
+    /// Specifies a time for the level. 
+    /// </summary>
+    public TimeDef LevelTime = new TimeDef(15,0);
+
+    /// <summary>
     /// Specifies the global sound volume for this level. Is a value between 0 and 1.
     /// </summary>
     public float GlobalSoundVolume = 1f;
@@ -72,6 +77,7 @@ public class LevelBehaviour : MonoBehaviour {
         HUD.Instance.setGoal(this.sheepCounter.MinimumSafeCount);
         HUD.Instance.setCollected(this.sheepCounter.CurrentSafeCount);
         HUD.Instance.setMaxCollected(this.sheepCounter.CurrentCount);
+        HUD.Instance.setTime((float) this.LevelTime);
 
         Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.dogCounter.StartCount,        this.sheepCounter.CurrentCount, this.sheepCounter.MinimumSafeCount));
 	}
@@ -228,6 +234,23 @@ public class LevelBehaviour : MonoBehaviour {
         public SheepLevelCounter(int startCount, int minimumSafeCount) : base(startCount) {
             this.minimumSafeCount = minimumSafeCount;
             this.currentSafeCount = 0;
+        }
+    }
+
+    [Serializable]
+    public class TimeDef {
+        public int Minutes;
+        public int Seconds;
+
+        public static explicit operator float(TimeDef t) {
+            return t.Minutes*60f + t.Seconds;
+        }
+
+        public TimeDef() {}
+
+        public TimeDef(int minutes, int seconds) {
+            this.Minutes = minutes;
+            this.Seconds = seconds;
         }
     }
 }
