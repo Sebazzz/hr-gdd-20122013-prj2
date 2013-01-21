@@ -140,6 +140,24 @@ public class LevelBehaviour : MonoBehaviour {
         // Save level state
         Level current = Levels.GetLevelByName(Application.loadedLevelName);
         current.SetFinished();
+
+        // MinSheep?
+        if (this.sheepCounter.CurrentSafeCount >= NumberOfSheepToCollect) {
+            current.AddScoreFlag(Level.Score.MinSheep);
+        }
+
+        // MaxSheep?
+        if (this.sheepCounter.CurrentSafeCount >= this.sheepCounter.StartCount) {
+            current.AddScoreFlag(Level.Score.MaxSheep);
+
+            // Within time?
+            if (HUD.Instance.LevelTime > 0) {
+                current.AddScoreFlag(Level.Score.MaxSheepWithinTime);
+            }
+        }
+        
+        
+
         // Unlock new level
         Levels.GetNextLevel(current).Unlock();
 
