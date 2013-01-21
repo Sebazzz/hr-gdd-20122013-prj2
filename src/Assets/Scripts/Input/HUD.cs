@@ -22,10 +22,12 @@ public class HUD : MonoBehaviour {
     private Texture2D goalTexture;
     private Texture2D sheepTexture;
 
-    private float time = 0;
     private int goal = 0;
     private int collected = 0;
     private int maxCollected = 0;
+
+    public float LevelTime { get; set; }
+
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +49,7 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        setTime(this.time-Time.deltaTime);
+	    this.LevelTime -= Time.deltaTime;
 	}
 
     void OnGUI() {
@@ -57,14 +59,6 @@ public class HUD : MonoBehaviour {
             drawDialog();
         }
         
-    }
-
-    /// <summary>
-    /// Sets played time in seconds.
-    /// </summary>
-    /// <param name="seconds"></param>
-    public void setTime(float seconds) {
-        time = seconds;
     }
 
     /// <summary>
@@ -136,15 +130,13 @@ public class HUD : MonoBehaviour {
         GUI.Label(new Rect(pixelsFromLeft(495), 35, 100, 40), getMaxCollected(), skin.GetStyle("LabelBlack"));
 
         if (GUI.Button(new Rect(pixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {
-            DisplayDialog("Restart", "Would you like to restart this level?", delegate() {
-                Application.LoadLevel(Application.loadedLevel);
-            }, delegate() { });
+            DisplayDialog("Restart", "Would you like to restart this level?",
+                          () => Application.LoadLevel(Application.loadedLevel), delegate() { });
         }
 
         if (GUI.Button(new Rect(pixelsFromRight(115), 20, 95, 59), "", skin.GetStyle("MenuButton"))) {
-            DisplayDialog("Return to menu", "Would you like to return to the menu?", delegate() {
-                Application.LoadLevel(Scenes.MainMenu);
-            }, delegate() { });
+            DisplayDialog("Return to menu", "Would you like to return to the menu?",
+                          () => Application.LoadLevel(Scenes.MainMenu), () => { });
             
         }
     }
