@@ -42,7 +42,7 @@ public static class DeathEffects {
             splashObject.transform.position = targetPosition;
             splashObject.transform.Translate(Vector3.up * 0.1f, Space.Self);
 
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
+            DeathEffectController.Instance.Register(splashObject, deathEffect);
         }
 
         public static void ExecuteExtra(GameObject context, GameObject causeOfDeath, DeathEffectConfiguration deathEffect, GameObject extraTemplate) {
@@ -65,7 +65,7 @@ public static class DeathEffects {
             splashObject.transform.position = targetPosition;
             splashObject.transform.Translate(Vector3.up * 0.1f, Space.Self);
 
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
+            DeathEffectController.Instance.Register(splashObject, deathEffect);
         }
     }
 
@@ -91,7 +91,7 @@ public static class DeathEffects {
 
             splashObject.transform.position = targetPosition;
 
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
+            DeathEffectController.Instance.Register(splashObject, deathEffect);
         }
     }
 
@@ -144,7 +144,7 @@ public static class DeathEffects {
               
            };
 
-            DeathEffectController.Instance.Register(splashObject, deathEffect.InitialDelay, deathEffect);
+            DeathEffectController.Instance.Register(splashObject, deathEffect);
         }
     }
 
