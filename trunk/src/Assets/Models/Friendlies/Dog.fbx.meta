@@ -157,8 +157,8 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
-    addColliders: 1
+    meshCompression: 3
+    addColliders: 0
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
