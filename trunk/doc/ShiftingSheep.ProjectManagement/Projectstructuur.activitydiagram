@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="da3d9105-1331-47c0-8437-5b86f628c9dd" name="Projectstructuur" linkedPackageId="2f9f92b3-a446-4109-9c1e-e7f7a0ae764f" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="b67ce5de-f1dd-4730-a93f-b3cc528056c3">
+      <elementDefinition Id="b42f8639-ca8b-488b-8b0c-21ad167e63ef" />
+      <body>Thom van Ledden</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="03d49ce6-49eb-41c6-a223-baacf5b47b8e" LastKnownName="Projectleider" />
+      </annotatedElements>
+    </comment>
+    <comment Id="272d1afd-05f7-47a2-b832-66715cf633f4">
+      <elementDefinition Id="d4e463ab-1d13-49e4-99a6-f4fe9866bf45" />
+      <body>Nadine van Leeuwen</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="3196ace8-75f6-4fa4-afe9-00fd0286e912" LastKnownName="Lead Artist" />
+      </annotatedElements>
+    </comment>
+    <comment Id="fd403004-6cc5-4c31-a18e-a0a4e26df2e0">
+      <elementDefinition Id="ebcef564-6317-45d8-8c8d-b99e92d6844b" />
+      <body>Bart Nijland</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="4d081c48-1bbe-438c-92f6-2e4fa450dd62" LastKnownName="Lead Game Designer" />
+      </annotatedElements>
+    </comment>
+    <comment Id="44b1e826-49a4-4271-b019-8bef306fa52d">
+      <elementDefinition Id="558df1ec-6f58-40b3-8d8a-6fbb67121aa1" />
+      <body>Sebastiaan Dammann</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="b938dd38-b10d-45d0-a4da-a23b614a2b2d" LastKnownName="Lead Developer" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="c9792700-c94a-4372-82ff-66f13399ef86">
+      <profileInstance Id="b0b2d445-0ff5-4c03-8dc6-22c3a606ab64" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="987ab4d5-c204-4153-accd-1fb9e253bf72">
+      <profileInstance Id="d4533f18-017d-4d09-b4a0-8094ca19821c" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="ac62f358-ee53-4fda-9a20-a9b3d93bc0e1" name="Projectstructuur" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="54ffd6a0-475f-4843-be5c-13073699c26a" />
+        <nodes>
+          <opaqueAction Id="03d49ce6-49eb-41c6-a223-baacf5b47b8e" name="Projectleider" isLeaf="false">
+            <elementDefinition Id="6227df84-25ac-49c0-b860-8327aacb76cb" />
+          </opaqueAction>
+          <opaqueAction Id="b938dd38-b10d-45d0-a4da-a23b614a2b2d" name="Lead Developer" isLeaf="false">
+            <elementDefinition Id="5f72a4c7-9f3a-45bc-8531-30fcbf295879" />
+            <flowNodeTargets>
+              <controlFlow Id="8615f7c5-ae5b-4daf-9150-f577b58fa7cc" isLeaf="false">
+                <opaqueActionMoniker Id="03d49ce6-49eb-41c6-a223-baacf5b47b8e" LastKnownName="Projectleider" />
+                <elementDefinition Id="7e2c95a3-f3d7-4d7c-bd8a-e96cbbcd2d61" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4d081c48-1bbe-438c-92f6-2e4fa450dd62" name="Lead Game Designer" isLeaf="false">
+            <elementDefinition Id="d2ff0a0b-16b5-4bf3-bfb7-4867d2b5db56" />
+            <flowNodeTargets>
+              <controlFlow Id="f8924784-a523-415c-8608-b259d7bfa561" isLeaf="false">
+                <opaqueActionMoniker Id="03d49ce6-49eb-41c6-a223-baacf5b47b8e" LastKnownName="Projectleider" />
+                <elementDefinition Id="f8fbc38e-4002-4c46-bc2a-49e81900337e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="3196ace8-75f6-4fa4-afe9-00fd0286e912" name="Lead Artist" isLeaf="false">
+            <elementDefinition Id="1ab12551-3f96-4718-94a2-035612e24eb6" />
+            <flowNodeTargets>
+              <controlFlow Id="03d278ee-5865-4ce9-a001-02b8512c9a86" isLeaf="false">
+                <opaqueActionMoniker Id="03d49ce6-49eb-41c6-a223-baacf5b47b8e" LastKnownName="Projectleider" />
+                <elementDefinition Id="7487f72f-c67d-41a5-a3c7-d925fb24bbdc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="4217ac7a-7a7a-46cc-b3be-d65f32cc6265" name="Developers" isLeaf="false">
+            <elementDefinition Id="491d1ec8-1423-4e83-a295-d12614b4c45f" />
+            <flowNodeTargets>
+              <controlFlow Id="19e10069-2fec-4d84-ba7d-a1fdfc3a4014" isLeaf="false">
+                <opaqueActionMoniker Id="b938dd38-b10d-45d0-a4da-a23b614a2b2d" LastKnownName="Lead Developer" />
+                <elementDefinition Id="758d6d9e-7afc-4bc5-b6cf-392881446559" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="731fab77-9c01-415c-8b4f-d73ab818fd18" name="Designers" isLeaf="false">
+            <elementDefinition Id="ac5ee0ac-816b-4375-a51c-24cb5369a1c2" />
+            <flowNodeTargets>
+              <controlFlow Id="f1676e0f-a121-472e-8095-8bc3d0366d00" isLeaf="false">
+                <opaqueActionMoniker Id="4d081c48-1bbe-438c-92f6-2e4fa450dd62" LastKnownName="Lead Game Designer" />
+                <elementDefinition Id="faf39589-d9aa-4278-b135-6ead2871da25" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="6e257203-f033-4973-a3d6-2c372d7c00f7" name="Artists" isLeaf="false">
+            <elementDefinition Id="b6aae940-bb5e-47fa-81ba-d9d4d510eaaa" />
+            <flowNodeTargets>
+              <controlFlow Id="a893c6e4-bfa8-47e1-8e01-548926e381bf" isLeaf="false">
+                <opaqueActionMoniker Id="3196ace8-75f6-4fa4-afe9-00fd0286e912" LastKnownName="Lead Artist" />
+                <elementDefinition Id="c6f2cc13-11c8-42db-bf93-a33dcd199fb1" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="2f9f92b3-a446-4109-9c1e-e7f7a0ae764f" name="ShiftingSheep.ProjectManagement">
+    <elementDefinition Id="f251ac3b-a25c-4c87-bc74-37171d999226" />
+  </package>
+</activityRootModel>
