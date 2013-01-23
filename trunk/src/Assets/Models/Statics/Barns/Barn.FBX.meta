@@ -66,6 +66,18 @@ ModelImporter:
     100120: transform7
     100122: transform8
     100124: transform9
+    100126: polySurface16
+    100128: polySurface17
+    100130: polySurface18
+    100132: polySurface19
+    100134: polySurface20
+    100136: polySurface21
+    100138: transform23
+    100140: transform24
+    100142: transform25
+    100144: transform26
+    100146: transform27
+    100148: transform28
     400000: //RootNode
     400002: Dak
     400004: Linkerdeur
@@ -129,21 +141,36 @@ ModelImporter:
     400120: transform7
     400122: transform8
     400124: transform9
+    400126: polySurface16
+    400128: polySurface17
+    400130: polySurface18
+    400132: polySurface19
+    400134: polySurface20
+    400136: polySurface21
+    400138: transform23
+    400140: transform24
+    400142: transform25
+    400144: transform26
+    400146: transform27
+    400148: transform28
     2300000: Dak
     2300002: Linkerdeur
     2300004: pCube1
     2300006: RechterDeur
     2300008: polySurface15
+    2300010: polySurface21
     3300000: Dak
     3300002: Linkerdeur
     3300004: pCube1
     3300006: RechterDeur
     3300008: polySurface15
+    3300010: polySurface21
     4300000: pCube1
     4300002: Linkerdeur
     4300004: RechterDeur
     4300006: Dak
     4300008: polySurface15
+    4300010: polySurface21
     9500000: //RootNode
   materials:
     importMaterials: 1
