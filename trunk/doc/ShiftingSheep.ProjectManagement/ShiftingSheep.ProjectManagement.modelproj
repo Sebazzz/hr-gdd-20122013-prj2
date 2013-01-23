@@ -29,6 +29,13 @@
       <SubType>Content</SubType>
       <DependentUpon>Projectstructuur.activitydiagram</DependentUpon>
     </Content>
+    <Content Include="Workflow.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Workflow.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Workflow.activitydiagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\ShiftingSheep.ProjectManagement.uml">
       <SubType>Content</SubType>
