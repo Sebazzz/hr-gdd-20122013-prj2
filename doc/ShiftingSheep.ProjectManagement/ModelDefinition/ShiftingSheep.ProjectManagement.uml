@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="f251ac3b-a25c-4c87-bc74-37171d999226"
   name="ShiftingSheep.ProjectManagement" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -41,6 +41,36 @@
         <opaqueActionMoniker
           Id="5f72a4c7-9f3a-45bc-8531-30fcbf295879"
           LastKnownName="Lead Developer"
+          LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="657133c4-2bc3-4587-ba76-8df74f158adf">
+      <body>Bugs tijdens testen, niet volgens specificatie geïmplementeerd, incompleet.</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="d3cdeabc-deb7-4bc6-a039-8ba214997b29"
+          LastKnownName="Rework"
+          LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="2ebfd56d-62a7-496e-8aa8-ea2e05ae69ac">
+      <body>Nieuwe of aangepaste specs</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="25ec47cd-98bd-4280-a16c-ce51d6ef75c4"
+          LastKnownName="To Do"
+          LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="f535a1c6-0868-45c7-a1a0-60ed5c41ed38">
+      <body>Items die niet meer ter zake doen of waar onzekerheid over is</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="dde5af15-c7d1-4dd9-83af-602144617314"
+          LastKnownName="On Hold"
           LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
       </annotatedElements>
     </comment>
@@ -173,6 +203,285 @@
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="1deae169-c5a3-45ea-9560-2c5d8a533818"
+        name="Workflow"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="36b22c8c-0bd7-45c6-affe-3e0068fca1ba"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="f01c36cb-25de-46ec-9990-0443058139d6"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="25ec47cd-98bd-4280-a16c-ce51d6ef75c4"
+                  LastKnownName="To Do"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="25ec47cd-98bd-4280-a16c-ce51d6ef75c4"
+            name="To Do"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="1e238afe-a7de-440c-99fa-98cbf555c5a8"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0a37673c-3d2a-469d-91b8-eaacd71699ef"
+                  LastKnownName="Doing"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0a37673c-3d2a-469d-91b8-eaacd71699ef"
+            name="Doing"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="009c7b5d-f30a-47aa-9b9e-411f8005ed66"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="1b95c793-77ea-44e4-ba6d-dcd834f08340"
+                  LastKnownName="Testing - Lead"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="f224b9bb-d77b-46c4-8952-4ff857f9550d"
+                isLeaf="false">
+                <mergeNodeMoniker
+                  Id="0b10ba00-71f4-46e0-83ed-b4d2d8937d78"
+                  LastKnownName="Merge1"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="1b95c793-77ea-44e4-ba6d-dcd834f08340"
+            name="Testing - Lead"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8bfcab0c-176b-4253-a7d8-a3c2852e2e0e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d34a4599-540e-46e2-b95b-d8e0d508141e"
+                  LastKnownName="Testing - Design"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="e4de8556-ac2e-4902-b689-589bc4d670e9"
+                isLeaf="false">
+                <mergeNodeMoniker
+                  Id="0b10ba00-71f4-46e0-83ed-b4d2d8937d78"
+                  LastKnownName="Merge1"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="af224d81-4331-4406-9ad1-980ad129796e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d3cdeabc-deb7-4bc6-a039-8ba214997b29"
+                  LastKnownName="Rework"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+            <pins>
+              <opaqueActionHasInputValues>
+                <inputPin
+                  Id="d3eb3aac-5762-4ee4-8c62-d750a42c110c"
+                  name="Controle"
+                  isLeaf="false"
+                  ordering="Unordered"
+                  isControlType="false"
+                  isControl="false">
+                  <upperBound>
+                    <literalInteger
+                      Id="352af82e-a2f5-4f7a-b8e2-3707eb996db8"
+                      name="2147483647"
+                      value="2147483647" />
+                  </upperBound>
+                </inputPin>
+              </opaqueActionHasInputValues>
+            </pins>
+          </opaqueAction>
+          <opaqueAction
+            Id="d34a4599-540e-46e2-b95b-d8e0d508141e"
+            name="Testing - Design"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="bddef867-5a09-42c6-8665-e90b979b9570"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a21fb5d3-f156-4e65-9ba2-bc3f8b062f77"
+                  LastKnownName="Done"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="302d18e9-522b-40b4-850c-79b650a32e7f"
+                isLeaf="false">
+                <mergeNodeMoniker
+                  Id="0b10ba00-71f4-46e0-83ed-b4d2d8937d78"
+                  LastKnownName="Merge1"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="4cbbf29f-9e33-4052-8a50-5cc6a9a7e5d9"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d3cdeabc-deb7-4bc6-a039-8ba214997b29"
+                  LastKnownName="Rework"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+            <pins>
+              <opaqueActionHasInputValues>
+                <inputPin
+                  Id="258d644f-fecd-4988-bc0a-2c4e89b9ba8e"
+                  name="Controle"
+                  isLeaf="false"
+                  ordering="Unordered"
+                  isControlType="false"
+                  isControl="false">
+                  <upperBound>
+                    <literalInteger
+                      Id="f3cdc3dd-dab6-45b0-8b2a-fa14f2cb97b1"
+                      name="2147483647"
+                      value="2147483647" />
+                  </upperBound>
+                </inputPin>
+              </opaqueActionHasInputValues>
+            </pins>
+          </opaqueAction>
+          <opaqueAction
+            Id="a21fb5d3-f156-4e65-9ba2-bc3f8b062f77"
+            name="Done"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="2fc3d8d8-ab7b-4fe3-9432-d32b71ef2b28"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="24f58e31-3066-477b-be9f-c5f6cd4e036c"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="24f58e31-3066-477b-be9f-c5f6cd4e036c"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <objectNode
+            Id="f080087b-ef22-4281-9a53-37fad9ad3729"
+            name="Lead Developer"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="53690bec-988e-4e79-96b4-d3e53d18ca5c"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <inputPinMoniker
+                  Id="d3eb3aac-5762-4ee4-8c62-d750a42c110c"
+                  LastKnownName="Controle"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger
+                Id="dae4217c-dbd0-49af-8832-11debbfb6001"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
+          <opaqueAction
+            Id="d3cdeabc-deb7-4bc6-a039-8ba214997b29"
+            name="Rework"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="77cea4b7-8a10-4525-8412-dd4e8cff8a48"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0a37673c-3d2a-469d-91b8-eaacd71699ef"
+                  LastKnownName="Doing"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="dde5af15-c7d1-4dd9-83af-602144617314"
+            name="On Hold"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0628a6ad-7d10-473a-a56b-fdb1549f029f"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0a37673c-3d2a-469d-91b8-eaacd71699ef"
+                  LastKnownName="Doing"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <mergeNode
+            Id="0b10ba00-71f4-46e0-83ed-b4d2d8937d78"
+            name="Merge1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="c5dac2d2-16c6-4faf-b54d-1117d9f70b21"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="dde5af15-c7d1-4dd9-83af-602144617314"
+                  LastKnownName="On Hold"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </mergeNode>
+          <objectNode
+            Id="0ec7d9fd-da73-4f9c-aa3c-d03f5b57e355"
+            name="Lead Game Designer"
+            isLeaf="false"
+            ordering="Unordered"
+            isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="bd36d552-0d58-4096-854e-684e69b8e273"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <inputPinMoniker
+                  Id="258d644f-fecd-4988-bc0a-2c4e89b9ba8e"
+                  LastKnownName="Controle"
+                  LastKnownLocation="ShiftingSheep.ProjectManagement.uml" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger
+                Id="dc00ea6d-b923-4c24-b1c9-cd5533cb447f"
+                name="2147483647"
+                value="2147483647" />
+            </upperBound>
+          </objectNode>
         </nodes>
       </activity>
     </packageHasNamedElement>
