@@ -289,6 +289,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
     /// </summary>
 	public void OnPathFinished(bool cancelled){
 		this.lineRenderer.SetVertexCount(0);
+        this.selectionProjector.SetActive(false);
 	}
 
     #region Input Helpers
