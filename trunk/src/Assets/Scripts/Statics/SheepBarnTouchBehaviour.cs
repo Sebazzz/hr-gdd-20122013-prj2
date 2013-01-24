@@ -51,11 +51,6 @@ public class SheepBarnTouchBehaviour : MonoBehaviour {
 
         // remove obsolete sheep
         foreach (GameObject removeableObject in removeableObjects) {
-            // call the level manager if it's a dog
-            if (removeableObject.tag == Tags.Shepherd) {
-                LevelBehaviour.Instance.OnDogBarnEntered();
-            }
-
             // remove object
             Destroy(removeableObject);
 
@@ -118,5 +113,10 @@ public class SheepBarnTouchBehaviour : MonoBehaviour {
         Vector3 target = this.endPointTarget.transform.position;
         target.y = collidingObject.transform.position.y;
         collidingObject.transform.LookAt(target);
+
+        // call the level manager if it's a dog
+        if (collidingObject.tag == Tags.Shepherd) {
+            LevelBehaviour.Instance.OnDogBarnEntered();
+        }
     }
 }
