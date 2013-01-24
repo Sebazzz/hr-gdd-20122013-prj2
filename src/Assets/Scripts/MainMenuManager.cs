@@ -4,7 +4,7 @@ using System.Collections;
 public class MainMenuManager : MonoBehaviour {
 
 	public enum MenuIndex { TitleScreen, WorldSelect, LevelSelect, Options}
-	public enum Worlds { None, Scotland, Netherlands, Australia, Canada}
+	public enum Worlds { None, Scotland, Netherlands, Canada, Australia}
 	public MenuIndex menuIndex = MenuIndex.TitleScreen;
 	public Worlds selectedWorld = Worlds.None;
 	
