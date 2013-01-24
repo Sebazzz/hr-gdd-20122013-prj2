@@ -112,7 +112,7 @@ public class AutoJumpBehaviour : MonoBehaviour {
 		
 		float angle = Vector2.Angle (ray2D, jumpzone2D);
 				
-		///will be executed if anglerange is between given values;
+		//will be executed if anglerange is between given values;
 		
 		if (angle < 90.0F - angleRange) {
             this.ExecuteJump(jumpZoneConfiguration, false);	
@@ -132,14 +132,14 @@ public class AutoJumpBehaviour : MonoBehaviour {
 		///this.ExecuteJump(jumpZoneConfiguration);
 	}
 
-	private void ExecuteJump (JumpZoneConfiguration configuration,Boolean front)
+	private void ExecuteJump (JumpZoneConfiguration configuration, Boolean front)
 	{
 		float finalForceUp = configuration.ForceUp * this.JumpUpModifier;
 		float finalForceForward = configuration.ForceForward * this.JumpForwardModifier;
 
-		this.rigidbody.AddForce (Vector3.up * finalForceUp, ForceMode.VelocityChange);
-		if(front)this.rigidbody.AddForce (-Vector3.forward * finalForceForward, ForceMode.VelocityChange);
-		if(!front)this.rigidbody.AddForce (Vector3.forward * finalForceForward, ForceMode.VelocityChange);
+		this.rigidbody.AddRelativeForce (Vector3.up * finalForceUp, ForceMode.VelocityChange);
+		this.rigidbody.AddRelativeForce(Vector3.forward * finalForceForward, ForceMode.VelocityChange);
+
 	    this.isJumping = true;
 	    this.jumpStartY = this.transform.position.y;
 	}
