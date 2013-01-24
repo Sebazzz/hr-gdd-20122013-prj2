@@ -9,9 +9,9 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	public TextMesh windowedMesh;
 	public TextMesh qualityMesh;
 
-	private enum audioOptions { Aan, Uit }
+	private enum audioOptions { On, Off }
 	private Resolution[] resolutions;
-	private enum windowedOptions { Aan, Uit }
+	private enum windowedOptions { On, Off }
 	private string[] qualityOptions;
 
 	private audioOptions audio;
@@ -31,6 +31,16 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 
 		resolutions = Screen.resolutions;
 		qualityOptions = QualitySettings.names;
+
+		bool fullscreen;
+		if (PlayerPrefs.GetInt("windowed") == 0) fullscreen = true;
+		else fullscreen = false;
+
+		if((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) && (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
+			Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width, resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
+
+		if(QualitySettings.GetQualityLevel() != quality)
+			QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
 	}
 
 	/// <summary>
@@ -39,10 +49,10 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	void Update () {
 
 		audioMesh.text = "Audio : " + audio;
-		try { resolutionMesh.text = "Resolutie : " + resolutions[resolution].width + " x " + resolutions[resolution].height; }
-		catch { resolutionMesh.text = "Resolutie : " + resolutions[0].width + " x " + resolutions[0].height; }
+		try { resolutionMesh.text = "Resolution : " + resolutions[resolution].width + " x " + resolutions[resolution].height; }
+		catch { resolutionMesh.text = "Resolution : " + resolutions[0].width + " x " + resolutions[0].height; }
 		windowedMesh.text = "Fullscreen : " + windowed;
-		qualityMesh.text = "Kwaliteit : " + qualityOptions[quality];
+		qualityMesh.text = "Quality : " + qualityOptions[quality];
 	
 	}
 
@@ -68,7 +78,7 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	public void SetAudio() {
 		audio++;
 
-		if (audio > audioOptions.Uit) audio = 0;
+		if (audio > audioOptions.Off) audio = 0;
 	}
 
 	public void SetResolution() {
@@ -80,7 +90,7 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	public void SetWindowed() {
 		windowed++;
 
-		if (windowed > windowedOptions.Uit) windowed = 0;
+		if (windowed > windowedOptions.Off) windowed = 0;
 	
 	}
 
