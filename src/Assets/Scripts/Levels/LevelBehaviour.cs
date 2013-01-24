@@ -184,11 +184,11 @@ public class LevelBehaviour : MonoBehaviour {
 
         HUD.Instance.DisplayDeathDialog("You died!");
 
+        /*
         yield return new WaitForSeconds(5f);
-
         AsyncSceneLoader.Load(Application.loadedLevelName);
-
         yield break;
+         */
     }
 
 
