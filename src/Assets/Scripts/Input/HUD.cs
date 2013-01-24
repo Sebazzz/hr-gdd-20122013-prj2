@@ -28,6 +28,8 @@ public class HUD : MonoBehaviour {
 
     public float LevelTime { get; set; }
 
+    public bool EnableCountDown { get; set; }
+
 
 	// Use this for initialization
 	void Start () {
@@ -49,7 +51,9 @@ public class HUD : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    this.LevelTime -= Time.deltaTime;
+        if (EnableCountDown) {
+            this.LevelTime -= Time.deltaTime;
+        }
 	}
 
     void OnGUI() {

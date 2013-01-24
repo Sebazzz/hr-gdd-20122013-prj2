@@ -46,6 +46,8 @@ class CameraZoomStartController : MonoBehaviour {
     }
 
     void Start() {
+        HUD.Instance.EnableCountDown = false;
+
         this.cameraControllerScript.enabled = false;
         this.startTime = Time.time;
 
@@ -84,6 +86,7 @@ class CameraZoomStartController : MonoBehaviour {
         if (positionReached && rotationReached) {
             this.cameraControllerScript.enabled = true;
             this.enabled = false;
+            HUD.Instance.EnableCountDown = true;
         }
     }
 }
