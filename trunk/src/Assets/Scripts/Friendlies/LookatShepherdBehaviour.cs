@@ -60,16 +60,13 @@ public class LookatShepherdBehaviour : MonoBehaviour
                 Vector3 distance = this.closestShepherd.transform.position - transform.position;
                 if (distance.magnitude < minWatchDistance)
                 {
-                   distance.x = -distance.x;
+                 
+                //    float rotation = Vector3.Angle(transform.forward,distance);Debug.Log(rotation + "angle1") ;
+                //    float rotation2 = Vector3.Angle(transform.forward,distance);Debug.Log(rotation2 + "angle2" );
+                //  Quaternion rotation = transform.AngleAxis(rotation, Vector3.up);
+                    distance.x = -distance.x;
                     distance.z = -distance.z;
-								
-                     float rotation = Vector3.Angle(transform.forward,distance);Debug.Log(rotation + "angle1") ;
-                    	float rotation2 = 180.0F - rotation ;
-               				transform.RotateAround(Vector3.up,rotation2);
-//					
-//                   Quaternion rotation = transform.AngleAxis(rotation, Vector3.up);
-//                   
-//                    transform.forward = distance;
+                    transform.forward = distance;
                 }
             }
             else if(Time.time - lastUpdate > UpdateDelay)
