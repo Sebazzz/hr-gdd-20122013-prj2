@@ -142,22 +142,29 @@ public class LevelBehaviour : MonoBehaviour {
         Level current = Levels.GetLevelByName(Application.loadedLevelName);
         current.SetFinished();
 
+        bool minsheep = false;
+        bool maxsheep = false;
+        bool maxsheeptime = false;
+
         // MinSheep?
         if (this.sheepCounter.CurrentSafeCount >= NumberOfSheepToCollect) {
             current.AddScoreFlag(Level.Score.MinSheep);
+            minsheep = true;
         }
 
         // MaxSheep?
         if (this.sheepCounter.CurrentSafeCount >= this.sheepCounter.StartCount) {
             current.AddScoreFlag(Level.Score.MaxSheep);
+            maxsheep = true;
 
             // Within time?
             if (HUD.Instance.LevelTime > 0) {
                 current.AddScoreFlag(Level.Score.MaxSheepWithinTime);
+                maxsheeptime = true;
             }
         }
-        
-        
+
+        HUD.Instance.DisplayScoreDialog(minsheep, maxsheep, maxsheeptime);
 
         // Unlock new level
         Levels.GetNextLevel(current).Unlock();
@@ -174,6 +181,8 @@ public class LevelBehaviour : MonoBehaviour {
     private IEnumerator OnGameOver() {
         // TODO: show level failure end
         this.audioController.GameLostSound.Play();
+
+        HUD.Instance.DisplayDeathDialog("You died!");
 
         yield return new WaitForSeconds(5f);
 
