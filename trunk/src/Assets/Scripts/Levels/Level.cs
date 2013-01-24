@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -78,5 +79,34 @@ public class Level {
     /// </summary>
     public void SetFinished() {
         PlayerPrefs.SetInt(this.Name + SettingsLockStateKey, (int) LevelStatus.Done);
+    }
+
+    protected bool Equals(Level other) {
+        return string.Equals(this.Name, other.Name);
+    }
+
+    public override bool Equals(object obj) {
+        if (ReferenceEquals(null, obj)) {
+            return false;
+        }
+        if (ReferenceEquals(this, obj)) {
+            return true;
+        }
+        if (obj.GetType() != this.GetType()) {
+            return false;
+        }
+        return Equals((Level) obj);
+    }
+
+    public override int GetHashCode() {
+        return (this.Name != null ? this.Name.GetHashCode() : 0);
+    }
+
+    public static bool operator ==(Level left, Level right) {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Level left, Level right) {
+        return !Equals(left, right);
     }
 }
