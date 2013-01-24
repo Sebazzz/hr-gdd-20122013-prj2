@@ -101,10 +101,10 @@ public class MainMenuCheatsOptionBehaviour : MonoBehaviour {
 
         [Cheat("BeTheBest")]
         public static void SetAllLevelsPlayed() {
-            Level currentLevel = Levels.GetCurrentLevel();
+            Level currentLevel = Levels.GetFirstLevel();
 
             while (currentLevel != Level.None) {
-                currentLevel.Unlock();
+                currentLevel.SetFinished();
 
                 currentLevel = Levels.GetNextLevel(currentLevel);
             }
