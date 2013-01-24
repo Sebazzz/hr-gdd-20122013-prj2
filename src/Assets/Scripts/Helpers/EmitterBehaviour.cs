@@ -91,6 +91,9 @@ public class EmitterBehaviour : MonoBehaviour {
             // initialize wave if required
             if (spawnTimer == null) {
                 spawnTimer = new Timer(SpawnTimeGap);
+
+                // Play sound
+                this.GetComponent<FoeAudioController>().EmitSound.Play();
             }
             
             spawnTimer.Update();

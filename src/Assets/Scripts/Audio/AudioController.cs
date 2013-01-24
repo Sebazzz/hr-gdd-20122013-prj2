@@ -113,7 +113,7 @@ public abstract class AudioController : MonoBehaviour {
         availableChannel.pitch = audioEffectConfiguration.Pitch;
         availableChannel.volume = audioEffectConfiguration.Volume * this.premultipliedVolume;
         availableChannel.bypassEffects = audioEffectConfiguration.BypassAudioEffects;
-        availableChannel.loop = false;
+        availableChannel.loop = audioEffectConfiguration.Loop;
 
         availableChannel.Play();
     }
@@ -134,6 +134,11 @@ public abstract class AudioController : MonoBehaviour {
         /// Specifies a value between -3 and -3 (1 default) for the pitch
         /// </summary>
         public float Pitch = 1;
+
+        /// <summary>
+        /// Specifies looping behaviour
+        /// </summary>
+        public Boolean Loop = false;
 
         /// <summary>
         /// Specifies one of the random sound effect to play
