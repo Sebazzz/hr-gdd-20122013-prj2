@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -19,19 +20,20 @@ static class Levels{
 											new Level("Holland_lvl4")
 										};
 
-	public static Level[] Canada = {
-										   new Level("Level1"),
-										   new Level("Level2"),
-										   new Level("Level3"),
-										   new Level("Level4")
-										};
-
 	public static Level[] Australia = {
 											new Level("Australia_lvl1"),
 											new Level("Australia_lvl2"),
 											new Level("Australia_lvl3"),
 											new Level("Australia_lvl4")
 										};
+
+    public static Level[] Canada = {
+										   new Level("Level1"),
+										   new Level("Level2"),
+										   new Level("Level3"),
+										   new Level("Level4")
+										};
+
     //Example of another country:
     //public static Level[] anotherCountry = { new Level("Cheese"), new Level("Bacon") };
 
@@ -50,6 +52,14 @@ static class Levels{
         }
 
         return Level.None;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    public static Level GetFirstLevel() {
+        return Countries.First().Levels.First();
     }
 
     /// <summary>
@@ -74,12 +84,11 @@ static class Levels{
     /// <param name="current">The level from which the next one should be found</param>
     /// <returns>The next level. Smaakt naar gravel. Will return Level.none if there is no next level.</returns>
     public static Level GetNextLevel(Level current) {
-        Boolean foundCurrent = false;
-        for (int countryIterator = 0; countryIterator < Countries.Length; countryIterator++) {
-            for (int levelIterator = 0; levelIterator < Countries[countryIterator].Levels.Length; levelIterator++) {
-                // Gets the current level from the iteration
-                Level level = Countries[countryIterator].Levels[levelIterator];
-
+        bool foundCurrent = false;
+        Country c = null;
+        foreach (Country country in Countries) {
+            c = country;
+            foreach (Level level in country.Levels) {
                 // If foundCurrent is true we found it one iteration ago, and we can safely return this one
                 if (foundCurrent) {
                     return level;
