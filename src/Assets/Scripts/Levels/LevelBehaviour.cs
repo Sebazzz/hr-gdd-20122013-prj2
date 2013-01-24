@@ -171,11 +171,13 @@ public class LevelBehaviour : MonoBehaviour {
 
         this.audioController.GameWonSound.Play();
 
-        yield return new WaitForSeconds(5f);
+        yield return null;
+
+        /*yield return new WaitForSeconds(5f);
 
         AsyncSceneLoader.Load(Scenes.MainMenu);
 
-        yield break;
+        yield break;*/
     }
 
     private IEnumerator OnGameOver() {
@@ -184,7 +186,7 @@ public class LevelBehaviour : MonoBehaviour {
 
         HUD.Instance.DisplayDeathDialog("You died!");
 
-        return null;
+        yield return null;
         /*
         yield return new WaitForSeconds(5f);
         AsyncSceneLoader.Load(Application.loadedLevelName);
