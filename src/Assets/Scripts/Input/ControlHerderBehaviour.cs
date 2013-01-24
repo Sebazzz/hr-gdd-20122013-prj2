@@ -9,6 +9,8 @@ using System.Collections.Generic;
 /// <dependency cref="HerderLoopBehaviour" />
 /// <dependend cref="HerderLoopBehaviour" />
 public class ControlHerderBehaviour : MonoBehaviour {
+    private GameObject selectionProjector;
+
     public AudioClip SOUND_DOGBARK;
 
     /// <summary>
@@ -127,8 +129,24 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
     private float totalPathLength;
 
+    void Awake() {
+       
+    }
 
     void Start(){
+        // get the projector
+        foreach (Transform tr in transform) {
+            if (tr.gameObject.name == "SelectionProjector") {
+                this.selectionProjector = tr.gameObject;
+                this.selectionProjector.SetActive(false);
+                break;
+            }
+        }
+
+        if (this.selectionProjector == null) {
+            throw new UnityException("Incorrectly configured object, no SelectionProjector!");
+        }
+
         // get a line renderer
 		GameObject pathRenderingObject = (GameObject) Instantiate(this.ShepherdPathPrefab);
         this.lineRenderer = pathRenderingObject.GetComponent<LineRenderer>();
@@ -139,28 +157,25 @@ public class ControlHerderBehaviour : MonoBehaviour {
             throw new Exception("This component cannot function without a HerderLoopBehaviour");
         }
 
-        this.Halo.enabled = false;
 
         // set-up path redraw timer
         this.redrawPathTimer = new Timer(RedrawPathTime);
 	}
 
     void OnMouseOver() {
-        this.Halo.enabled = true;
+        this.selectionProjector.SetActive(true);
     }
 
-    private Behaviour Halo {
-        get { return ((Behaviour) this.gameObject.GetComponent("Halo")); }
-    }
 
     void OnMouseExit() {
-        this.Halo.enabled = false;
+        this.selectionProjector.SetActive(false);
     }
 
 	void Update () {
         // end the draw of an existing path
         if (this.isCurrentlyDrawing && this.IsMouseButtonUp()) {
-            (gameObject.GetComponent("Halo") as Behaviour).enabled = false;
+            this.selectionProjector.SetActive(true);
+
             this.isCurrentlyDrawing = false;
             this.herderLoopController.StartWalking(this.ControlMode, this.currentTrajectory, this.CalculateTotalDrawTime(), this.totalPathLength);
             MouseManager.ReleaseLock(this);
@@ -175,7 +190,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
             if (hit != null && hit.Value.collider.gameObject == this.gameObject ) {
                 // acquire mouse lock and enable drawing state
                 if (MouseManager.TryAcquireLock(this)) {
-                    (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
+                    this.selectionProjector.SetActive(true);
                     this.herderLoopController.CancelWalk();
 
                     this.isCurrentlyDrawing = true;
@@ -192,7 +207,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         // continue drawing of current path
         if (this.isCurrentlyDrawing) {
             this.redrawPathTimer.Update();
-            (gameObject.GetComponent("Halo") as Behaviour).enabled = true;
+            this.selectionProjector.SetActive(true);
 
             // get the current mouse position, and seed the path if there is none
             Vector3 position = this.GetTerrainMousePosition();
@@ -222,7 +237,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
                 this.DrawPath();
             }
         }
-
 	}
 
     private float CalculateTotalDrawTime() {
@@ -336,5 +350,4 @@ public class ControlHerderBehaviour : MonoBehaviour {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(this.transform.position, this.SelectRadius);
     }
-
 }
