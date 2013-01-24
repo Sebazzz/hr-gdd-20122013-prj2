@@ -16,6 +16,8 @@ public class MainMenuOptionsSaveBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton() {
+
 		optionsBehaviour.SaveOptions();
+		
 	}
 }

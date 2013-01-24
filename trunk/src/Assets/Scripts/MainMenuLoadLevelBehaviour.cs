@@ -14,7 +14,22 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 		//Levels.GetLevelByName("Scotland_lvl1").SetFinished();
 		//Levels.GetLevelByName("Scotland_lvl2").SetFinished();
 		//Levels.GetLevelByName("Scotland_lvl3").SetFinished();
-		//Levels.GetLevelByName("Scotland_lvl4").Unlock();
+		//Levels.GetLevelByName("Scotland_lvl4").SetFinished();
+
+		//Levels.GetLevelByName("Holland_lvl1").SetFinished();
+		//Levels.GetLevelByName("Holland_lvl2").SetFinished();
+		//Levels.GetLevelByName("Holland_lvl3").SetFinished();
+		//Levels.GetLevelByName("Holland_lvl4").SetFinished();
+
+		//Levels.GetLevelByName("Australia_lvl1").SetFinished();
+		//Levels.GetLevelByName("Australia_lvl2").SetFinished();
+		//Levels.GetLevelByName("Australia_lvl3").SetFinished();
+		//Levels.GetLevelByName("Australia_lvl4").SetFinished();
+
+		//Levels.GetLevelByName("Level1").SetFinished();
+		//Levels.GetLevelByName("Level2").SetFinished();
+		//Levels.GetLevelByName("Level3").SetFinished();
+		//Levels.GetLevelByName("Level4").SetFinished();
 
 		if (LevelName == "Scotland_lvl1" && Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) {
 			Levels.GetLevelByName(this.LevelName).Unlock();
