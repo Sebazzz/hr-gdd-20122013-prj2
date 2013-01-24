@@ -36,7 +36,7 @@ static class Levels{
     //public static Level[] anotherCountry = { new Level("Cheese"), new Level("Bacon") };
 
     // Add levelarray to countries to add a country
-    public static Country[] Countries = { new Country(Scotland), new Country(Holland), new Country(Canada), new Country(Australia) };
+    public static Country[] Countries = { new Country(Scotland), new Country(Holland), new Country(Australia), new Country(Canada) };
     
     /// <summary>
     /// Get the current level
