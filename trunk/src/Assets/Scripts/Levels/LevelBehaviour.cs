@@ -116,7 +116,7 @@ public class LevelBehaviour : MonoBehaviour {
     public void OnDogBarnEntered() {
         // sanity check
         if (this.sheepCounter.CurrentSafeCount < this.sheepCounter.MinimumSafeCount) {
-            throw new Exception("Still sheep left.. programming error?");
+            Debug.LogError("Still sheep left.. programming error?");
         }
 
         this.StartCoroutine(this.OnLevelCompleted());
@@ -137,7 +137,6 @@ public class LevelBehaviour : MonoBehaviour {
     }
 
     private IEnumerator OnLevelCompleted() {
-        // TODO: show level end
         // Save level state
         Level current = Levels.GetLevelByName(Application.loadedLevelName);
         current.SetFinished();
@@ -164,6 +163,8 @@ public class LevelBehaviour : MonoBehaviour {
             }
         }
 
+        HUD.Instance.EnableCountDown = false;
+        HUD.Instance.Show = false;
         HUD.Instance.DisplayScoreDialog(minsheep, maxsheep, maxsheeptime);
 
         // Unlock new level
@@ -172,26 +173,16 @@ public class LevelBehaviour : MonoBehaviour {
         this.audioController.GameWonSound.Play();
 
         yield return null;
-
-        /*yield return new WaitForSeconds(5f);
-
-        AsyncSceneLoader.Load(Scenes.MainMenu);
-
-        yield break;*/
     }
 
     private IEnumerator OnGameOver() {
-        // TODO: show level failure end
         this.audioController.GameLostSound.Play();
 
+        HUD.Instance.Show = false;
+        HUD.Instance.EnableCountDown = false;
         HUD.Instance.DisplayDeathDialog("You died!");
 
         yield return null;
-        /*
-        yield return new WaitForSeconds(5f);
-        AsyncSceneLoader.Load(Application.loadedLevelName);
-        yield break;
-         */
     }
 
 

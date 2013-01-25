@@ -49,6 +49,7 @@ public class HUD : MonoBehaviour {
     public float LevelTime { get; set; }
 
     public bool EnableCountDown { get; set; }
+    public bool Show { get; set; }
 
 
 	// Use this for initialization
@@ -59,6 +60,8 @@ public class HUD : MonoBehaviour {
             throw(new Exception("GUISkin is needed for the HUD"));
         }
 
+        this.EnableCountDown = true;
+        this.Show = true;
 
         loadTextures();
 	}
@@ -84,7 +87,9 @@ public class HUD : MonoBehaviour {
 	}
 
     void OnGUI() {
-        drawTopBar();
+        if (this.Show) {
+            drawTopBar();
+        }
 
         if (showDialog == DialogType.text) {
             drawDialog();
