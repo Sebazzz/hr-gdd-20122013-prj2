@@ -20,4 +20,6 @@ static class Tags {
     public const string Untagged = "Untagged";
 
     public const string Trap = "Trap";
+
+    public const string LevelBounds = "LevelBounds";
 }
