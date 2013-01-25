@@ -27,6 +27,11 @@ public class LevelBehaviour : MonoBehaviour {
     public int NumberOfSheepToCollect = 1;
 
     /// <summary>
+    /// Specifies the time used for blurring after level end
+    /// </summary>
+    public float BlurTime = 1;
+
+    /// <summary>
     /// Specifies a time for the level. 
     /// </summary>
     public TimeDef LevelTime = new TimeDef(15,0);
@@ -163,6 +168,12 @@ public class LevelBehaviour : MonoBehaviour {
             }
         }
 
+        // Show end dialog
+        BlurEffect blurEffect = Camera.mainCamera.GetComponent<BlurEffect>();
+        if (blurEffect != null) {
+            blurEffect.enabled = true;
+        }
+
         HUD.Instance.EnableCountDown = false;
         HUD.Instance.Show = false;
         HUD.Instance.DisplayScoreDialog(minsheep, maxsheep, maxsheeptime);
@@ -178,13 +189,18 @@ public class LevelBehaviour : MonoBehaviour {
     private IEnumerator OnGameOver() {
         this.audioController.GameLostSound.Play();
 
+        // Show dialog
+        BlurEffect blurEffect = Camera.mainCamera.GetComponent<BlurEffect>();
+        if (blurEffect != null) {
+            blurEffect.enabled = true;
+        }
+
         HUD.Instance.Show = false;
         HUD.Instance.EnableCountDown = false;
         HUD.Instance.DisplayDeathDialog("You died!");
 
         yield return null;
     }
-
 
     /// <summary>
     /// Gets the current level behaviour instance
