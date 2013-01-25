@@ -54,7 +54,9 @@ public class HUD : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        dialogRect = new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 200);
+        const int width = 300;
+        const int height = 200;
+        dialogRect = new Rect(Screen.width / 2 - (width/2), Screen.height / 2 - (height/2), width, height);
 
         if (skin == null) {
             throw(new Exception("GUISkin is needed for the HUD"));
