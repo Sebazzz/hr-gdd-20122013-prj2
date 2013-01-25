@@ -72,6 +72,8 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	private void Start () {
+	    HUD.Instance.EnableCountDown = true;
+
         if (this.AutoDetectScrollPointDistance) {
             // get a point on the terrain for scroll distance
             Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
