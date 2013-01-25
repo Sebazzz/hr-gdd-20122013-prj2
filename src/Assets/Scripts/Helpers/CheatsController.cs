@@ -45,10 +45,13 @@ public sealed class CheatsController : MonoBehaviour {
         // get the GUI style from the HUD script
         GUISkin guiStyle = this.GetComponent<HUD>().skin;
 
-        int x = Screen.width - 50;
-        int y = Screen.height - 25;
+        const int width = 60;
+        const int height = 30;
 
-        if (GUI.Button(new Rect(x, y, 50, 25), "Cheats", guiStyle.GetStyle("button"))) {
+        int x = Screen.width - width;
+        int y = Screen.height - height;
+
+        if (GUI.Button(new Rect(x, y, width, height), "Cheats", guiStyle.GetStyle("button"))) {
             Cheats.Dialog.ShowDialog();
         }
 
