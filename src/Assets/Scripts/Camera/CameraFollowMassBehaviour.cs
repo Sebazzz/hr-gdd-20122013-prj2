@@ -31,8 +31,6 @@ public class CameraFollowMassBehaviour : MonoBehaviour {
 	        throw new UnityException("No 'TagToFollow' parameter configured");
 	    }
 
-	    HUD.Instance.EnableCountDown = true;
-
 	    this.CameraToFollow = this.CameraToFollow ?? Camera.mainCamera;
 	    this.startCameraPosition = this.CameraToFollow.transform.position;
 	}
