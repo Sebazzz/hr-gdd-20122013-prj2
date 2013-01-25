@@ -25,6 +25,11 @@ public class DogDeathBehaviour : CanDieBehaviour {
 
         // notify level manager
         LevelBehaviour.Instance.OnDogKilled();
+
+        // try to release the dog
+        if (MouseManager.CurrentLockOwner == this.GetComponent<ControlHerderBehaviour>()) {
+            MouseManager.ReleaseLock(this.GetComponent<ControlHerderBehaviour>());
+        }
     }
 
     protected override bool CanDie (GameObject causeOfDeath, string causeOfDeathTag, int causeOfDeathLayer) {
