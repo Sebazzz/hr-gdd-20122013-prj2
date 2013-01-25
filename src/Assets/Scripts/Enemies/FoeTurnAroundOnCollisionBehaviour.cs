@@ -31,6 +31,7 @@ public class FoeTurnAroundOnCollisionBehaviour : MonoBehaviour {
             Tags.Foe,
             Tags.Sheep,
             Tags.Shepherd,
+            Tags.LevelBounds
         };
 
     private readonly IEnumerable<int> ignoreLayers = new [] {
