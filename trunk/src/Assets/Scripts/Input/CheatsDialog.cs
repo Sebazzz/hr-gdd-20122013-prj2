@@ -105,7 +105,7 @@ public static class Cheats {
             _EnteredCheat = String.Empty;
             _ShowDialog = true;
 
-            _DialogRect = new Rect(Screen.width/2 - 150, Screen.height/2 - 100, 300, 200);
+            _DialogRect = new Rect(Screen.width/2 - 150, Screen.height/2 - 100, 300, 100);
         }
 
         /// <summary>
@@ -121,17 +121,22 @@ public static class Cheats {
         /// <param name="skin"></param>
         public static void DrawDialog(GUISkin skin) {
             if (_ShowDialog) {
-                _DialogRect = GUI.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), "Cheats",
-                                         skin.GetStyle("window"));
+                _DialogRect = GUILayout.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), "Cheats",
+                                               skin.GetStyle("window"));
             }
         }
 
         private static void DrawInsideDialog(int dialogId, GUISkin skin) {
-            GUI.Label(new Rect(25, 25, 250, 25), "Enter cheat: ", skin.GetStyle("label"));
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("Enter cheat: ", skin.GetStyle("label"));
+            GUILayout.EndHorizontal();
 
-            _EnteredCheat = GUI.TextField(new Rect(25, 70, 250, 25), _EnteredCheat, 60, skin.GetStyle("textfield"));
+            GUILayout.BeginHorizontal();
+            _EnteredCheat = GUILayout.TextField(_EnteredCheat, 60, skin.GetStyle("textfield"));
+            GUILayout.EndHorizontal();
 
-            if (GUI.Button(new Rect(220, 160, 50, 30), "Apply", skin.GetStyle("button"))) {
+            GUILayout.BeginHorizontal(GUILayout.Width(50));
+            if (GUILayout.Button("Apply", skin.GetStyle("button"))) {
                 _ShowDialog = false;
 
                 if (String.IsNullOrEmpty(_EnteredCheat)) {
@@ -141,6 +146,7 @@ public static class Cheats {
                     ApplyCheat(_EnteredCheat);
                 }
             }
+            GUILayout.EndHorizontal();
         }
 
         private static void ApplyCheat(string cheatText) {
@@ -170,7 +176,7 @@ public static class Cheats {
         }
 
         private static MethodInfo FindCheatMemberByCheatAttribute(string cheatText) {
-            MethodInfo[] cheatMembers = typeof (Cheats).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            MethodInfo[] cheatMembers = typeof (Impl).GetMethods(BindingFlags.Public | BindingFlags.Static);
 
             MethodInfo cheatMember = null;
             foreach (MethodInfo member in cheatMembers) {
