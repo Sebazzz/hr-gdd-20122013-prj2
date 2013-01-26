@@ -14,6 +14,8 @@ public sealed class CheatsController : MonoBehaviour {
 
     public static bool EnableLargeSheep = false;
 
+    public static bool TerrainBounce = false;
+
     private void Awake() {
         Cheats.Dialog.HideDialog();
 
