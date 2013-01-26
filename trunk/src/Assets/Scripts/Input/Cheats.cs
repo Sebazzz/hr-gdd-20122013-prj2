@@ -125,6 +125,16 @@ public static class Cheats {
             AsyncSceneLoader.Load(Scenes.MainMenu);
         }
 
+        [Cheat("EndlessCameraMovement")]
+        public static void DisableCameraMovementBounds() {
+            ArrowMovementCameraBehaviour cameraScript = Camera.mainCamera.GetComponent<ArrowMovementCameraBehaviour>();
+
+            if (cameraScript != null) {
+                cameraScript.BoundingBoxBottomLeft = new Vector2(-1000, -1000);
+                cameraScript.BoundingBoxTopRight = new Vector2(1000, 1000);
+            }
+        }
+
         [Cheat("SheepRocket")]
         public static void LaunchAllSheepUpIntoTheAirByTheSpecifiedForce(float force) {
             GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
