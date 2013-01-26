@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -49,7 +50,7 @@ public static class Cheats {
                     continue;
                 }
 
-                // format
+                // format member name into words
                 string memberName = member.Name;
 
                 string[] words = Regex.Split(memberName, "([A-Z][a-z]+)", RegexOptions.None);
@@ -64,8 +65,17 @@ public static class Cheats {
                     }
                 }
 
-                cheatName.Add(indent + cheatAttr.Name);
                 cheatDescription.Add(format.ToString());
+
+                // command formatted with arguments
+                format = new StringBuilder();
+                format.Append(indent + cheatAttr.Name);
+
+                foreach (ParameterInfo parameterInfo in  member.GetParameters()) {
+                    format.AppendFormat(" <{0}>", parameterInfo.Name);
+                }
+
+                cheatName.Add(format.ToString());
             }
 
             cheatName.Add(indent);
@@ -110,18 +120,43 @@ public static class Cheats {
             AsyncSceneLoader.Load(Scenes.MainMenu);
         }
 
-        [Cheat("enable/disable")]
-        public static void EnableOrDisableVariabeles(bool enable, string name) {
-            // select member of cheat controller
-            foreach (var cheatVar in CheatVars) {
-                if (String.Equals(cheatVar.Name, name, StringComparison.InvariantCultureIgnoreCase)) {
-                    cheatVar.Setter.Invoke(enable);
+        [Cheat("SheepRocket")]
+        public static void LaunchAllSheepUpIntoTheAirByTheSpecifiedForce(float force) {
+            GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
-                    Debug.Log(cheatVar.Name + ": " + enable);
-                    break;
-                }
+            foreach (GameObject gameObject in sheep) {
+                Rigidbody rb = gameObject.rigidbody;
+
+                float finalForce = force*rb.mass;
+
+                rb.AddRelativeForce(Vector3.up * finalForce, ForceMode.Impulse);
             }
         }
+
+        [Cheat("enable")]
+        public static void EnableTheSpecifiedVariabele(string variabele) {
+            SetBooleanVariabeleValue(variabele, true);
+        }
+
+        [Cheat("disable")]
+        public static void DisableTheSpecifiedVariabele(string variabele) {
+            SetBooleanVariabeleValue(variabele, true);
+        }
+
+        private static void SetBooleanVariabeleValue(string variabele, bool value) {
+// select member of cheat controller
+            foreach (var cheatVar in CheatVars) {
+                if (String.Equals(cheatVar.Name, variabele, StringComparison.InvariantCultureIgnoreCase)) {
+                    cheatVar.Setter.Invoke(value);
+
+                    Debug.Log(cheatVar.Name + ": " + value);
+                    return;
+                }
+            }
+
+            SimpleTextDialog.ShowDialog("Error", String.Format("Variabele could not be set to '{1}': Variabele '{0}' does not exist.", variabele, value), "MonospaceLabel");
+        }
+
 
         #region Nested type: CheatVar
 
@@ -188,6 +223,7 @@ public static class Cheats {
             _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
 
             GameCheatReferenceDialog.HideDialog();
+            SimpleTextDialog.HideDialog();
         }
 
         /// <summary>
@@ -195,7 +231,9 @@ public static class Cheats {
         /// </summary>
         public static void HideDialog() {
             _ShowDialog = false;
+
             GameCheatReferenceDialog.HideDialog();
+            SimpleTextDialog.HideDialog();
         }
 
         /// <summary>
@@ -209,6 +247,7 @@ public static class Cheats {
             }
 
             GameCheatReferenceDialog.DrawDialog(skin);
+            SimpleTextDialog.DrawDialog(skin);
         }
 
         private static void DrawInsideDialog(int dialogId, GUISkin skin) {
@@ -235,27 +274,40 @@ public static class Cheats {
         }
 
         private static void ApplyCheat(string cheatText) {
+            string[] arguments = cheatText.Split(' ');
+
             // select correct cheat member
-            MethodInfo cheatMember = FindCheatMemberByCheatAttribute(cheatText);
+            MethodInfo cheatMember = FindCheatMemberByCheatAttribute(arguments[0]);
 
+            // check if cheat is found
             if (cheatMember == null) {
-                // check for 'enable/disable' fallback
-                cheatMember = FindCheatMemberByCheatAttribute("enable/disable");
-
-                // split by space
-                string[] split = cheatText.Split(new char[] {' '}, 2);
-                if (split.Length != 2) {
-                    return;
-                }
-
-                bool enable = String.Equals(split[0], "enable", StringComparison.InvariantCultureIgnoreCase);
-
-                cheatMember.Invoke(null, new object[] {enable, split[1]});
+                SimpleTextDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found", "MonospaceLabel");
                 return;
             }
 
+            // select parameters
+            ParameterInfo[] memberParams = cheatMember.GetParameters();
+            
+            if (memberParams.Length != arguments.Length - 1) {
+                SimpleTextDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, arguments.Length-1) , "MonospaceLabel");
+                return;
+            }
+
+            object[] parsedParameters = new object[memberParams.Length];
+            for (int i = 0; i < memberParams.Length && i < parsedParameters.Length; i++) {
+                ParameterInfo currentParam = memberParams[i];
+                string rawArgument = arguments[i + 1];
+
+                try {
+                     parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
+                } catch (Exception) {
+                    SimpleTextDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName), "MonospaceLabel");
+                    return;
+                }
+            }
+
             // call
-            cheatMember.Invoke(null, null);
+            cheatMember.Invoke(null, parsedParameters);
 
             Debug.Log("Applied cheat: " + cheatMember.Name);
         }
@@ -360,6 +412,65 @@ public static class Cheats {
                 GUILayout.EndHorizontal();
             }
             
+            GUILayout.BeginHorizontal(GUILayout.Width(50));
+            if (GUILayout.Button("Close", skin.GetStyle("button"))) {
+                _ShowDialog = false;
+            }
+            GUILayout.EndHorizontal();
+        }
+
+    }
+
+    private static class SimpleTextDialog {
+        private static Rect _DialogRect;
+        private static bool _ShowDialog;
+
+        private static string _DialogBodyTitle;
+        private static string _DialogBodyText;
+        private static string _DialogBodyTextStyleName;
+
+        /// <summary>
+        /// Enables showing of the dialog
+        /// </summary>
+        public static void ShowDialog(string title, string text, string bodyStyleName) {
+            _ShowDialog = true;
+
+            const int width = 300;
+            const int height = 100;
+            _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
+
+            _DialogBodyTitle = title;
+            _DialogBodyText = text;
+            _DialogBodyTextStyleName = bodyStyleName;
+        }
+
+        /// <summary>
+        /// Disables showing of the dialog
+        /// </summary>
+        public static void HideDialog() {
+            _ShowDialog = false;
+        }
+
+        /// <summary>
+        /// Draws the dialog. Call in <c>OnGUI</c>.
+        /// </summary>
+        /// <param name="skin"></param>
+        public static void DrawDialog(GUISkin skin) {
+            if (_ShowDialog) {
+                _DialogRect = GUILayout.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), _DialogBodyTitle,
+                                               skin.GetStyle("window"));
+            }
+        }
+
+        private static void DrawInsideDialog(int dialogId, GUISkin skin) {
+            GUIStyle textStyle = skin.GetStyle(_DialogBodyTextStyleName);
+
+            GUILayout.BeginHorizontal();
+
+            GUILayout.Label(_DialogBodyText, textStyle);
+
+            GUILayout.EndHorizontal();
+
             GUILayout.BeginHorizontal(GUILayout.Width(50));
             if (GUILayout.Button("Close", skin.GetStyle("button"))) {
                 _ShowDialog = false;
