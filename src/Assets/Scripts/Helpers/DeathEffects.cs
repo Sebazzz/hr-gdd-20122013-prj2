@@ -114,7 +114,10 @@ public static class DeathEffects {
 
             // ... add information of velocity, makes sure the effect is placed on the proper position
             Vector3 targetPosition = context.transform.position;
-            targetPosition += deathEffect.EffectOffset;
+
+            if (!deathEffect.OffsetAsForce) {
+                targetPosition += deathEffect.EffectOffset;
+            }
 
             // ... disable wolf movement
             MonoBehaviour beh = causeOfDeath.GetComponent<MoveBehaviour>();
@@ -130,6 +133,11 @@ public static class DeathEffects {
             Rigidbody rb = context.GetComponent<Rigidbody>();
             if (rb != null) {
                 rb.isKinematic = true;
+            }
+
+            rb = splashObject.GetComponent<Rigidbody>();
+            if (rb != null && deathEffect.OffsetAsForce) {
+                rb.AddForce(deathEffect.EffectOffset, ForceMode.Impulse);
             }
 
             splashObject.transform.position = targetPosition;
@@ -190,6 +198,11 @@ public static class DeathEffects {
         /// Gets the offset of the main effect template
         /// </summary>
         public Vector3 EffectOffset;
+
+        /// <summary>
+        /// If <c>true</c>, <see cref="EffectOffset"/> is applied as a force to the rigid body
+        /// </summary>
+        public bool OffsetAsForce = false;
 
         public DeathEffectConfiguration() {}
 

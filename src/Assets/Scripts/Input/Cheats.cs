@@ -16,11 +16,13 @@ public static class Cheats {
     /// Cheat implementation class
     /// </summary>
     private static class Impl {
-        private static readonly List<CheatVar<bool>> CheatVars = new List<CheatVar<bool>>();
+        private static readonly List<CheatVar<bool>> ToggleCheatVars = new List<CheatVar<bool>>();
+        private static readonly List<CheatVar<float>> FloatCheatVars = new List<CheatVar<float>>();
 
         static Impl() {
-            CheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times", v => CheatsController.EnableLargeSheep = v));
-            CheatVars.Add(new CheatVar<bool>("gamecheats", "Show the in-game cheat button and menu", v => CheatsController.EnableInGameCheatsMenu = v));
+            ToggleCheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times", v => CheatsController.EnableLargeSheep = v));
+            ToggleCheatVars.Add(new CheatVar<bool>("gamecheats", "Show the in-game cheat button and menu", v => CheatsController.EnableInGameCheatsMenu = v));
+            ToggleCheatVars.Add(new CheatVar<bool>("terrainbounce", "Enable a bouncy terrain", v => CheatsController.TerrainBounce = v));
         }
 
         [Cheat("Help")]
@@ -86,10 +88,13 @@ public static class Cheats {
             cheatDescription.Add(null);
 
             // ... aggregate any enable/disable vars
-            foreach (CheatVar<bool> cheatVar in CheatVars) {
+            foreach (CheatVar<bool> cheatVar in ToggleCheatVars) {
                 cheatName.Add(indent + cheatVar.Name);
                 cheatDescription.Add(cheatVar.Description);
             }
+
+            cheatName.Add("Note: Some cheats may only be applied after a level reload.");
+            cheatDescription.Add(null);
 
             // show the dialog
             GameCheatReferenceDialog.ShowDialog("Cheats Reference", cheatName.ToArray(), cheatDescription.ToArray(), "MonospaceLabel");
@@ -145,7 +150,7 @@ public static class Cheats {
 
         private static void SetBooleanVariabeleValue(string variabele, bool value) {
 // select member of cheat controller
-            foreach (var cheatVar in CheatVars) {
+            foreach (var cheatVar in ToggleCheatVars) {
                 if (String.Equals(cheatVar.Name, variabele, StringComparison.InvariantCultureIgnoreCase)) {
                     cheatVar.Setter.Invoke(value);
 

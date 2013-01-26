@@ -11,7 +11,7 @@ public class ApplyPhysicsBehaviour : MonoBehaviour {
     public float updateInterval = 0.5f; // Interval in seconds
 
     // table of textures and their respective PhysicsMaterials
-    private Dictionary<int, PhysicsProperties> textures = new Dictionary<int, PhysicsProperties>();
+    private readonly Dictionary<int, PhysicsProperties> textures = new Dictionary<int, PhysicsProperties>();
 
 	void Start () {
 	    // Set textures
@@ -39,6 +39,10 @@ public class PhysicsProperties {
     public PhysicsProperties(string MaterialPath, float drag) {
         this.drag = drag;
         this.material = (PhysicMaterial)Resources.Load(MaterialPath);
+
+        if (CheatsController.TerrainBounce) {
+            this.material.bounciness = 1;
+        }
     }
 
     public void apply(GameObject gameObject){
