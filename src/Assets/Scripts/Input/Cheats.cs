@@ -19,6 +19,7 @@ public static class Cheats {
 
         static Impl() {
             CheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times", v => CheatsController.EnableLargeSheep = v));
+            CheatVars.Add(new CheatVar<bool>("gamecheats", "Show the in-game cheat button and menu", v => CheatsController.EnableInGameCheatsMenu = v));
         }
 
         [Cheat("Help")]
@@ -81,7 +82,7 @@ public static class Cheats {
             }
 
             // show the dialog
-            SimpleTextDialog.ShowDialog("Cheats Reference", cheatName.ToArray(), cheatDescription.ToArray(), "MonospaceLabel");
+            GameCheatReferenceDialog.ShowDialog("Cheats Reference", cheatName.ToArray(), cheatDescription.ToArray(), "MonospaceLabel");
         }
 
         [Cheat("PlayTheGround")]
@@ -186,7 +187,7 @@ public static class Cheats {
             const int height = 100;
             _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
 
-            SimpleTextDialog.HideDialog();
+            GameCheatReferenceDialog.HideDialog();
         }
 
         /// <summary>
@@ -194,7 +195,7 @@ public static class Cheats {
         /// </summary>
         public static void HideDialog() {
             _ShowDialog = false;
-            SimpleTextDialog.HideDialog();
+            GameCheatReferenceDialog.HideDialog();
         }
 
         /// <summary>
@@ -207,7 +208,7 @@ public static class Cheats {
                                                skin.GetStyle("window"));
             }
 
-            SimpleTextDialog.DrawDialog(skin);
+            GameCheatReferenceDialog.DrawDialog(skin);
         }
 
         private static void DrawInsideDialog(int dialogId, GUISkin skin) {
@@ -289,7 +290,7 @@ public static class Cheats {
 
     #endregion
 
-    private static class SimpleTextDialog {
+    private static class GameCheatReferenceDialog {
         private static Rect _DialogRect;
         private static bool _ShowDialog;
 

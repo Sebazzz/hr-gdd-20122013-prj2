@@ -8,12 +8,14 @@ public sealed class CheatsController : MonoBehaviour {
     /// <summary>
     /// Specifies if the in-game cheat menu is enabled
     /// </summary>
-    public static bool EnableInGameCheatsMenu = Debug.isDebugBuild;
+    public static bool EnableInGameCheatsMenu = false;
 
     public static bool EnableLargeSheep = false;
 
     private void Awake() {
         Cheats.Dialog.HideDialog();
+
+        EnableInGameCheatsMenu = Debug.isDebugBuild;
     }
 
     private void Start() {
