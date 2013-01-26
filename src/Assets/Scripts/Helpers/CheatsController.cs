@@ -5,6 +5,8 @@
 /// </summary>
 [RequireComponent(typeof(HUD))]
 public sealed class CheatsController : MonoBehaviour {
+    private static bool _HasSetEnableInGameCheatsMenuDefaultValue = false;
+
     /// <summary>
     /// Specifies if the in-game cheat menu is enabled
     /// </summary>
@@ -15,7 +17,10 @@ public sealed class CheatsController : MonoBehaviour {
     private void Awake() {
         Cheats.Dialog.HideDialog();
 
-        EnableInGameCheatsMenu = Debug.isDebugBuild;
+        if (!_HasSetEnableInGameCheatsMenuDefaultValue) {
+            EnableInGameCheatsMenu = Debug.isDebugBuild;
+            _HasSetEnableInGameCheatsMenuDefaultValue = true;
+        }
     }
 
     private void Start() {

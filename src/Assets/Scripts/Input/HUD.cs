@@ -169,15 +169,34 @@ public class HUD : MonoBehaviour {
         this.maxScore = maxScore;
         this.maxScoreTime = maxScoreTime;
         showDialog = DialogType.score;
+
+        this.minScoreTextureRect = this.minScoreTextureStartRect;
+        this.maxScoreTextureRect = this.maxScoreTextureStartRect;
+        this.timeScoreTextureRect = this.timeScoreTextureStartRect;
     }
 
     private void drawScoreDialog() {
         dialogRect = GUI.Window(0, dialogRect, drawInsideScoreDialog, dialog_title, skin.window);
     }
 
+    private const float AnimationSpeedModifier = 0.1f;
+
+    private readonly Rect minScoreTextureTargetRect = new Rect(150 - 90 - 40, 60, 80, 80);
+    private readonly Rect minScoreTextureStartRect = new Rect(150 - 90 - 40, 60, 0, 0);
+    private Rect minScoreTextureRect;
+
+    private readonly Rect maxScoreTextureTargetRect = new Rect(150 - 40, 60, 80, 80);
+    private readonly Rect maxScoreTextureStartRect = new Rect(150 - 0, 60, 0, 0);
+    private Rect maxScoreTextureRect;
+
+    private readonly Rect timeScoreTextureTargetRect = new Rect(150 + 90 - 40, 60, 80, 80);
+    private readonly Rect timeScoreTextureStartRect = new Rect(150 + 90 + 40, 60, 0, 0);
+    private Rect timeScoreTextureRect;
+
     private void drawInsideScoreDialog(int dialogID) {
         GUI.Label(new Rect(25, 25, 250, 130), dialog_text, skin.GetStyle("WindowText"));
 
+        // get the correct textures 
         Texture2D minT = minScoreTexture;
         if(minScore){
             minT = minScoreCheckedTexture;
@@ -193,10 +212,15 @@ public class HUD : MonoBehaviour {
             maxTimeT = timeScoreCheckedTexture;
         }
 
+        // draw the textures with animation
+        this.minScoreTextureRect = this.AnimateRect(this.minScoreTextureRect, this.minScoreTextureTargetRect, AnimationSpeedModifier);
+        GUI.DrawTexture(this.minScoreTextureRect, minT, ScaleMode.StretchToFill, true, 0);
 
-        GUI.DrawTexture(new Rect(150 - 90 - 40 , 60, 80, 80), minT, ScaleMode.StretchToFill, true, 0);
-        GUI.DrawTexture(new Rect(150 - 40, 60, 80, 80), maxT, ScaleMode.StretchToFill, true, 0);
-        GUI.DrawTexture(new Rect(150 + 90 - 40, 60, 80, 80), maxTimeT, ScaleMode.StretchToFill, true, 0);
+        this.maxScoreTextureRect = this.AnimateRect(this.maxScoreTextureRect, this.maxScoreTextureTargetRect, AnimationSpeedModifier);
+        GUI.DrawTexture(this.maxScoreTextureRect, maxT, ScaleMode.StretchToFill, true, 0);
+
+        this.timeScoreTextureRect = this.AnimateRect(this.timeScoreTextureRect, this.timeScoreTextureTargetRect, AnimationSpeedModifier);
+        GUI.DrawTexture(this.timeScoreTextureRect, maxTimeT, ScaleMode.StretchToFill, true, 0);
 
 
         if (GUI.Button(new Rect(150 - 50 - 20, 150, 40, 40), "", skin.GetStyle("MenuScoreButton"))) {
@@ -318,5 +342,16 @@ public class HUD : MonoBehaviour {
 
             return hudscript;
         }
+    }
+
+
+    private Rect AnimateRect(Rect current, Rect target, float t) {
+        Rect result = new Rect();
+        result.xMin = Mathf.Lerp(current.xMin, target.xMin, t);
+        result.yMin = Mathf.Lerp(current.yMin, target.yMin, t);
+        result.width = Mathf.Lerp(current.width, target.width, t);
+        result.height = Mathf.Lerp(current.height, target.height, t);
+
+        return result;
     }
 }
