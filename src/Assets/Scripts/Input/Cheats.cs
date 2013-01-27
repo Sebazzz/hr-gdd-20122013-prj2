@@ -228,6 +228,7 @@ public static class Cheats {
                     SpawnSheep(sheepTemplate, lowerBounds, upperBounds);
                 }
 
+                LevelBehaviour.Instance.RecountSheep();
                 yield return new WaitForSeconds(0.5f);
                 timeLeft -= 0.5f;
 
@@ -236,6 +237,7 @@ public static class Cheats {
                     SpawnSheep(sheepTemplate, lowerBounds, upperBounds);
                 }
 
+                LevelBehaviour.Instance.RecountSheep();
                 yield return new WaitForSeconds(0.5f);
                 timeLeft -= 0.5f;
             }
