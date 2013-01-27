@@ -266,26 +266,42 @@ public static class Cheats {
         }
 
         private static void DrawInsideDialog(int dialogId, GUISkin skin) {
+
+            // label
             GUILayout.BeginHorizontal();
             GUILayout.Label("Enter cheat: ", skin.GetStyle("label"));
             GUILayout.EndHorizontal();
 
+            // text field
             GUILayout.BeginHorizontal();
+            GUI.SetNextControlName("CheatInputBox");
             _EnteredCheat = GUILayout.TextField(_EnteredCheat, 60, skin.GetStyle("textfield"));
             GUILayout.EndHorizontal();
 
+            bool cheatEnterKeyPressed = _EnteredCheat.Length > 0 &&
+                                        (_EnteredCheat[_EnteredCheat.Length - 1] == '\n' ||
+                                        _EnteredCheat[_EnteredCheat.Length - 1] == '\r');
+
+            // button
             GUILayout.BeginHorizontal(GUILayout.Width(50));
-            if (GUILayout.Button("Apply", skin.GetStyle("button"))) {
+            if (GUILayout.Button("Apply", skin.GetStyle("button")) || cheatEnterKeyPressed) {
                 _ShowDialog = false;
 
                 if (String.IsNullOrEmpty(_EnteredCheat)) {
                     _EnteredCheat = String.Empty;
                 }
                 else {
+                    _EnteredCheat = _EnteredCheat.TrimEnd('\n', ' ', '\r');
                     ApplyCheat(_EnteredCheat);
                 }
             }
             GUILayout.EndHorizontal();
+
+            // set focus to cheat input box
+            if (GUI.GetNameOfFocusedControl() == string.Empty) {
+                GUI.FocusControl("CheatInputBox");
+            }
+
         }
 
         private static void ApplyCheat(string cheatText) {
@@ -296,7 +312,7 @@ public static class Cheats {
 
             // check if cheat is found
             if (cheatMember == null) {
-                SimpleTextDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found", "MonospaceLabel");
+                SimpleTextDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.", "MonospaceLabel");
                 return;
             }
 
