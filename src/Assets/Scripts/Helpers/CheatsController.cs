@@ -8,6 +8,11 @@ public sealed class CheatsController : MonoBehaviour {
     private static bool _HasSetEnableInGameCheatsMenuDefaultValue = false;
 
     /// <summary>
+    /// Specifies if the rotation lock on the sheep <see cref="Rigidbody"/> is disabled
+    /// </summary>
+    public static bool EnableSheepRotationLock = true;
+
+    /// <summary>
     /// Specifies if the in-game cheat menu is enabled
     /// </summary>
     public static bool EnableInGameCheatsMenu = false;
@@ -28,6 +33,24 @@ public sealed class CheatsController : MonoBehaviour {
     private void Start() {
         if (EnableLargeSheep) {
             SetLargeSheep();
+        }
+
+        if (!EnableSheepRotationLock) {
+            RemoveSheepRigidbodyRotationConstraint();
+        }
+    }
+
+    private static void RemoveSheepRigidbodyRotationConstraint() {
+        GameObject[] sheepArray = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+
+        foreach (GameObject sheep in sheepArray) {
+            Rigidbody rb = sheep.GetComponent<Rigidbody>();
+
+            if (rb == null) {
+                continue;
+            }
+
+            rb.constraints = RigidbodyConstraints.None;
         }
     }
 
