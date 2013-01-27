@@ -332,7 +332,7 @@ public static class Cheats {
     /// <summary>
     /// Helper class for showing a cheat dialog
     /// </summary>
-    public static class Dialog {
+    public static class InputDialog {
         private static bool _ShowDialog;
         private static Rect _DialogRect;
         private static string _EnteredCheat = String.Empty;
@@ -487,6 +487,7 @@ public static class Cheats {
     private static class GameCheatReferenceDialog {
         private static Rect _DialogRect;
         private static bool _ShowDialog;
+        private static Vector2 _ScrollPosition;
 
         private static string _DialogBodyTitle;
         private static string[] _DialogBodyTextColumn1;
@@ -499,7 +500,7 @@ public static class Cheats {
         public static void ShowDialog(string title, string[] bodyColumn1, string[] bodyColumn2, string bodyStyleName) {
             _ShowDialog = true;
 
-            const int width = 500;
+            const int width = 600;
             const int height = 400;
             _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
 
@@ -534,6 +535,8 @@ public static class Cheats {
         private static void DrawInsideDialog(int dialogId, GUISkin skin) {
             GUIStyle textStyle = skin.GetStyle(_DialogBodyTextStyleName);
 
+            _ScrollPosition = GUILayout.BeginScrollView(_ScrollPosition, false, true, skin.GetStyle("horizontalscrollbar"),
+                                      skin.GetStyle("verticalscrollbar"), skin.GetStyle("scrollview"), GUILayout.ExpandWidth(true), GUILayout.Height(350));
             for (int i=0;i<_DialogBodyTextColumn1.Length&&i<_DialogBodyTextColumn2.Length;i++) {
                 string col1Text = _DialogBodyTextColumn1[i];
                 string col2Text = _DialogBodyTextColumn2[i];
@@ -542,7 +545,7 @@ public static class Cheats {
 
                 bool createSecondColumn = col2Text != null;
                 if (createSecondColumn) {
-                    GUILayout.Label(col1Text, textStyle, GUILayout.Width(175));
+                    GUILayout.Label(col1Text, textStyle, GUILayout.Width(225));
 
                     GUILayout.BeginVertical();
                     GUILayout.Label(col2Text, textStyle);
@@ -553,6 +556,8 @@ public static class Cheats {
 
                 GUILayout.EndHorizontal();
             }
+
+            GUILayout.EndScrollView();
             
             GUILayout.BeginHorizontal(GUILayout.Width(50));
             if (GUILayout.Button("Close", skin.GetStyle("button"))) {
