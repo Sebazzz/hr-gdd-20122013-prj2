@@ -11,7 +11,7 @@ public static class DeathEffects {
 
         Rigidbody myBody = context.GetComponent<Rigidbody>();
         if (myBody != null) {
-            pos += myBody.velocity;
+            //pos += myBody.velocity;
         }
 
         return pos;
