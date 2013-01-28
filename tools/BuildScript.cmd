@@ -5,7 +5,7 @@ REM Unity Build Script version 1.0
 REM
 
 REM Get current date
-SET datetimef=%date:~-4%-%date:~3,2%-%date:~6,2%
+SET datetimef=%date:~-4%-%date:~6,2%-%date:~3,2%
 SET buildDate=%datetimef%
 echo Build date: %buildDate%
 
