@@ -7,16 +7,16 @@ public class MainMenuCheatsOptionBehaviour : MonoBehaviour {
     public GUISkin Skin;
 
     private void Awake() {
-        Cheats.InputDialog.HideDialog();
+        CheatInputDialog.HideDialog();
     }
 
     private void OnMouseUpAsButton() {
-        Cheats.InputDialog.ShowDialog();
+        CheatInputDialog.ShowDialog();
     }
 
     private void OnGUI() {
         if (Skin != null) {
-            Cheats.InputDialog.DrawDialog(this.Skin);
+            CheatInputDialog.DrawDialog(this.Skin);
         }
     }
 }

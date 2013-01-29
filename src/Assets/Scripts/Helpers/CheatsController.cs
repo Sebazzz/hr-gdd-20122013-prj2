@@ -22,7 +22,7 @@ public sealed class CheatsController : MonoBehaviour {
     public static bool TerrainBounce = false;
 
     private void Awake() {
-        Cheats.InputDialog.HideDialog();
+        CheatInputDialog.HideDialog();
 
         if (!_HasSetEnableInGameCheatsMenuDefaultValue) {
             EnableInGameCheatsMenu = Debug.isDebugBuild;
@@ -42,7 +42,7 @@ public sealed class CheatsController : MonoBehaviour {
 
     private void Update() {
         if (EnableInGameCheatsMenu && Input.GetKeyUp(KeyCode.BackQuote)) {
-            Cheats.InputDialog.ShowDialog();
+            CheatInputDialog.ShowDialog();
         }
     }
 
@@ -89,11 +89,11 @@ public sealed class CheatsController : MonoBehaviour {
         int x = Screen.width - width;
         int y = Screen.height - height;
 
-        if (GUI.Button(new Rect(x, y, width, height), "Cheats", guiStyle.GetStyle("button"))) {
-            Cheats.InputDialog.ShowDialog();
+        if (GUI.Button(new Rect(x, y, width, height), "Cheats1337", guiStyle.GetStyle("button"))) {
+            CheatInputDialog.ShowDialog();
         }
 
         // draw dialog
-        Cheats.InputDialog.DrawDialog(guiStyle);
+        CheatInputDialog.DrawDialog(guiStyle);
     }
 }
