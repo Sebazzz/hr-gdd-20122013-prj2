@@ -83,6 +83,13 @@ public sealed class CheatsController : MonoBehaviour {
             if (collider != null) {
                 collider.material = bounceMaterial;
             }
+
+            Rigidbody rb = gameObject.GetComponent<Rigidbody>();
+
+            if (rb != null) {
+                rb.drag = 0.15f;
+            }
+
         }
     }
 
@@ -126,6 +133,10 @@ public sealed class CheatsController : MonoBehaviour {
     }
 
     private void OnGUI() {
+        if (!EnableInGameCheatsMenu) {
+            return;
+        }
+
         // get the GUI style from the HUD script
         GUISkin guiStyle = this.GetComponent<HUD>().skin;
 
