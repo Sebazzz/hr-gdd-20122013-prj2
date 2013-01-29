@@ -176,6 +176,11 @@ public static class CheatsImplementation {
 
     #region Just for Fun
 
+    [Cheat("SetGravity")]
+    public static void SetGlobalGravityDirection(float x, float y, float z) {
+        Physics.gravity = new Vector3(x,y,z);
+    }
+
     [Cheat("SheepRain")]
     public static void StartsRainingSheepAllOverTheLevel(int amountPerSecond, int timeInSeconds) {
         // find a sheep to clone
