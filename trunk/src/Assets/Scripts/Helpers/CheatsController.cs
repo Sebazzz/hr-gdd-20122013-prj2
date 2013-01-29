@@ -40,6 +40,12 @@ public sealed class CheatsController : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        if (EnableInGameCheatsMenu && Input.GetKeyUp(KeyCode.BackQuote)) {
+            Cheats.InputDialog.ShowDialog();
+        }
+    }
+
     private static void RemoveSheepRigidbodyRotationConstraint() {
         GameObject[] sheepArray = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
