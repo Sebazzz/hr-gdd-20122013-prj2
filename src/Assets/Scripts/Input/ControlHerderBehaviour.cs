@@ -9,9 +9,8 @@ using System.Collections.Generic;
 /// <dependency cref="HerderLoopBehaviour" />
 /// <dependend cref="HerderLoopBehaviour" />
 public class ControlHerderBehaviour : MonoBehaviour {
+    private DogAudioController audioController;
     private GameObject selectionProjector;
-
-    public AudioClip SOUND_DOGBARK;
 
     /// <summary>
     /// Specifies the time in which the path is completely redrawn. This makes sure the speed material of the path is properly updated.
@@ -129,8 +128,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
 
     private float totalPathLength;
 
-    void Awake() {
-       
+    private void Awake() {
+        this.audioController = this.GetComponent<DogAudioController>();
     }
 
     void Start(){
@@ -199,7 +198,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
                     this.totalPathLength = 0;
 
                     this.redrawPathTimer.Reset();
-                    audio.PlayOneShot(SOUND_DOGBARK);
+                    this.audioController.BarnSound.Play();
                 }
             }
         }

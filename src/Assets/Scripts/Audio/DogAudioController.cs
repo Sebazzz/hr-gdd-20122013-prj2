@@ -26,4 +26,9 @@ public sealed class DogAudioController : AudioController {
     /// Defines the electric fence touch sound
     /// </summary>
     public AudioEffectConfiguration ElectricFenceTouchSound;
+
+    /// <summary>
+    /// Defines the electric fence touch sound
+    /// </summary>
+    public AudioEffectConfiguration BarnSound;
 }
