@@ -44,6 +44,11 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
     public float MovementSpeed = 5f;
 
     /// <summary>
+    /// Specifies the rotation speed for the pageup/pagedown key
+    /// </summary>
+    public float RotationSpeed = 5f;
+
+    /// <summary>
     /// Specifies how sensitive the scroll wheel should be
     /// </summary>
     public float ScrollSensitivity = 5f;
@@ -95,7 +100,6 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	    if (Input.GetMouseButtonDown((int) this.MouseButtonToCheck) && !MouseManager.TryAcquireLock(this)) {
             // nothing
 	    } else {
-
 	        if (this.IsMouseButtonDown())
 	            OnMouseDown();
 	        if (this.IsMouseButton() && onMouseDownCameraPosition != Vector3.zero)
@@ -109,6 +113,12 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
         if (Math.Abs(yAxis - 0f) > 0.00001)
         {
             this.ExecuteRotation(yAxis);
+        } else {
+            if (Input.GetKey(KeyCode.PageUp)) {
+                this.ExecuteRotation(this.RotationSpeed * Time.deltaTime);
+            } else if (Input.GetKey(KeyCode.PageDown)) {
+                this.ExecuteRotation(-this.RotationSpeed * Time.deltaTime);
+            }
         }
 
         // execute keyboard movement
