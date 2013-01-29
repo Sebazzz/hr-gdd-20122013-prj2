@@ -246,6 +246,19 @@ public static class CheatsImplementation {
         }
     }
 
+    [Cheat("DanceOfTheSheep")]
+    public static void AppliesARandomForceToEachSheep(float force) {
+        GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+
+        foreach (GameObject gameObject in sheep) {
+            Rigidbody rb = gameObject.rigidbody;
+
+            float finalForce = force * rb.mass;
+
+            rb.AddForceAtPosition(Vector3.up * finalForce, Vector3.left + Vector3.down, ForceMode.Impulse);
+        }
+    }
+
     #endregion
 
     #region Support methods
