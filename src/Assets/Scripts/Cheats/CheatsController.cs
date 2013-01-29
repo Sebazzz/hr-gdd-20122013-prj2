@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 /// <summary>
 /// Helper script for processing various cheats and enable in-game cheats
@@ -38,6 +39,51 @@ public sealed class CheatsController : MonoBehaviour {
         if (!EnableSheepRotationLock) {
             RemoveSheepRigidbodyRotationConstraint();
         }
+
+        if (TerrainBounce) {
+            EnableTerrainBounce();
+        }
+    }
+
+    private static void EnableTerrainBounce() {
+        // load material
+        PhysicMaterial bounceMaterial = (PhysicMaterial)Resources.Load("BounceMaterial", typeof(PhysicMaterial));
+
+        if (bounceMaterial == null) {
+            Debug.LogError("Could not load bounce material");
+        }
+
+        // bouncy terrain
+        Terrain.activeTerrain.collider.material = bounceMaterial;
+
+        // bouncy sheep
+        GameObject[] sheepArray = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+
+        SetObjectBouncy(sheepArray, bounceMaterial);
+
+        // bouncy dog
+        GameObject[] dogArray = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
+
+        SetObjectBouncy(dogArray, bounceMaterial);
+    }
+
+
+    private static void SetObjectBouncy(IEnumerable<GameObject> sheepArray, PhysicMaterial bounceMaterial) {
+        foreach (GameObject gameObject in sheepArray) {
+            // disable physics script
+            ApplyPhysicsBehaviour physicsScript = gameObject.GetComponent<ApplyPhysicsBehaviour>();
+
+            if (physicsScript != null) {
+                physicsScript.enabled = false;
+            }
+
+            // set collider material
+            Collider collider = gameObject.GetComponent<Collider>();
+
+            if (collider != null) {
+                collider.material = bounceMaterial;
+            }
+        }
     }
 
     private void Update() {
@@ -46,7 +92,7 @@ public sealed class CheatsController : MonoBehaviour {
         }
     }
 
-    private static void RemoveSheepRigidbodyRotationConstraint() {Debug.Log("DISABLE SHEEPROT");
+    private static void RemoveSheepRigidbodyRotationConstraint() {
         GameObject[] sheepArray = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject sheep in sheepArray) {

@@ -39,10 +39,6 @@ public class PhysicsProperties {
     public PhysicsProperties(string MaterialPath, float drag) {
         this.drag = drag;
         this.material = (PhysicMaterial)Resources.Load(MaterialPath);
-
-        if (CheatsController.TerrainBounce) {
-            this.material.bounciness = 1;
-        }
     }
 
     public void apply(GameObject gameObject){
