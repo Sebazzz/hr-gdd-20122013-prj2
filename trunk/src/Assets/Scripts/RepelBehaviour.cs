@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class RepelBehaviour : MonoBehaviour {
+public sealed class RepelBehaviour : MonoBehaviour {
     private DogAudioController audioController;
     private bool hasBarked;
 
@@ -61,7 +61,7 @@ public class RepelBehaviour : MonoBehaviour {
 
             // check for radius
             float force = this.InnerRadiusCheck(hit.transform) ? this.InnerPower : this.OuterPower;
-            float radiusForce = this.InnerRadiusCheck(hit.transform) ? this.InnerRadius : this.OuterRadius;
+            float radiusForce = this.InnerRadiusCheck(hit.transform) ? this.InnerRadius : this.OuterRadius; // we may want to experiment with lower values, this executes more direct force
 
             if (force < 0.1) {
                 continue;

@@ -77,7 +77,11 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	private void Start () {
-	    HUD.Instance.EnableCountDown = true;
+	    // make sure the countdown is started
+	    CameraZoomStartController zoomer = this.GetComponent<CameraZoomStartController>();
+        if (zoomer == null || !zoomer.enabled) {
+            HUD.Instance.EnableCountDown = true;
+        }
 
         if (this.AutoDetectScrollPointDistance) {
             // get a point on the terrain for scroll distance

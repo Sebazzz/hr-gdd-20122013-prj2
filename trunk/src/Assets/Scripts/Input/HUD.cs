@@ -62,7 +62,6 @@ public class HUD : MonoBehaviour {
             throw(new Exception("GUISkin is needed for the HUD"));
         }
 
-        this.EnableCountDown = true;
         this.Show = true;
 
         loadTextures();
