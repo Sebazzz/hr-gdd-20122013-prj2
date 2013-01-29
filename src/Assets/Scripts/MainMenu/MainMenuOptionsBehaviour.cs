@@ -26,21 +26,21 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	void Start () {
 		audio = (audioOptions) PlayerPrefs.GetInt("audio", 0);
 		resolution = PlayerPrefs.GetInt("resolution", 0);
-		windowed = (windowedOptions) PlayerPrefs.GetInt("windowed", 1);
+		windowed = (windowedOptions) PlayerPrefs.GetInt("windowed", 0);
 		quality = PlayerPrefs.GetInt("quality", 0);
 
 		resolutions = Screen.resolutions;
 		qualityOptions = QualitySettings.names;
 
 		bool fullscreen;
-		if (PlayerPrefs.GetInt("windowed") == 0) fullscreen = true;
+		if (windowed == 0) fullscreen = true;
 		else fullscreen = false;
 
-		if((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) && (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
+		if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) && (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
 			Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width, resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
 
 		if(QualitySettings.GetQualityLevel() != quality)
-			QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
+			QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality", 0));
 	}
 
 	/// <summary>
