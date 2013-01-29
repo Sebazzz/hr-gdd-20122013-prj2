@@ -46,7 +46,7 @@ public sealed class CheatsController : MonoBehaviour {
         }
     }
 
-    private static void RemoveSheepRigidbodyRotationConstraint() {
+    private static void RemoveSheepRigidbodyRotationConstraint() {Debug.Log("DISABLE SHEEPROT");
         GameObject[] sheepArray = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject sheep in sheepArray) {
@@ -89,7 +89,7 @@ public sealed class CheatsController : MonoBehaviour {
         int x = Screen.width - width;
         int y = Screen.height - height;
 
-        if (GUI.Button(new Rect(x, y, width, height), "Cheats1337", guiStyle.GetStyle("button"))) {
+        if (GUI.Button(new Rect(x, y, width, height), "Cheats", guiStyle.GetStyle("button"))) {
             CheatInputDialog.ShowDialog();
         }
 
