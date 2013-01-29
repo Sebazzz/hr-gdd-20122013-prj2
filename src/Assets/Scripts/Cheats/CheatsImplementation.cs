@@ -26,43 +26,16 @@ public static class CheatsImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate all general cheats and format them nicely
-        MethodInfo[] cheatMembers = typeof(CheatsImplementation).GetMethods(BindingFlags.Public | BindingFlags.Static);
+        IEnumerable<CheatDescriptor> cheatDescriptors = CheatReference.GetAllCheats();
 
-        foreach (MethodInfo member in cheatMembers) {
-            // get cheat attr
-            object[] attr = member.GetCustomAttributes(typeof(CheatAttribute), false);
-
-            if (attr.Length == 0) {
-                continue;
-            }
-
-            var cheatAttr = attr[0] as CheatAttribute;
-            if (cheatAttr == null) {
-                continue;
-            }
-
-            // format member name into words
-            string memberName = member.Name;
-
-            string[] words = Regex.Split(memberName, "([A-Z][a-z]+)", RegexOptions.None);
-
-            StringBuilder format = new StringBuilder();
-            foreach (string word in words) {
-                if (format.Length == 0) {
-                    format.Append(word);
-                } else {
-                    format.Append(" ");
-                    format.Append(word.ToLowerInvariant());
-                }
-            }
-
-            cheatDescription.Add(format.ToString());
+        foreach (CheatDescriptor member in cheatDescriptors) {
+            cheatDescription.Add(member.Description);
 
             // command formatted with arguments
-            format = new StringBuilder();
-            format.Append(indent + cheatAttr.Name);
+            StringBuilder format = new StringBuilder();
+            format.Append(indent + member.CommandName);
 
-            foreach (ParameterInfo parameterInfo in  member.GetParameters()) {
+            foreach (ParameterInfo parameterInfo in  member.Parameters) {
                 format.AppendFormat(" <{0}>", parameterInfo.Name);
             }
 

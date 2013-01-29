@@ -51,7 +51,6 @@ public static class CheatInputDialog {
     }
 
     private static void DrawInsideDialog(int dialogId, GUISkin skin) {
-
         // label
         GUILayout.BeginHorizontal();
         GUILayout.Label("Enter cheat: ", skin.GetStyle("label"));
@@ -91,18 +90,19 @@ public static class CheatInputDialog {
 
     private static void ApplyCheat(string cheatText) {
         string[] arguments = cheatText.Split(' ');
+        string commandName = arguments[0];
 
         // select correct cheat member
-        MethodInfo cheatMember = FindCheatMemberByCheatAttribute(arguments[0]);
+        CheatDescriptor cheat = CheatReference.GetCheatByCommandName(commandName);
 
         // check if cheat is found
-        if (cheatMember == null) {
+        if (cheat == null) {
             CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.", "MonospaceLabel");
             return;
         }
 
         // select parameters
-        ParameterInfo[] memberParams = cheatMember.GetParameters();
+        ParameterInfo[] memberParams = cheat.Parameters;
             
         if (memberParams.Length != arguments.Length - 1) {
             CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, arguments.Length-1) , "MonospaceLabel");
@@ -123,35 +123,8 @@ public static class CheatInputDialog {
         }
 
         // call
-        cheatMember.Invoke(null, parsedParameters);
+        cheat.Method.Invoke(null, parsedParameters);
 
-        Debug.Log("Applied cheat: " + cheatMember.Name);
-    }
-
-    private static MethodInfo FindCheatMemberByCheatAttribute(string cheatText) {
-        MethodInfo[] cheatMembers = typeof (CheatsImplementation).GetMethods(BindingFlags.Public | BindingFlags.Static);
-
-        MethodInfo cheatMember = null;
-        foreach (MethodInfo member in cheatMembers) {
-            // get cheat attr
-            object[] attr = member.GetCustomAttributes(typeof (CheatAttribute), false);
-
-            if (attr.Length == 0) {
-                continue;
-            }
-
-            var cheatAttr = attr[0] as CheatAttribute;
-            if (cheatAttr == null) {
-                continue;
-            }
-
-            // compare
-            if (String.Equals(cheatAttr.Name, cheatText, StringComparison.InvariantCultureIgnoreCase)) {
-                cheatMember = member;
-                break;
-            }
-        }
-
-        return cheatMember;
+        Debug.Log("Applied cheat: " + cheat.CommandName);
     }
 }
