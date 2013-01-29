@@ -288,12 +288,12 @@ public class HUD : MonoBehaviour {
 
         if (GUI.Button(new Rect(pixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {
             DisplayDialog("Restart", "Would you like to restart this level?",
-                          () => Application.LoadLevel(Application.loadedLevel), delegate() { });
+                          () => AsyncSceneLoader.Load(Application.loadedLevelName), delegate() { });
         }
 
         if (GUI.Button(new Rect(pixelsFromRight(115), 20, 95, 59), "", skin.GetStyle("MenuButton"))) {
             DisplayDialog("Return to menu", "Would you like to return to the menu?",
-                          () => Application.LoadLevel(Scenes.MainMenu), () => { });
+                          () => AsyncSceneLoader.Load(Scenes.MainMenu), () => { });
             
         }
     }
