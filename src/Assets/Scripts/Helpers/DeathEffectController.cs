@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 /// Executes delayed removal of objects with particle and other effects
 /// </summary>
 public sealed class DeathEffectController : MonoBehaviour {
-    private IEnumerator ProcessDeathEffect(GameObject context, DeathEffects.DeathEffectConfiguration animationConfiguration) {
+    private static IEnumerator ProcessDeathEffect(GameObject context, DeathEffects.DeathEffectConfiguration animationConfiguration) {
         // first wait for removing object or particles
         yield return new WaitForSeconds(animationConfiguration.InitialDelay);
 
@@ -81,7 +81,7 @@ public sealed class DeathEffectController : MonoBehaviour {
 
         objectToRegister.name = "__DeathParticle";
 
-        this.StartCoroutine(this.ProcessDeathEffect(objectToRegister, animationConfiguration));
+        this.StartCoroutine(ProcessDeathEffect(objectToRegister, animationConfiguration));
     }
 
     /// <summary>

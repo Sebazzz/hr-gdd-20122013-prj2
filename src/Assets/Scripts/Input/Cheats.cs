@@ -388,7 +388,7 @@ public static class Cheats {
             // text field
             GUILayout.BeginHorizontal();
             GUI.SetNextControlName("CheatInputBox");
-            _EnteredCheat = GUILayout.TextField(_EnteredCheat, 60, skin.GetStyle("textfield"));
+            _EnteredCheat = GUILayout.TextField(_EnteredCheat, 60, skin.GetStyle("textfield")).TrimStart('`');
             GUILayout.EndHorizontal();
 
             bool cheatEnterKeyPressed = _EnteredCheat.Length > 0 &&
@@ -562,10 +562,17 @@ public static class Cheats {
             GUILayout.EndScrollView();
             
             GUILayout.BeginHorizontal(GUILayout.Width(50));
+            GUI.SetNextControlName("CloseButton");
             if (GUILayout.Button("Close", skin.GetStyle("button"))) {
                 _ShowDialog = false;
             }
+            
             GUILayout.EndHorizontal();
+
+            // set focus to close button
+            if (GUI.GetNameOfFocusedControl() == string.Empty) {
+                GUI.FocusControl("CloseButton");
+            }
         }
 
     }
@@ -621,10 +628,16 @@ public static class Cheats {
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal(GUILayout.Width(50));
+            GUI.SetNextControlName("CloseButton");
             if (GUILayout.Button("Close", skin.GetStyle("button"))) {
                 _ShowDialog = false;
             }
             GUILayout.EndHorizontal();
+
+            // set focus to close button
+            if (GUI.GetNameOfFocusedControl() == string.Empty) {
+                GUI.FocusControl("CloseButton");
+            }
         }
 
     }
