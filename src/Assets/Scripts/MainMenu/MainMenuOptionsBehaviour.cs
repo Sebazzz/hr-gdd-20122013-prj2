@@ -24,14 +24,9 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	void Start () {
+	    bool firstTime = PlayerPrefs.GetInt("audio", 0) == 0 && PlayerPrefs.GetInt("resolution", 0) == 0 && (windowedOptions)PlayerPrefs.GetInt("windowed", 0) == 0 && PlayerPrefs.GetInt("quality", 0) == 0;
 
-		bool firstTime = false;
-
-		if (PlayerPrefs.GetInt("audio", 0) == 0 && PlayerPrefs.GetInt("resolution", 0) == 0 && (windowedOptions)PlayerPrefs.GetInt("windowed", 0) == 0 && PlayerPrefs.GetInt("quality", 0) == 0) {
-			firstTime = true;
-		}
-
-		audioOption = (audioOptions) PlayerPrefs.GetInt("audio", 0);
+	    audioOption = (audioOptions) PlayerPrefs.GetInt("audio", 0);
 		resolution = PlayerPrefs.GetInt("resolution", 0);
 		windowed = (windowedOptions) PlayerPrefs.GetInt("windowed", 0);
 		quality = PlayerPrefs.GetInt("quality", 0);
@@ -45,10 +40,14 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		if (PlayerPrefs.GetInt("windowed", 0) == 0) fullscreen = true;
 		else fullscreen = false;
 
-		if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) && (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
-			Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width, resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
+        if (Screen.GetResolution.Length > 0) {
+            if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) &&
+                (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
+                Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
+                                     resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
+        }
 
-		if(QualitySettings.GetQualityLevel() != quality)
+	    if(QualitySettings.GetQualityLevel() != quality)
 			QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality", 0));
 	}
 
