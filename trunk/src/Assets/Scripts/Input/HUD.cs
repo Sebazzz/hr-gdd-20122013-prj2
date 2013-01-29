@@ -225,18 +225,21 @@ public class HUD : MonoBehaviour {
 
         if (GUI.Button(new Rect(150 - 50 - 20, 150, 40, 40), "", skin.GetStyle("MenuScoreButton"))) {
             showDialog = DialogType.none;
-            Application.LoadLevel(Scenes.MainMenu);
+
+            AsyncSceneLoader.Load(Scenes.MainMenu);
         }
 
         if (GUI.Button(new Rect(150-20, 150, 40, 40), "", skin.GetStyle("RestartScoreButton"))) {
             showDialog = DialogType.none;
-            Application.LoadLevel(Application.loadedLevel);
+
+            AsyncSceneLoader.Load(Application.loadedLevelName);
         }
 
         if (GUI.Button(new Rect(150 + 50 - 20, 150, 40, 40), "", skin.GetStyle("NextScoreButton"))) {
             showDialog = DialogType.none;
             MainMenuReturnToLevelSelectBehaviour.selectedWorld = currentWorld;
-            Application.LoadLevel(Scenes.MainMenu);
+
+            AsyncSceneLoader.Load(Scenes.MainMenu);
         }
     }
 
@@ -259,12 +262,14 @@ public class HUD : MonoBehaviour {
 
         if (GUI.Button(new Rect(150 - 50, 150, 40, 40), "", skin.GetStyle("MenuScoreButton"))) {
             showDialog = DialogType.none;
-            Application.LoadLevel(Scenes.MainMenu);
+
+            AsyncSceneLoader.Load(Scenes.MainMenu);
         }
 
         if (GUI.Button(new Rect(150 + 10, 150, 40, 40), "", skin.GetStyle("RestartScoreButton"))) {
             showDialog = DialogType.none;
-            Application.LoadLevel(Application.loadedLevel);
+
+            AsyncSceneLoader.Load(Application.loadedLevelName);
         }
     }
 
