@@ -18,7 +18,7 @@ public class MainMenuManager : MonoBehaviour {
 	private const float cameraLow = 51.19862f;
 	private float cameraYPosition = 51.19862f;
 	
-	public Camera camera;
+	public Camera cam;
 
 	/// <summary>
 	/// Use this for initialization
@@ -48,8 +48,8 @@ public class MainMenuManager : MonoBehaviour {
 				break;
 		}
 
-		camera.transform.rotation = Quaternion.Euler(0f, cameraRotation, 0f);
-		camera.transform.position = new Vector3(camera.transform.position.x, cameraYPosition, camera.transform.position.z);
+		cam.transform.rotation = Quaternion.Euler(0f, cameraRotation, 0f);
+		cam.transform.position = new Vector3(cam.transform.position.x, cameraYPosition, cam.transform.position.z);
 	}
 	
 	/// <summary>
@@ -57,8 +57,8 @@ public class MainMenuManager : MonoBehaviour {
 	/// </summary>
 	private void Update () {
 
-		camera.transform.rotation = Quaternion.Slerp(camera.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f);
-		camera.transform.position = Vector3.Slerp(camera.transform.position, new Vector3(camera.transform.position.x, cameraYPosition, camera.transform.position.z), Time.deltaTime * 5f);
+		cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Quaternion.Euler(0f, cameraRotation, 0f), Time.deltaTime*5f);
+		cam.transform.position = Vector3.Slerp(cam.transform.position, new Vector3(cam.transform.position.x, cameraYPosition, cam.transform.position.z), Time.deltaTime * 5f);
 	}
 
 	/// <summary>

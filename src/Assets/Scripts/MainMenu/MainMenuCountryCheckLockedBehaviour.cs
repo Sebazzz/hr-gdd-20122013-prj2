@@ -7,7 +7,7 @@ public class MainMenuCountryCheckLockedBehaviour : MonoBehaviour {
 	public Material levelUnlocked;
 	public Material levelLocked;
 	public MeshRenderer planeMesh;
-	public Collider collider;
+	public Collider meshCollider;
 
 	// Use this for initialization
 	void Start () {
@@ -15,19 +15,19 @@ public class MainMenuCountryCheckLockedBehaviour : MonoBehaviour {
 		if (countryIndex != 0) {
 			if (Levels.Countries[countryIndex - 1].HasBeenCompleted()) {
 				planeMesh.material = levelUnlocked;
-				collider.enabled = true;
+				meshCollider.enabled = true;
 
 				if (Levels.GetLevelByName(Levels.Countries[countryIndex].Levels[0].Name).GetState() == Level.LevelStatus.Locked)
 					Levels.GetLevelByName(Levels.Countries[countryIndex].Levels[0].Name).Unlock();
 			}
 			else {
 				planeMesh.material = levelLocked;
-				collider.enabled = false;
+				meshCollider.enabled = false;
 			}
 		}
 		else {
 			planeMesh.material = levelUnlocked;
-			collider.enabled = true;
+			meshCollider.enabled = true;
 		}
 
 		//Debug.Log(Levels.Countries[0].HasBeenCompleted());

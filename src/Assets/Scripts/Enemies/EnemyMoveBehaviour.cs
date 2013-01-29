@@ -3,9 +3,9 @@ using System.Collections;
 
 public class EnemyMoveBehaviour : MonoBehaviour {
 
-	public AudioSource audio;
-	public AudioClip clip;
-	private bool active = false;
+	public AudioSource AudioToChange;
+	public AudioClip newAudioClip;
+	private bool enemyIsActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -14,17 +14,17 @@ public class EnemyMoveBehaviour : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!active) return;
+		if (!enemyIsActive) return;
 		transform.position = Vector3.Lerp(transform.position, new Vector3(180f, transform.position.y, transform.position.z), 0.005f);
 
 	}
 
-	public void Activate() {
-		active = true;
-		audio.Stop();
-		audio.clip = clip;
-		audio.Play();
-		audio.loop = true;
+	public void ActivateEnemy() {
+		enemyIsActive = true;
+		AudioToChange.Stop();
+		AudioToChange.clip = newAudioClip;
+		AudioToChange.Play();
+		AudioToChange.loop = true;
 		
 	}
 }
