@@ -14,10 +14,12 @@ public class CheckAudioOptionBehaviour : MonoBehaviour {
 	void Update () {
 		switch (PlayerPrefs.GetInt("audio", 0)) {
 			case 0:
-				listener.enabled = true;
+				AudioListener.volume = 1f;
+				//listener.enabled = true;
 				break;
 			case 1:
-				listener.enabled = false;
+				AudioListener.volume = 0f;
+				//listener.enabled = false;
 				break;
 		}
 	}

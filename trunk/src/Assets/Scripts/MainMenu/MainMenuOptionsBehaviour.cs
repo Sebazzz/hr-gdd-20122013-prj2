@@ -24,6 +24,13 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	void Start () {
+
+		bool firstTime = false;
+
+		if (PlayerPrefs.GetInt("audio", 0) == 0 && PlayerPrefs.GetInt("resolution", 0) == 0 && (windowedOptions)PlayerPrefs.GetInt("windowed", 0) == 0 && PlayerPrefs.GetInt("quality", 0) == 0) {
+			firstTime = true;
+		}
+
 		audio = (audioOptions) PlayerPrefs.GetInt("audio", 0);
 		resolution = PlayerPrefs.GetInt("resolution", 0);
 		windowed = (windowedOptions) PlayerPrefs.GetInt("windowed", 0);
@@ -32,8 +39,10 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		resolutions = Screen.resolutions;
 		qualityOptions = QualitySettings.names;
 
+		if (firstTime) { SaveOptions(); return; }
+
 		bool fullscreen;
-		if (windowed == 0) fullscreen = true;
+		if (PlayerPrefs.GetInt("windowed", 0) == 0) fullscreen = true;
 		else fullscreen = false;
 
 		if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) && (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
@@ -60,10 +69,9 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	/// Write options to playerprefs
 	/// </summary>
 	public void SaveOptions() {
-		PlayerPrefs.SetInt("audio", (int)audio);
 		PlayerPrefs.SetInt("resolution", resolution);
 		PlayerPrefs.SetInt("windowed", (int)windowed);
-		PlayerPrefs.SetInt("Quality", quality);
+		//PlayerPrefs.SetInt("Quality", quality);
 
 		bool fullscreen;
 		if(PlayerPrefs.GetInt("windowed") == 0) fullscreen = true;
@@ -71,7 +79,7 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 
 		Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width, resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
 
-		QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
+		//QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
 	}
 
 
@@ -79,6 +87,8 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		audio++;
 
 		if (audio > audioOptions.Off) audio = 0;
+
+		PlayerPrefs.SetInt("audio", (int)audio);
 	}
 
 	public void SetResolution() {
@@ -98,6 +108,9 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		quality++;
 
 		if (quality >= qualityOptions.Length) quality = 0;
+
+		PlayerPrefs.SetInt("Quality", quality);
+		QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
 
 	}
 }
