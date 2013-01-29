@@ -51,8 +51,7 @@ public class RepelBehaviour : MonoBehaviour {
 
                 float angle = Vector3.Angle(this.transform.forward, dir);
 
-                Debug.Log(String.Format("Direction: {0}; my Y: {1}; angle: {2}", dir, this.transform.eulerAngles.y,
-                                        angle));
+                //Debug.Log(String.Format("Direction: {0}; my Y: {1}; angle: {2}", dir, this.transform.eulerAngles.y, angle));
 
                 if (angle > EffectAngle/2f) {
                     continue;

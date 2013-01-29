@@ -93,7 +93,7 @@ public static class CheatsImplementation {
 
     [Cheat("disable")]
     public static void DisableTheSpecifiedVariabele(string variabele) {
-        SetBooleanVariabeleValue(variabele, true);
+        SetBooleanVariabeleValue(variabele, false);
     }
 
     private static void SetBooleanVariabeleValue(string variabele, bool value) {
