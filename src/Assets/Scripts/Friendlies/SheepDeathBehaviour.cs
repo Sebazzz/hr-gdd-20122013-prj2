@@ -75,10 +75,6 @@ public class SheepDeathBehaviour : CanDieBehaviour {
 
         }
 
-        if (this.DisableScriptsWhenDying) {
-            this.DisableScriptIfExists<LookatShepherdBehaviour>();
-        }
-
         LevelBehaviour.Instance.OnSheepDeath();
         base.OnStartDying(causeOfDeath);
     }
