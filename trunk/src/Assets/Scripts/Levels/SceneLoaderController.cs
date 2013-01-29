@@ -22,7 +22,6 @@ public sealed class SceneLoaderController : MonoBehaviour {
 
     IEnumerator LoadScene() {
         string scene = AsyncSceneLoader.GetTargetScene();
-        Debug.Log("Loading scene: " + scene);
 
         // standard wait time
         yield return new WaitForSeconds(this.StandardWaitTime);
@@ -31,7 +30,6 @@ public sealed class SceneLoaderController : MonoBehaviour {
 
         // load
         AsyncOperation loadOperation = Application.LoadLevelAsync(scene);
-        Debug.Log("Loaded scene: " + scene);
         yield return loadOperation;
 
         yield break;

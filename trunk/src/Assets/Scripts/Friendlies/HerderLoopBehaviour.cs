@@ -191,7 +191,6 @@ public class HerderLoopBehaviour : MonoBehaviour {
             if (this.stuckCheckTimer.IsTriggered) {
                 // check if we're stuck
                 if (this.CheckStuck()) {
-                    Debug.LogWarning(this.gameObject.name + " is stuck. Canceling walk.");
                     this.CancelWalk();
                     return;
                 }

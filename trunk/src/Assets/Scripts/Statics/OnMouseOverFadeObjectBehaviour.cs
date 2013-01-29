@@ -36,7 +36,7 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
 
 	    if (this.RecursiveWalk) {
 	        //this.WalkAndProcessGameObject(gameObjectToProcess);
-            Debug.LogWarning("Recursive walk currently not implemented");
+            //Debug.LogWarning("Recursive walk currently not implemented");
             this.processGameObjects = !this.ProcessGameObject(gameObjectToProcess);
         } else {
 	        this.processGameObjects = !this.ProcessGameObject(gameObjectToProcess);
@@ -107,7 +107,7 @@ public class OnMouseOverFadeObjectBehaviour : MonoBehaviour {
             return true;
         }
 		
-		Debug.Log("Processing " + gameObjectToProcess.name);
+		
 		
         Color shadercolor = new Color(
                 currentRenderer.material.color.r,
