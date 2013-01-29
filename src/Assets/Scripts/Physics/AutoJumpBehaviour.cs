@@ -64,7 +64,7 @@ public class AutoJumpBehaviour : MonoBehaviour {
             bool doneJumping = this.rigidbody.velocity.y < 0 && Math.Abs(this.transform.position.y - this.jumpStartY) < JumpCheckThreshold;
 
             if (doneJumping) {
-                this.isJumping = false;Debug.Log("Jumping done");
+                this.isJumping = false;
                 this.jumpStartY = Single.NaN;
             } else {
                 return; // don't jump while jumping
@@ -116,12 +116,9 @@ public class AutoJumpBehaviour : MonoBehaviour {
 		
 		if (angle < 90.0F - angleRange) {
             this.ExecuteJump(jumpZoneConfiguration, false);	
-			Debug.Log (" back hit" + angle  +"<90-range");
 		} else if ( angle > 180 -  angleRange ) {
 			this.ExecuteJump (jumpZoneConfiguration,true);	
-			Debug.Log (" front hit" + angle +"> 90-range");
 		} else {
-			Debug.Log (" no good hit" + angle );
 			return;
 		}
 		 
