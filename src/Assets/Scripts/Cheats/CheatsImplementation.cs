@@ -58,7 +58,7 @@ public static class CheatsImplementation {
         cheatDescription.Add(null);
 
         // show the dialog
-        CheatReferenceDialog.ShowDialog("Cheats1337 Reference", cheatName.ToArray(), cheatDescription.ToArray(),
+        CheatReferenceDialog.ShowDialog("Cheats Reference", cheatName.ToArray(), cheatDescription.ToArray(),
                                         "MonospaceLabel");
     }
 
