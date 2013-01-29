@@ -87,7 +87,7 @@ public static class CheatsImplementation {
     #region Variabele modifications
 
     private static readonly List<CheatVar<bool>> ToggleCheatVars = new List<CheatVar<bool>>();
-    private static readonly List<CheatVar<float>> FloatCheatVars = new List<CheatVar<float>>();
+    //private static readonly List<CheatVar<float>> FloatCheatVars = new List<CheatVar<float>>();
 
     static CheatsImplementation() {
         ToggleCheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times",
