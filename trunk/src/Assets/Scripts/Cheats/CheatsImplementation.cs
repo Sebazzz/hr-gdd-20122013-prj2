@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -18,8 +17,8 @@ public static class CheatsImplementation {
     public static void ShowCheatsHelpReference() {
         const string indent = "    ";
 
-        List<string> cheatName = new List<string>();
-        List<string> cheatDescription = new List<string>();
+        var cheatName = new List<string>();
+        var cheatDescription = new List<string>();
 
         // title for general cheats
         cheatName.Add("General commands:");
@@ -32,7 +31,7 @@ public static class CheatsImplementation {
             cheatDescription.Add(member.Description);
 
             // command formatted with arguments
-            StringBuilder format = new StringBuilder();
+            var format = new StringBuilder();
             format.Append(indent + member.CommandName);
 
             foreach (ParameterInfo parameterInfo in  member.Parameters) {
@@ -50,7 +49,7 @@ public static class CheatsImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate any enable/disable vars
-        foreach (CheatVar<bool> cheatVar in ToggleCheatVars) {
+        foreach (var cheatVar in ToggleCheatVars) {
             cheatName.Add(indent + cheatVar.Name);
             cheatDescription.Add(cheatVar.Description);
         }
@@ -59,7 +58,8 @@ public static class CheatsImplementation {
         cheatDescription.Add(null);
 
         // show the dialog
-        CheatReferenceDialog.ShowDialog("Cheats1337 Reference", cheatName.ToArray(), cheatDescription.ToArray(), "MonospaceLabel");
+        CheatReferenceDialog.ShowDialog("Cheats1337 Reference", cheatName.ToArray(), cheatDescription.ToArray(),
+                                        "MonospaceLabel");
     }
 
     [Cheat("ClearSettings")]
@@ -86,6 +86,20 @@ public static class CheatsImplementation {
 
     #region Variabele modifications
 
+    private static readonly List<CheatVar<bool>> ToggleCheatVars = new List<CheatVar<bool>>();
+    private static readonly List<CheatVar<float>> FloatCheatVars = new List<CheatVar<float>>();
+
+    static CheatsImplementation() {
+        ToggleCheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times",
+                                               v => CheatsController.EnableLargeSheep = v));
+        ToggleCheatVars.Add(new CheatVar<bool>("gamecheats", "Show the in-game cheat button and menu",
+                                               v => CheatsController.EnableInGameCheatsMenu = v));
+        ToggleCheatVars.Add(new CheatVar<bool>("terrainbounce", "Enable a bouncy terrain",
+                                               v => CheatsController.TerrainBounce = v));
+        ToggleCheatVars.Add(new CheatVar<bool>("sheeprotationlock", "Rotation lock of sheep. By default true.",
+                                               v => CheatsController.EnableSheepRotationLock = v));
+    }
+
     [Cheat("enable")]
     public static void EnableTheSpecifiedVariabele(string variabele) {
         SetBooleanVariabeleValue(variabele, true);
@@ -107,29 +121,20 @@ public static class CheatsImplementation {
             }
         }
 
-        CheatNotificationDialog.ShowDialog("Error", String.Format("Variabele could not be set to '{1}': Variabele '{0}' does not exist.", variabele, value), "MonospaceLabel");
+        CheatNotificationDialog.ShowDialog("Error",
+                                           String.Format(
+                                               "Variabele could not be set to '{1}': Variabele '{0}' does not exist.",
+                                               variabele, value), "MonospaceLabel");
     }
-
-    private static readonly List<CheatVar<bool>> ToggleCheatVars = new List<CheatVar<bool>>();
-    private static readonly List<CheatVar<float>> FloatCheatVars = new List<CheatVar<float>>();
-
-    static CheatsImplementation() {
-        ToggleCheatVars.Add(new CheatVar<bool>("supersheep", "Enlarge all sheeps in the next levels 4 times", v => CheatsController.EnableLargeSheep = v));
-        ToggleCheatVars.Add(new CheatVar<bool>("gamecheats", "Show the in-game cheat button and menu", v => CheatsController.EnableInGameCheatsMenu = v));
-        ToggleCheatVars.Add(new CheatVar<bool>("terrainbounce", "Enable a bouncy terrain", v => CheatsController.TerrainBounce = v));
-        ToggleCheatVars.Add(new CheatVar<bool>("sheeprotationlock", "Rotation lock of sheep. By default true.", v => CheatsController.EnableSheepRotationLock = v));
-    }
-
-    #region Nested type: CheatVar
 
     /// <summary>
     /// Internal helper struct for defining and setting variabeles
     /// </summary>
     /// <typeparam name="T"></typeparam>
     private struct CheatVar<T> {
+        public readonly string Description;
         public readonly string Name;
         public readonly Action<T> Setter;
-        public readonly string Description;
 
         public CheatVar(string name, Action<T> setter) {
             this.Name = name;
@@ -146,8 +151,6 @@ public static class CheatsImplementation {
 
     #endregion
 
-    #endregion
-
     #region Unlockables
 
     [Cheat("PlayTheGround")]
@@ -161,7 +164,7 @@ public static class CheatsImplementation {
 
     [Cheat("EndlessCameraMovement")]
     public static void DisableCameraMovementBounds() {
-        ArrowMovementCameraBehaviour cameraScript = Camera.mainCamera.GetComponent<ArrowMovementCameraBehaviour>();
+        var cameraScript = Camera.mainCamera.GetComponent<ArrowMovementCameraBehaviour>();
 
         if (cameraScript != null) {
             cameraScript.BoundingBoxBottomLeft = new Vector2(-1000, -1000);
@@ -172,7 +175,7 @@ public static class CheatsImplementation {
     #endregion
 
     #region Just for Fun
-        
+
     [Cheat("SheepRain")]
     public static void StartsRainingSheepAllOverTheLevel(int amountPerSecond, int timeInSeconds) {
         // find a sheep to clone
@@ -189,12 +192,12 @@ public static class CheatsImplementation {
         Vector3 upperBounds = lowerBounds + Terrain.activeTerrain.terrainData.size;
 
         // split in two
-        int amountPerSecondLower = Mathf.FloorToInt(amountPerSecond / 2f);
-        int amountPerSecondUpper = Mathf.CeilToInt(amountPerSecond / 2f);
+        int amountPerSecondLower = Mathf.FloorToInt(amountPerSecond/2f);
+        int amountPerSecondUpper = Mathf.CeilToInt(amountPerSecond/2f);
 
         while (timeLeft > 0) {
             // first half of second
-            for (int n=0;n<amountPerSecondLower;n++) {
+            for (int n = 0; n < amountPerSecondLower; n++) {
                 SpawnSheep(sheepTemplate, lowerBounds, upperBounds);
             }
 
@@ -217,12 +220,12 @@ public static class CheatsImplementation {
 
     private static void SpawnSheep(GameObject sheepTemplate, Vector3 lowerBounds, Vector3 upperBounds) {
         // determine position
-        Vector3 spawnPosition = new Vector3(Random.Range(lowerBounds.x, upperBounds.x),
-                                            Camera.mainCamera.transform.position.y + 50f,
-                                            Random.Range(lowerBounds.z, upperBounds.z));
+        var spawnPosition = new Vector3(Random.Range(lowerBounds.x, upperBounds.x),
+                                        Camera.mainCamera.transform.position.y + 50f,
+                                        Random.Range(lowerBounds.z, upperBounds.z));
 
         // determine rotation
-        Vector3 rotation = new Vector3();
+        var rotation = new Vector3();
         rotation.y = Random.Range(0, 360);
 
         if (!CheatsController.EnableSheepRotationLock) {
@@ -242,7 +245,7 @@ public static class CheatsImplementation {
 
             float finalForce = force*rb.mass;
 
-            rb.AddRelativeForce(Vector3.up * finalForce, ForceMode.Impulse);
+            rb.AddRelativeForce(Vector3.up*finalForce, ForceMode.Impulse);
         }
     }
 
@@ -253,9 +256,9 @@ public static class CheatsImplementation {
         foreach (GameObject gameObject in sheep) {
             Rigidbody rb = gameObject.rigidbody;
 
-            float finalForce = force * rb.mass;
+            float finalForce = force*rb.mass;
 
-            rb.AddForceAtPosition(Vector3.up * finalForce, Vector3.left + Vector3.down, ForceMode.Impulse);
+            rb.AddForceAtPosition(Vector3.up*finalForce, Vector3.left + Vector3.down, ForceMode.Impulse);
         }
     }
 
@@ -278,20 +281,18 @@ public static class CheatsImplementation {
         GameObject worldObject = GameObject.FindGameObjectWithTag(Tags.World);
 
         if (worldObject != null) {
-            CheatsController ctrl = worldObject.GetComponent<CheatsController>();
+            var ctrl = worldObject.GetComponent<CheatsController>();
 
             if (ctrl != null) {
                 return ctrl;
             }
         }
 
-        CheatNotificationDialog.ShowDialog("Error", "You're not currently in a level and the command cannot be executed therefore.", "MonospaceLabel");
+        CheatNotificationDialog.ShowDialog("Error",
+                                           "You're not currently in a level and the command cannot be executed therefore.",
+                                           "MonospaceLabel");
         return null;
     }
 
-        
-
     #endregion
-
-        
 }
