@@ -2,5 +2,9 @@
 /// Represents cheat categories
 /// </summary>
 public enum CheatCategory {
-    None
+    GeneralCommands,
+    TestingHelpers,
+    JustForFun,
+    DebuggingHelpers,
+    Unlockables,
 }

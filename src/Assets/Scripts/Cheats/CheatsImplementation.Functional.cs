@@ -5,7 +5,7 @@ using UnityEngine;
 
 // Cheats implementation: Functional
 public static partial class CheatsImplementation {
-    [Cheat("Help")]
+    [Cheat("Help", CheatCategory.GeneralCommands)]
     public static void ShowCheatsHelpReference() {
         const string indent = "    ";
 
@@ -56,14 +56,14 @@ public static partial class CheatsImplementation {
                                         "CheatDialogLabel");
     }
 
-    [Cheat("ClearSettings")]
+    [Cheat("ClearSettings", CheatCategory.TestingHelpers)]
     public static void ClearAllSettings() {
         PlayerPrefs.DeleteAll();
 
         AsyncSceneLoader.Load(Scenes.MainMenu);
     }
 
-    [Cheat("BeTheBest")]
+    [Cheat("BeTheBest", CheatCategory.TestingHelpers)]
     public static void SetAllLevelsFullyPlayed() {
         Level currentLevel = Levels.GetFirstLevel();
 
@@ -76,7 +76,7 @@ public static partial class CheatsImplementation {
         AsyncSceneLoader.Load(Scenes.MainMenu);
     }
 
-    [Cheat("Reload")]
+    [Cheat("Reload", CheatCategory.TestingHelpers)]
     public static void ReloadTheCurrentLevel() {
         AsyncSceneLoader.Load(Application.loadedLevelName);
     }
