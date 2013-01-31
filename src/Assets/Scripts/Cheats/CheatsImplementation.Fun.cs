@@ -39,14 +39,14 @@ public static partial class CheatsImplementation {
     #region Fun: Sheep control
 
     [Cheat("ControllableSheep")]
-    public static void EnablesSheepToBeControlledByArrowKeys() {
+    public static void EnablesSheepToBeControlledByArrowKeysOptionallyDisablingControlHelperEffects(bool disableControlEffects) {
         // find dog marker
-        GameObject dog = GameObject.FindGameObjectWithTag(Tags.Shepherd);
+        GameObject sourceDog = GameObject.FindGameObjectWithTag(Tags.Shepherd);
         GameObject selectionMarker = null;
-        
-        if (dog != null) {
+
+        if (sourceDog != null) {
             // get the projector
-            foreach (Transform tr in dog.transform) {
+            foreach (Transform tr in sourceDog.transform) {
                 if (tr.gameObject.name == "SelectionProjector") {
                     selectionMarker = tr.gameObject;
                     break;
@@ -54,12 +54,29 @@ public static partial class CheatsImplementation {
             }
         }
 
-        // attach the controlling to the sheep
-        GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
-        foreach (GameObject gameObject in sheep) {
-            CheatControlSheepByArrowKeysBehaviour c = gameObject.AddComponent<CheatControlSheepByArrowKeysBehaviour>();
+        // disable dog effects
+        GameObject[] dogs = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
+
+        foreach (GameObject dog in dogs) {
+            RepelBehaviour repeller = dog.GetComponent<RepelBehaviour>();
+
+            if (repeller != null) {
+                repeller.enabled = !disableControlEffects;
+            }
+        }
+
+        // attach the controlling to the sheep
+        GameObject[] sheepArr = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+
+        foreach (GameObject sheep in sheepArr) {
+            CheatControlSheepByArrowKeysBehaviour c = sheep.AddComponent<CheatControlSheepByArrowKeysBehaviour>();
             c.SetMarker(selectionMarker);
+
+            MagneticBehaviour magnet = sheep.GetComponent<MagneticBehaviour>();
+            if (magnet != null) {
+                magnet.enabled = !disableControlEffects;
+            }
         }
 
         CheatNotificationDialog.ShowDialog("Instruction", "Control the sheep using the JIKL keys (similar to WSAD). Select an sheep using the middle mouse button, unselect it by clicking again.", "MonospaceLabel");
