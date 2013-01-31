@@ -5,6 +5,8 @@ public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
     private static readonly Dictionary<KeyCode, Vector3> MovementMultipliers = new Dictionary<KeyCode, Vector3>() {
             {KeyCode.I, new Vector3(0, 0, 1)},
             {KeyCode.K, new Vector3(0, 0, -1)},
+            {KeyCode.U, new Vector3(-1, 0, 0)},
+            {KeyCode.O, new Vector3(1, 0, 0)},
     };
 
     private static readonly Dictionary<KeyCode, int> RotationMultipliers = new Dictionary<KeyCode, int>() {
@@ -12,9 +14,12 @@ public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
             {KeyCode.L,1},
     };
 
+    private const KeyCode JumpKey = KeyCode.Space;
+
     private const int Button = 2;
     private const float MovementSpeed = 10f;
     private const float RotationSpeed = 90f;
+    private const float JumpForce = 10f;
 
     private GameObject marker;
     private bool isMouseOver;
@@ -60,7 +65,6 @@ public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
             if (Input.GetKey(code)) {
                 Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
                 movementSpeed = movementSpeed * CheatControlSheepByArrowKeysBehaviour.MovementSpeed * Time.deltaTime;
-                movementSpeed.y = 0;
 
                 this.transform.Translate(movementSpeed, Space.World);
             }
@@ -73,6 +77,11 @@ public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
             if (Input.GetKey(code)) {
                 this.transform.Rotate(Vector3.up, controlPair.Value * Time.deltaTime * RotationSpeed, Space.Self);
             }
+        }
+
+        // control: jump
+        if (Input.GetKey(JumpKey)) {
+            this.rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
     }
 
