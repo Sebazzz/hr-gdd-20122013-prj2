@@ -202,4 +202,27 @@ public static class CheatService {
 
         Debug.Log("Applied cheat: " + cheat.Name);
     }
+
+    /// <summary>
+    /// Executes a raw cheat command
+    /// </summary>
+    /// <param name="command"></param>
+    public static void ExecuteRawCommand(string command) {
+        string[] arguments = command.Split(' ');
+        string commandName = arguments[0];
+
+        // select correct cheat member
+        CheatCommandDescriptor cheat = CheatService.GetCheatByCommandName(commandName);
+
+        // check if cheat is found
+        if (cheat == null) {
+            CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.");
+            return;
+        }
+
+        object[] parameters = new object[arguments.Length - 1];
+        Array.Copy(arguments, 1, parameters, 0, parameters.Length);
+
+        CheatService.ExecuteCheat(cheat, parameters);
+    }
 }

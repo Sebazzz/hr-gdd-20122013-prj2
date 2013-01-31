@@ -76,7 +76,7 @@ public static class CheatInputDialog {
             }
             else {
                 _EnteredCheat = _EnteredCheat.TrimEnd('\n', ' ', '\r');
-                ApplyCheat(_EnteredCheat);
+                CheatService.ExecuteRawCommand(_EnteredCheat);
             }
         }
         GUILayout.EndHorizontal();
@@ -86,24 +86,5 @@ public static class CheatInputDialog {
             GUI.FocusControl("CheatInputBox");
         }
 
-    }
-
-    private static void ApplyCheat(string cheatText) {
-        string[] arguments = cheatText.Split(' ');
-        string commandName = arguments[0];
-
-        // select correct cheat member
-        CheatCommandDescriptor cheat = CheatService.GetCheatByCommandName(commandName);
-
-        // check if cheat is found
-        if (cheat == null) {
-            CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.");
-            return;
-        }
-
-        object[] parameters = new object[arguments.Length-1];
-        Array.Copy(arguments, 1, parameters, 0, parameters.Length);
-        
-        CheatService.ExecuteCheat(cheat, parameters);
     }
 }
