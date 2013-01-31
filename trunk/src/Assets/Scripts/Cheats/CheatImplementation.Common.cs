@@ -23,13 +23,15 @@ using UnityEngine;
 /// <para>
 /// The guide to writing variabeles:
 ///   <para>
-///     The actual variabeles are contained in the <see cref="CheatsController"/> class and take effect there, usually
-///     after a level reload. The actual documentation and registration of the variabeles is done using the static contructor
-///     of this class.
+///     The actual variabeles are public static fields decorated with the <see cref="CheatVariabeleAttribute"/>. These 
+///     variabeles are defined in the <see cref="CheatVariables"/> class and take effect usually after a level reload. 
+///     The responsibility of applying cheat variabeles is taken by the <see cref="CheatsController"/> class. 
+///     The actual documentation of the variabeles is done by the <see cref="CheatVariabeleAttribute"/>. The
+///     variables can only of a primitive type. Variabeles are set using the <see cref="SetAVariabeleToTheSpecifiedValue"/> command.
 ///   </para>
 /// </para>
 /// </remarks>
-public static partial class CheatsImplementation {
+public static partial class CheatImplementation {
     #region Support methods
 
     private static bool StartCoroutine(IEnumerator coroutineResult) {

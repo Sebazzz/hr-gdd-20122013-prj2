@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 // Cheats implementation: Functional
-public static partial class CheatsImplementation {
+public static partial class CheatImplementation {
     [CheatCommand("EndlessCameraMovement", CheatCategory.DebuggingHelpers)]
     public static void DisableCameraMovementBounds() {
         var cameraScript = Camera.mainCamera.GetComponent<ArrowMovementCameraBehaviour>();

@@ -93,7 +93,7 @@ public static class CheatInputDialog {
         string commandName = arguments[0];
 
         // select correct cheat member
-        CheatDescriptor cheat = CheatRepository.GetCheatByCommandName(commandName);
+        CheatCommandDescriptor cheat = CheatRepository.GetCheatByCommandName(commandName);
 
         // check if cheat is found
         if (cheat == null) {
@@ -125,6 +125,6 @@ public static class CheatInputDialog {
         // call
         cheat.Method.Invoke(null, parsedParameters);
 
-        Debug.Log("Applied cheat: " + cheat.CommandName);
+        Debug.Log("Applied cheat: " + cheat.Name);
     }
 }

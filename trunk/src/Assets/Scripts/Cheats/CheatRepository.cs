@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -9,16 +8,46 @@ using System.Text.RegularExpressions;
 /// Class with the single purpose of descrbing cheats and aggregrating them
 /// </summary>
 public static class CheatRepository {
-    private static readonly List<CheatDescriptor> Cheats;
+    private static readonly List<CheatCommandDescriptor> CheatCommands;
+    private static readonly List<CheatVariabeleDescriptor> CheatVariables; 
 
     static CheatRepository() {
-        Cheats =  new List<CheatDescriptor>();
-        
-        MethodInfo[] cheatMembers = typeof(CheatsImplementation).GetMethods(BindingFlags.Public | BindingFlags.Static);
+        CheatCommands =  new List<CheatCommandDescriptor>();
+        CheatVariables = new List<CheatVariabeleDescriptor>();
+
+        FindCheatCommands();
+        FindCheatVariables();
+    }
+
+    private static void FindCheatVariables() {
+        FieldInfo[] cheatVariables = typeof (CheatVariables).GetFields(BindingFlags.Public | BindingFlags.Static);
+
+        foreach (FieldInfo member in cheatVariables) {
+            // get cheat attr
+            object[] attr = member.GetCustomAttributes(typeof(CheatVariabeleAttribute), false);
+
+            if (attr.Length == 0) {
+                continue;
+            }
+
+            var cheatAttr = attr[0] as CheatVariabeleAttribute;
+            if (cheatAttr == null) {
+                continue;
+            }
+
+            // add variabele
+            CheatVariabeleDescriptor descriptor = new CheatVariabeleDescriptor(cheatAttr.Name, cheatAttr.Description, member);
+
+            CheatVariables.Add(descriptor);
+        }
+    }
+
+    private static void FindCheatCommands() {
+        MethodInfo[] cheatMembers = typeof (CheatImplementation).GetMethods(BindingFlags.Public | BindingFlags.Static);
 
         foreach (MethodInfo member in cheatMembers) {
             // get cheat attr
-            object[] attr = member.GetCustomAttributes(typeof(CheatCommandAttribute), false);
+            object[] attr = member.GetCustomAttributes(typeof (CheatCommandAttribute), false);
 
             if (attr.Length == 0) {
                 continue;
@@ -38,43 +67,67 @@ public static class CheatRepository {
             foreach (string word in words) {
                 if (format.Length == 0) {
                     format.Append(word);
-                } else {
+                }
+                else {
                     format.Append(" " + word.ToLowerInvariant());
                 }
             }
 
             string description = format.ToString();
 
-            CheatDescriptor descriptor = new CheatDescriptor(
+            CheatCommandDescriptor descriptor = new CheatCommandDescriptor(
                 cheatAttr.Name,
                 description,
                 member,
                 member.GetParameters());
 
-            Cheats.Add(descriptor);
+            CheatCommands.Add(descriptor);
         }
     }
 
     /// <summary>
-    /// Gets all cheats in the system
+    /// Gets all cheat commands in the system
     /// </summary>
     /// <returns></returns>
-    public static IEnumerable<CheatDescriptor> GetAllCheats() {
-        return Cheats;
+    public static IEnumerable<CheatCommandDescriptor> GetAllCommands() {
+        return CheatCommands;
     }
+
+    /// <summary>
+    /// Gets all cheat variables in the system
+    /// </summary>
+    /// <returns></returns>
+    public static IEnumerable<CheatVariabeleDescriptor> GetAllVariabeles() {
+        return CheatVariables;
+    } 
 
     /// <summary>
     /// Gets the cheat by the specified command name. If not found, returns null.
     /// </summary>
     /// <param name="commandName"></param>
     /// <returns></returns>
-    public static CheatDescriptor GetCheatByCommandName(string commandName) {
-        foreach (CheatDescriptor cheat in Cheats) {
-            if (String.Equals(cheat.CommandName, commandName, StringComparison.InvariantCultureIgnoreCase)) {
+    public static CheatCommandDescriptor GetCheatByCommandName(string commandName) {
+        foreach (CheatCommandDescriptor cheat in CheatCommands) {
+            if (String.Equals(cheat.Name, commandName, StringComparison.InvariantCultureIgnoreCase)) {
                 return cheat;
             }
         }
 
         return null;
-    } 
+    }
+
+    /// <summary>
+    /// Gets the cheat variabele by the specified command name. If not found, returns null.
+    /// </summary>
+    /// <param name="variabeleName"></param>
+    /// <returns></returns>
+    public static CheatVariabeleDescriptor GetCheatByVariabeleName(string variabeleName) {
+        foreach (CheatVariabeleDescriptor cheat in CheatVariables) {
+            if (String.Equals(cheat.Name, variabeleName, StringComparison.InvariantCultureIgnoreCase)) {
+                return cheat;
+            }
+        }
+
+        return null;
+    }
 }

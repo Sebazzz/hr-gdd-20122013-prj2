@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Cheats implementation: Functional
-public static partial class CheatsImplementation {
+public static partial class CheatImplementation {
     [CheatCommand("SetGravity", CheatCategory.JustForFun)]
     public static void SetGlobalGravityDirection(float x, float y, float z) {
         Physics.gravity = new Vector3(x, y, z);
@@ -137,7 +137,7 @@ public static partial class CheatsImplementation {
         var rotation = new Vector3();
         rotation.y = Random.Range(0, 360);
 
-        if (!CheatsController.EnableSheepRotationLock) {
+        if (!CheatVariables.EnableSheepRotationLock) {
             rotation.x = Random.Range(0, 360);
             rotation.z = Random.Range(0, 360);
         }

@@ -22,7 +22,7 @@ internal static class CheatReferenceDialog {
     public static void ShowDialog(string title, string[] bodyColumn1, string[] bodyColumn2, string bodyStyleName) {
         _ShowDialog = true;
 
-        const int width = 600;
+        const int width = 900;
         const int height = 400;
         _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
 
@@ -67,7 +67,7 @@ internal static class CheatReferenceDialog {
 
             bool createSecondColumn = col2Text != null;
             if (createSecondColumn) {
-                GUILayout.Label(col1Text, textStyle, GUILayout.Width(225));
+                GUILayout.Label(col1Text, textStyle, GUILayout.Width(350));
 
                 GUILayout.BeginVertical();
                 GUILayout.Label(col2Text, textStyle);
