@@ -25,9 +25,9 @@ internal static class CheatReferenceDialog {
     public static void ShowDialog(string title, Dictionary<string, List<CheatCommandDescriptor>> cheatCommandsByCategory, IEnumerable<CheatVariabeleDescriptor> cheatVariables, string bodyStyleName) {
         _ShowDialog = true;
 
-        const int width = 900;
+        float width = Mathf.Max(Screen.width - 100f, 1024f);
         const int height = 400;
-        _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
+        _DialogRect = new Rect(Screen.width / 2f - (width / 2f), Screen.height / 2f - (height / 2f), width, height);
 
         _DialogBodyTitle = title;
         _CheatCommandsByCategory = cheatCommandsByCategory;
@@ -82,7 +82,6 @@ internal static class CheatReferenceDialog {
         }
 
         // list variabeles
-        CreateRow("  ", textStyle);
         CreateRow("Variables that can be set:", textFatStyle);
 
         foreach (CheatVariabeleDescriptor variabeleDescriptor in _CheatVariables) {
@@ -101,7 +100,6 @@ internal static class CheatReferenceDialog {
             CreateRow(format, variabeleDescriptor.Description, textStyle);
         }
 
-        CreateRow("   ", textStyle);
         CreateRow("Note: Some cheats may only be applied after a level reload.", textStyle);
 
         GUILayout.EndScrollView();

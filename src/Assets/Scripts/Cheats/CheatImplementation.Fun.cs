@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 // Cheats implementation: Functional
 public static partial class CheatImplementation {
@@ -36,50 +39,112 @@ public static partial class CheatImplementation {
         }
     }
 
-    #region Fun: Sheep control
+    #region Fun: Disco Sheep
+    [CheatCommand("DiscoSheep", CheatCategory.JustForFun)]
+    public static void ColorChangesOnEverySheep(bool useAlphaChannel) {
+        // start coroutine for every sheep
+        GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
-    [CheatCommand("ControllableSheep", CheatCategory.JustForFun)]
-    public static void EnablesSheepToBeControlledByArrowKeysOptionallyDisablingControlHelperEffects(bool disableControlEffects) {
-        // find dog marker
-        GameObject sourceDog = GameObject.FindGameObjectWithTag(Tags.Shepherd);
-        GameObject selectionMarker = null;
+        foreach (GameObject gameObject in sheep) {
+            StartCoroutine(ExecuteColorChange(gameObject, useAlphaChannel));
+        }
+    }
 
-        if (sourceDog != null) {
-            // get the projector
-            foreach (Transform tr in sourceDog.transform) {
-                if (tr.gameObject.name == "SelectionProjector") {
-                    selectionMarker = tr.gameObject;
-                    break;
-                }
+    // ReSharper disable FunctionNeverReturns -- This is intented
+    private static IEnumerator ExecuteColorChange(GameObject sheep, bool useAlphaChannel) {
+        // first find all materials
+        List<Material> materials = GetMaterialsOfObject(sheep, "Vacht");
+
+        // start color
+        {
+            Color32 startColor = CreateRandomColor(useAlphaChannel);
+
+            foreach (Material material in materials) {
+                material.color = startColor;
             }
         }
 
+        // go into our endless loop of fun
+        while (true) {
+            // factors
+            float r = Random.Range(-0.1f, 0.1f);
+            float g = Random.Range(-0.1f, 0.1f);
+            float b = Random.Range(-0.1f, 0.1f);
+            float a = Random.Range(-0.1f, 0.1f);
 
-        // disable dog effects
-        GameObject[] dogs = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
+            if (!useAlphaChannel) {
+                a = 0;
+            }
 
-        foreach (GameObject dog in dogs) {
-            RepelBehaviour repeller = dog.GetComponent<RepelBehaviour>();
+            // colorize each material
+            foreach (Material material in materials) {
+                Color currentColor = material.color;
 
-            if (repeller != null) {
-                repeller.enabled = !disableControlEffects;
+                currentColor.r = ClampColorFloat(currentColor.r + r);
+                currentColor.g = ClampColorFloat(currentColor.g + g);
+                currentColor.b = ClampColorFloat(currentColor.b + b);
+                currentColor.a = ClampColorFloat(currentColor.a + a);
+
+                material.color = currentColor;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+    // ReSharper restore FunctionNeverReturns
+
+    private static float ClampColorFloat(float current) {
+        const float min = 0f;
+        const float max = 1f;
+
+        if (current < min) {
+            return max;
+        }
+
+        if (current > max) {
+            return min;
+        }
+
+        return current;
+    }
+
+    private static Color CreateRandomColor(bool useAlphaChannel) {
+        float r = Random.Range(-1f, 1f);
+        float g = Random.Range(-1f, 1f);
+        float b = Random.Range(-1f, 1f);
+        float a = Random.Range(-1f, 1f);
+
+        if (!useAlphaChannel) {
+            a = 0;
+        }
+
+        return new Color(r, g, b, a);
+    }
+
+    private static List<Material> GetMaterialsOfObject(GameObject targetGameObject, string filter) {
+        List<Material> materials = new List<Material>();
+
+        Stack<GameObject> gameObjects = new Stack<GameObject>();
+        gameObjects.Push(targetGameObject);
+
+        while (gameObjects.Count > 0) {
+            GameObject current = gameObjects.Pop();
+
+            // disable emitter
+            MeshRenderer renderer = current.GetComponent<MeshRenderer>();
+            if ((filter == null || String.Equals(current.name, filter, StringComparison.InvariantCultureIgnoreCase)) && renderer != null) {
+                materials.AddRange(renderer.materials);
+            }
+
+            // search for additional
+            foreach (Transform childTransform in current.transform) {
+                GameObject child = childTransform.gameObject;
+
+                gameObjects.Push(child);
             }
         }
 
-        // attach the controlling to the sheep
-        GameObject[] sheepArr = GameObject.FindGameObjectsWithTag(Tags.Sheep);
-
-        foreach (GameObject sheep in sheepArr) {
-            CheatControlSheepByArrowKeysBehaviour c = sheep.AddComponent<CheatControlSheepByArrowKeysBehaviour>();
-            c.SetMarker(selectionMarker);
-
-            MagneticBehaviour magnet = sheep.GetComponent<MagneticBehaviour>();
-            if (magnet != null) {
-                magnet.enabled = !disableControlEffects;
-            }
-        }
-
-        CheatNotificationDialog.ShowDialog("Instruction", "Control the sheep using the JIKL keys (similar to WSAD). Select an sheep using the middle mouse button, unselect it by clicking again.");
+        return materials;
     }
 
     #endregion
