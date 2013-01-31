@@ -21,6 +21,10 @@ public sealed class Timer {
         this.currentTime = 0;
     }
 
+    public void Trigger() {
+        this.currentTime = TargetTime+1;
+    }
+
     public Timer() {
     }
 

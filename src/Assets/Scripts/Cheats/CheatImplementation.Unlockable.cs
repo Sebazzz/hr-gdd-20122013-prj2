@@ -1,4 +1,4 @@
-﻿ // Cheats implementation: Functional
+﻿ // Cheats implementation: Unlockables
 public static partial class CheatImplementation {
     [CheatCommand("PlayTheGround", CheatCategory.Unlockables)]
     public static void LoadDeveloperSandboxLevel() {
