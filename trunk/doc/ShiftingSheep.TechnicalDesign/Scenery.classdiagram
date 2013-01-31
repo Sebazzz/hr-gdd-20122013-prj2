@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="542e1632-3204-4d23-bc3b-88f79dec38d4" name="UMLClassDiagram2" linkedPackageId="0196696d-0e76-43c8-af5f-610280f0fbd3" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="41c345e4-3744-40c1-9bfd-d76f711a1f20">
+      <profileInstance Id="dbabce72-31eb-41ca-836b-294f7f45acd6" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f8a800ad-8ca0-4fa2-9b4f-36f09a4f9e18">
+      <profileInstance Id="e4b094c5-2b82-4b67-b139-82ee9950be9f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="72b8b180-938a-4266-bfd9-cc6a8b540222">
+      <profileInstance Id="32da25d7-729a-42f9-90a4-8eb3e5aa821f" name="CSharpProfile">
+        <elementDefinition Id="3841ac51-9c5d-421f-9a1b-a55831152330" />
+      </profileInstance>
+      <elementDefinition Id="5491e218-9cd4-4068-9bdd-6d55854cd3d9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8117097a-1af2-4dd3-93b8-1e5614b323fd" name=" NONACTIVE-SCENERY" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="155bb897-c0a1-413f-9e23-04ecd6e15143" />
+        <targetEnds>
+          <association Id="df147944-c00b-4689-976c-0fab7982e4ee" isDerived="false" sourceEndRoleName=" NONACTIVE-SCENERY" targetEndRoleName="Animation" isLeaf="false" isAbstract="false">
+            <classMoniker Id="b031bd33-ab65-4708-a355-44eb1f0c068c" LastKnownName="Animation" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="56b2c0a8-0c94-4fe9-9902-0472aab2b29f" name=" NONACTIVE-SCENERY" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b43a31ea-cab0-406e-aa4b-b02861083c23" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ab9c2d16-a3d6-47dc-8a8e-ebaa91ed5ecd" name="Animation" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="da356ee9-4270-45a1-bc4c-a7fb3297c542" name="Lower" value="0-1">
+                      <elementDefinition Id="aa2a85ad-9fc9-424f-b7bf-8864d3749c27" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="ff708749-d671-4182-95f0-a0928d694398" name="Upper" value="0-1">
+                      <elementDefinition Id="83f9a30a-68d0-4b84-a6d1-0b740830b7bb" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="cf0b50f9-15b2-41b0-b250-bfe5f91fb1dc" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5566ce5d-3ed9-4f9d-95b1-6ea4f0f17d16" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8e2b4030-214a-486a-90cf-e606bd3a842d" name="INTERACTIVE-SCENERY" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c19ab48d-3faf-4cff-8369-f3128ff05557" />
+        <targetEnds>
+          <association Id="46b6ba27-4d89-4967-b47e-93c108b4389d" isDerived="false" sourceEndRoleName="INTERACTIVE-SCENERY" targetEndRoleName="Behaviour" isLeaf="false" isAbstract="false">
+            <classMoniker Id="1beeaadd-0c3f-47f8-bc62-84dbc69eda99" LastKnownName="Behaviour" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9ceb366b-587c-43b1-9d07-3ff7298f2611" name="INTERACTIVE-SCENERY" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="c42bf633-2c1d-4916-b511-2e1ac46ab291" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="c27e4594-2338-41d1-ba56-68b9c1324b8c" name="Behaviour" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="7deb6615-2d53-43f5-969e-ffd3bf9e78e0" name="Lower" value="1 - *">
+                      <elementDefinition Id="1a2a3b5f-b609-499e-a326-499b8404c054" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="e765b06d-1c20-44c4-8b4d-3dbbdf388300" name="Upper" value="1 - *">
+                      <elementDefinition Id="b94656b3-de41-456f-a2b7-1cacbaf3d0a9" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="5c7b8149-dfee-41da-92bc-584e9b463f95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="5da79409-ed41-41ef-85ad-417beacd1093" />
+          </association>
+        </targetEnds>
+        <ownedOperationsInternal>
+          <operation Id="8fe48c56-03e7-492a-a7ee-1ec4e94ad46a" name="OnCollision" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="88226459-2477-4f6e-8ba2-aaf344939152" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1beeaadd-0c3f-47f8-bc62-84dbc69eda99" name="Behaviour" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cdd0a1b5-f7bd-4203-bc0f-7dc22649160a" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a90eb27f-e091-4698-b1f4-9fe63bbf33d0" name="Elctric Fence" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c02e7cb0-07bf-4ada-bb78-6690242c3751" />
+        <generalsInternal>
+          <generalization Id="8cef36cd-7d6f-4eb4-8fb3-9b6529998032" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="f7eea5f5-fecb-4082-a55b-819b2e166e44" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="e4e41eab-88a9-487c-88ee-bf9b99393181" isDerived="false" sourceEndRoleName="Elctric Fence" targetEndRoleName="KillBehaviour" isLeaf="false" isAbstract="false">
+            <classMoniker Id="83331b34-1923-4cca-8a31-dac13152a340" LastKnownName="KillBehaviour" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="dbba1680-2954-497b-b679-cad4dafd6f0a" name="Elctric Fence" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1262cd4a-2181-4415-9dd9-27138ec61e10" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="93ad3d4b-c883-4ee2-adb0-d0574452b3ef" name="KillBehaviour" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ec48c6b3-dd32-45dd-a7fd-d58b7535e162" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="9aaf13af-7462-4f89-8f49-4c4f42225b1c" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5a5d277b-c61c-4e16-b666-3945051e31cb" name="Fence" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c8c0db40-9e0c-4866-8cd2-2d57c64dc1bf" />
+        <generalsInternal>
+          <generalization Id="270377e4-1cea-4485-ac6b-3a0d5bbbf0e8" isSubstitutable="false">
+            <classMoniker Id="8117097a-1af2-4dd3-93b8-1e5614b323fd" LastKnownName=" NONACTIVE-SCENERY" />
+            <elementDefinition Id="fd581bdd-b651-49ba-8852-cff2723daddc" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="76b3054e-af3c-4ea3-8ac6-cf5b5c1e4441" name="Fire" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ddb71d3d-015b-4c3f-ac84-fce2e619603e" />
+        <generalsInternal>
+          <generalization Id="1dbf241d-9f17-4b60-97e0-e53396eeefa4" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="de051613-2f55-46c5-aeb8-6c84e4fe7b41" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="ee211f97-6737-4398-8971-922ff99e9758" isDerived="false" sourceEndRoleName="Fire" targetEndRoleName="KillBehaviour" isLeaf="false" isAbstract="false">
+            <classMoniker Id="83331b34-1923-4cca-8a31-dac13152a340" LastKnownName="KillBehaviour" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9790ec6d-c190-4768-a4df-d6b932db386b" name="Fire" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="e07e658f-b34a-4a18-b223-7420829231b6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="28d41906-415f-484a-837e-94de01bdacf3" name="KillBehaviour" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="ec103bc7-abb0-44cc-b6fe-dee58ed00e61" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8d47d701-df04-4a11-abdb-65e932a6219f" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e2a479bd-e0d8-4cb0-b00d-a737bfdf84fb" name="Bridge" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9f2a884a-6c4f-4954-ba9e-1a3b0635a966" />
+        <generalsInternal>
+          <generalization Id="f5b4fda2-4687-4ac2-ba44-860c98e2e9d5" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="a9291674-9761-4b32-9b34-4357547a1b7a" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ca2dca12-5aaa-4f7a-9f47-56819ee917d0" name="Barn" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="daecf0c0-e13e-4dcc-b923-dc91d79be96b" />
+        <generalsInternal>
+          <generalization Id="ffb8d4f4-ada4-457a-aaa0-abb66829c0f7" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="04eb6260-a923-4993-8dfd-b91814debd4e" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributesInternal>
+          <property Id="7d3c1c2a-743d-4ff5-b5e3-9a69286939b7" name="SheepsEnteredBarnCount" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6ff6d543-acb1-4234-9c11-e0f6432b215c" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="a3e80e5e-5039-485b-a097-385f6f4b97cb" name="BarnTouchedBy" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="26ed39c8-31e9-41c6-9151-81bd44c8688f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7dcf69f2-a40c-48f1-99bd-e3a6bbb725d3" name="Gemeobject object" direction="In" isUnique="false">
+                  <elementDefinition Id="b0194c03-6b53-4824-a6e1-c87e15cc14ea" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b031bd33-ab65-4708-a355-44eb1f0c068c" name="Animation" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="47495228-4fcd-4226-ba9b-415df4c6c3f8" />
+        <ownedAttributesInternal>
+          <property Id="a855dcb7-0417-432e-9035-17c8b5183b94" name="Animation" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="56884aae-e686-48dc-9971-a221b07ebfc0" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="2f22927e-795d-4b68-a341-ed18832faa4f" name="PlayAnimation" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="94068fd4-0aff-4b10-8a8f-6b60328d6c6c" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e65b3a61-332a-497b-8e7a-6dff6af21af1" name="Hay" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ac4e0efb-424f-4b30-bf35-99cc3e29faa7" />
+        <generalsInternal>
+          <generalization Id="c9859662-9419-46ee-8a4e-c447966a16a9" isSubstitutable="false">
+            <classMoniker Id="8117097a-1af2-4dd3-93b8-1e5614b323fd" LastKnownName=" NONACTIVE-SCENERY" />
+            <elementDefinition Id="84ebf0e0-e1b8-4d2e-9eeb-fba528b4ce0b" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="333f7570-acfc-411c-92eb-c26b8bf13de0" name="KillHole" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1ede326a-02dd-4a37-badd-2169c95a67b1" />
+        <generalsInternal>
+          <generalization Id="68300dca-3357-433e-89e0-4c26e9ff8d6d" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="ffebecfe-d7d8-47aa-a3bb-7aaa8731ce29" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="5cddc0d1-8a69-45dd-a815-af6ec66628f0" isDerived="false" sourceEndRoleName="KillHole" targetEndRoleName="KillBehaviour" isLeaf="false" isAbstract="false">
+            <classMoniker Id="83331b34-1923-4cca-8a31-dac13152a340" LastKnownName="KillBehaviour" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bd64eeaa-dddb-4074-9ac2-c0b576253b6e" name="KillHole" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="12b9dfaa-545a-4a73-a24d-6e57ef61843a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="90c1d6d8-6370-483d-a82c-9ebb14dbf426" name="KillBehaviour" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="74fd7579-9843-458c-a6e8-1b79aac3b386" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="06128ecd-c551-4a66-ac15-e27736e7f00f" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="aabcf7de-999c-4df4-8b2d-289f29717618" name="Traktor" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7aa8b509-d53d-4984-91a2-28fa06d76c28" />
+        <generalsInternal>
+          <generalization Id="c52174f0-5e8b-4ac8-8cad-6cc588d3358e" isSubstitutable="false">
+            <classMoniker Id="8117097a-1af2-4dd3-93b8-1e5614b323fd" LastKnownName=" NONACTIVE-SCENERY" />
+            <elementDefinition Id="0f81df73-89c0-475a-99fd-c6cdd083e619" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="5ad8f8da-725d-4af7-9655-9fdad17ee7c3" name="Water" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8c953023-c988-45de-b2bb-b1e72a0c2050" />
+        <generalsInternal>
+          <generalization Id="0fd76ece-f9f0-497a-b3b3-0a7f71781573" isSubstitutable="false">
+            <classMoniker Id="8e2b4030-214a-486a-90cf-e606bd3a842d" LastKnownName="INTERACTIVE-SCENERY" />
+            <elementDefinition Id="fcd86a40-1815-4c67-9ce0-5a3216c47f01" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="3d46a8bf-f373-4461-b896-9ac3a2b66b15" isDerived="false" sourceEndRoleName="Water" targetEndRoleName="KillBehaviour" isLeaf="false" isAbstract="false">
+            <classMoniker Id="83331b34-1923-4cca-8a31-dac13152a340" LastKnownName="KillBehaviour" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6dfab316-855d-4d29-a889-ae7c89f24719" name="Water" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f9ce2042-038a-4d62-8201-22f2b840ae7a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7ee7aa7a-fda4-4976-8bc6-4094a1eba271" name="KillBehaviour" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="309e4848-e14a-4467-aa17-b059e7c87ff7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="51ba488a-28a3-4a61-9ea1-ad14961ae758" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e007bac8-7b51-4d0d-985e-847cb810881f" name="WindMill" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ffad4322-f7b3-44d2-a776-2448e5a1568a" />
+        <generalsInternal>
+          <generalization Id="b308ac70-d5fb-4694-9bac-44689695542c" isSubstitutable="false">
+            <classMoniker Id="8117097a-1af2-4dd3-93b8-1e5614b323fd" LastKnownName=" NONACTIVE-SCENERY" />
+            <elementDefinition Id="570ec2ae-1e8a-4a5f-a3a1-0348cf8c87bf" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="83331b34-1923-4cca-8a31-dac13152a340" name="KillBehaviour" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ca1c7e9e-da56-4aaf-bdea-ce03227f5a74" />
+        <ownedAttributesInternal>
+          <property Id="781d8d48-7822-4472-99a0-f3154aa38aed" name="Object" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="77ad5798-1626-4743-91d9-6b94c97eb62a" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="896a5206-e4d5-4003-8abf-ee0a86ade387" name="Destroy(Object" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="700fc1fa-e9b9-4cff-ae0a-945f3c59cc52" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="0196696d-0e76-43c8-af5f-610280f0fbd3" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</logicalClassDesignerModel>
