@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
 using UnityEngine;
 
 /// <summary>
@@ -13,13 +16,13 @@ internal static class CheatReferenceDialog {
     private static Vector2 _ScrollPosition;
 
     private static string _DialogBodyTitle;
-    private static string[] _DialogBodyTextColumn1;
-    private static string[] _DialogBodyTextColumn2;
+    private static Dictionary<string, List<CheatCommandDescriptor>> _CheatCommandsByCategory;
+    private static IEnumerable<CheatVariabeleDescriptor> _CheatVariables;
 
     /// <summary>
     /// Enables showing of the dialog
     /// </summary>
-    public static void ShowDialog(string title, string[] bodyColumn1, string[] bodyColumn2, string bodyStyleName) {
+    public static void ShowDialog(string title, Dictionary<string, List<CheatCommandDescriptor>> cheatCommandsByCategory, IEnumerable<CheatVariabeleDescriptor> cheatVariables, string bodyStyleName) {
         _ShowDialog = true;
 
         const int width = 900;
@@ -27,12 +30,8 @@ internal static class CheatReferenceDialog {
         _DialogRect = new Rect(Screen.width / 2 - (width / 2), Screen.height / 2 - (height / 2), width, height);
 
         _DialogBodyTitle = title;
-        _DialogBodyTextColumn1 = bodyColumn1;
-        _DialogBodyTextColumn2 = bodyColumn2;
-
-        if (bodyColumn1.Length != bodyColumn2.Length) {
-            throw new Exception("Both column text arrays must have same length!");
-        }
+        _CheatCommandsByCategory = cheatCommandsByCategory;
+        _CheatVariables = cheatVariables;
     }
 
     /// <summary>
@@ -59,28 +58,55 @@ internal static class CheatReferenceDialog {
 
         _ScrollPosition = GUILayout.BeginScrollView(_ScrollPosition, false, true, skin.GetStyle("horizontalscrollbar"),
                                                     skin.GetStyle("verticalscrollbar"), skin.GetStyle("scrollview"), GUILayout.ExpandWidth(true), GUILayout.Height(350));
-        for (int i=0;i<_DialogBodyTextColumn1.Length&&i<_DialogBodyTextColumn2.Length;i++) {
-            string col1Text = _DialogBodyTextColumn1[i];
-            string col2Text = _DialogBodyTextColumn2[i];
 
-            GUILayout.BeginHorizontal();
+        // list cheats per category
+        foreach (KeyValuePair<string, List<CheatCommandDescriptor>> cheatsPerCategory in _CheatCommandsByCategory) {
+            // cheat category title
+            CreateRow(cheatsPerCategory.Key + ":", textFatStyle);
 
-            bool createSecondColumn = col2Text != null;
-            if (createSecondColumn) {
-                GUILayout.Label(col1Text, textStyle, GUILayout.Width(350));
+            // list cheats
+            foreach (CheatCommandDescriptor commandDescriptor in cheatsPerCategory.Value) {
+                // command formatted with arguments
+                var format = new StringBuilder();
+                format.Append(commandDescriptor.Name);
 
-                GUILayout.BeginVertical();
-                GUILayout.Label(col2Text, textStyle);
-                GUILayout.EndVertical();
-            } else {
-                GUILayout.Label(col1Text, textFatStyle);
+                foreach (ParameterInfo parameterInfo in commandDescriptor.Parameters) {
+                    format.AppendFormat(" <{0}>", parameterInfo.Name);
+                }
+
+                CreateRow(format.ToString(), commandDescriptor.Description, textStyle);
             }
 
-            GUILayout.EndHorizontal();
+            // empty space
+            CreateRow("   ", textStyle);
         }
 
+        // list variabeles
+        CreateRow("  ", textStyle);
+        CreateRow("Variables that can be set:", textFatStyle);
+
+        foreach (CheatVariabeleDescriptor variabeleDescriptor in _CheatVariables) {
+            string name = variabeleDescriptor.Name;
+
+            Type fieldType = variabeleDescriptor.FieldInfo.FieldType;
+            string typeName = fieldType.Name.ToLowerInvariant();
+
+            if (fieldType == typeof(double) || fieldType == typeof(float)) {
+                typeName = "decimal";
+            } else if (fieldType == typeof(int) || fieldType == typeof(long)) {
+                typeName = "integer";
+            }
+
+            string format = String.Format("{0} ({1})", name, typeName);
+            CreateRow(format, variabeleDescriptor.Description, textStyle);
+        }
+
+        CreateRow("   ", textStyle);
+        CreateRow("Note: Some cheats may only be applied after a level reload.", textStyle);
+
         GUILayout.EndScrollView();
-            
+        
+        // close button
         GUILayout.BeginHorizontal(GUILayout.Width(50));
         GUI.SetNextControlName("CloseButton");
         if (GUILayout.Button("Close", skin.GetStyle("button"))) {
@@ -95,4 +121,21 @@ internal static class CheatReferenceDialog {
         }
     }
 
+    private static void CreateRow(string contents, GUIStyle style) {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(contents, style);
+        GUILayout.EndHorizontal();
+    }
+
+    private static void CreateRow(string column1Contents, string column2Contents, GUIStyle style) {
+        GUILayout.BeginHorizontal();
+        GUILayout.Label(column1Contents, style, GUILayout.Width(350));
+
+        GUILayout.BeginVertical();
+        GUILayout.Label(column2Contents, style);
+        GUILayout.EndVertical();
+
+
+        GUILayout.EndHorizontal();
+    }
 }
