@@ -67,6 +67,7 @@ public static class CheatService {
             CheatCommandDescriptor descriptor = new CheatCommandDescriptor(
                 cheatAttr.Name,
                 description,
+                cheatAttr.Category,
                 member,
                 member.GetParameters());
 
@@ -100,12 +101,40 @@ public static class CheatService {
     }
 
     /// <summary>
+    /// Gets all cheat commands in the system
+    /// </summary>
+    /// <returns></returns>
+    public static Dictionary<string, List<CheatCommandDescriptor>> GetAllCommandsByHumanReadableCategory() {
+        Dictionary<CheatCategory, List<CheatCommandDescriptor>> commandsByCategory = new Dictionary<CheatCategory, List<CheatCommandDescriptor>>();
+
+        // list per category
+        foreach (CheatCommandDescriptor command in CheatCommands) {
+            // get existing or new list
+            List<CheatCommandDescriptor> lst;
+            if (!commandsByCategory.TryGetValue(command.Category, out lst)) {
+                lst = new List<CheatCommandDescriptor>();
+                commandsByCategory.Add(command.Category, lst);
+            }
+
+            lst.Add(command);
+        }
+
+        // category to human readable string
+        Dictionary<string, List<CheatCommandDescriptor>> result = new Dictionary<string, List<CheatCommandDescriptor>>();
+        foreach (KeyValuePair<CheatCategory, List<CheatCommandDescriptor>> pair in commandsByCategory) {
+            result.Add(ConvertPascalCasedToSentence(pair.Key.ToString()), pair.Value);
+        }
+
+        return result;
+    }
+
+    /// <summary>
     /// Gets all cheat variables in the system
     /// </summary>
     /// <returns></returns>
     public static IEnumerable<CheatVariabeleDescriptor> GetAllVariabeles() {
         return CheatVariables;
-    } 
+    }
 
     /// <summary>
     /// Gets the cheat by the specified command name. If not found, returns null.
