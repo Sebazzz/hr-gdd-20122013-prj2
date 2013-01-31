@@ -93,7 +93,7 @@ public static class CheatInputDialog {
         string commandName = arguments[0];
 
         // select correct cheat member
-        CheatCommandDescriptor cheat = CheatRepository.GetCheatByCommandName(commandName);
+        CheatCommandDescriptor cheat = CheatService.GetCheatByCommandName(commandName);
 
         // check if cheat is found
         if (cheat == null) {
@@ -101,30 +101,9 @@ public static class CheatInputDialog {
             return;
         }
 
-        // select parameters
-        ParameterInfo[] memberParams = cheat.Parameters;
-            
-        if (memberParams.Length != arguments.Length - 1) {
-            CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, arguments.Length-1));
-            return;
-        }
-
-        object[] parsedParameters = new object[memberParams.Length];
-        for (int i = 0; i < memberParams.Length && i < parsedParameters.Length; i++) {
-            ParameterInfo currentParam = memberParams[i];
-            string rawArgument = arguments[i + 1];
-
-            try {
-                parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
-            } catch (Exception) {
-                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
-                return;
-            }
-        }
-
-        // call
-        cheat.Method.Invoke(null, parsedParameters);
-
-        Debug.Log("Applied cheat: " + cheat.Name);
+        object[] parameters = new object[arguments.Length-1];
+        Array.Copy(arguments, 1, parameters, 0, parameters.Length);
+        
+        CheatService.ExecuteCheat(cheat, parameters);
     }
 }

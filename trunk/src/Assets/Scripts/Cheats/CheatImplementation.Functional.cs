@@ -17,7 +17,7 @@ public static partial class CheatImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate all general cheats and format them nicely
-        IEnumerable<CheatCommandDescriptor> cheatDescriptors = CheatRepository.GetAllCommands();
+        IEnumerable<CheatCommandDescriptor> cheatDescriptors = CheatService.GetAllCommands();
 
         foreach (CheatCommandDescriptor member in cheatDescriptors) {
             cheatDescription.Add(member.Description);
@@ -41,7 +41,7 @@ public static partial class CheatImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate any enable/disable vars
-        foreach (CheatVariabeleDescriptor cheatVar in CheatRepository.GetAllVariabeles()) {
+        foreach (CheatVariabeleDescriptor cheatVar in CheatService.GetAllVariabeles()) {
             cheatName.Add(cheatVar.Name);
             cheatDescription.Add(cheatVar.Description);
         }
