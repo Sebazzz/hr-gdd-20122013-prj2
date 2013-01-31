@@ -175,12 +175,15 @@ public static class CheatService {
     /// </summary>
     /// <param name="cheat"></param>
     /// <param name="parameters"></param>
-    public static void ExecuteCheat(CheatCommandDescriptor cheat, params object[] parameters) {
+    /// <param name="showErrors"> </param>
+    public static void ExecuteCheat(CheatCommandDescriptor cheat, object[] parameters, bool showErrors) {
         // select parameters
         ParameterInfo[] memberParams = cheat.Parameters;
 
         if (memberParams.Length != parameters.Length) {
-            CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, parameters.Length - 1));
+            if (showErrors) {
+                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, parameters.Length - 1));
+            }
             return;
         }
 
@@ -192,7 +195,10 @@ public static class CheatService {
             try {
                 parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
             } catch (Exception) {
-                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
+                if (showErrors) {
+                    CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
+                }
+
                 return;
             }
         }
@@ -207,8 +213,9 @@ public static class CheatService {
     /// Executes a raw cheat command
     /// </summary>
     /// <param name="command"></param>
-    public static void ExecuteRawCommand(string command) {
-        string[] arguments = command.Split(' ');
+    /// <param name="showError"> </param>
+    public static void ExecuteRawCommand(string command, bool showError) {
+        string[] arguments = ParseCommandString(command);
         string commandName = arguments[0];
 
         // select correct cheat member
@@ -216,13 +223,53 @@ public static class CheatService {
 
         // check if cheat is found
         if (cheat == null) {
-            CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.");
+            if (showError) {
+                CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.");
+            }
             return;
         }
 
         object[] parameters = new object[arguments.Length - 1];
         Array.Copy(arguments, 1, parameters, 0, parameters.Length);
 
-        CheatService.ExecuteCheat(cheat, parameters);
+        CheatService.ExecuteCheat(cheat, parameters, showError);
+    }
+
+    private static string[] ParseCommandString(string command) {
+        List<string> segments = new List<string>();
+
+        // find each " or space for a segment
+        int index = 0;
+        int max = command.Length;
+
+        while (index < max) {
+            char current = command[index];
+
+            int segmentEnd;
+            bool isSubSegment = current == '"';
+            if (isSubSegment) {
+                segmentEnd = command.IndexOf('"', index+1);
+            } else {
+                segmentEnd = command.IndexOf(' ', index);
+            }
+
+            if (segmentEnd == -1) {
+                segmentEnd = max;
+            }
+
+            if (isSubSegment) {
+                index++;
+            }
+            string segment = command.Substring(index, segmentEnd - index);
+            segments.Add(segment);
+
+            index = segmentEnd+1;
+
+            if (isSubSegment) {
+                index++;
+            }
+        }
+
+        return segments.ToArray();
     }
 }

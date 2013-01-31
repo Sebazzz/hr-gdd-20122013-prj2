@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using UnityEngine;
@@ -12,6 +13,21 @@ public static partial class CheatImplementation {
                                          CheatService.GetAllCommandsByHumanReadableCategory(),
                                          CheatService.GetAllVariabeles(),
                                         "CheatDialogLabel");
+    }
+
+    [CheatCommand("RepeatCommand", CheatCategory.GeneralCommands)]
+    public static void RepeatSpecifiedCommand(float timeDelay, int numberOfTimes, string command) {
+        StartCoroutine(RepeatSpecifiedCommandExecutor(timeDelay, numberOfTimes, command));
+    }
+
+    private static IEnumerator RepeatSpecifiedCommandExecutor(float timeDelay, int numberOfTimes, string command) {
+        while (numberOfTimes-- > 0) {
+            CheatService.ExecuteRawCommand(command, false);
+
+            yield return new WaitForSeconds(timeDelay);
+        }
+
+        yield break;
     }
 
     [CheatCommand("ClearSettings", CheatCategory.TestingHelpers)]
