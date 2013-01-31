@@ -1,9 +1,34 @@
 ﻿using System;
+using System.Collections;
 using System.Globalization;
-using System.Reflection;
+using UnityEngine;
 
-// Cheats implementation: Functional
+// Cheats implementation: General Commands
 public static partial class CheatImplementation {
+    [CheatCommand("Help", CheatCategory.GeneralCommands)]
+    public static void ShowCheatsHelpReference() {
+        // show the dialog
+        CheatReferenceDialog.ShowDialog("Cheats Reference",
+                                         CheatService.GetAllCommandsByHumanReadableCategory(),
+                                         CheatService.GetAllVariabeles(),
+                                        "CheatDialogLabel");
+    }
+
+    [CheatCommand("RepeatCommand", CheatCategory.GeneralCommands)]
+    public static void RepeatSpecifiedCommand(float timeDelay, int numberOfTimes, string command) {
+        StartCoroutine(RepeatSpecifiedCommandExecutor(timeDelay, numberOfTimes, command));
+    }
+
+    private static IEnumerator RepeatSpecifiedCommandExecutor(float timeDelay, int numberOfTimes, string command) {
+        while (numberOfTimes-- > 0) {
+            CheatService.ExecuteRawCommand(command, false);
+
+            yield return new WaitForSeconds(timeDelay);
+        }
+
+        yield break;
+    }
+
     [CheatCommand("Enable", CheatCategory.GeneralCommands)]
     public static void EnableTheSpecifiedVariabele(string variabele) {
         SetAVariabeleToTheSpecifiedValue(variabele, true);

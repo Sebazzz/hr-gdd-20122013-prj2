@@ -111,6 +111,14 @@ public class EmitterBehaviour : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Forces a wave to emit
+    /// </summary>
+    public void ForceWave() {
+        this.waveTimer.Trigger();
+    }
+
+
     // http://answers.unity3d.com/questions/8003/how-can-i-know-if-a-gameobject-is-seen-by-a-partic.html
     private bool IsSeenInCamera() {
         Vector3 res = this.spawnCameraCheck.WorldToViewportPoint(this.transform.position);

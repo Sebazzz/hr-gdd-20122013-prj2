@@ -32,6 +32,7 @@ using UnityEngine;
 /// </para>
 /// </remarks>
 public static partial class CheatImplementation {
+
     #region Support methods
 
     private static bool StartCoroutine(IEnumerator coroutineResult) {

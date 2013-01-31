@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-/// <summary>
-/// Contains definitions for tags. Makes it more easier to refactor tag names.
+﻿/// <summary>
+/// Contains definitions for tags. Makes it more easier to refactor tag names and provides safe compile-time support.
 /// </summary>
 static class Tags {
     public const string Shepherd = "Shepherd";
@@ -22,4 +17,6 @@ static class Tags {
     public const string Trap = "Trap";
 
     public const string LevelBounds = "LevelBounds";
+
+    public const string Emitter = "Emitter";
 }
