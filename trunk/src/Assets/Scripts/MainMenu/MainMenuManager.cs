@@ -17,6 +17,9 @@ public class MainMenuManager : MonoBehaviour {
 	private const float cameraHigh = 53.19862f;
 	private const float cameraLow = 51.19862f;
 	private float cameraYPosition = 51.19862f;
+
+	private Vector3 selectedWorldPosition = new Vector3(124.6157f, 53.22188f, 84.06711f);
+	private Vector3 unselectedWorldPosition = new Vector3(124.6157f, 153.22188f, 84.06711f);
 	
 	public Camera cam;
 
@@ -93,40 +96,71 @@ public class MainMenuManager : MonoBehaviour {
 	public void SetSelectedWorld(Worlds index) {
 		switch (index) {
 			case Worlds.None:
-				LevelSelectScotland.SetActive(false);
-				LevelSelectNetherlands.SetActive(false);
-				LevelSelectCanada.SetActive(false);
-				LevelSelectAustralia.SetActive(false);
+				LevelSelectScotland.transform.position = unselectedWorldPosition;
+				LevelSelectNetherlands.transform.position = unselectedWorldPosition;
+				LevelSelectCanada.transform.position = unselectedWorldPosition;
+				LevelSelectAustralia.transform.position = unselectedWorldPosition;
+
+				//LevelSelectScotland.SetActive(false);
+				//LevelSelectNetherlands.SetActive(false);
+				//LevelSelectCanada.SetActive(false);
+				//LevelSelectAustralia.SetActive(false);
+
 				break;
 			case Worlds.Scotland:
-				LevelSelectScotland.SetActive(true);
-				LevelSelectNetherlands.SetActive(false);
-				LevelSelectCanada.SetActive(false);
-				LevelSelectAustralia.SetActive(false);
+				LevelSelectScotland.transform.position = selectedWorldPosition;
+				LevelSelectNetherlands.transform.position = unselectedWorldPosition;
+				LevelSelectCanada.transform.position = unselectedWorldPosition;
+				LevelSelectAustralia.transform.position = unselectedWorldPosition;
+
+				//LevelSelectScotland.SetActive(true);
+				//LevelSelectNetherlands.SetActive(false);
+				//LevelSelectCanada.SetActive(false);
+				//LevelSelectAustralia.SetActive(false);
 				break;
 			case Worlds.Netherlands:
-				LevelSelectScotland.SetActive(false);
-				LevelSelectNetherlands.SetActive(true);
-				LevelSelectCanada.SetActive(false);
-				LevelSelectAustralia.SetActive(false);
+				LevelSelectScotland.transform.position = unselectedWorldPosition;
+				LevelSelectNetherlands.transform.position = selectedWorldPosition;
+				LevelSelectCanada.transform.position = unselectedWorldPosition;
+				LevelSelectAustralia.transform.position = unselectedWorldPosition;
+				
+				//LevelSelectScotland.SetActive(false);
+				//LevelSelectNetherlands.SetActive(true);
+				//LevelSelectCanada.SetActive(false);
+				//LevelSelectAustralia.SetActive(false);
 				break;
 			case Worlds.Canada:
-				LevelSelectScotland.SetActive(false);
-				LevelSelectNetherlands.SetActive(false);
-				LevelSelectCanada.SetActive(true);
-				LevelSelectAustralia.SetActive(false);
+				LevelSelectScotland.transform.position = unselectedWorldPosition;
+				LevelSelectNetherlands.transform.position = unselectedWorldPosition;
+				LevelSelectCanada.transform.position = selectedWorldPosition;
+				LevelSelectAustralia.transform.position = unselectedWorldPosition;
+
+				//LevelSelectScotland.SetActive(false);
+				//LevelSelectNetherlands.SetActive(false);
+				//LevelSelectCanada.SetActive(true);
+				//LevelSelectAustralia.SetActive(false);
 				break;
 			case Worlds.Australia:
-				LevelSelectScotland.SetActive(false);
-				LevelSelectNetherlands.SetActive(false);
-				LevelSelectCanada.SetActive(false);
-				LevelSelectAustralia.SetActive(true);
+				LevelSelectScotland.transform.position = unselectedWorldPosition;
+				LevelSelectNetherlands.transform.position = unselectedWorldPosition;
+				LevelSelectCanada.transform.position = unselectedWorldPosition;
+				LevelSelectAustralia.transform.position = selectedWorldPosition;
+
+				//LevelSelectScotland.SetActive(false);
+				//LevelSelectNetherlands.SetActive(false);
+				//LevelSelectCanada.SetActive(false);
+				//LevelSelectAustralia.SetActive(true);
 				break;
 			default:
-				LevelSelectScotland.SetActive(false);
-				LevelSelectNetherlands.SetActive(false);
-				LevelSelectCanada.SetActive(false);
-				LevelSelectAustralia.SetActive(false);
+				LevelSelectScotland.transform.position = unselectedWorldPosition;
+				LevelSelectNetherlands.transform.position = unselectedWorldPosition;
+				LevelSelectCanada.transform.position = unselectedWorldPosition;
+				LevelSelectAustralia.transform.position = unselectedWorldPosition;
+
+				//LevelSelectScotland.SetActive(false);
+				//LevelSelectNetherlands.SetActive(false);
+				//LevelSelectCanada.SetActive(false);
+				//LevelSelectAustralia.SetActive(false);
 				break;
 		}
 	}
