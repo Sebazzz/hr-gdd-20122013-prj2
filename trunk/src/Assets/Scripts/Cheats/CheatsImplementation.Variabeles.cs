@@ -18,12 +18,12 @@ public static partial class CheatsImplementation {
                                                v => CheatsController.EnableSheepRotationLock = v));
     }
 
-    [Cheat("Enable", CheatCategory.GeneralCommands)]
+    [CheatCommand("Enable", CheatCategory.GeneralCommands)]
     public static void EnableTheSpecifiedVariabele(string variabele) {
         SetBooleanVariabeleValue(variabele, true);
     }
 
-    [Cheat("Disable", CheatCategory.GeneralCommands)]
+    [CheatCommand("Disable", CheatCategory.GeneralCommands)]
     public static void DisableTheSpecifiedVariabele(string variabele) {
         SetBooleanVariabeleValue(variabele, false);
     }
