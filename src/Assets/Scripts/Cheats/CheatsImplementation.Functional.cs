@@ -17,14 +17,14 @@ public static partial class CheatsImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate all general cheats and format them nicely
-        IEnumerable<CheatDescriptor> cheatDescriptors = CheatReference.GetAllCheats();
+        IEnumerable<CheatDescriptor> cheatDescriptors = CheatRepository.GetAllCheats();
 
         foreach (CheatDescriptor member in cheatDescriptors) {
             cheatDescription.Add(member.Description);
 
             // command formatted with arguments
             var format = new StringBuilder();
-            format.Append(indent + member.CommandName);
+            format.Append(member.CommandName);
 
             foreach (ParameterInfo parameterInfo in member.Parameters) {
                 format.AppendFormat(" <{0}>", parameterInfo.Name);
@@ -42,16 +42,18 @@ public static partial class CheatsImplementation {
 
         // ... aggregate any enable/disable vars
         foreach (var cheatVar in ToggleCheatVars) {
-            cheatName.Add(indent + cheatVar.Name);
+            cheatName.Add(cheatVar.Name);
             cheatDescription.Add(cheatVar.Description);
         }
 
+        cheatName.Add(indent);
+        cheatDescription.Add(indent);
         cheatName.Add("Note: Some cheats may only be applied after a level reload.");
         cheatDescription.Add(null);
 
         // show the dialog
         CheatReferenceDialog.ShowDialog("Cheats Reference", cheatName.ToArray(), cheatDescription.ToArray(),
-                                        "MonospaceLabel");
+                                        "CheatDialogLabel");
     }
 
     [Cheat("ClearSettings")]

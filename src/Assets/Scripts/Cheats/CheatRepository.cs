@@ -8,11 +8,11 @@ using System.Text.RegularExpressions;
 /// <summary>
 /// Class with the single purpose of descrbing cheats and aggregrating them
 /// </summary>
-public static class CheatReference {
-    private static readonly List<CheatDescriptor> _Cheats;
+public static class CheatRepository {
+    private static readonly List<CheatDescriptor> Cheats;
 
-    static CheatReference() {
-        _Cheats =  new List<CheatDescriptor>();
+    static CheatRepository() {
+        Cheats =  new List<CheatDescriptor>();
         
         MethodInfo[] cheatMembers = typeof(CheatsImplementation).GetMethods(BindingFlags.Public | BindingFlags.Static);
 
@@ -39,8 +39,7 @@ public static class CheatReference {
                 if (format.Length == 0) {
                     format.Append(word);
                 } else {
-                    format.Append(" ");
-                    format.Append(word.ToLowerInvariant());
+                    format.Append(" " + word.ToLowerInvariant());
                 }
             }
 
@@ -52,7 +51,7 @@ public static class CheatReference {
                 member,
                 member.GetParameters());
 
-            _Cheats.Add(descriptor);
+            Cheats.Add(descriptor);
         }
     }
 
@@ -61,7 +60,7 @@ public static class CheatReference {
     /// </summary>
     /// <returns></returns>
     public static IEnumerable<CheatDescriptor> GetAllCheats() {
-        return _Cheats;
+        return Cheats;
     }
 
     /// <summary>
@@ -70,7 +69,7 @@ public static class CheatReference {
     /// <param name="commandName"></param>
     /// <returns></returns>
     public static CheatDescriptor GetCheatByCommandName(string commandName) {
-        foreach (CheatDescriptor cheat in _Cheats) {
+        foreach (CheatDescriptor cheat in Cheats) {
             if (String.Equals(cheat.CommandName, commandName, StringComparison.InvariantCultureIgnoreCase)) {
                 return cheat;
             }

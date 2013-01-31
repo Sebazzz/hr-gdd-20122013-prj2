@@ -79,7 +79,7 @@ public static partial class CheatsImplementation {
             }
         }
 
-        CheatNotificationDialog.ShowDialog("Instruction", "Control the sheep using the JIKL keys (similar to WSAD). Select an sheep using the middle mouse button, unselect it by clicking again.", "MonospaceLabel");
+        CheatNotificationDialog.ShowDialog("Instruction", "Control the sheep using the JIKL keys (similar to WSAD). Select an sheep using the middle mouse button, unselect it by clicking again.");
     }
 
     #endregion

@@ -5,6 +5,9 @@ using UnityEngine;
 /// Represents a dialog that shows in a two-column grid a overview of the contents specified
 /// </summary>
 internal static class CheatReferenceDialog {
+    private const string TextStyle = "CheatDialogText";
+    private const string TextFatStyle = "CheatDialogTextFat";
+
     private static Rect _DialogRect;
     private static bool _ShowDialog;
     private static Vector2 _ScrollPosition;
@@ -12,7 +15,6 @@ internal static class CheatReferenceDialog {
     private static string _DialogBodyTitle;
     private static string[] _DialogBodyTextColumn1;
     private static string[] _DialogBodyTextColumn2;
-    private static string _DialogBodyTextStyleName;
 
     /// <summary>
     /// Enables showing of the dialog
@@ -27,7 +29,6 @@ internal static class CheatReferenceDialog {
         _DialogBodyTitle = title;
         _DialogBodyTextColumn1 = bodyColumn1;
         _DialogBodyTextColumn2 = bodyColumn2;
-        _DialogBodyTextStyleName = bodyStyleName;
 
         if (bodyColumn1.Length != bodyColumn2.Length) {
             throw new Exception("Both column text arrays must have same length!");
@@ -53,7 +54,8 @@ internal static class CheatReferenceDialog {
     }
 
     private static void DrawInsideDialog(int dialogId, GUISkin skin) {
-        GUIStyle textStyle = skin.GetStyle(_DialogBodyTextStyleName);
+        GUIStyle textStyle = skin.GetStyle(TextStyle);
+        GUIStyle textFatStyle = skin.GetStyle(TextFatStyle);
 
         _ScrollPosition = GUILayout.BeginScrollView(_ScrollPosition, false, true, skin.GetStyle("horizontalscrollbar"),
                                                     skin.GetStyle("verticalscrollbar"), skin.GetStyle("scrollview"), GUILayout.ExpandWidth(true), GUILayout.Height(350));
@@ -71,7 +73,7 @@ internal static class CheatReferenceDialog {
                 GUILayout.Label(col2Text, textStyle);
                 GUILayout.EndVertical();
             } else {
-                GUILayout.Label(col1Text, textStyle);
+                GUILayout.Label(col1Text, textFatStyle);
             }
 
             GUILayout.EndHorizontal();

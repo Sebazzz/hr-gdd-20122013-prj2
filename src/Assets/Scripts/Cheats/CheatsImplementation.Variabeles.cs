@@ -42,7 +42,7 @@ public static partial class CheatsImplementation {
         CheatNotificationDialog.ShowDialog("Error",
                                            String.Format(
                                                "Variabele could not be set to '{1}': Variabele '{0}' does not exist.",
-                                               variabele, value), "MonospaceLabel");
+                                               variabele, value));
     }
 
     #region Nested type: CheatVar

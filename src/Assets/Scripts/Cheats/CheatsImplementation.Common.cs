@@ -30,8 +30,7 @@ public static partial class CheatsImplementation {
         }
 
         CheatNotificationDialog.ShowDialog("Error",
-                                           "You're not currently in a level and the command cannot be executed therefore.",
-                                           "MonospaceLabel");
+                                           "You're not currently in a level and the command cannot be executed therefore.");
         return null;
     }
 
