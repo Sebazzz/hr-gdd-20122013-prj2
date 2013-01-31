@@ -18,13 +18,13 @@ public static class CheatRepository {
 
         foreach (MethodInfo member in cheatMembers) {
             // get cheat attr
-            object[] attr = member.GetCustomAttributes(typeof(CheatAttribute), false);
+            object[] attr = member.GetCustomAttributes(typeof(CheatCommandAttribute), false);
 
             if (attr.Length == 0) {
                 continue;
             }
 
-            var cheatAttr = attr[0] as CheatAttribute;
+            var cheatAttr = attr[0] as CheatCommandAttribute;
             if (cheatAttr == null) {
                 continue;
             }
