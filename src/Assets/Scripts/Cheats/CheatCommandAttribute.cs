@@ -3,6 +3,7 @@ using System;
 /// <summary>
 /// Cheat commands are decorated with this attribute
 /// </summary>
+[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 public sealed class CheatCommandAttribute : Attribute {
     private readonly string name;
     private readonly CheatCategory category;

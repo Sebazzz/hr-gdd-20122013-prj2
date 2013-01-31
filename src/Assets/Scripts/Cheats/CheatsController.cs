@@ -8,39 +8,25 @@ using UnityEngine;
 public sealed class CheatsController : MonoBehaviour {
     private static bool _HasSetEnableInGameCheatsMenuDefaultValue = false;
 
-    /// <summary>
-    /// Specifies if the rotation lock on the sheep <see cref="Rigidbody"/> is disabled
-    /// </summary>
-    public static bool EnableSheepRotationLock = true;
-
-    /// <summary>
-    /// Specifies if the in-game cheat menu is enabled
-    /// </summary>
-    public static bool EnableInGameCheatsMenu = false;
-
-    public static bool EnableLargeSheep = false;
-
-    public static bool TerrainBounce = false;
-
     private void Awake() {
         CheatInputDialog.HideDialog();
 
         if (!_HasSetEnableInGameCheatsMenuDefaultValue) {
-            EnableInGameCheatsMenu = Debug.isDebugBuild;
+            CheatVariables.EnableInGameCheatsMenu = Debug.isDebugBuild;
             _HasSetEnableInGameCheatsMenuDefaultValue = true;
         }
     }
 
     private void Start() {
-        if (EnableLargeSheep) {
+        if (CheatVariables.EnableLargeSheep) {
             SetLargeSheep();
         }
 
-        if (!EnableSheepRotationLock) {
+        if (!CheatVariables.EnableSheepRotationLock) {
             RemoveSheepRigidbodyRotationConstraint();
         }
 
-        if (TerrainBounce) {
+        if (CheatVariables.TerrainBounce) {
             EnableTerrainBounce();
         }
     }
@@ -94,7 +80,7 @@ public sealed class CheatsController : MonoBehaviour {
     }
 
     private void Update() {
-        if (EnableInGameCheatsMenu && Input.GetKeyUp(KeyCode.BackQuote)) {
+        if (CheatVariables.EnableInGameCheatsMenu && Input.GetKeyUp(KeyCode.BackQuote)) {
             CheatInputDialog.ShowDialog();
         }
     }
@@ -133,7 +119,7 @@ public sealed class CheatsController : MonoBehaviour {
     }
 
     private void OnGUI() {
-        if (!EnableInGameCheatsMenu) {
+        if (!CheatVariables.EnableInGameCheatsMenu) {
             return;
         }
 

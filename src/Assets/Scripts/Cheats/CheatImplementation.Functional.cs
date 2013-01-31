@@ -4,7 +4,7 @@ using System.Text;
 using UnityEngine;
 
 // Cheats implementation: Functional
-public static partial class CheatsImplementation {
+public static partial class CheatImplementation {
     [CheatCommand("Help", CheatCategory.GeneralCommands)]
     public static void ShowCheatsHelpReference() {
         const string indent = "    ";
@@ -17,14 +17,14 @@ public static partial class CheatsImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate all general cheats and format them nicely
-        IEnumerable<CheatDescriptor> cheatDescriptors = CheatRepository.GetAllCheats();
+        IEnumerable<CheatCommandDescriptor> cheatDescriptors = CheatRepository.GetAllCommands();
 
-        foreach (CheatDescriptor member in cheatDescriptors) {
+        foreach (CheatCommandDescriptor member in cheatDescriptors) {
             cheatDescription.Add(member.Description);
 
             // command formatted with arguments
             var format = new StringBuilder();
-            format.Append(member.CommandName);
+            format.Append(member.Name);
 
             foreach (ParameterInfo parameterInfo in member.Parameters) {
                 format.AppendFormat(" <{0}>", parameterInfo.Name);
@@ -41,7 +41,7 @@ public static partial class CheatsImplementation {
         cheatDescription.Add(null);
 
         // ... aggregate any enable/disable vars
-        foreach (var cheatVar in ToggleCheatVars) {
+        foreach (CheatVariabeleDescriptor cheatVar in CheatRepository.GetAllVariabeles()) {
             cheatName.Add(cheatVar.Name);
             cheatDescription.Add(cheatVar.Description);
         }
