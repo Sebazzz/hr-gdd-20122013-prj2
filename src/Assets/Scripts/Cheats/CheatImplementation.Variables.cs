@@ -17,7 +17,7 @@ public static partial class CheatImplementation {
     [CheatCommand("Set", CheatCategory.GeneralCommands)]
     public static void SetAVariabeleToTheSpecifiedValue(string variabele, object value) {
         // select member field
-        CheatVariabeleDescriptor variabeleDescriptor = CheatRepository.GetCheatByVariabeleName(variabele);
+        CheatVariabeleDescriptor variabeleDescriptor = CheatService.GetCheatByVariabeleName(variabele);
 
         if (variabeleDescriptor == null) {
             CheatNotificationDialog.ShowDialog("Error",

@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 /// <summary>
 /// Class with the single purpose of descrbing cheats and aggregrating them
 /// </summary>
-public static class CheatRepository {
+public static class CheatService {
     private static readonly List<CheatCommandDescriptor> CheatCommands;
     private static readonly List<CheatVariabeleDescriptor> CheatVariables; 
 
-    static CheatRepository() {
+    static CheatService() {
         CheatCommands =  new List<CheatCommandDescriptor>();
         CheatVariables = new List<CheatVariabeleDescriptor>();
 
@@ -60,20 +62,7 @@ public static class CheatRepository {
 
             // format member name into words
             string memberName = member.Name;
-
-            string[] words = Regex.Split(memberName, "([A-Z][a-z]+)", RegexOptions.None);
-
-            StringBuilder format = new StringBuilder();
-            foreach (string word in words) {
-                if (format.Length == 0) {
-                    format.Append(word);
-                }
-                else {
-                    format.Append(" " + word.ToLowerInvariant());
-                }
-            }
-
-            string description = format.ToString();
+            string description = ConvertPascalCasedToSentence(memberName);
 
             CheatCommandDescriptor descriptor = new CheatCommandDescriptor(
                 cheatAttr.Name,
@@ -83,6 +72,23 @@ public static class CheatRepository {
 
             CheatCommands.Add(descriptor);
         }
+    }
+
+    private static string ConvertPascalCasedToSentence(string memberName) {
+        string[] words = Regex.Split(memberName, "([A-Z][a-z]+)", RegexOptions.None);
+
+        StringBuilder format = new StringBuilder();
+        foreach (string word in words) {
+            if (format.Length == 0) {
+                format.Append(word);
+            }
+            else {
+                format.Append(" " + word.ToLowerInvariant());
+            }
+        }
+
+        string description = format.ToString();
+        return description;
     }
 
     /// <summary>
@@ -129,5 +135,38 @@ public static class CheatRepository {
         }
 
         return null;
+    }
+
+    /// <summary>
+    /// Executes the specified cheat
+    /// </summary>
+    /// <param name="cheat"></param>
+    /// <param name="parameters"></param>
+    public static void ExecuteCheat(CheatCommandDescriptor cheat, params object[] parameters) {
+        // select parameters
+        ParameterInfo[] memberParams = cheat.Parameters;
+
+        if (memberParams.Length != parameters.Length) {
+            CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, parameters.Length - 1));
+            return;
+        }
+
+        object[] parsedParameters = new object[memberParams.Length];
+        for (int i = 0; i < memberParams.Length && i < parsedParameters.Length; i++) {
+            ParameterInfo currentParam = memberParams[i];
+            object rawArgument = parameters[i];
+
+            try {
+                parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
+            } catch (Exception) {
+                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
+                return;
+            }
+        }
+
+        // call
+        cheat.Method.Invoke(null, parsedParameters);
+
+        Debug.Log("Applied cheat: " + cheat.Name);
     }
 }
