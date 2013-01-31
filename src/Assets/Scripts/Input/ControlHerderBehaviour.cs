@@ -165,7 +165,6 @@ public class ControlHerderBehaviour : MonoBehaviour {
         this.selectionProjector.SetActive(true);
     }
 
-
     void OnMouseExit() {
         this.selectionProjector.SetActive(false);
     }
