@@ -5,17 +5,19 @@ using UnityEngine;
 /// Represents a simple text dialog with notification text. Note: only to be used by the <see cref="CheatInputDialog"/> and related classes.
 /// </summary>
 internal static class CheatNotificationDialog {
+    private const string TextStyle = "CheatDialogText";
+    private const string TextFatStyle = "CheatDialogTextFat";
+
     private static Rect _DialogRect;
     private static bool _ShowDialog;
 
     private static string _DialogBodyTitle;
     private static string _DialogBodyText;
-    private static string _DialogBodyTextStyleName;
 
     /// <summary>
     /// Enables showing of the dialog
     /// </summary>
-    public static void ShowDialog(string title, string text, string bodyStyleName) {
+    public static void ShowDialog(string title, string text) {
         _ShowDialog = true;
 
         const int width = 300;
@@ -24,7 +26,6 @@ internal static class CheatNotificationDialog {
 
         _DialogBodyTitle = title;
         _DialogBodyText = text;
-        _DialogBodyTextStyleName = bodyStyleName;
     }
 
     /// <summary>
@@ -46,7 +47,7 @@ internal static class CheatNotificationDialog {
     }
 
     private static void DrawInsideDialog(int dialogId, GUISkin skin) {
-        GUIStyle textStyle = skin.GetStyle(_DialogBodyTextStyleName);
+        GUIStyle textStyle = skin.GetStyle(TextStyle);
 
         GUILayout.BeginHorizontal();
 

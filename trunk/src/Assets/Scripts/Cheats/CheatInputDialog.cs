@@ -42,7 +42,7 @@ public static class CheatInputDialog {
     /// <param name="skin"></param>
     public static void DrawDialog(GUISkin skin) {
         if (_ShowDialog) {
-            _DialogRect = GUILayout.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), "Cheats1337",
+            _DialogRect = GUILayout.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), "Cheats",
                                            skin.GetStyle("window"));
         }
 
@@ -93,11 +93,11 @@ public static class CheatInputDialog {
         string commandName = arguments[0];
 
         // select correct cheat member
-        CheatDescriptor cheat = CheatReference.GetCheatByCommandName(commandName);
+        CheatDescriptor cheat = CheatRepository.GetCheatByCommandName(commandName);
 
         // check if cheat is found
         if (cheat == null) {
-            CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.", "MonospaceLabel");
+            CheatNotificationDialog.ShowDialog("Error", "Cheat could not be applied: cheat not found. Type 'help' for cheat reference.");
             return;
         }
 
@@ -105,7 +105,7 @@ public static class CheatInputDialog {
         ParameterInfo[] memberParams = cheat.Parameters;
             
         if (memberParams.Length != arguments.Length - 1) {
-            CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, arguments.Length-1) , "MonospaceLabel");
+            CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, arguments.Length-1));
             return;
         }
 
@@ -117,7 +117,7 @@ public static class CheatInputDialog {
             try {
                 parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
             } catch (Exception) {
-                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName), "MonospaceLabel");
+                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
                 return;
             }
         }
