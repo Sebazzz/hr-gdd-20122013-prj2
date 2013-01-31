@@ -21,8 +21,6 @@ public class Level {
         MaxSheepWithinTime = 4
     }
 
-    private Score score = Score.None;
-
     private const string SettingsLockStateKey = "_lockstate";
     private const string SettingsScoresKey = "_scores";
     public static Level None = new Level("None");

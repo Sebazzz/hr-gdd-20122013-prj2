@@ -85,9 +85,8 @@ static class Levels{
     /// <returns>The next level. Smaakt naar gravel. Will return Level.none if there is no next level.</returns>
     public static Level GetNextLevel(Level current) {
         bool foundCurrent = false;
-        Country c = null;
+
         foreach (Country country in Countries) {
-            c = country;
             foreach (Level level in country.Levels) {
                 // If foundCurrent is true we found it one iteration ago, and we can safely return this one
                 if (foundCurrent) {
