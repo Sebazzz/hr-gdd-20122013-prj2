@@ -30,6 +30,8 @@ public class MoveBehaviour : MonoBehaviour {
     /// </summary>
     public bool IgnoreYAxis = true;
 
+    private Quaternion targetRotation;
+
     /// <summary>
     /// Gets the current direction of movement. See also <see cref="GameObject.transform"/>.
     /// </summary>
@@ -143,6 +145,9 @@ public class MoveBehaviour : MonoBehaviour {
             finalSpeed *= -1;
         }
 
+        // Rotate
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, this.targetRotation, Time.fixedDeltaTime * 10);
+
         // calculate movement
         this.gameObject.transform.Translate(0, 0, finalSpeed);
     }
@@ -189,7 +194,8 @@ public class MoveBehaviour : MonoBehaviour {
         this.targetAsDirection = true;
         this.Speed = speed;
 
-        this.transform.rotation = directionTarget;
+        this.targetRotation = directionTarget;
+        //this.transform.rotation = directionTarget;
     }
 
     /// <summary>
