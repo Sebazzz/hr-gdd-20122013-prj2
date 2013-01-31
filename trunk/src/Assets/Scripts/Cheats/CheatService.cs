@@ -42,6 +42,9 @@ public static class CheatService {
 
             CheatVariables.Add(descriptor);
         }
+
+        // order list
+        CheatCommands.Sort((a,b) => System.String.Compare(a.Name, b.Name, System.StringComparison.InvariantCultureIgnoreCase));
     }
 
     private static void FindCheatCommands() {
@@ -73,6 +76,9 @@ public static class CheatService {
 
             CheatCommands.Add(descriptor);
         }
+
+        // order list
+        CheatVariables.Sort((a, b) => System.String.Compare(a.Name, b.Name, System.StringComparison.InvariantCultureIgnoreCase));
     }
 
     private static string ConvertPascalCasedToSentence(string memberName) {
@@ -105,24 +111,22 @@ public static class CheatService {
     /// </summary>
     /// <returns></returns>
     public static Dictionary<string, List<CheatCommandDescriptor>> GetAllCommandsByHumanReadableCategory() {
-        Dictionary<CheatCategory, List<CheatCommandDescriptor>> commandsByCategory = new Dictionary<CheatCategory, List<CheatCommandDescriptor>>();
+        Dictionary<string, List<CheatCommandDescriptor>> result = new Dictionary<string, List<CheatCommandDescriptor>>();
 
-        // list per category
-        foreach (CheatCommandDescriptor command in CheatCommands) {
-            // get existing or new list
-            List<CheatCommandDescriptor> lst;
-            if (!commandsByCategory.TryGetValue(command.Category, out lst)) {
-                lst = new List<CheatCommandDescriptor>();
-                commandsByCategory.Add(command.Category, lst);
+        Array categories = Enum.GetValues(typeof (CheatCategory));
+
+        foreach (CheatCategory category in categories) {
+            string categoryAsString = ConvertPascalCasedToSentence(category.ToString());
+            List<CheatCommandDescriptor> list = new List<CheatCommandDescriptor>();
+
+            // list per category
+            foreach (CheatCommandDescriptor command in CheatCommands) {
+                if (command.Category == category) {
+                    list.Add(command);
+                }
             }
 
-            lst.Add(command);
-        }
-
-        // category to human readable string
-        Dictionary<string, List<CheatCommandDescriptor>> result = new Dictionary<string, List<CheatCommandDescriptor>>();
-        foreach (KeyValuePair<CheatCategory, List<CheatCommandDescriptor>> pair in commandsByCategory) {
-            result.Add(ConvertPascalCasedToSentence(pair.Key.ToString()), pair.Value);
+            result.Add(categoryAsString, list);
         }
 
         return result;
