@@ -4,13 +4,13 @@ using UnityEngine;
 
 // Cheats implementation: Functional
 public static partial class CheatsImplementation {
-    [Cheat("SetGravity")]
+    [Cheat("SetGravity", CheatCategory.JustForFun)]
     public static void SetGlobalGravityDirection(float x, float y, float z) {
         Physics.gravity = new Vector3(x, y, z);
     }
 
 
-    [Cheat("SheepRocket")]
+    [Cheat("SheepRocket", CheatCategory.JustForFun)]
     public static void LaunchAllSheepUpIntoTheAirByTheSpecifiedForce(float force) {
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
@@ -23,7 +23,7 @@ public static partial class CheatsImplementation {
         }
     }
 
-    [Cheat("DanceOfTheSheep")]
+    [Cheat("DanceOfTheSheep", CheatCategory.JustForFun)]
     public static void AppliesARandomForceToEachSheep(float force) {
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
@@ -38,7 +38,7 @@ public static partial class CheatsImplementation {
 
     #region Fun: Sheep control
 
-    [Cheat("ControllableSheep")]
+    [Cheat("ControllableSheep", CheatCategory.JustForFun)]
     public static void EnablesSheepToBeControlledByArrowKeysOptionallyDisablingControlHelperEffects(bool disableControlEffects) {
         // find dog marker
         GameObject sourceDog = GameObject.FindGameObjectWithTag(Tags.Shepherd);
@@ -85,7 +85,7 @@ public static partial class CheatsImplementation {
     #endregion
 
     #region Fun: Sheep Rain
-    [Cheat("SheepRain")]
+    [Cheat("SheepRain", CheatCategory.JustForFun)]
     public static void StartsRainingSheepAllOverTheLevel(int amountPerSecond, int timeInSeconds) {
         // find a sheep to clone
         GameObject sheepToClone = GameObject.FindGameObjectWithTag(Tags.Sheep);

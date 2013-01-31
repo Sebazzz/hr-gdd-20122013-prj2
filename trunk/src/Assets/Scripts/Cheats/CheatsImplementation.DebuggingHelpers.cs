@@ -2,7 +2,7 @@
 
 // Cheats implementation: Functional
 public static partial class CheatsImplementation {
-    [Cheat("EndlessCameraMovement")]
+    [Cheat("EndlessCameraMovement", CheatCategory.DebuggingHelpers)]
     public static void DisableCameraMovementBounds() {
         var cameraScript = Camera.mainCamera.GetComponent<ArrowMovementCameraBehaviour>();
 

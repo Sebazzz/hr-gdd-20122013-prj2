@@ -12,7 +12,8 @@ public sealed class CheatAttribute : Attribute {
         this.category = category;
     }
 
-    public CheatAttribute(string name) : this(name, CheatCategory.None) {
+    public CheatAttribute(string name)
+        : this(name, CheatCategory.GeneralCommands) {
     }
 
     public string Name {
