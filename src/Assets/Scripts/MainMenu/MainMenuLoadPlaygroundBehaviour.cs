@@ -2,9 +2,12 @@
 
 public sealed class MainMenuLoadPlaygroundBehaviour : MonoBehaviour {
     private int count = 0;
-    void OnMouseUpAsButton() {
+
+	public string scenetoload = Scenes.Playground;
+	
+	void OnMouseUpAsButton() {
         if (++count >= 3) {
-            AsyncSceneLoader.Load(Scenes.Playground);
+			AsyncSceneLoader.Load(scenetoload);
         }
     }
 }
