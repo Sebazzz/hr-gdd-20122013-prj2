@@ -76,7 +76,7 @@ public static class CheatInputDialog {
             }
             else {
                 _EnteredCheat = _EnteredCheat.TrimEnd('\n', ' ', '\r');
-                CheatService.ExecuteRawCommand(_EnteredCheat);
+                CheatService.ExecuteRawCommand(_EnteredCheat, true);
             }
         }
         GUILayout.EndHorizontal();
