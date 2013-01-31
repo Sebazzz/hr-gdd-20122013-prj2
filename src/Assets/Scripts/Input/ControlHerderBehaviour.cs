@@ -182,7 +182,7 @@ public class ControlHerderBehaviour : MonoBehaviour {
         }
 
         // start drawing of a new path
-        if (!MouseManager.IsMouseLocked && !this.isCurrentlyDrawing && this.IsMouseButtonDown() && this.herderLoopController.AcceptsNewPath()) {
+        if (!MouseManager.IsMouseLocked && GetMouse() && !this.isCurrentlyDrawing && this.IsMouseButtonDown() && this.herderLoopController.AcceptsNewPath()) {
             // get the position of the mouse in the world and check if we are hit
             RaycastHit? hit = this.GetMousePosition();
 
@@ -236,6 +236,8 @@ public class ControlHerderBehaviour : MonoBehaviour {
                 this.DrawPath();
             }
         }
+
+        updateMouseState();
 	}
 
     private float CalculateTotalDrawTime() {
@@ -334,6 +336,25 @@ public class ControlHerderBehaviour : MonoBehaviour {
             }
         }
         return null;
+    }
+
+    private bool HasBeenReleased = true;
+    private bool MouseState = false;
+    private void updateMouseState() {
+        if (Input.GetMouseButton((int)this.MouseButtonToCheck)) {
+            if (HasBeenReleased) {
+                HasBeenReleased = false;
+                MouseState = true;
+            }
+        } else {
+            HasBeenReleased = true;
+        }
+    }
+
+    private bool GetMouse() {
+        bool m = MouseState;
+        MouseState = false;
+        return m;
     }
 
     private bool IsMouseButtonDown() {
