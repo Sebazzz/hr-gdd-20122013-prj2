@@ -106,7 +106,8 @@ public abstract class CanDieBehaviour : MonoBehaviour {
         }
 
         if (this.currentCauseOfDeath != null) {
-            Debug.LogWarning("Dying a second time while already dying.");            
+            Debug.LogWarning("Dying a second time while already dying. Ignoring.");
+            return;
         }
 
         this.currentCauseOfDeath = causeOfDeath;
