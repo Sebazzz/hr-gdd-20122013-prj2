@@ -53,7 +53,7 @@ public static partial class CheatImplementation {
         GameObject[] sheepArr = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject sheep in sheepArr) {
-            CheatControlSheepByArrowKeysBehaviour c = sheep.AddComponent<CheatControlSheepByArrowKeysBehaviour>();
+            CheatControlledByKeysBehaviour c = sheep.AddComponent<CheatControlledByKeysBehaviour>();
             c.SetMarker(selectionMarker);
 
             MagneticBehaviour magnet = sheep.GetComponent<MagneticBehaviour>();
@@ -62,7 +62,55 @@ public static partial class CheatImplementation {
             }
         }
 
-        CheatNotificationDialog.ShowDialog("Instruction", "Control the sheep using the JIKL keys (similar to WSAD). Select an sheep using the middle mouse button, unselect it by clicking again.");
+        CheatNotificationDialog.ShowDialog(
+            "Instructions", 
+            "Control the sheep using the JIKL keys (similar to WSAD). Press U or O to strafe. Press space to jump. " +
+            "Select an sheep using the middle mouse button, unselect it by clicking the middle mouse button again.");
+    }
+
+    [CheatCommand("KeyboardControllableDogs", CheatCategory.DebuggingHelpers)]
+    public static void EnablesDogsToBeControlledByArrowKeys() {
+        // attach the controlling script to the dogs
+        GameObject[] dogs = GameObject.FindGameObjectsWithTag(Tags.Shepherd);
+
+        foreach (GameObject dog in dogs) {
+            // get the projector
+            GameObject selectionMarker = null;
+            foreach (Transform tr in dog.transform) {
+                if (tr.gameObject.name == "SelectionProjector") {
+                    selectionMarker = tr.gameObject;
+                    break;
+                }
+            }
+
+            // add component
+            CheatControlledByKeysBehaviour c = dog.AddComponent<CheatControlledByKeysBehaviour>();
+            c.SetMarker(selectionMarker);
+
+            if (selectionMarker == null) {
+                continue;
+            }
+
+            // destroy original marker
+            selectionMarker.transform.parent = null;
+            Object.Destroy(selectionMarker);
+
+            // disable control scripts
+            MonoBehaviour controlScript = dog.GetComponent<ControlHerderBehaviour>();
+            if (controlScript != null) {
+                controlScript.enabled = false;
+            }
+
+            controlScript = dog.GetComponent<HerderLoopBehaviour>();
+            if (controlScript != null) {
+                controlScript.enabled = false;
+            }
+        }
+
+        CheatNotificationDialog.ShowDialog(
+            "Instructions",
+            "Control the dog using the JIKL keys (similar to WSAD). Press U or O to strafe. Press space to jump. " +
+            "Select an dog using the middle mouse button, unselect it by clicking the middle mouse button again.");
     }
 
 }
