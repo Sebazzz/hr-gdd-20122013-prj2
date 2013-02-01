@@ -23,6 +23,8 @@ SolidCompression=yes
 LZMAAlgorithm=1
 LZMAUseSeparateProcess=yes
 LZMANumFastBytes=256
+;WizardImageFile=
+;WizardSmallImageFile=
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
