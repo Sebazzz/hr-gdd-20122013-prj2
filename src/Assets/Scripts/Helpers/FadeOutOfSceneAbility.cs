@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,6 +9,8 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
     private const float RotationSpeed = 0.5f;
     private const float DistanceOffset = 25f;
     private const float AcceptDistance = 5f;
+    private const float MaterialAlpha = 0.5f;
+    private const float MaterialAlphaFadeSpeed = 0.01f;
     private static readonly Vector3 DefaultDirection = Vector3.up;
 
     /// <summary>
@@ -17,8 +20,16 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
 
     private GameObject rootGameObject;
     private Vector3 targetPosition;
+    private List<Material> materials;
 
     private void Update() {
+        // create semi-transparant material
+        if (this.materials != null) {
+            foreach (Material material in materials) {
+                material.color = FadeColorToAlpha(material.color);
+            }
+        }
+
         // set rotation
         Quaternion targetRotation = Quaternion.LookRotation(targetPosition - rootGameObject.transform.position);
         Quaternion currentRotation = rootGameObject.transform.rotation;
@@ -35,6 +46,17 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
         if (Vector3.Distance(newTarget, this.targetPosition) <= AcceptDistance) {
             Destroy(this.rootGameObject);
         }
+    }
+
+    private static Color FadeColorToAlpha(Color original) {
+        if (original.a <= MaterialAlpha) {
+            return original;
+        }
+
+        Color copy = original;
+        copy.a -= MaterialAlphaFadeSpeed;
+
+        return copy;
     }
 
     /// <summary>
@@ -62,7 +84,48 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
 
         this.rootGameObject = targetGameObject;
         this.targetPosition = target;
+
+        // index all materials
+        this.materials = GetMaterialsOfObject(targetGameObject);
+
+        Shader transDiffuseShader = Shader.Find("Transparent/Diffuse");
+        if (transDiffuseShader == null) {
+            Debug.LogWarning("Transparent/Diffuse shader could not be found. Alpha transition will not execute");
+            this.materials = null;
+            return;
+        }
+
+        foreach (Material material in materials) {
+            material.shader = transDiffuseShader;
+        }
     }
+
+    private static List<Material> GetMaterialsOfObject(GameObject targetGameObject) {
+        List<Material> materials = new List<Material>();
+
+        Stack<GameObject> gameObjects = new Stack<GameObject>();
+        gameObjects.Push(targetGameObject);
+
+        while (gameObjects.Count > 0) {
+            GameObject current = gameObjects.Pop();
+
+            // disable emitter
+            MeshRenderer renderer = current.GetComponent<MeshRenderer>();
+            if (renderer != null) {
+                materials.AddRange(renderer.materials);
+            }
+
+            // search for additional
+            foreach (Transform childTransform in current.transform) {
+                GameObject child = childTransform.gameObject;
+
+                gameObjects.Push(child);
+            }
+        }
+
+        return materials;
+    }
+
 
     private static Behaviour GetHaloRecursive(GameObject targetGameObject) {
         var gameObjects = new Stack<GameObject>();

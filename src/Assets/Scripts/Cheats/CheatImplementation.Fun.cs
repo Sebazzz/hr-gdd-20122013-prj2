@@ -41,23 +41,23 @@ public static partial class CheatImplementation {
 
     #region Fun: Disco Sheep
     [CheatCommand("DiscoSheep", CheatCategory.JustForFun)]
-    public static void ColorChangesOnEverySheep(bool useAlphaChannel) {
+    public static void ColorChangesOnEverySheep() {
         // start coroutine for every sheep
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject gameObject in sheep) {
-            StartCoroutine(ExecuteColorChange(gameObject, useAlphaChannel));
+            StartCoroutine(ExecuteColorChange(gameObject));
         }
     }
 
     // ReSharper disable FunctionNeverReturns -- This is intented
-    private static IEnumerator ExecuteColorChange(GameObject sheep, bool useAlphaChannel) {
+    private static IEnumerator ExecuteColorChange(GameObject sheep) {
         // first find all materials
         List<Material> materials = GetMaterialsOfObject(sheep, "Vacht");
 
         // start color
         {
-            Color32 startColor = CreateRandomColor(useAlphaChannel);
+            Color32 startColor = CreateRandomColor();
 
             foreach (Material material in materials) {
                 material.color = startColor;
@@ -70,11 +70,6 @@ public static partial class CheatImplementation {
             float r = Random.Range(-0.1f, 0.1f);
             float g = Random.Range(-0.1f, 0.1f);
             float b = Random.Range(-0.1f, 0.1f);
-            float a = Random.Range(-0.1f, 0.1f);
-
-            if (!useAlphaChannel) {
-                a = 0;
-            }
 
             // colorize each material
             foreach (Material material in materials) {
@@ -83,7 +78,6 @@ public static partial class CheatImplementation {
                 currentColor.r = ClampColorFloat(currentColor.r + r);
                 currentColor.g = ClampColorFloat(currentColor.g + g);
                 currentColor.b = ClampColorFloat(currentColor.b + b);
-                currentColor.a = ClampColorFloat(currentColor.a + a);
 
                 material.color = currentColor;
             }
@@ -108,15 +102,11 @@ public static partial class CheatImplementation {
         return current;
     }
 
-    private static Color CreateRandomColor(bool useAlphaChannel) {
+    private static Color CreateRandomColor() {
         float r = Random.Range(-1f, 1f);
         float g = Random.Range(-1f, 1f);
         float b = Random.Range(-1f, 1f);
-        float a = Random.Range(-1f, 1f);
-
-        if (!useAlphaChannel) {
-            a = 0;
-        }
+        const float a = 1f;
 
         return new Color(r, g, b, a);
     }
