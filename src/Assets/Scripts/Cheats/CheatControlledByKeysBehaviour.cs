@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
+public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     private static readonly Dictionary<KeyCode, Vector3> MovementMultipliers = new Dictionary<KeyCode, Vector3>() {
             {KeyCode.I, new Vector3(0, 0, 1)},
             {KeyCode.K, new Vector3(0, 0, -1)},
@@ -64,7 +64,7 @@ public sealed class CheatControlSheepByArrowKeysBehaviour : MonoBehaviour {
 
             if (Input.GetKey(code)) {
                 Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
-                movementSpeed = movementSpeed * CheatControlSheepByArrowKeysBehaviour.MovementSpeed * Time.deltaTime;
+                movementSpeed = movementSpeed * CheatControlledByKeysBehaviour.MovementSpeed * Time.deltaTime;
 
                 this.transform.Translate(movementSpeed, Space.World);
             }
