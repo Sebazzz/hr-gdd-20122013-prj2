@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 
 /// <summary>
-/// Class with the single purpose of descrbing cheats and aggregrating them
+/// Class with the purpose of describing cheats and aggregrating them. Also provides services to execute cheat commands.
 /// </summary>
 public static class CheatService {
     private static readonly List<CheatCommandDescriptor> CheatCommands;
@@ -182,7 +182,7 @@ public static class CheatService {
 
         if (memberParams.Length != parameters.Length) {
             if (showErrors) {
-                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, parameters.Length - 1));
+                CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Expected {0} parameters, but got {1} parameters", memberParams.Length, parameters.Length));
             }
             return;
         }
