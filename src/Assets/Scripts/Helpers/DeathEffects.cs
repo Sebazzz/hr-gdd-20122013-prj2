@@ -29,11 +29,11 @@ public static class DeathEffects {
 
             // instantiate the template
             GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
             Quaternion targetRotation = causeOfDeath.transform.rotation;
             splashObject.transform.rotation = targetRotation;
-
 
             // ... add information of velocity, makes sure the effect is placed on the proper position
             Vector3 targetPosition = CalculatePositionWithBodyVelocity(context);
@@ -53,6 +53,7 @@ public static class DeathEffects {
 
             // instantiate the template
             GameObject splashObject = (GameObject)Object.Instantiate(extraTemplate);
+            splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
             Quaternion targetRotation = causeOfDeath.transform.rotation;
@@ -81,6 +82,7 @@ public static class DeathEffects {
 
             // instantiate the template
             GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
             Quaternion targetRotation = context.transform.rotation;
@@ -107,6 +109,7 @@ public static class DeathEffects {
 
             // instantiate the template
             GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
             Quaternion targetRotation = context.transform.rotation;
