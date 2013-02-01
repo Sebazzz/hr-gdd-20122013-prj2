@@ -60,7 +60,8 @@ public static partial class CheatImplementation {
             CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for variabele '{1}' could not be parsed as '{2}'", value, variabele, variabeleDescriptor.FieldInfo.FieldType.FullName));
             return;
         }
-
+        
         variabeleDescriptor.FieldInfo.SetValue(null, parsedParameter);
+        Debug.Log(String.Format("Set {0} to '{1}'. Readback: '{2}'", variabeleDescriptor.FieldInfo.Name, parsedParameter, variabeleDescriptor.FieldInfo.GetValue(null)));
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -115,6 +117,21 @@ public sealed class CheatsController : MonoBehaviour {
             Vector3 pos = sheep.transform.position;
             pos.y += (ySize*scale)/2f;
             sheep.transform.position = pos;
+
+            // try to set dead effect size
+            SheepDeathBehaviour deathBehaviour = sheep.GetComponent<SheepDeathBehaviour>();
+            FieldInfo[] fields = deathBehaviour.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (FieldInfo fieldInfo in fields) {
+                if (fieldInfo.FieldType == typeof(DeathEffects.DeathEffectConfiguration)) {
+                    DeathEffects.DeathEffectConfiguration config = fieldInfo.GetValue(deathBehaviour) as DeathEffects.DeathEffectConfiguration;
+                    if (config == null || config.EffectTemplate == null) {
+                        continue;
+                    }
+
+                    config.EffectTemplate.transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
         }
     }
 
