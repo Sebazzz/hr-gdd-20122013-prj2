@@ -39,6 +39,34 @@ public static partial class CheatImplementation {
         }
     }
 
+    [CheatCommand("TakeThePill", CheatCategory.JustForFun)]
+    public static void DiscofyTheEntireLevel() {
+        // start coroutine for every object
+        Object[] allObjects = Object.FindObjectsOfType(typeof (Transform));
+
+        foreach (Transform script in allObjects) {
+            GameObject gameObject = script.gameObject;
+
+            if (gameObject.name.EndsWith("_DISCO")) {
+                return;
+            }
+
+            gameObject.name += "_DISCO";
+
+            // change water material to dog
+            if (gameObject.tag == Tags.Trap && gameObject.name.IndexOf("Water", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                MeshRenderer r = gameObject.GetComponent<MeshRenderer>();
+
+                if (r != null) {
+                    r.material = (Material)Resources.Load("Reserved", typeof(Material));
+                }
+            }
+
+            // execute
+            StartCoroutine(ExecuteColorChange(gameObject, null));
+        }
+    }
+
     #region Fun: Disco Sheep
     [CheatCommand("DiscoSheep", CheatCategory.JustForFun)]
     public static void ColorChangesOnEverySheep() {
@@ -46,14 +74,18 @@ public static partial class CheatImplementation {
         GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject gameObject in sheep) {
-            StartCoroutine(ExecuteColorChange(gameObject));
+            StartCoroutine(ExecuteColorChange(gameObject, "Vacht"));
         }
     }
 
     // ReSharper disable FunctionNeverReturns -- This is intented
-    private static IEnumerator ExecuteColorChange(GameObject sheep) {
+    private static IEnumerator ExecuteColorChange(GameObject sheep, string filter) {
         // first find all materials
-        List<Material> materials = GetMaterialsOfObject(sheep, "Vacht");
+        List<Material> materials = GetMaterialsOfObject(sheep, filter);
+
+        if (materials.Count <= 0) {
+            yield break;
+        }
 
         // start color
         {
