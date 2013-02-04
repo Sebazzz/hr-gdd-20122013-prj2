@@ -81,6 +81,11 @@ public sealed class DeathEffectController : MonoBehaviour {
 
         objectToRegister.name = "__DeathParticle";
 
+        if (!CheatVariables.LoadDeathEffectsOnDemand) {
+            objectToRegister.transform.parent = null;
+            objectToRegister.SetActive(true);
+        }
+
         this.StartCoroutine(ProcessDeathEffect(objectToRegister, animationConfiguration));
     }
 

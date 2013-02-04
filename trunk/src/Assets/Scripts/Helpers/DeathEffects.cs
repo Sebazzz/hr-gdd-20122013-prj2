@@ -17,6 +17,16 @@ public static class DeathEffects {
         return pos;
     }
 
+
+    private static GameObject LoadDeathEffect(DeathEffectConfiguration deathEffect) {
+        if (CheatVariables.LoadDeathEffectsOnDemand) {
+            return (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+        }
+
+        deathEffect.EffectTemplate.transform.parent = null;
+        return deathEffect.EffectTemplate;
+    }
+
     /// <summary>
     /// Logic for death by water touch
     /// </summary>
@@ -28,7 +38,7 @@ public static class DeathEffects {
             }
 
             // instantiate the template
-            GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            GameObject splashObject = LoadDeathEffect(deathEffect);
             splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
@@ -52,7 +62,7 @@ public static class DeathEffects {
             }
 
             // instantiate the template
-            GameObject splashObject = (GameObject)Object.Instantiate(extraTemplate);
+            GameObject splashObject = LoadDeathEffect(deathEffect);
             splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
@@ -81,7 +91,7 @@ public static class DeathEffects {
             }
 
             // instantiate the template
-            GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            GameObject splashObject = LoadDeathEffect(deathEffect);
             splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
@@ -108,7 +118,7 @@ public static class DeathEffects {
             }
 
             // instantiate the template
-            GameObject splashObject = (GameObject)Object.Instantiate(deathEffect.EffectTemplate);
+            GameObject splashObject = LoadDeathEffect(deathEffect);
             splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
