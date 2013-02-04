@@ -39,9 +39,9 @@ public sealed class HUD : MonoBehaviour {
 	}
 
     private void LoadTextures() {
-        timeTexture = Resources.Load("Hud/hud-time") as Texture2D;
-        goalTexture = Resources.Load("Hud/hud-goal") as Texture2D;
-        sheepTexture = Resources.Load("Hud/hud-sheep") as Texture2D;
+        this.timeTexture = Resources.Load("Hud/hud-time") as Texture2D;
+        this.goalTexture = Resources.Load("Hud/hud-goal") as Texture2D;
+        this.sheepTexture = Resources.Load("Hud/hud-sheep") as Texture2D;
     }
 	
 	void Update () {
@@ -118,7 +118,16 @@ public sealed class HUD : MonoBehaviour {
         GUI.Label(new Rect(GetPixelsFromLeft(246), 35, 10, 30), this.GetGoalAsString(), skin.GetStyle("LabelWhite"));
 
         GUI.DrawTexture(new Rect(GetPixelsFromLeft(320), 20, 230, 59), sheepTexture, ScaleMode.StretchToFill, true, 0);
-        GUI.Label(new Rect(GetPixelsFromLeft(445), 35, 50, 40), this.GetNumberCollectedAsString(), skin.GetStyle("LabelRed"));// x = 465 maar omdat we rechts uitlijnen is het x - width
+
+        bool showRedLabel = this.collected >= this.sheepGoal;
+        GUIStyle labelStyle;
+        if (showRedLabel) {
+            labelStyle = skin.GetStyle("LabelRed");
+        } else {
+            labelStyle = skin.GetStyle("LabelBlack");
+        }
+
+        GUI.Label(new Rect(GetPixelsFromLeft(445), 35, 50, 40), this.GetNumberCollectedAsString(), labelStyle);// x = 465 maar omdat we rechts uitlijnen is het x - width
         GUI.Label(new Rect(GetPixelsFromLeft(495), 35, 100, 40), this.GetMaxCollectedAsString(), skin.GetStyle("LabelBlack"));
 
         if (GUI.Button(new Rect(GetPixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {
