@@ -19,6 +19,8 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     private const int Button = 2;
     public float MovementSpeed = 10f;
     public float RotationSpeed = 90f;
+    public bool DefaultSelected = false;
+
     private const float JumpForce = 10f;
 
     private GameObject marker;
@@ -44,6 +46,10 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     void OnMouseExit() {
         this.isMouseOver = false;
         this.ShowMarker = false;
+    }
+
+    private void Start() {
+        this.isSelected = this.DefaultSelected;
     }
 
     private void Update() {
