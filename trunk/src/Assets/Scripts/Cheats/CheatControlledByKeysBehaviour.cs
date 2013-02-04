@@ -19,7 +19,9 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     private const int Button = 2;
     public float MovementSpeed = 10f;
     public float RotationSpeed = 90f;
+
     public bool DefaultSelected = false;
+    public bool TransformInLocalSpace = false;
 
     private const float JumpForce = 10f;
 
@@ -72,11 +74,19 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
             KeyCode code = controlPair.Key;
 
             if (Input.GetKey(code)) {
-                Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
-                movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
+                if (this.TransformInLocalSpace) {
+                    Vector3 movementSpeed = controlPair.Value;
+                    movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
 
-                this.transform.Translate(movementSpeed, Space.World);
-                speedAccul += movementSpeed;
+                    this.transform.Translate(movementSpeed, Space.Self);
+                    speedAccul += movementSpeed;
+                } else {
+                    Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
+                    movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
+
+                    this.transform.Translate(movementSpeed, Space.World);
+                    speedAccul += movementSpeed;
+                }
             }
         }
 
@@ -98,7 +108,12 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
             this.lastMovementSpeed = speedAccul;
         } else {
             this.lastMovementSpeed = Vector3.Lerp(this.lastMovementSpeed, Vector3.zero, Time.deltaTime*this.rigidbody.drag + 0.1f);
-            this.transform.Translate(this.lastMovementSpeed, Space.World);
+            
+            if (this.TransformInLocalSpace) {
+                this.transform.Translate(this.lastMovementSpeed, Space.Self);
+            } else {
+                this.transform.Translate(this.lastMovementSpeed, Space.World);
+            }
         }
     }
 
