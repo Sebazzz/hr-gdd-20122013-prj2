@@ -119,15 +119,18 @@ public sealed class HUD : MonoBehaviour {
 
         GUI.DrawTexture(new Rect(GetPixelsFromLeft(320), 20, 230, 59), sheepTexture, ScaleMode.StretchToFill, true, 0);
 
-        bool showRedLabel = this.collected >= this.sheepGoal;
+        bool showRedLabel = this.collected < this.sheepGoal;
+        float pos;
         GUIStyle labelStyle;
         if (showRedLabel) {
             labelStyle = skin.GetStyle("LabelRed");
+            pos = GetPixelsFromLeft(445);
         } else {
             labelStyle = skin.GetStyle("LabelBlack");
+            pos = GetPixelsFromLeft(465);
         }
 
-        GUI.Label(new Rect(GetPixelsFromLeft(445), 35, 50, 40), this.GetNumberCollectedAsString(), labelStyle);// x = 465 maar omdat we rechts uitlijnen is het x - width
+        GUI.Label(new Rect(pos, 35, 50, 40), this.GetNumberCollectedAsString(), labelStyle);// x = 465 maar omdat we rechts uitlijnen is het x - width
         GUI.Label(new Rect(GetPixelsFromLeft(495), 35, 100, 40), this.GetMaxCollectedAsString(), skin.GetStyle("LabelBlack"));
 
         if (GUI.Button(new Rect(GetPixelsFromRight(190), 20, 55, 59), "", skin.GetStyle("RestartButton"))) {

@@ -174,6 +174,12 @@ public static partial class CheatImplementation {
     #region Fun: Sheep Rain
     [CheatCommand("SheepRain", CheatCategory.JustForFun)]
     public static void StartsRainingSheepAllOverTheLevel(int amountPerSecond, int timeInSeconds) {
+        int reqSheep = amountPerSecond*timeInSeconds;
+        if (reqSheep > 250 && !Debug.isDebugBuild) {
+            CheatNotificationDialog.ShowDialog("Error", "You are not trying to crash the game, are you?");
+            return;
+        }
+
         // find a sheep to clone
         GameObject sheepToClone = GameObject.FindGameObjectWithTag(Tags.Sheep);
 
