@@ -9,14 +9,15 @@ using Object = UnityEngine.Object;
 /// </summary>
 [RequireComponent(typeof(HUD))]
 public sealed class CheatsController : MonoBehaviour {
-    private static bool _HasSetEnableInGameCheatsMenuDefaultValue = false;
+    private static bool _HasSetEnableInCheatVarsDefaultValue = false;
 
     private void Awake() {
         CheatInputDialog.HideDialog();
 
-        if (!_HasSetEnableInGameCheatsMenuDefaultValue) {
+        if (!_HasSetEnableInCheatVarsDefaultValue) {
             CheatVariables.EnableInGameCheatsMenu = Debug.isDebugBuild;
-            _HasSetEnableInGameCheatsMenuDefaultValue = true;
+            CheatVariables.EnableFPSCounter = Debug.isDebugBuild;
+            _HasSetEnableInCheatVarsDefaultValue = true;
         }
     }
 
@@ -35,6 +36,16 @@ public sealed class CheatsController : MonoBehaviour {
 
         if (CheatVariables.TerrainBounce) {
             EnableTerrainBounce();
+        }
+
+        SetFPSCounter();
+    }
+
+    private static void SetFPSCounter() {
+        FPSCounter fpsCounter = Camera.mainCamera.GetComponent<FPSCounter>();
+
+        if (fpsCounter != null) {
+            fpsCounter.enabled = CheatVariables.EnableFPSCounter;
         }
     }
 

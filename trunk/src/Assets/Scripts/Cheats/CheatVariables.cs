@@ -21,4 +21,7 @@ public static class CheatVariables {
 
     [CheatVariabele("terrainbounce", "Enable a bouncy terrain.")]
     public static bool TerrainBounce = false;
+
+    [CheatVariabele("fpscounter", "Enable a FPS counter (Frames per Second)")]
+    public static bool EnableFPSCounter = false;
 }
