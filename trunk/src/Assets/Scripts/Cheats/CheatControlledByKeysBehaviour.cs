@@ -65,7 +65,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
         }
         this.ShowMarker = this.isSelected;
 
-        Vector3 currentLocation = this.transform.position;
+        Vector3 speedAccul = Vector3.zero;
 
         // control: movement
         foreach (KeyValuePair<KeyCode, Vector3> controlPair in MovementMultipliers) {
@@ -76,6 +76,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
                 movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
 
                 this.transform.Translate(movementSpeed, Space.World);
+                speedAccul += movementSpeed;
             }
         }
 
@@ -93,15 +94,12 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
             this.rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
 
-        Vector3 speed = currentLocation - this.transform.position;
-        bool currentSpeedZero = Vector3.Distance(currentLocation, speed) < 0.5f;
-
-        if (currentSpeedZero) {
-            Debug.Log(this.lastMovementSpeed);
-            this.rigidbody.velocity = this.lastMovementSpeed;
+        if (speedAccul != Vector3.zero) {
+            this.lastMovementSpeed = speedAccul;
+        } else {
+            this.lastMovementSpeed = Vector3.Lerp(this.lastMovementSpeed, Vector3.zero, Time.deltaTime*this.rigidbody.drag + 0.1f);
+            this.transform.Translate(this.lastMovementSpeed, Space.World);
         }
-
-        this.lastMovementSpeed = speed;
     }
 
     private bool ShowMarker {
