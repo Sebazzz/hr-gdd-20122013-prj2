@@ -40,6 +40,21 @@ public static partial class CheatImplementation {
     }
 
     [CheatCommand("TakeThePill", CheatCategory.JustForFun)]
+    public static void CombinesTheBestCheats() {
+        SetGlobalGravityDirection(0, -4, 0);
+
+        CheatVariables.EnableSheepRotationLock = false;
+        CheatVariables.TerrainBounce = true;
+        RefreshVariablesWithoutReloadingLevelMayBeUnstable();
+
+        DiscofyTheEntireLevel();
+        DisableCameraMovementBounds();
+        ZoomTheCameraInOrOutByTheSpecifiedAmount(-50);
+        
+        StartsRainingSheepAllOverTheLevel(5, 30);
+    }
+
+    [CheatCommand("PartyMode", CheatCategory.JustForFun)]
     public static void DiscofyTheEntireLevel() {
         // start coroutine for every object
         Object[] allObjects = Object.FindObjectsOfType(typeof (Transform));

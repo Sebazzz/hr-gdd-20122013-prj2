@@ -39,6 +39,11 @@ public static partial class CheatImplementation {
         SetAVariabeleToTheSpecifiedValue(variabele, false);
     }
 
+    [CheatCommand("RefreshVariables", CheatCategory.GeneralCommands)]
+    public static void RefreshVariablesWithoutReloadingLevelMayBeUnstable() {
+        GameObject.FindGameObjectWithTag(Tags.World).GetComponent<CheatsController>().RefreshVariables();
+    }
+
     [CheatCommand("Set", CheatCategory.GeneralCommands)]
     public static void SetAVariabeleToTheSpecifiedValue(string variabele, object value) {
         // select member field
