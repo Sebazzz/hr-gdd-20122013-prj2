@@ -20,7 +20,6 @@ public static partial class CheatImplementation {
         c.transform.Translate(delta, Space.World);
     }
 
-
     [CheatCommand("ControllableSheep", CheatCategory.DebuggingHelpers)]
     public static void EnablesSheepToBeControlledByArrowKeysOptionallyDisablingControlHelperEffects(bool disableControlEffects) {
         // find dog marker
