@@ -190,7 +190,7 @@ public static partial class CheatImplementation {
     [CheatCommand("SheepRain", CheatCategory.JustForFun)]
     public static void StartsRainingSheepAllOverTheLevel(int amountPerSecond, int timeInSeconds) {
         int reqSheep = amountPerSecond*timeInSeconds;
-        if (reqSheep > 250 && !Debug.isDebugBuild) {
+        if (!Debug.isDebugBuild && (reqSheep > 250 || GameObject.FindGameObjectsWithTag(Tags.Sheep).Length > 250)) {
             CheatNotificationDialog.ShowDialog("Error", "You are not trying to crash the game, are you?");
             return;
         }

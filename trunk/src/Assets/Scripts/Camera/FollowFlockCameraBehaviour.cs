@@ -7,7 +7,7 @@ public class FollowFlockCameraBehaviour : MonoBehaviour
     private Vector3 cameraLookAtTarget = Vector3.zero;
     //private Vector3 cameraLookAtTargetPrevious = Vector3.zero;
 
-    public const string FollowTag = Tags.Shepherd;
+    public string FollowTag = Tags.Shepherd;
 
     public Vector3 CameraToTargetDistance = new Vector3(0f, 20f, -7.5f);
     public float FollowThreshold = 45f;

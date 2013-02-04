@@ -17,8 +17,8 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     private const KeyCode JumpKey = KeyCode.Space;
 
     private const int Button = 2;
-    private const float MovementSpeed = 10f;
-    private const float RotationSpeed = 90f;
+    public float MovementSpeed = 10f;
+    public float RotationSpeed = 90f;
     private const float JumpForce = 10f;
 
     private GameObject marker;
@@ -64,7 +64,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
 
             if (Input.GetKey(code)) {
                 Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
-                movementSpeed = movementSpeed * CheatControlledByKeysBehaviour.MovementSpeed * Time.deltaTime;
+                movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
 
                 this.transform.Translate(movementSpeed, Space.World);
             }

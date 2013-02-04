@@ -7,4 +7,6 @@ public class Scenes {
     public const string MainMenu = "MainMenu";
 
     public const string LoadingScreen = "LoadingScreen";
+
+    public const string Carnage = "Carnage";
 }
