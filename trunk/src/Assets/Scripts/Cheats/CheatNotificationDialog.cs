@@ -18,6 +18,8 @@ internal static class CheatNotificationDialog {
     /// Enables showing of the dialog
     /// </summary>
     public static void ShowDialog(string title, string text) {
+        DialogController.HideDialogs();
+
         _ShowDialog = true;
 
         const int width = 300;
@@ -56,10 +58,12 @@ internal static class CheatNotificationDialog {
         GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal(GUILayout.Width(50));
+
         GUI.SetNextControlName("CloseButton");
         if (GUILayout.Button("Close", skin.GetStyle("button"))) {
             _ShowDialog = false;
         }
+
         GUILayout.EndHorizontal();
 
         // set focus to close button

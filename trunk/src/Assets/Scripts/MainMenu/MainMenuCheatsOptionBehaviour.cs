@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class MainMenuCheatsOptionBehaviour : MonoBehaviour {
+/// <summary>
+/// Controller for cheats menu option
+/// </summary>
+public sealed class MainMenuCheatsOptionBehaviour : MonoBehaviour {
     /// <summary>
     /// Skin for the cheat dialog. Required, may not be null.
     /// </summary>
     public GUISkin Skin;
 
     private void Awake() {
-        CheatInputDialog.HideDialog();
+        DialogController.HideDialogs();
     }
 
     private void OnMouseUpAsButton() {
@@ -16,7 +19,7 @@ public class MainMenuCheatsOptionBehaviour : MonoBehaviour {
 
     private void OnGUI() {
         if (Skin != null) {
-            CheatInputDialog.DrawDialog(this.Skin);
+            DialogController.DrawDialogs(this.Skin);
         }
     }
 }

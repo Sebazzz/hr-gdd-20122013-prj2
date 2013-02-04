@@ -43,6 +43,8 @@ public class LevelBehaviour : MonoBehaviour {
 
     void Awake() {
         this.OnLevelWasLoaded(Application.loadedLevel);
+
+        DialogController.HideDialogs();
     }
 
 
@@ -80,9 +82,9 @@ public class LevelBehaviour : MonoBehaviour {
         this.sheepCounter = new SheepLevelCounter(sheepCount, this.NumberOfSheepToCollect);
 
         // Set the HUD
-        HUD.Instance.setGoal(this.sheepCounter.MinimumSafeCount);
-        HUD.Instance.setCollected(this.sheepCounter.CurrentSafeCount);
-        HUD.Instance.setMaxCollected(this.sheepCounter.CurrentCount);
+        HUD.Instance.SetGoal(this.sheepCounter.MinimumSafeCount);
+        HUD.Instance.SetNumberCollected(this.sheepCounter.CurrentSafeCount);
+        HUD.Instance.SetMaxCollected(this.sheepCounter.CurrentCount);
 	    HUD.Instance.LevelTime = (float) this.LevelTime;
 
         Debug.Log(String.Format("Initialized World. Number of dogs: {0}, number of sheep: {1}, minimum number to collect: {2}", this.dogCounter.StartCount,        this.sheepCounter.CurrentCount, this.sheepCounter.MinimumSafeCount));
@@ -104,7 +106,7 @@ public class LevelBehaviour : MonoBehaviour {
 	public void OnSheepCollected() {
         this.sheepCounter.IncreaseSafeCount();
 
-        HUD.Instance.setCollected(this.sheepCounter.CurrentSafeCount);
+        HUD.Instance.SetNumberCollected(this.sheepCounter.CurrentSafeCount);
     }
 
     /// <summary>
@@ -136,7 +138,7 @@ public class LevelBehaviour : MonoBehaviour {
     /// </summary>
     public void OnSheepDeath() {
         this.sheepCounter.IncreaseDeadCount();
-        HUD.Instance.setMaxCollected(this.sheepCounter.CurrentCount);
+        HUD.Instance.SetMaxCollected(this.sheepCounter.CurrentCount);
 
         // check if all other sheep are dead
         if (this.sheepCounter.CurrentSafeCount + this.sheepCounter.CurrentCount < this.sheepCounter.MinimumSafeCount) {
