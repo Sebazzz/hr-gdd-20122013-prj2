@@ -30,4 +30,18 @@ public class KillBehaviour : MonoBehaviour {
         // execute death logic
         dieComponent.Die(this.gameObject);
     }
+
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        // check for the 'can die' component
+        GameObject collidingGameObject = hit.gameObject;
+        CanDieBehaviour dieComponent = collidingGameObject.GetComponent<CanDieBehaviour>();
+
+        if (dieComponent == null) {
+            return;
+        }
+
+        // execute death logic
+        dieComponent.Die(this.gameObject);
+    }
 }
