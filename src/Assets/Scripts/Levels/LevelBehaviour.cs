@@ -203,7 +203,12 @@ public class LevelBehaviour : MonoBehaviour {
 
         HUD.Instance.Show = false;
         HUD.Instance.EnableCountDown = false;
-        HUD.Instance.DisplayDeathDialog("You died!");
+
+        if (this.dogCounter.DeadCount >= this.dogCounter.StartCount) {
+            HUD.Instance.DisplayDeathDialog("You failed! All your dogs died!");            
+        } else {
+            HUD.Instance.DisplayDeathDialog("You failed! You didn't save enough sheep!");
+        }
 
         yield return null;
     }
