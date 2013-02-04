@@ -15,15 +15,15 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     };
 
     private const KeyCode JumpKey = KeyCode.Space;
+    private const int SelectMouseButton = 2;
 
-    private const int Button = 2;
     public float MovementSpeed = 10f;
     public float RotationSpeed = 90f;
+    public float JumpForce = 10f;
 
     public bool DefaultSelected = false;
     public bool TransformInLocalSpace = false;
 
-    private const float JumpForce = 10f;
 
     private GameObject marker;
     private bool isMouseOver;
@@ -57,7 +57,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
 
     private void Update() {
         // check for select / deselect
-        if (Input.GetMouseButtonUp(Button) && this.isMouseOver) {
+        if (Input.GetMouseButtonUp(SelectMouseButton) && this.isMouseOver) {
             this.isSelected = !this.isSelected;
         }
 
@@ -77,13 +77,14 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
                 if (this.TransformInLocalSpace) {
                     Vector3 movementSpeed = controlPair.Value;
                     movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
-
+                    
                     this.transform.Translate(movementSpeed, Space.Self);
+
                     speedAccul += movementSpeed;
                 } else {
                     Vector3 movementSpeed = Quaternion.AngleAxis(transform.rotation.eulerAngles.y, Vector3.up) * controlPair.Value;
                     movementSpeed = movementSpeed * MovementSpeed * Time.deltaTime;
-
+                    
                     this.transform.Translate(movementSpeed, Space.World);
                     speedAccul += movementSpeed;
                 }
@@ -101,7 +102,10 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
 
         // control: jump
         if (Input.GetKey(JumpKey)) {
-            this.rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
+            // check for terrain below
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), 2f)) {
+                this.rigidbody.AddForce(Vector3.up * JumpForce * this.rigidbody.mass, ForceMode.Impulse);
+            }
         }
 
         if (speedAccul != Vector3.zero) {
