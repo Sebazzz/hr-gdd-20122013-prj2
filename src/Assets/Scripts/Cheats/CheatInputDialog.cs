@@ -1,6 +1,4 @@
 using System;
-using System.Globalization;
-using System.Reflection;
 using UnityEngine;
 
 /// <summary>
@@ -15,8 +13,10 @@ public static class CheatInputDialog {
     /// Enables showing of the dialog
     /// </summary>
     public static void ShowDialog() {
-        _EnteredCheat = String.Empty;
+        DialogController.HideDialogs();
         _ShowDialog = true;
+
+        _EnteredCheat = String.Empty;
 
         const int width = 300;
         const int height = 100;
@@ -31,9 +31,6 @@ public static class CheatInputDialog {
     /// </summary>
     public static void HideDialog() {
         _ShowDialog = false;
-
-        CheatReferenceDialog.HideDialog();
-        CheatNotificationDialog.HideDialog();
     }
 
     /// <summary>
@@ -45,9 +42,6 @@ public static class CheatInputDialog {
             _DialogRect = GUILayout.Window(0, _DialogRect, i => DrawInsideDialog(i, skin), "Cheats",
                                            skin.GetStyle("window"));
         }
-
-        CheatReferenceDialog.DrawDialog(skin);
-        CheatNotificationDialog.DrawDialog(skin);
     }
 
     private static void DrawInsideDialog(int dialogId, GUISkin skin) {

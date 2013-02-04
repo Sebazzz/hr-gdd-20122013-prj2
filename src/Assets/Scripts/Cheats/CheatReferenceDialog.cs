@@ -23,6 +23,7 @@ internal static class CheatReferenceDialog {
     /// Enables showing of the dialog
     /// </summary>
     public static void ShowDialog(string title, Dictionary<string, List<CheatCommandDescriptor>> cheatCommandsByCategory, IEnumerable<CheatVariabeleDescriptor> cheatVariables, string bodyStyleName) {
+        DialogController.HideDialogs();
         _ShowDialog = true;
 
         float width = Mathf.Max(Screen.width - 100f, 1024f);
