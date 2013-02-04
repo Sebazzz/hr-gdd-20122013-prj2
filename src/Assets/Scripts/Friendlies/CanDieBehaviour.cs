@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 /// <summary>
 /// Base class for objects that can die. Derived classes implement specific death logic.
@@ -8,6 +10,57 @@ using UnityEngine;
 /// <dependend cref="KillBehaviour" />
 public abstract class CanDieBehaviour : MonoBehaviour {
     private GameObject currentCauseOfDeath;
+    private bool hasPreloadedDeathEffects;
+
+    void Start() {
+        // preload death effects
+        if (!hasPreloadedDeathEffects && !CheatVariables.LoadDeathEffectsOnDemand) {
+            this.PreloadDeathEffects();
+
+            hasPreloadedDeathEffects = true;
+        }
+    }
+
+    private void PreloadDeathEffects() {
+        // create dead pool holder helper object
+        GameObject deadPoolHolder = new GameObject("__DeadEffectPool");
+        deadPoolHolder.transform.parent = this.transform;
+        deadPoolHolder.SetActive(false);
+
+        // get all the fields and clone them
+        FieldInfo[] publicFields = this.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+        foreach (FieldInfo publicField in publicFields) {
+            // filter by type
+            if (!typeof(DeathEffects.DeathEffectConfiguration).IsAssignableFrom(publicField.FieldType)) {
+                continue;
+            }
+
+            // instantiate
+            DeathEffects.DeathEffectConfiguration config =
+                publicField.GetValue(this) as DeathEffects.DeathEffectConfiguration;
+            if (config == null) {
+                continue;
+            }
+
+            GameObject newObj = (GameObject)Object.Instantiate(config.EffectTemplate);
+            newObj.transform.parent = deadPoolHolder.transform;
+            newObj.SetActive(false);
+            
+            // disable any physics
+            Rigidbody rb = newObj.GetComponent<Rigidbody>();
+            if (rb != null) {
+                rb.isKinematic = true;
+            }
+
+            Collider c = newObj.GetComponent<Collider>();
+            if (c != null) {
+                c.enabled = false;
+            }
+
+            config.EffectTemplate = newObj;
+        }
+    }
 
     /// <summary>
     /// Defines the delay between being hit and being killed
@@ -45,7 +98,6 @@ public abstract class CanDieBehaviour : MonoBehaviour {
         // so we just disable colliders, rigidbody and renderer. it exists, but it doesnt influence the game world anymore
         RecursiveDisableInfluence(this.gameObject);
     }
-
 
     private static void RecursiveDisableInfluence(GameObject rootObject) {
         Stack<GameObject> gameObjects = new Stack<GameObject>();
