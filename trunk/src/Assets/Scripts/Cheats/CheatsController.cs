@@ -21,6 +21,10 @@ public sealed class CheatsController : MonoBehaviour {
     }
 
     private void Start() {
+        this.RefreshVariables();
+    }
+
+    public void RefreshVariables() {
         if (CheatVariables.EnableLargeSheep) {
             SetLargeSheep();
         }
