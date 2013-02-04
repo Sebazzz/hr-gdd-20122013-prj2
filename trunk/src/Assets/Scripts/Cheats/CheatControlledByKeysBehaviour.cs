@@ -26,6 +26,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     private GameObject marker;
     private bool isMouseOver;
     private bool isSelected;
+    private Vector3 lastMovementSpeed;
 
     public void SetMarker(GameObject projectorToSet) {
         GameObject copy = (GameObject)Object.Instantiate(projectorToSet);
@@ -64,6 +65,8 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
         }
         this.ShowMarker = this.isSelected;
 
+        Vector3 currentLocation = this.transform.position;
+
         // control: movement
         foreach (KeyValuePair<KeyCode, Vector3> controlPair in MovementMultipliers) {
             KeyCode code = controlPair.Key;
@@ -89,6 +92,16 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
         if (Input.GetKey(JumpKey)) {
             this.rigidbody.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         }
+
+        Vector3 speed = currentLocation - this.transform.position;
+        bool currentSpeedZero = Vector3.Distance(currentLocation, speed) < 0.5f;
+
+        if (currentSpeedZero) {
+            Debug.Log(this.lastMovementSpeed);
+            this.rigidbody.velocity = this.lastMovementSpeed;
+        }
+
+        this.lastMovementSpeed = speed;
     }
 
     private bool ShowMarker {
