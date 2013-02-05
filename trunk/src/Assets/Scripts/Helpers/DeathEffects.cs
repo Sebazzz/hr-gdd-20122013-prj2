@@ -62,7 +62,7 @@ public static class DeathEffects {
             }
 
             // instantiate the template
-            GameObject splashObject = LoadDeathEffect(deathEffect);
+            GameObject splashObject = (GameObject) Object.Instantiate(extraTemplate);
             splashObject.transform.localScale = context.transform.localScale;
 
             // set positional information
