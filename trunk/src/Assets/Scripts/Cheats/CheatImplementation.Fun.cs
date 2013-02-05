@@ -12,6 +12,27 @@ public static partial class CheatImplementation {
         Physics.gravity = new Vector3(x, y, z);
     }
 
+	[CheatCommand("DawnOfTheSheep", CheatCategory.JustForFun)]
+	public static void AllSheepMoveToCamera() {
+		StartCoroutine(DawnOfTheSheepExcecutor());
+	}
+
+	private static IEnumerator DawnOfTheSheepExcecutor() {
+		GameObject[] sheep = GameObject.FindGameObjectsWithTag(Tags.Sheep);
+
+		foreach (GameObject gameObject in sheep) {
+			gameObject.rigidbody.isKinematic = true;
+		}
+
+		while (true) {
+
+			foreach (GameObject gameObject in sheep) {
+				gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Camera.mainCamera.transform.position, Time.deltaTime);
+				//gameObject.transform.Translate(Vector3.MoveTowards(gameObject.transform.position, Camera.mainCamera.transform.position, 1f));
+			}
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
+	}
 
     [CheatCommand("SheepRocket", CheatCategory.JustForFun)]
     public static void LaunchAllSheepUpIntoTheAirByTheSpecifiedForce(float force) {
