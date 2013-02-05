@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public static class HowToPlayDialog {
     private static bool _ShowDialog;
-    private static Rect _DialogRect;
+
 
     private static Texture2D _HowToTexture;
 
@@ -20,7 +20,6 @@ public static class HowToPlayDialog {
 
         _ContinueButton = buttonInfo;
 
-        _DialogRect = new Rect(0,0,Screen.width, Screen.height);
     }
 
     public static void HideDialog() {
