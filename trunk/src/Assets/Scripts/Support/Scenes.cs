@@ -11,4 +11,6 @@ public class Scenes {
     public const string Carnage = "Carnage";
 
     public const string DemoLevel = "Demo";
+
+    public const string Parcour = "Parcour";
 }
