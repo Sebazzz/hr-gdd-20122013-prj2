@@ -12,9 +12,11 @@ echo Build date: %buildDate%
 REM Set environment
 SET "unityPath=%programfiles(x86)%\Unity\Editor"
 SET "zevenZipPath=%programfiles%\7-zip"
+SET "innoSetupPath=A:\Inno Setup 5"
 
 SET "buildPath=%cd%"
 cd ..
+SET "rootPath=%cd%"
 cd src
 SET "projectPath=%cd%"
 
@@ -41,18 +43,20 @@ echo Choose:
 echo [A] Build without zipping
 echo [B] Build with zipping
 echo [C] Build with installer (for Win32) and zip (for OSX)
+echo [D] Build with installer only (for Win32) 
 echo [T] Disable archive verification after build
 echo [U] Do not build Unity project, use build from directory '%buildDate%'
 echo [Q] Quit
 echo+
 
 :choice
-SET /P C=[A,B,D,Q]? 
+SET /P C=[A,B,C,U,Q]? 
 for %%? in (A) do if /I "%C%"=="%%?" goto :BuildWithoutZipping
 for %%? in (B) do if /I "%C%"=="%%?" goto :BuildWithZipping
 for %%? in (C) do if /I "%C%"=="%%?" goto :BuildWithInstallerAndZip
+for %%? in (D) do if /I "%C%"=="%%?" goto :BuildWithInstaller
 for %%? in (T) do if /I "%C%"=="%%?" goto :DisableArchiveVerification
-for %%? in (T) do if /I "%C%"=="%%?" goto :NoUnityBuild
+for %%? in (U) do if /I "%C%"=="%%?" goto :NoUnityBuild
 for %%? in (Q) do if /I "%C%"=="%%?" exit
 goto :Menu
 
@@ -73,13 +77,19 @@ SET BuildOSXOnlyZip=False
 SET BuildWin32Installer=False
 goto :ExecuteBuild
 
-REM Build with zipping
+REM Build with zipping and installer
 :BuildWithInstallerAndZip
 SET BuildAllZip=False
 SET BuildOSXOnlyZip=True
 SET BuildWin32Installer=True
-echo Error: Not implemented yet!
-goto :Menu
+goto :ExecuteBuild
+
+REM Build with installer
+:BuildWithInstaller
+SET BuildAllZip=False
+SET BuildOSXOnlyZip=False
+SET BuildWin32Installer=True
+goto :ExecuteBuild
 
 REM Build with zipping
 :BuildWithZipping
@@ -127,6 +137,9 @@ IF %BuildAllZip%==True call :ExecuteZipAllFiles
 IF %BuildWin32Installer%==True call :ExecuteBuildWin32Installer
 
 IF %BuildOSXOnlyZip%==True call :ExecuteOSXZip
+
+IF %BuildWin32Installer%==True IF %BuildOSXOnlyZip%==True call :ExecuteCreateCommonPackage
+
 goto :ExecuteBuildStep3
 
 REM Execute Build: Step 3 Verify Files
@@ -142,6 +155,11 @@ goto :ExecuteBuildStep4
 
 REM Execute Build: Step 4 End
 :ExecuteBuildStep4
+REM echo +
+REM echo Copy current to dir
+REM rmdir /S /Q current
+REM robocopy "%buildDir%" current /E
+
 echo +
 echo Build completed.
 pause
@@ -158,7 +176,9 @@ goto :eof
 
 REM Build Win32 installer
 :ExecuteBuildWin32Installer
-echo NOT IMPLEMENTED
+
+"%innoSetupPath%\Compil32.exe" /cc "%rootPath%\installer\ShiftingSheep.Installer.iss"
+
 goto :eof
 
 REM 7-zip all files
@@ -173,7 +193,17 @@ REM 7-zip OSX files
 :ExecuteOSXZip
 
 echo Zipping OSX build directory...
-"%zevenZipPath%\7z.exe" a -t7z -ssc -mx=9 -ms=on -mf=off -mmt=on -m0=LZMA:d=512m %buildDate%-OSX.7z "%buildDir%\OSX"
+"%zevenZipPath%\7z.exe" a -tzip -ssc -mx=9 -mfb=257 -mpass=5 -md=64k -mmt=on %buildDate%-OSX.zip "%buildDir%\OSX"
+
+goto :eof
+
+REM Zip installer
+:ExecuteCreateCommonPackage
+
+echo Zipping installer and OSX in common package
+
+CommonPackageBuildDir
+"%zevenZipPath%\7z.exe" a -tzip -ssc -mx=0 %buildDate%-win32-OSX.zip "%buildDate%-OSX.zip" "installer\Setup.exe"
 
 goto :eof
 
