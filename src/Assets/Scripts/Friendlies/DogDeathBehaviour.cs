@@ -16,8 +16,15 @@ public class DogDeathBehaviour : CanDieBehaviour {
         this.audioController = this.GetComponent<DogAudioController>();
     }
 
+    public GameObject GenericDeadDog = null;
+
     public DeathEffects.DeathEffectConfiguration WaterDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, true, 2f);
 
+    public DeathEffects.DeathEffectConfiguration HoleDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, false, 0.5f);
+
+    public DeathEffects.DeathEffectConfiguration FireDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, false, 0.5f);
+
+    public DeathEffects.DeathEffectConfiguration ElecticFenceDeathEffect = new DeathEffects.DeathEffectConfiguration(0.5f, false, 0.5f);
 
     protected override void OnExecuteDeath(GameObject causeOfDeath) {
         // kill the dog
@@ -37,23 +44,40 @@ public class DogDeathBehaviour : CanDieBehaviour {
     }
 
     protected override void OnStartDying (GameObject causeOfDeath) {
-        if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            this.audioController.FallInHoleSound.Play();
-        }
-
-        if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
-            this.audioController.ElectricFenceTouchSound.Play();
-        }
-
-        if (causeOfDeath.layer == Layers.Water) {
-            this.audioController.FallInWaterSound.Play();
-            this.audioController.DrowningSound.Play();
-        }
-
-        if (causeOfDeath.layer != Layers.Water && causeOfDeath.name.IndexOf("hole", StringComparison.CurrentCultureIgnoreCase) != -1) {
+        if (causeOfDeath.layer != Layers.Water) {
             this.ExecuteDirectDeath();
+
+            // execute object specific behaviour
+            // ... electric fence
+            if (causeOfDeath.name.IndexOf("fence", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                this.audioController.ElectricFenceTouchSound.Play();
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.ElecticFenceDeathEffect);
+            }
+
+            // ... fire
+            if (causeOfDeath.name.IndexOf("fire", StringComparison.InvariantCultureIgnoreCase) != -1 ||
+                causeOfDeath.name.IndexOf("flame", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.FireDeathEffect);
+            }
+
+            // ... hole
+            if (causeOfDeath.name.IndexOf("hole", StringComparison.InvariantCultureIgnoreCase) != -1) {
+                this.audioController.FallInHoleSound.Play();
+                DeathEffects.RagdollTouchDeathEffect.Execute(this.gameObject, causeOfDeath, this.HoleDeathEffect);
+            }
+
         } else {
-            DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
+            // execute water behaviour
+            if (causeOfDeath.layer == Layers.Water) {
+                this.audioController.FallInWaterSound.Play();
+                this.audioController.DrowningSound.Play();
+                DeathEffects.WaterDeathEffect.Execute(this.gameObject, causeOfDeath, this.WaterDeathEffect);
+
+                if (this.GenericDeadDog != null) {
+                    DeathEffects.WaterDeathEffect.ExecuteExtra(this.gameObject, causeOfDeath, this.WaterDeathEffect, this.GenericDeadDog);
+                }
+            }
+
         }
 
         if (this.DisableScriptsWhenDying) {
