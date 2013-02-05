@@ -9,4 +9,6 @@ public class Scenes {
     public const string LoadingScreen = "LoadingScreen";
 
     public const string Carnage = "Carnage";
+
+    public const string DemoLevel = "Demo";
 }

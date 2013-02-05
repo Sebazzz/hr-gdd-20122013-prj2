@@ -9,4 +9,9 @@ public static partial class CheatImplementation {
     public static void EnterCarnageTestLevel() {
         AsyncSceneLoader.Load(Scenes.Carnage);
     }
+
+    [CheatCommand("GameDemo", CheatCategory.Unlockables)]
+    public static void EnterDemoLevel() {
+        AsyncSceneLoader.Load(Scenes.DemoLevel);
+    }
 }
