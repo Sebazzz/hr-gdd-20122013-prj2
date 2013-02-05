@@ -65,10 +65,6 @@ public sealed class FadeOutOfSceneAbility : MonoBehaviour {
     public void Enable(GameObject targetGameObject) {
         this.enabled = true;
 
-        if (targetGameObject == null) {
-            targetGameObject = this.gameObject;
-        }
-
         // search for an halo in this or one of the child objects
         Behaviour halo = GetHaloRecursive(targetGameObject);
 
