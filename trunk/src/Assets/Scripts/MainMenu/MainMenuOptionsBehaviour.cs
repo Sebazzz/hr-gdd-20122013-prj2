@@ -115,8 +115,8 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 
 		if (quality >= qualityOptions.Length) quality = 0;
 
-		PlayerPrefs.SetInt("Quality", quality);
-		QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
+		PlayerPrefs.SetInt("quality", quality);
+		QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality", 0));
 
 	}
 }
