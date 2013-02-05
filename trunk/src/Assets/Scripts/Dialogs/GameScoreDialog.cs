@@ -109,6 +109,7 @@ public static class GameScoreDialog {
 
 
         if (GUI.Button(new Rect(150 - 50 - 20, 150, 40, 40), String.Empty, skin.GetStyle("MenuScoreButton"))) {
+            MainMenuReturnToLevelSelectBehaviour.selectedWorld = MainMenuReturnToLevelSelectBehaviour.SelectedWorld.None;
             AsyncSceneLoader.Load(Scenes.MainMenu);
 
             HideDialog();
