@@ -20,6 +20,27 @@ public static partial class CheatImplementation {
         c.transform.Translate(delta, Space.World);
     }
 
+    [CheatCommand("SetCameraMode", CheatCategory.DebuggingHelpers)]
+    public static void SetCameraToIsometricOrPerspectiveModeUsingTheSpecifiedSizeOrFieldOfView(CameraMode cameraMode, float param) {
+        Camera.mainCamera.isOrthoGraphic = cameraMode == CameraMode.Iso;
+        
+        if (Camera.mainCamera.isOrthoGraphic) {
+            Camera.mainCamera.orthographicSize = param;
+        } else {
+            Camera.mainCamera.fieldOfView = param;
+        }
+    }
+
+    public enum CameraMode {
+        Fov = 0,
+        Perspective = 0,
+        Perspect=0,
+        Spec=0,
+        Iso=1,
+        Isometric=1,
+        Sims=1
+    }
+
     [CheatCommand("ControllableSheep", CheatCategory.DebuggingHelpers)]
     public static void EnablesSheepToBeControlledByArrowKeysOptionallyDisablingControlHelperEffects(bool disableControlEffects) {
         // find dog marker

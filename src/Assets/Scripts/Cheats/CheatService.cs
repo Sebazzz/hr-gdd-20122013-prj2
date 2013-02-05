@@ -193,7 +193,12 @@ public static class CheatService {
             object rawArgument = parameters[i];
 
             try {
-                parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType, CultureInfo.InvariantCulture);
+                if (currentParam.ParameterType.IsEnum) {
+                    parsedParameters[i] = Enum.Parse(currentParam.ParameterType, rawArgument.ToString(), true);
+                } else {
+                    parsedParameters[i] = Convert.ChangeType(rawArgument, currentParam.ParameterType,
+                                                             CultureInfo.InvariantCulture);
+                }
             } catch (Exception) {
                 if (showErrors) {
                     CheatNotificationDialog.ShowDialog("Error", String.Format("Cheat could not be applied: Value '{0}' for parameter '{1}' could not be parsed as '{2}'", rawArgument, currentParam.Name, currentParam.ParameterType.FullName));
