@@ -14,4 +14,9 @@ public static partial class CheatImplementation {
     public static void EnterDemoLevel() {
         AsyncSceneLoader.Load(Scenes.DemoLevel);
     }
+
+    [CheatCommand("EnterTheRace", CheatCategory.Unlockables)]
+    public static void EnterParcoursCarnageDemoLevel() {
+        AsyncSceneLoader.Load(Scenes.Parcour);
+    }
 }
