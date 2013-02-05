@@ -12,6 +12,8 @@ public static class DialogController {
         GenericYesNoDialog.HideDialog();
         GameOverDialog.HideDialog();
         GameScoreDialog.HideDialog();
+
+        HowToPlayDialog.HideDialog();
     }
 
     public static void DrawDialogs(GUISkin skin) {
@@ -22,5 +24,7 @@ public static class DialogController {
         GenericYesNoDialog.DrawDialog(skin);
         GameOverDialog.DrawDialog(skin);
         GameScoreDialog.DrawDialog(skin);
+
+        HowToPlayDialog.DrawDialog(skin);
     }
 }
