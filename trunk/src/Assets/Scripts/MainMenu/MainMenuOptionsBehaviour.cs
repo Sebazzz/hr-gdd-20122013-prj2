@@ -76,9 +76,11 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		if(PlayerPrefs.GetInt("windowed") == 0) fullscreen = true;
 		else fullscreen = false;
 
+		Debug.Log("fullscreen " + fullscreen);
+
 	    int res = PlayerPrefs.GetInt("resolution");
         if (resolutions.Length > res) {
-            if (Screen.height != resolutions[res].height && Screen.width != resolutions[res].width)
+            if (Screen.height != resolutions[res].height && Screen.width != resolutions[res].width || fullscreen != Screen.fullScreen)
                 Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
                                      resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
         }
