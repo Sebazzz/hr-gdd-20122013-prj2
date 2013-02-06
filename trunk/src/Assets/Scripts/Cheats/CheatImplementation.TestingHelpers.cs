@@ -292,7 +292,7 @@ function refreshImage() {
         }
 
         public static IEnumerator ScreenShotPump() {
-            while (_Started) {
+            while (true) {
                 // wait for graphics to render
                 yield return new WaitForEndOfFrame();
 
