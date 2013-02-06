@@ -75,6 +75,7 @@ public static partial class CheatImplementation {
         foreach (GameObject sheep in sheepArr) {
             CheatControlledByKeysBehaviour c = sheep.AddComponent<CheatControlledByKeysBehaviour>();
             c.SetMarker(selectionMarker);
+            c.JumpForce = 1f;
 
             MagneticBehaviour magnet = sheep.GetComponent<MagneticBehaviour>();
             if (magnet != null) {
