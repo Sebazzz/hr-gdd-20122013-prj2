@@ -15,11 +15,13 @@ using ThreadPriority = System.Threading.ThreadPriority;
 /// </summary>
 public static class RemoteInterfaceServer {
     private const string VirtualImagePath = "/current.png";
+    private const int MaxNumberOfConcurrentRequests = 2;
     private static float _ScreenshotInterval = 0.1f;
 
     private static bool _Started;
     private static HttpListener _HttpListener;
     private static Thread _WebThread;
+    private static int _RequestCounter = 0;
 
     private static readonly object TimerLock = new object();
     private static System.Timers.Timer _ShutdownTimer;
@@ -152,25 +154,46 @@ public static class RemoteInterfaceServer {
     // ReSharper disable EmptyGeneralCatchClause
     private static void HandleRequests() {
         while (_Started) {
-            HttpListenerContext ctx = _HttpListener.GetContext();
+            while (_Started && _RequestCounter <= MaxNumberOfConcurrentRequests) {
+                Interlocked.Increment(ref _RequestCounter);
 
-            HttpListenerRequest request = ctx.Request;
-            HttpListenerResponse response = ctx.Response;
-                
-            try {
-                // handle requests synchronous: asynchronous does not work!
-                HandleRequest(request, response);
-            } catch (Exception ex) {
-                try {
-                    WriteSimpleText("Error", ex.ToString(), response);
-                } catch(Exception) {
-                    // silently continue
-                }
+                _HttpListener.BeginGetContext(OnRequestProcessing, null);
+            }              
+            
+            if (_RequestCounter > MaxNumberOfConcurrentRequests) {
+                Thread.Sleep(100);
             }
         }
 
         Shutdown();
     }
+
+    private static void OnRequestProcessing(IAsyncResult ia) {
+        try {
+            HttpListenerContext ctx = _HttpListener.EndGetContext(ia);
+
+            HttpListenerRequest request = ctx.Request;
+            HttpListenerResponse response = ctx.Response;
+
+            try {
+                HandleRequest(request, response);
+            }
+            catch (Exception ex) {
+                try {
+                    WriteSimpleText("Error", ex.ToString(), response);
+                }
+                catch (Exception) {
+                    // silently continue
+                }
+            }
+        }
+        catch (Exception) {
+            // silently continue
+        }
+
+        Interlocked.Decrement(ref _RequestCounter);
+    }
+
     // ReSharper restore EmptyGeneralCatchClause
 
     private static void HandleRequest(HttpListenerRequest request, HttpListenerResponse response) {
