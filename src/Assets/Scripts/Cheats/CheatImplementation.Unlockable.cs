@@ -10,7 +10,7 @@ public static partial class CheatImplementation {
         AsyncSceneLoader.Load(Scenes.Carnage);
     }
 
-    [CheatCommand("GameDemo", CheatCategory.Unlockables)]
+	[CheatCommand("GameDemo", CheatCategory.Unlockables)]
     public static void EnterDemoLevel() {
         AsyncSceneLoader.Load(Scenes.DemoLevel);
     }
