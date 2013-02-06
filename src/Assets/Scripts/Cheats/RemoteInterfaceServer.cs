@@ -92,16 +92,24 @@ public static class RemoteInterfaceServer {
     }
 
     public static void Shutdown() {
-        if (_Started) {
-            _Started = false;
+        lock (TimerLock) {
+            if (_Started) {
+                _Started = false;
 
-            // dispose http listener
-            if (_HttpListener != null && _HttpListener.IsListening) {
-                _HttpListener.Stop();
+                if (_ShutdownTimer != null) {
+                    _ShutdownTimer.Enabled = false;
+                    _ShutdownTimer.Close();
+                    _ShutdownTimer = null;
+                }
+
+                // dispose http listener
+                if (_HttpListener != null && _HttpListener.IsListening) {
+                    _HttpListener.Stop();
+                }
+                _HttpListener = null;
+
+                GC.Collect();
             }
-            _HttpListener = null;
-
-            GC.Collect();
         }
     }
 
