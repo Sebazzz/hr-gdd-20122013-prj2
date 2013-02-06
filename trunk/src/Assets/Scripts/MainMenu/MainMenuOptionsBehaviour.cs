@@ -24,8 +24,9 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 	/// Use this for initialization
 	/// </summary>
 	void Start () {
-	    bool firstTime = PlayerPrefs.GetInt("audio", 0) == 0 && PlayerPrefs.GetInt("resolution", 0) == 0 && (windowedOptions)PlayerPrefs.GetInt("windowed", 0) == 0 && PlayerPrefs.GetInt("quality", 0) == 0;
-
+		bool firstTime = false;
+		if (PlayerPrefs.GetInt("audio", 0) == 0 && PlayerPrefs.GetInt("resolution", 0) == 0 && (windowedOptions)PlayerPrefs.GetInt("windowed", 0) == 0 && PlayerPrefs.GetInt("quality", 0) == 0) firstTime = true;
+		
 	    audioOption = (audioOptions) PlayerPrefs.GetInt("audio", 0);
 		resolution = PlayerPrefs.GetInt("resolution", 0);
 		windowed = (windowedOptions) PlayerPrefs.GetInt("windowed", 0);
@@ -41,13 +42,14 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		else fullscreen = false;
 
         if (Screen.GetResolution.Length > resolution) {
-            if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) &&
-                (Screen.GetResolution[0].width != Screen.resolutions[resolution].width))
-                Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
-                                     resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
-        }
+			if ((Screen.GetResolution[0].height != Screen.resolutions[resolution].height) ||
+				(Screen.GetResolution[0].width != Screen.resolutions[resolution].width)) {
+				Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
+									 resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
+			}
+		}
 
-	    if(QualitySettings.GetQualityLevel() != quality)
+		if(QualitySettings.GetQualityLevel() != quality)
 			QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("quality", 0));
 	}
 
@@ -76,14 +78,17 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 		if(PlayerPrefs.GetInt("windowed") == 0) fullscreen = true;
 		else fullscreen = false;
 
-		Debug.Log("fullscreen " + fullscreen);
-
-	    int res = PlayerPrefs.GetInt("resolution");
+		int res = PlayerPrefs.GetInt("resolution");
         if (resolutions.Length > res) {
-            if (Screen.height != resolutions[res].height && Screen.width != resolutions[res].width || fullscreen != Screen.fullScreen)
+			Debug.Log("resolution");
+            if (Screen.height != resolutions[res].height || Screen.width != resolutions[res].width)
                 Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
                                      resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);
         }
+
+		if (fullscreen != Screen.fullScreen) {
+			Screen.fullScreen = fullscreen;
+		}
 
 	    //QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("Quality", 0));
 	}
