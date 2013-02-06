@@ -23,6 +23,7 @@ public static class RemoteInterfaceServer {
     private static float _ScreenshotInterval = 0.1f;
 
     private static bool _Started;
+    private static bool _ShutdownPump;
     private static HttpListener _HttpListener;
     private static Thread _WebThread;
 
@@ -40,12 +41,13 @@ public static class RemoteInterfaceServer {
     }
 
     public static void Start(float refreshInterval) {
-        // determine first-time unity thread
+        // determine first-time unity thread - used for logging
         if (_UnityThreadId < 0) {
             _UnityThreadId = Thread.CurrentThread.ManagedThreadId;
         }
 
         _ScreenshotInterval = refreshInterval;
+        _ShutdownPump = false;
 
         if (!_Started) {
             LogInfo("Starting server, refresh interval: {0}", refreshInterval);
@@ -55,7 +57,6 @@ public static class RemoteInterfaceServer {
             _WebThread.Priority = ThreadPriority.Lowest;
             _WebThread.Name = "WorldWideSheep Remote Interface Server Thread";
             _WebThread.IsBackground = true;
-            _WebThread.SetApartmentState(ApartmentState.STA);
 
             _WebThread.Start();
         }
@@ -115,6 +116,7 @@ public static class RemoteInterfaceServer {
                 LogInfo("Server is being shutdown");
 
                 _Started = false;
+                _ShutdownPump = true;
 
                 if (_ShutdownTimer != null) {
                     _ShutdownTimer.Enabled = false;
@@ -202,7 +204,7 @@ public static class RemoteInterfaceServer {
     public static IEnumerator ScreenShotPump() {
         Debug.Log("Starting screenshot pump");
 
-        while (true) {
+        while (!_ShutdownPump) {
             // wait for graphics to render
             yield return new WaitForEndOfFrame();
 
