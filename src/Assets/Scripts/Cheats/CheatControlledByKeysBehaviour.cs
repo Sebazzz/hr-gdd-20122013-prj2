@@ -20,6 +20,7 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
     public float MovementSpeed = 10f;
     public float RotationSpeed = 90f;
     public float JumpForce = 10f;
+    public float JumpCheckDistance = 2f;
 
     public bool DefaultSelected = false;
     public bool TransformInLocalSpace = false;
@@ -103,8 +104,9 @@ public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
         // control: jump
         if (Input.GetKey(JumpKey)) {
             // check for terrain below
-            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), 2f)) {
-                this.rigidbody.AddForce(Vector3.up * JumpForce * this.rigidbody.mass, ForceMode.Impulse);
+            Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.down) * JumpCheckDistance);
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), JumpCheckDistance, Layers.Terrain)) {
+                this.rigidbody.AddRelativeForce(Vector3.up * JumpForce * this.rigidbody.mass, ForceMode.Impulse);
             }
         }
 
