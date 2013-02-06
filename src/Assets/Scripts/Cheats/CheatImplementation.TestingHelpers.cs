@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using System.Threading;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using ThreadPriority = System.Threading.ThreadPriority;
 
 // Cheats implementation: Functional
@@ -49,30 +50,34 @@ public static partial class CheatImplementation {
         }
     }
 
-    [CheatCommand("WorldWideSheep", CheatCategory.TestingHelpers)]
-    public static void StartAWebServerShowingGameScreenShots() {
+    [CheatCommand("WorldWideSheepConfig", CheatCategory.TestingHelpers)]
+    public static void StartAWebServerWithConfigurationShowingGameScreenShots(float refreshIntervalSeconds) {
         Application.runInBackground = true;
 
+        WebServer.Start(refreshIntervalSeconds);
         StartCoroutine(WebServer.ScreenShotPump());
-        WebServer.Start(null);
+    }
+
+    [CheatCommand("WorldWideSheep", CheatCategory.TestingHelpers)]
+    public static void StartAWebServerShowingGameScreenShots() {
+        StartAWebServerWithConfigurationShowingGameScreenShots(0.250f);
     }
 
     private static class WebServer {
-        private const float ScreenshotInterval = 0.5f;
         private const string VirtualImagePath = "/current.png";
+        private static float _ScreenshotInterval = 0.1f;
 
         private static bool _Started;
         private static HttpListener _HttpListener;
         private static Thread _WebThread;
 
         private static DateTime _ScreenshotTime;
-        private static Queue<string> _ScreenShots;
-        private static byte[] _ScreenshotBytes;
+        private static volatile byte[] _ScreenshotBytes;
 
-        public static void Start(string prefix) {
+        public static void Start(float refreshInterval) {
+            _ScreenshotInterval = refreshInterval;
+
             if (!_Started) {
-                _ScreenShots = new Queue<string>();
-
                 _WebThread = new Thread(StartInternal);
 
                 _WebThread.Priority = ThreadPriority.Lowest;
@@ -80,7 +85,7 @@ public static partial class CheatImplementation {
                 _WebThread.IsBackground = true;
                 _WebThread.SetApartmentState(ApartmentState.STA);
 
-                _WebThread.Start(prefix);
+                _WebThread.Start();
             }
         }
 
@@ -101,7 +106,6 @@ public static partial class CheatImplementation {
         private static void StartInternal(object uselessArgument) {
             try {
                 _HttpListener = new HttpListener();
-                //_HttpListener.Prefixes.Add((string) uselessArgument);
                 _HttpListener.Prefixes.Add("http://*:50000/");
 
                 _HttpListener.Start();
@@ -206,7 +210,7 @@ function refreshImage() {
 }
 ";
             string headScript = headScriptTemplate
-                .Replace("REFRESH_TIME", (ScreenshotInterval*1000f/2f).ToString(CultureInfo.InvariantCulture))
+                .Replace("REFRESH_TIME", (_ScreenshotInterval*1000f/2f).ToString(CultureInfo.InvariantCulture))
                 .Replace("IMAGEPATH", VirtualImagePath);
 
             const string htmlTemplate = @"
@@ -218,19 +222,6 @@ function refreshImage() {
 
         private static void ProcessImageRequest(HttpListenerResponse response) {
             byte[] screenshot = _ScreenshotBytes;
-
-            // select screenshot
-            if (_ScreenShots.Count > 0) {
-                string screenshotPath;
-                lock (_ScreenShots) {
-                    screenshotPath = _ScreenShots.Dequeue();
-                }
-
-                screenshot = File.ReadAllBytes(screenshotPath);
-                _ScreenshotBytes = screenshot;
-
-                File.Delete(screenshotPath);
-            }
 
             // get a response stream and write the response to it.
             response.ContentType = "image/png";
@@ -301,44 +292,32 @@ function refreshImage() {
         }
 
         public static IEnumerator ScreenShotPump() {
-            while (true) {
-                string path = Path.GetTempFileName();
+            while (_Started) {
+                // wait for graphics to render
+                yield return new WaitForEndOfFrame();
 
-                Application.CaptureScreenshot(path, 1);
+                // create a texture to pass to encoding
+                Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+                // put buffer into texture
+                texture.ReadPixels(new Rect(0, 0, Screen.width, Screen.height), 0, 0);
+                texture.Apply();
+
+                // split the process up--ReadPixels() and the EncodeToPNG() call inside of the encoder are both pretty heavy
+                yield return 0;
+
+                byte[] bytes = texture.EncodeToPNG();
+                _ScreenshotBytes = bytes;
                 _ScreenshotTime = DateTime.UtcNow;
 
-                ThreadPool.QueueUserWorkItem(AddScreenShot, path);
+                // tell unity to delete the texture, by default it seems to keep hold of it and memory crashes will occur after too many screenshots.
+                Object.DestroyObject(texture);
 
-                yield return new WaitForSeconds(ScreenshotInterval);
+                yield return new WaitForSeconds(_ScreenshotInterval);
             }
 
             yield break;
         }  
 
-        private static void AddScreenShot(object path) {
-            const int maxQueueLength = 25;
-
-            Thread.Sleep(TimeSpan.FromSeconds(ScreenshotInterval/2f));
-
-            // first do some housekeeping on the queue
-            if (_ScreenShots.Count > maxQueueLength) {
-                lock (_ScreenShots) {
-                    if (_ScreenShots.Count > maxQueueLength) {
-                        while (_ScreenShots.Count > 2) {
-                            try {
-                                File.Delete(_ScreenShots.Dequeue());
-                            } catch {} // eat exception
-                        }
-                    }
-                }
-
-                GC.Collect();
-            }
-
-            // post a new screenshot
-            lock (_ScreenShots) {
-                _ScreenShots.Enqueue(path.ToString());
-            }
-        }
     }
 }
