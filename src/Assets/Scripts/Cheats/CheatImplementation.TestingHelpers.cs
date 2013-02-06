@@ -43,7 +43,7 @@ public static partial class CheatImplementation {
     }
 
     [CheatCommand("WorldWideSheep_Config", CheatCategory.TestingHelpers)]
-    public static void StartAWebServerWithConfigurationShowingGameScreenShots(float refreshIntervalSeconds) {
+    public static void StartAWebServerShowingGameScreenShotsWithConfiguration(float refreshIntervalSeconds) {
         if (RemoteInterfaceServer.IsRunning) {
             return;
         }
@@ -56,6 +56,11 @@ public static partial class CheatImplementation {
 
     [CheatCommand("WorldWideSheep", CheatCategory.TestingHelpers)]
     public static void StartAWebServerShowingGameScreenShots() {
-        StartAWebServerWithConfigurationShowingGameScreenShots(1f);
+        StartAWebServerShowingGameScreenShotsWithConfiguration(1f);
+    }
+
+    [CheatCommand("ShutdownWebClient", CheatCategory.TestingHelpers)]
+    public static void ShutdownTheWebServer() {
+        RemoteInterfaceServer.Shutdown();
     }
 }
