@@ -415,7 +415,11 @@ function refreshImage() {
             cheatPageBuilder.Append("<tr><th>Command</th><th>Parameters</th><th>Description</th></tr>");
 
             Dictionary<string, List<CheatCommandDescriptor>> overviewData = CheatService.GetAllCommandsByHumanReadableCategory();
+            bool first = true;
             foreach (KeyValuePair<string, List<CheatCommandDescriptor>> cheatsByCategory in overviewData) {
+                if (!first) {
+                    cheatPageBuilder.Append("<tr><td colspan=\"3\">&nbsp;</td></tr>");
+                }
                 cheatPageBuilder.AppendFormat("<tr><th colspan=\"3\" style=\"text-decoration:none;\">{0}</td></tr>", cheatsByCategory.Key);
 
                 foreach (CheatCommandDescriptor commandDescriptor in cheatsByCategory.Value) {
@@ -439,6 +443,8 @@ function refreshImage() {
                     cheatPageBuilder.AppendFormat("<td>{0}</td>", commandDescriptor.Description);
                     cheatPageBuilder.Append("</tr>");
                 }
+
+                first = false;
             }
             cheatPageBuilder.Append("</table>");
             
