@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 /// <summary>
 /// Helper script for processing various cheats and enable in-game cheats
@@ -23,6 +20,11 @@ public sealed class CheatsController : MonoBehaviour {
 
     private void Start() {
         this.RefreshVariables();
+
+        if (RemoteInterfaceServer.IsRunning) {
+            StartCoroutine(RemoteInterfaceServer.ScreenShotPump());
+            RemoteInterfaceServer.CancelShutdown();
+        }
     }
 
     public void RefreshVariables() {
@@ -156,5 +158,14 @@ public sealed class CheatsController : MonoBehaviour {
 
         // draw dialog
         CheatInputDialog.DrawDialog(guiStyle);
+    }
+
+    void OnLevelWasLoaded(int levelIndex) {
+        // called when the level shuts down
+        RemoteInterfaceServer.ScheduleShutdown(30f);
+    }
+
+    void OnApplicationQuit() {
+        RemoteInterfaceServer.Shutdown();
     }
 }
