@@ -22,6 +22,7 @@ Compression=lzma
 SolidCompression=yes
 LZMAAlgorithm=1
 LZMAUseSeparateProcess=yes
+LZMANumBlockThreads=4
 LZMANumFastBytes=64
 ;WizardImageFile=
 ;WizardSmallImageFile=
