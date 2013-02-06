@@ -18,11 +18,12 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 OutputDir=..\build.me\installer
 OutputBaseFilename=setup
-Compression=lzma/ultra64
+Compression=lzma2/ultra64
 SolidCompression=yes
 LZMAAlgorithm=1
 LZMAUseSeparateProcess=yes
 LZMANumFastBytes=256
+LZMANumBlockThreads=2
 ;WizardImageFile=
 ;WizardSmallImageFile=
 
