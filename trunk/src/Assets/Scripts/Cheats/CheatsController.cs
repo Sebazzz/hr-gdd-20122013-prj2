@@ -8,6 +8,11 @@ using UnityEngine;
 public sealed class CheatsController : MonoBehaviour {
     private static bool _HasSetEnableInCheatVarsDefaultValue = false;
 
+    /// <summary>
+    /// Specifies whether to suppress the cheats button
+    /// </summary>
+    public bool SuppressCheatsButton = false;
+
     private void Awake() {
         CheatInputDialog.HideDialog();
 
@@ -139,7 +144,7 @@ public sealed class CheatsController : MonoBehaviour {
     }
 
     private void OnGUI() {
-        if (!CheatVariables.EnableInGameCheatsMenu) {
+        if (!CheatVariables.EnableInGameCheatsMenu || SuppressCheatsButton) {
             return;
         }
 

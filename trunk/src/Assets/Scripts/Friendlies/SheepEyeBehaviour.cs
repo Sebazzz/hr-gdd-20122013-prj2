@@ -16,6 +16,7 @@ public class SheepEyeBehaviour : MonoBehaviour {
 	}
 
 	void OnMouseUpAsButton() {
+        Debug.Log("Activating enemy");
 		behaviour.ActivateEnemy();
 	}
 }
