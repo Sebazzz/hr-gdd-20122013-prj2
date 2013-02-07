@@ -303,9 +303,11 @@ public static class RemoteInterfaceServer {
             string imagePath = String.Format("{0}?tl={1}", VirtualImagePath, DateTime.UtcNow.Ticks);
 
             const string headScriptTemplate = @"
-var taskId;
+var taskId, hasLoadedCurrentImage;
 
 $(document).ready(function() {
+    hasLoadedCurrentImage = true;
+
     // schedule refresh task
     taskId = window.setInterval(refreshImage, REFRESH_TIME);
 
@@ -322,17 +324,24 @@ function onImageLoaded() {
     var milliseconds = currentDate.getMilliseconds();
 
     $('#updateTime').text('Updated: ' + hours + ':' + minutes + ':' + seconds + '.' + milliseconds);
+    hasLoadedCurrentImage = true;
 }
 
 function onImageLoadError() {
     $('#updateTime').text('Updated: error loading');
+    hasLoadedCurrentImage = true;
 }
 
 function refreshImage() {
+    if (!hasLoadedCurrentImage) {
+        return;
+    }
+
     var currentDate = new Date();
     var newUrl = 'IMAGEPATH?tl=' + currentDate.getTime();
 
     $('#CurrentImage').attr('src', newUrl);
+    hasLoadedCurrentImage = false;
 }
 ";
             string headScript = headScriptTemplate
