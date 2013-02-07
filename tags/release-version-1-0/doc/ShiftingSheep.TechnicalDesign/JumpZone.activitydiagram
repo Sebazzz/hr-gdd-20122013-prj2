@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="d74d12f8-ce5e-4f0f-9c5e-6dd97af8c97a" name="JumpZone" linkedPackageId="5c940f27-eeea-4a96-a3db-4bb232c1d784" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="0ee87a61-6828-48e8-914e-f0f0a410d7fb">
+      <elementDefinition Id="56cad9a6-de56-4c04-8b6e-facab4c6a9d4" />
+      <body>Calculates the dog look rotation</body>
+      <annotatedElements>
+        <opaqueActionMoniker Id="9c0bcc07-e77b-4641-9cc2-4022d280c40a" LastKnownName="Calculate dog rotation" />
+      </annotatedElements>
+    </comment>
+    <comment Id="88529ee2-9a47-44ec-b647-112113233dcd">
+      <elementDefinition Id="f295331b-0aba-4dcd-8d12-841dbb27a96a" />
+      <body>Check difference between dog rotation and look rotation of jump zone</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="a157947a-d9e0-4315-8a1e-85909de8a7d6" LastKnownName="Decision1" />
+      </annotatedElements>
+    </comment>
+    <comment Id="6e0a57e4-1655-4470-ba47-e975315ff492">
+      <elementDefinition Id="84b73313-267f-4484-a7fc-44c06d69b947" />
+      <body>Check if the dog path trajectory is across the jump zone</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="7ae76d05-59cd-47bd-9a76-d68a1484fc0d" LastKnownName="Decision2" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="5bb80dbc-e473-46a2-836c-49ec6d8b59bf">
+      <profileInstance Id="02db7b48-e9bd-4489-8bcb-f04d1bdbc74d" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="29a9c774-33d2-449e-9c23-2bdd7d7a3875">
+      <profileInstance Id="7e58e945-2fbf-4418-9c02-5ab21be40909" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="78e338f2-1fe8-4fa3-a310-f04cbf27a13e">
+      <profileInstance Id="18519585-7d26-47e1-b7c1-0dfbb4e1c147" name="CSharpProfile">
+        <elementDefinition Id="3841ac51-9c5d-421f-9a1b-a55831152330" />
+      </profileInstance>
+      <elementDefinition Id="5491e218-9cd4-4068-9bdd-6d55854cd3d9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="497170ae-2e37-4090-a1ff-e022e384589f" name="JumpZone" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="6af52fa0-1f7c-441e-b205-b72da41a2612" />
+        <nodes>
+          <initialNode Id="2cbb2926-4ae1-43f8-9921-98db53cbcc5e" name="Initial1" isLeaf="false">
+            <elementDefinition Id="4a752e0a-f901-4835-a245-ba8b2c93d1da" />
+            <flowNodeTargets>
+              <controlFlow Id="9412fd32-cdac-449c-8412-3c2382abc5a0" guard="Dog enters jump zone" isLeaf="false">
+                <opaqueActionMoniker Id="9c0bcc07-e77b-4641-9cc2-4022d280c40a" LastKnownName="Calculate dog rotation" />
+                <elementDefinition Id="a4485cfa-afa4-42e3-8cd2-24cd1631d767" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="9c0bcc07-e77b-4641-9cc2-4022d280c40a" name="Calculate dog rotation" isLeaf="false">
+            <elementDefinition Id="7e56889a-adcb-4d32-bfa6-d1c54dbc21ee" />
+            <flowNodeTargets>
+              <controlFlow Id="0123c691-2060-4a21-911d-be6da925607c" isLeaf="false">
+                <decisionNodeMoniker Id="a157947a-d9e0-4315-8a1e-85909de8a7d6" LastKnownName="Decision1" />
+                <elementDefinition Id="82fa5173-3752-4ce3-94a4-3502755be6b7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="a157947a-d9e0-4315-8a1e-85909de8a7d6" name="Decision1" isLeaf="false">
+            <elementDefinition Id="b5238a72-b92e-4429-b2a8-387a062be5b8" />
+            <flowNodeTargets>
+              <controlFlow Id="0a107847-77f6-492c-a1ab-7a9cfd9bfe9a" guard="Dog rotation within acceptation threshold" isLeaf="false">
+                <decisionNodeMoniker Id="7ae76d05-59cd-47bd-9a76-d68a1484fc0d" LastKnownName="Decision2" />
+                <elementDefinition Id="35e859bb-6a6a-4d75-a63e-6227b0ecdd74" />
+              </controlFlow>
+              <controlFlow Id="e456f724-8235-498a-8287-a0346a31981d" guard="Dog rotation outside accept threshold" isLeaf="false">
+                <activityFinalNodeMoniker Id="64665384-6ca4-4255-9e21-0884a7d38cf1" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="4be2c80b-0978-4160-a220-7c628e2e70bc" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <decisionNode Id="7ae76d05-59cd-47bd-9a76-d68a1484fc0d" name="Decision2" isLeaf="false">
+            <elementDefinition Id="fb416d4d-1879-4398-bf5a-c7407734440e" />
+            <flowNodeTargets>
+              <controlFlow Id="b1b919d3-7249-4109-9cab-0586d440e2f9" guard="Dog path crosses jump zone" name="Dog path crosses jump zone" isLeaf="false">
+                <opaqueActionMoniker Id="3f6ddcec-44d4-4ebd-82f4-670824be6be7" LastKnownName="Apply up force to dog" />
+                <elementDefinition Id="0321b994-4e78-40ed-b730-a5317509e30c" />
+              </controlFlow>
+              <controlFlow Id="7701dff0-daed-4c5d-827b-7f25ee09228b" guard="Dog path does not cross jump zone" isLeaf="false">
+                <activityFinalNodeMoniker Id="64665384-6ca4-4255-9e21-0884a7d38cf1" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="e6b0cff2-6872-40d5-9cd2-ecf6f9247c1a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="3f6ddcec-44d4-4ebd-82f4-670824be6be7" name="Apply up force to dog" isLeaf="false">
+            <elementDefinition Id="71b9dc16-4456-4e49-9b45-e4b52b0b6394" />
+            <flowNodeTargets>
+              <controlFlow Id="2ccc3d19-9f9a-4d32-821a-5929cf30273e" isLeaf="false">
+                <activityFinalNodeMoniker Id="deb04bcd-8801-4817-8970-048e534ff54a" LastKnownName="ActivityFinal2" />
+                <elementDefinition Id="03361a8c-d3d7-4405-903a-d03b0dc5fa51" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode Id="64665384-6ca4-4255-9e21-0884a7d38cf1" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="86df9a63-237a-4ebf-916e-90539444fc1f" />
+          </activityFinalNode>
+          <activityFinalNode Id="deb04bcd-8801-4817-8970-048e534ff54a" name="ActivityFinal2" isLeaf="false">
+            <elementDefinition Id="b0f9432f-5b8b-482c-9550-cb7ec3f8d702" />
+          </activityFinalNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="5c940f27-eeea-4a96-a3db-4bb232c1d784" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</activityRootModel>

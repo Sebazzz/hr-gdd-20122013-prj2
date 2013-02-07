@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="CameraZoom">
+  <activityRootModelMoniker Id="898ec542-383a-44a1-ac7d-61244015add6" />
+  <nestedChildShapes>
+    <initialNodeShape Id="7c17074d-5490-49cb-bb3b-adb915fa316b" absoluteBounds="5.875, 1.25, 0.125, 0.125" customColor="89, 89, 89">
+      <initialNodeMoniker Id="b7e8b944-c3ed-4084-977e-96fa09b89601" LastKnownName="Initial1" />
+    </initialNodeShape>
+    <actionShape Id="0ae3ceb7-4ba0-408b-aea6-c475ee8a659e" absoluteBounds="5.375, 2.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="45dbfbea-4ad8-49c7-8202-95f1fee06f42" LastKnownName="Set camera position to zoom in position" />
+    </actionShape>
+    <controlFlowConnector edgePoints="[(5.9375 : 1.375); (5.9375 : 2.25)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="e1e8cf17-1c12-499c-aa9f-fc882d882764" />
+      <relativeChildShapes />
+      <nodes>
+        <initialNodeShapeMoniker Id="7c17074d-5490-49cb-bb3b-adb915fa316b" />
+        <actionShapeMoniker Id="0ae3ceb7-4ba0-408b-aea6-c475ee8a659e" />
+      </nodes>
+    </controlFlowConnector>
+    <actionShape Id="c4830a9c-204e-402b-adf5-a0ea1e6b2146" absoluteBounds="5.375, 3.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="75409872-5fff-4c26-be28-b6a96c3afa9b" LastKnownName="TODO" />
+    </actionShape>
+    <controlFlowConnector edgePoints="[(5.9375 : 2.625); (5.9375 : 3.625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="a13f3ce2-ebd7-46c7-9b79-ee12eb8bbc0b" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="0ae3ceb7-4ba0-408b-aea6-c475ee8a659e" />
+        <actionShapeMoniker Id="c4830a9c-204e-402b-adf5-a0ea1e6b2146" />
+      </nodes>
+    </controlFlowConnector>
+  </nestedChildShapes>
+</activityDiagram>
