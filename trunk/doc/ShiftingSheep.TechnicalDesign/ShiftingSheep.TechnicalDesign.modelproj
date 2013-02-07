@@ -29,12 +29,26 @@
       <SubType>Content</SubType>
       <DependentUpon>Dog.classdiagram</DependentUpon>
     </Content>
+    <Content Include="DogControl.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="DogControl.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>DogControl.activitydiagram</DependentUpon>
+    </Content>
     <Content Include="Fox.classdiagram">
       <SubType>Content</SubType>
     </Content>
     <Content Include="Fox.classdiagram.layout">
       <SubType>Content</SubType>
       <DependentUpon>Fox.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="JumpZone.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="JumpZone.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>JumpZone.activitydiagram</DependentUpon>
     </Content>
     <Content Include="ModelDefinition\Package1_1334.uml">
       <SubType>Content</SubType>
