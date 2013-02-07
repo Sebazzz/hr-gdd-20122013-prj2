@@ -202,8 +202,7 @@ REM Zip installer
 
 echo Zipping installer and OSX in common package
 
-CommonPackageBuildDir
-"%zevenZipPath%\7z.exe" a -tzip -ssc -mx=0 %buildDate%-win32-OSX.zip "%buildDate%-OSX.zip" "installer\Setup.exe"
+"%zevenZipPath%\7z.exe" a -tzip -ssc -mx=0 "%buildDate%-win32-OSX.zip" "%buildDate%-OSX.zip" "installer\Setup.exe"
 
 goto :eof
 
