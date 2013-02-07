@@ -50,7 +50,6 @@ public class LookatShepherdBehaviour : MonoBehaviour
             {
                 vecmem = vec;
                 this.closestShepherd = shepherd[i];
-              //  Debug.Log("closest is " +i + "Shepherd");
             }
         }
 
@@ -76,8 +75,6 @@ public class LookatShepherdBehaviour : MonoBehaviour
             }
             else if(Time.time - lastUpdate > UpdateDelay)
             {
-                //Debug.Log(lastUpdate + "lastupdate" + ", formule dif :" + (Time.time - lastUpdate) + "  > delta * delat " + UpdateDelay);
-                //Debug.Log("findingdog");
                 this.lastUpdate = Time.time;
                 FindClosestDog();
             }

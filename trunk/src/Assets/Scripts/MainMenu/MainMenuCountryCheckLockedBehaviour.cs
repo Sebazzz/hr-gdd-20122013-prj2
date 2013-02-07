@@ -29,8 +29,6 @@ public class MainMenuCountryCheckLockedBehaviour : MonoBehaviour {
 			planeMesh.material = levelUnlocked;
 			meshCollider.enabled = true;
 		}
-
-		//Debug.Log(Levels.Countries[0].HasBeenCompleted());
 	}
 	
 	// Update is called once per frame

@@ -125,7 +125,6 @@ public class AutoJumpBehaviour : MonoBehaviour {
 			
 		
 		/// Vector3 v = this.rigidbody.GetPointVelocity(other.transform.position);
-		///   Debug.Log(v);	
 		///this.ExecuteJump(jumpZoneConfiguration);
 	}
 

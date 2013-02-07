@@ -54,8 +54,6 @@ public class MainMenuLoadLevelBehaviour : MonoBehaviour {
 			Levels.GetLevelByName(this.LevelName).Unlock();
 		}
 
-		//Debug.Log(Levels.GetLevelByName(this.LevelName).GetState());
-
 		if (Levels.GetLevelByName(this.LevelName).GetState() == Level.LevelStatus.Locked) return;
 
 		AsyncSceneLoader.Load(Levels.GetLevelByName(this.LevelName).Name);

@@ -67,6 +67,5 @@ public static partial class CheatImplementation {
         }
         
         variabeleDescriptor.FieldInfo.SetValue(null, parsedParameter);
-        Debug.Log(String.Format("Set {0} to '{1}'. Readback: '{2}'", variabeleDescriptor.FieldInfo.Name, parsedParameter, variabeleDescriptor.FieldInfo.GetValue(null)));
     }
 }
