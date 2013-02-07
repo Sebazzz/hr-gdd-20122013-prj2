@@ -100,6 +100,13 @@
       <SubType>Content</SubType>
       <DependentUpon>sheep.classdiagram</DependentUpon>
     </Content>
+    <Content Include="LevelLoop.activitydiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="LevelLoop.activitydiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>LevelLoop.activitydiagram</DependentUpon>
+    </Content>
     <Content Include="UMLClassDiagram1.classdiagram">
       <SubType>Content</SubType>
     </Content>
