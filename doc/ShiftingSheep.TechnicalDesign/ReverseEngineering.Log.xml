@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///D:/VISUALSTUDIO2012/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/ReverseEngineeringLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2013-02-07T21:57:58" Importance="High" Text="Reverse Engineering Started." />
+  <Error Timestamp="2013-02-07T21:57:59" Importance="High" Text="Length cannot be less than zero.&#xD;&#xA;Parameter name: length Reverse engineer process was stopped." />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Boolean' -  (PrimitiveType)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'Integer' -  (PrimitiveType)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign' -  (ModelStoreModel)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::Awake' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::BlurTime' -  (Property)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::CanLevelBeCompleted' -  (Property)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::GlobalSoundVolume' -  (Property)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::Instance' -  (Property)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::LevelBehaviour' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::LevelTime' -  (Property)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnDogBarnEntered' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnDogKilled' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnGameOver' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnLevelCompleted' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnLevelWasLoaded' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnLevelWasLoaded::index' -  (Parameter)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnSheepCollected' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::OnSheepDeath' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::RecountSheep' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::LevelBehaviour::Start' -  (Operation)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::System' -  (Package)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::System::Collections' -  (Package)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::System::Collections::IEnumerator' -  (Interface)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Element reverse engineered into the UML model: 'ShiftingSheep.TechnicalDesign::System::Single' -  (Class)   (partially reverse engineered - definition not updated) " />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="Diagnostic" Text="Relationship reverse engineered into the UML model: ShiftingSheep.TechnicalDesign::LevelBehaviour to ShiftingSheep.TechnicalDesign::LevelBehaviour (Association)" />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="High" Text="(0) type(s) fully reverse engineered." />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="High" Text="(3) type(s) partially reverse engineered.  These types were not included in the original selection so their full definitions are not reverse engineered.  Instead, this shallow operation has simply ensured these types exist in the UML model because they are needed in order to fully describe other elements." />
+  <Message Timestamp="2013-02-07T21:57:59" Importance="High" Text="The reverse engineering operation completed with (1) error(s), and (0) warning(s)." />
+</Log>
