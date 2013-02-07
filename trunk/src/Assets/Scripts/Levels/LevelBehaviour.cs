@@ -140,7 +140,7 @@ public class LevelBehaviour : MonoBehaviour {
         HUD.Instance.SetMaxCollected(this.sheepCounter.CurrentCount);
 
         // check if all other sheep are dead
-        if (this.sheepCounter.CurrentSafeCount + this.sheepCounter.CurrentCount < this.sheepCounter.MinimumSafeCount) {
+        if (this.sheepCounter.CurrentSafeCount + this.sheepCounter.FreeSheepLeft < this.sheepCounter.MinimumSafeCount) {
             // since there are sheep left to collect and no sheep are alive, we're game over
             this.StartCoroutine(this.OnGameOver());
         }
@@ -277,7 +277,7 @@ public class LevelBehaviour : MonoBehaviour {
         }
 
         public int FreeSheepLeft {
-            get { return this.CurrentSafeCount - this.CurrentCount; }
+            get { return this.CurrentCount - this.CurrentSafeCount; }
         }
 
         public void IncreaseSafeCount() {
