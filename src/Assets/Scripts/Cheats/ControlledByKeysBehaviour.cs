@@ -105,7 +105,7 @@ public sealed class ControlledByKeysBehaviour : MonoBehaviour {
         if (Input.GetKey(JumpKey)) {
             // check for terrain below
             Debug.DrawRay(this.transform.position, this.transform.TransformDirection(Vector3.down) * JumpCheckDistance);
-            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), JumpCheckDistance, Layers.Terrain)) {
+            if (Physics.Raycast(this.transform.position, this.transform.TransformDirection(Vector3.down), JumpCheckDistance)) {
                 this.rigidbody.AddRelativeForce(Vector3.up * JumpForce * this.rigidbody.mass, ForceMode.Impulse);
             }
         }
