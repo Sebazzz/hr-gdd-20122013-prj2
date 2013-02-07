@@ -4,7 +4,7 @@
     <comment Id="e2d40280-89c0-4c62-9142-d75504e87273">
       <elementDefinition Id="0afe57eb-5b0c-4d46-b5ed-4950e27f68a9" />
       <body>Speler begint het spel
- in een level
+
 </body>
       <annotatedElements>
         <initialNodeMoniker Id="9693ed54-2a1e-4e39-baee-b11a3527cdcd" LastKnownName="Initial1" />
@@ -39,9 +39,9 @@
           <initialNode Id="9693ed54-2a1e-4e39-baee-b11a3527cdcd" name="Initial1" isLeaf="false">
             <elementDefinition Id="10997048-a4bd-47f6-b312-0d5e64555d0b" />
             <flowNodeTargets>
-              <controlFlow Id="990e08a1-d1a4-4833-9323-00984c6740c1" isLeaf="false">
-                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Hond wordt bestuurd" />
-                <elementDefinition Id="45ceaf7d-26ea-4b9b-8184-c5ebbc1a408d" />
+              <controlFlow Id="401621ec-7426-4bae-b0bd-77899c344688" isLeaf="false">
+                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="kies level" />
+                <elementDefinition Id="9e8e6ff7-37cc-47c2-bed7-c089d3160cbd" />
               </controlFlow>
             </flowNodeTargets>
           </initialNode>
@@ -188,6 +188,10 @@
                 <activityFinalNodeMoniker Id="e75515a0-a98b-48c7-adff-917e9672a676" LastKnownName="ActivityFinal1" />
                 <elementDefinition Id="0cce4c61-7ced-4b67-999b-706f1d759721" />
               </objectFlow>
+              <objectFlow Id="4dc9a0ac-0fa2-4456-978e-9ebcb9cf99fe" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="kies level" />
+                <elementDefinition Id="adb23d1c-35e1-4a03-a4da-8a67594cd4b2" />
+              </objectFlow>
             </objectFlowTargets>
             <upperBound>
               <literalInteger Id="ae8b9c48-ad61-44c9-ae38-9103f077b531" name="2147483647" value="2147483647">
@@ -195,6 +199,15 @@
               </literalInteger>
             </upperBound>
           </objectNode>
+          <opaqueAction Id="12f34797-7401-4e4a-b1ee-8e2966654f17" name="kies level" isLeaf="false">
+            <elementDefinition Id="cfac2e4a-98a8-4fde-a607-08fca3518a30" />
+            <flowNodeTargets>
+              <controlFlow Id="704f914d-0bb6-4dbb-993c-6aee350c0534" isLeaf="false">
+                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Hond wordt bestuurd" />
+                <elementDefinition Id="193cdb2c-e39f-4399-bced-52fb3b9e294e" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
         </nodes>
       </activity>
     </activityRootModelHasActivity>
