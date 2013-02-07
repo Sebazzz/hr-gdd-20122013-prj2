@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="55fafd22-ecd6-48e0-a666-af197607e3c1" name="Activity1" linkedPackageId="e7ae1532-3553-46fb-bf32-50cf81f98e28" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="55fafd22-ecd6-48e0-a666-af197607e3c1" name="Activity1" linkedPackageId="e7ae1532-3553-46fb-bf32-50cf81f98e28" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
   <ownedCommentsInternal>
     <comment Id="e2d40280-89c0-4c62-9142-d75504e87273">
       <elementDefinition Id="0afe57eb-5b0c-4d46-b5ed-4950e27f68a9" />
@@ -40,12 +40,12 @@
             <elementDefinition Id="10997048-a4bd-47f6-b312-0d5e64555d0b" />
             <flowNodeTargets>
               <controlFlow Id="401621ec-7426-4bae-b0bd-77899c344688" isLeaf="false">
-                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="kies level" />
+                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="Choose Level" />
                 <elementDefinition Id="9e8e6ff7-37cc-47c2-bed7-c089d3160cbd" />
               </controlFlow>
             </flowNodeTargets>
           </initialNode>
-          <opaqueAction Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" name="Hond wordt bestuurd" isLeaf="false">
+          <opaqueAction Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" name="Controll Dogg " isLeaf="false">
             <elementDefinition Id="fe76d7a8-f313-42ba-b3b8-da536b90d153" />
             <flowNodeTargets>
               <controlFlow Id="1af9b3df-2f29-4326-9756-903711f85af7" isLeaf="false">
@@ -58,11 +58,11 @@
             <elementDefinition Id="791eaf3e-4c2f-495d-b807-450dacca07c3" />
             <flowNodeTargets>
               <controlFlow Id="7493bcc7-bc1b-4cf7-a56c-25876177c2c7" isLeaf="false">
-                <opaqueActionMoniker Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" LastKnownName="Schaap  loopt schuur binnen" />
+                <opaqueActionMoniker Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" LastKnownName="Sheep enters barn" />
                 <elementDefinition Id="8f9ed96a-4f03-4e81-863c-455a89024c06" />
               </controlFlow>
               <controlFlow Id="7bd06283-17ac-494b-bcb2-4aaf8828a0fa" isLeaf="false">
-                <opaqueActionMoniker Id="36509245-866c-4ca7-92d3-71358a02c27a" LastKnownName="Schaap gaat dood" />
+                <opaqueActionMoniker Id="36509245-866c-4ca7-92d3-71358a02c27a" LastKnownName="Sheep dies" />
                 <elementDefinition Id="95c0b31e-baad-4039-bc4b-60cd66ce4a9c" />
               </controlFlow>
               <controlFlow Id="92a1e728-91ad-4a2f-a117-b72352c0e531" isLeaf="false">
@@ -70,12 +70,12 @@
                 <elementDefinition Id="9a944972-2800-49f4-b73e-67b8725d4df4" />
               </controlFlow>
               <controlFlow Id="3e76fedf-222f-48fd-9627-ea0e3f9c4b0a" isLeaf="false">
-                <opaqueActionMoniker Id="c65df987-e42a-40c7-8397-790996d18f97" LastKnownName="Hond gaat schuur binnen" />
+                <opaqueActionMoniker Id="c65df987-e42a-40c7-8397-790996d18f97" LastKnownName="Hond enters Barn" />
                 <elementDefinition Id="28a1e1d8-205f-4722-91c8-35ceb6ae18f8" />
               </controlFlow>
             </flowNodeTargets>
           </forkNode>
-          <opaqueAction Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" name="Schaap  loopt schuur binnen" isLeaf="false">
+          <opaqueAction Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" name="Sheep enters barn" isLeaf="false">
             <elementDefinition Id="506703a8-618e-470f-aedb-9c1b6d8da08b" />
             <flowNodeTargets>
               <controlFlow Id="068c9095-64e3-4cf5-a6f0-f5eaf2cad361" isLeaf="false">
@@ -84,7 +84,7 @@
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
-          <opaqueAction Id="36509245-866c-4ca7-92d3-71358a02c27a" name="Schaap gaat dood" isLeaf="false">
+          <opaqueAction Id="36509245-866c-4ca7-92d3-71358a02c27a" name="Sheep dies" isLeaf="false">
             <elementDefinition Id="4fd13992-2e3e-48f7-a3c3-c96d32477517" />
             <flowNodeTargets>
               <controlFlow Id="8c1103fe-43e6-4681-904a-e12056de9505" isLeaf="false">
@@ -102,21 +102,25 @@
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
-          <opaqueAction Id="c65df987-e42a-40c7-8397-790996d18f97" name="Hond gaat schuur binnen" isLeaf="false">
+          <opaqueAction Id="c65df987-e42a-40c7-8397-790996d18f97" name="Hond enters Barn" isLeaf="false">
             <elementDefinition Id="d2ee1a5e-1ce4-456e-be83-9f6e349ecb0e" />
             <flowNodeTargets>
-              <controlFlow Id="1c5ab2f2-5366-4e55-9985-9d6f71812ddc" isLeaf="false">
-                <opaqueActionMoniker Id="793370c4-d3eb-4e9b-8809-56cd98ef0f72" LastKnownName="Win event" />
-                <elementDefinition Id="a6688b58-59d4-4023-a8f2-7f401df56a05" />
+              <controlFlow Id="a4a3dfe1-6576-4987-abe5-bb81e63b11b5" isLeaf="false">
+                <forkNodeMoniker Id="7cd7e64f-21a2-460e-a8a9-4e1db84f7b59" LastKnownName="Fork3" />
+                <elementDefinition Id="9ecbdf2f-d2fc-4c32-addc-2d248e786fd3" />
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
-          <opaqueAction Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" name="Score verandert" isLeaf="false">
+          <opaqueAction Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" name="Score changes" isLeaf="false">
             <elementDefinition Id="af1b0a80-211b-4163-8620-0e50b982d2c9" />
             <flowNodeTargets>
               <controlFlow Id="4fe3ab67-fbf7-450e-8841-385819e0f04e" isLeaf="false">
                 <forkNodeMoniker Id="34ab3275-4dd1-4388-9284-db580a90528b" LastKnownName="Fork2" />
                 <elementDefinition Id="7a350a2b-8cf8-4d41-ad62-36f50f2f037f" />
+              </controlFlow>
+              <controlFlow Id="10e0f01c-3692-4f77-8a27-fef5c5a1ef33" isLeaf="false">
+                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Controll Dogg " />
+                <elementDefinition Id="5812a90d-5132-4161-bb2d-27b955fd02ce" />
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
@@ -124,7 +128,7 @@
             <elementDefinition Id="10a4c71e-c100-4316-8479-132482ccba6e" />
             <flowNodeTargets>
               <controlFlow Id="7f10fb11-0a08-4d95-acbb-b29f6ef72e73" isLeaf="false">
-                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score verandert" />
+                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score changes" />
                 <elementDefinition Id="c5329b5a-017f-44ab-88f1-01d2015a5dcd" />
               </controlFlow>
             </flowNodeTargets>
@@ -133,7 +137,7 @@
             <elementDefinition Id="28d0bc01-c409-4977-b24f-31f795e70ab1" />
             <flowNodeTargets>
               <controlFlow Id="541ec170-87c0-48f3-b0f1-fd0bc0db87db" isLeaf="false">
-                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score verandert" />
+                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score changes" />
                 <elementDefinition Id="cfe79701-4e8d-4ca0-8cd4-c12b9c86d8f2" />
               </controlFlow>
             </flowNodeTargets>
@@ -147,7 +151,7 @@
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
-          <opaqueAction Id="c8c1d99c-3871-4b31-b195-aaa95b616244" name="Level gewonnen" isLeaf="false">
+          <opaqueAction Id="c8c1d99c-3871-4b31-b195-aaa95b616244" name="Level Won" isLeaf="false">
             <elementDefinition Id="d544c7c6-a7cc-4942-ab5f-8831ffba6b7e" />
             <flowNodeTargets>
               <controlFlow Id="48b501e5-54da-42f2-b2d7-231ad53475ff" isLeaf="false">
@@ -164,7 +168,7 @@
                 <elementDefinition Id="e43939d9-872b-4052-a5f0-09bd154f688f" />
               </controlFlow>
               <controlFlow Id="33c3257e-fd40-405d-9d73-fa3062a5db4a" isLeaf="false">
-                <opaqueActionMoniker Id="c8c1d99c-3871-4b31-b195-aaa95b616244" LastKnownName="Level gewonnen" />
+                <opaqueActionMoniker Id="c8c1d99c-3871-4b31-b195-aaa95b616244" LastKnownName="Level Won" />
                 <elementDefinition Id="d3ea13c7-8655-4a99-b457-450de3d4b41b" />
               </controlFlow>
             </flowNodeTargets>
@@ -189,7 +193,7 @@
                 <elementDefinition Id="0cce4c61-7ced-4b67-999b-706f1d759721" />
               </objectFlow>
               <objectFlow Id="4dc9a0ac-0fa2-4456-978e-9ebcb9cf99fe" isLeaf="false" isMulticast="false" isMultireceive="false">
-                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="kies level" />
+                <opaqueActionMoniker Id="12f34797-7401-4e4a-b1ee-8e2966654f17" LastKnownName="Choose Level" />
                 <elementDefinition Id="adb23d1c-35e1-4a03-a4da-8a67594cd4b2" />
               </objectFlow>
             </objectFlowTargets>
@@ -199,15 +203,28 @@
               </literalInteger>
             </upperBound>
           </objectNode>
-          <opaqueAction Id="12f34797-7401-4e4a-b1ee-8e2966654f17" name="kies level" isLeaf="false">
+          <opaqueAction Id="12f34797-7401-4e4a-b1ee-8e2966654f17" name="Choose Level" isLeaf="false">
             <elementDefinition Id="cfac2e4a-98a8-4fde-a607-08fca3518a30" />
             <flowNodeTargets>
               <controlFlow Id="704f914d-0bb6-4dbb-993c-6aee350c0534" isLeaf="false">
-                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Hond wordt bestuurd" />
+                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Controll Dogg " />
                 <elementDefinition Id="193cdb2c-e39f-4399-bced-52fb3b9e294e" />
               </controlFlow>
             </flowNodeTargets>
           </opaqueAction>
+          <forkNode Id="7cd7e64f-21a2-460e-a8a9-4e1db84f7b59" name="Fork3" isLeaf="false">
+            <elementDefinition Id="5ae70637-2626-4ad5-8f48-c80db926be10" />
+            <flowNodeTargets>
+              <controlFlow Id="2fcbec03-2447-495c-a1fc-84e86f92ec74" isLeaf="false">
+                <opaqueActionMoniker Id="c8c1d99c-3871-4b31-b195-aaa95b616244" LastKnownName="Level Won" />
+                <elementDefinition Id="de428c13-4110-4d09-aaf4-bbafffa3a4b8" />
+              </controlFlow>
+              <controlFlow Id="5a60502b-0c76-4fed-815c-373dd62c728a" isLeaf="false">
+                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Controll Dogg " />
+                <elementDefinition Id="c84ec7e5-cad5-49f9-b274-a12e873fc391" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
         </nodes>
       </activity>
     </activityRootModelHasActivity>
