@@ -245,7 +245,7 @@ public static class RemoteInterfaceServer {
 <!doctype html>
 <html>
      <head>
-           <title>{0}</title>
+           <title>{0} - Shifting Sheep Web Client</title>
 
            <link href=""//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"" type=""text/css"" rel=""stylesheet"">
            <link href=""//netdna.bootstrapcdn.com/bootswatch/2.1.1/cosmo/bootstrap.min.css"" type=""text/css"" rel=""stylesheet"">

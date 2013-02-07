@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class CheatControlledByKeysBehaviour : MonoBehaviour {
+public sealed class ControlledByKeysBehaviour : MonoBehaviour {
     private static readonly Dictionary<KeyCode, Vector3> MovementMultipliers = new Dictionary<KeyCode, Vector3>() {
             {KeyCode.I, new Vector3(0, 0, 1)},
             {KeyCode.K, new Vector3(0, 0, -1)},
