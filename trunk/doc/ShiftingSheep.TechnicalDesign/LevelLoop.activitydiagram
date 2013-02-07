@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="55fafd22-ecd6-48e0-a666-af197607e3c1" name="Activity1" linkedPackageId="e7ae1532-3553-46fb-bf32-50cf81f98e28" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="e2d40280-89c0-4c62-9142-d75504e87273">
+      <elementDefinition Id="0afe57eb-5b0c-4d46-b5ed-4950e27f68a9" />
+      <body>Speler begint het spel
+ in een level
+</body>
+      <annotatedElements>
+        <initialNodeMoniker Id="9693ed54-2a1e-4e39-baee-b11a3527cdcd" LastKnownName="Initial1" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="63383aa6-641a-4c07-8b1e-62b057d1108b">
+      <profileInstance Id="dbcf6ba5-234d-475b-8841-b3e19d5d2817" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="fad9a69a-a7d0-496e-9ea7-b9ce63e0938f">
+      <profileInstance Id="77445565-b987-4d68-aa3a-829fdfefd70f" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b9c45433-dce4-4438-9b3c-ab606e1742c4">
+      <profileInstance Id="08283186-91af-4e5e-9de5-c44ed85ee7f5" name="CSharpProfile">
+        <elementDefinition Id="3841ac51-9c5d-421f-9a1b-a55831152330" />
+      </profileInstance>
+      <elementDefinition Id="5491e218-9cd4-4068-9bdd-6d55854cd3d9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="6a1d2d65-d0c4-4a1e-89e4-a15f6b940f1f" name="Activity1" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="cb0e7a71-70df-434e-951d-02d4fe3a2e29" />
+        <nodes>
+          <initialNode Id="9693ed54-2a1e-4e39-baee-b11a3527cdcd" name="Initial1" isLeaf="false">
+            <elementDefinition Id="10997048-a4bd-47f6-b312-0d5e64555d0b" />
+            <flowNodeTargets>
+              <controlFlow Id="990e08a1-d1a4-4833-9323-00984c6740c1" isLeaf="false">
+                <opaqueActionMoniker Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" LastKnownName="Hond wordt bestuurd" />
+                <elementDefinition Id="45ceaf7d-26ea-4b9b-8184-c5ebbc1a408d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="23e1b3f5-c72d-4eea-9092-45d4411a8616" name="Hond wordt bestuurd" isLeaf="false">
+            <elementDefinition Id="fe76d7a8-f313-42ba-b3b8-da536b90d153" />
+            <flowNodeTargets>
+              <controlFlow Id="1af9b3df-2f29-4326-9756-903711f85af7" isLeaf="false">
+                <forkNodeMoniker Id="53750b9d-dc5f-4aa1-92ae-fbb35a541713" LastKnownName="Fork1" />
+                <elementDefinition Id="1a59f751-062c-4e95-b473-b07979881f2d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode Id="53750b9d-dc5f-4aa1-92ae-fbb35a541713" name="Fork1" isLeaf="false">
+            <elementDefinition Id="791eaf3e-4c2f-495d-b807-450dacca07c3" />
+            <flowNodeTargets>
+              <controlFlow Id="7493bcc7-bc1b-4cf7-a56c-25876177c2c7" isLeaf="false">
+                <opaqueActionMoniker Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" LastKnownName="Schaap  loopt schuur binnen" />
+                <elementDefinition Id="8f9ed96a-4f03-4e81-863c-455a89024c06" />
+              </controlFlow>
+              <controlFlow Id="7bd06283-17ac-494b-bcb2-4aaf8828a0fa" isLeaf="false">
+                <opaqueActionMoniker Id="36509245-866c-4ca7-92d3-71358a02c27a" LastKnownName="Schaap gaat dood" />
+                <elementDefinition Id="95c0b31e-baad-4039-bc4b-60cd66ce4a9c" />
+              </controlFlow>
+              <controlFlow Id="92a1e728-91ad-4a2f-a117-b72352c0e531" isLeaf="false">
+                <opaqueActionMoniker Id="a1e064ae-eacd-4f7c-ba4a-ba8e1dfc5fa9" LastKnownName="Hond gaat dood" />
+                <elementDefinition Id="9a944972-2800-49f4-b73e-67b8725d4df4" />
+              </controlFlow>
+              <controlFlow Id="3e76fedf-222f-48fd-9627-ea0e3f9c4b0a" isLeaf="false">
+                <opaqueActionMoniker Id="c65df987-e42a-40c7-8397-790996d18f97" LastKnownName="Hond gaat schuur binnen" />
+                <elementDefinition Id="28a1e1d8-205f-4722-91c8-35ceb6ae18f8" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <opaqueAction Id="a9714e2a-ac5e-40e2-8d8b-a994bd27d0ee" name="Schaap  loopt schuur binnen" isLeaf="false">
+            <elementDefinition Id="506703a8-618e-470f-aedb-9c1b6d8da08b" />
+            <flowNodeTargets>
+              <controlFlow Id="068c9095-64e3-4cf5-a6f0-f5eaf2cad361" isLeaf="false">
+                <opaqueActionMoniker Id="793370c4-d3eb-4e9b-8809-56cd98ef0f72" LastKnownName="Win event" />
+                <elementDefinition Id="66c25759-f708-4398-bcbd-e1d102579a44" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="36509245-866c-4ca7-92d3-71358a02c27a" name="Schaap gaat dood" isLeaf="false">
+            <elementDefinition Id="4fd13992-2e3e-48f7-a3c3-c96d32477517" />
+            <flowNodeTargets>
+              <controlFlow Id="8c1103fe-43e6-4681-904a-e12056de9505" isLeaf="false">
+                <opaqueActionMoniker Id="e382dfea-4a72-493d-a2f3-6c558c454da7" LastKnownName="Loose event" />
+                <elementDefinition Id="6fc6cbb0-b8cc-40d4-9078-73d0c41428fd" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="a1e064ae-eacd-4f7c-ba4a-ba8e1dfc5fa9" name="Hond gaat dood" isLeaf="false">
+            <elementDefinition Id="5312bb4c-eaa1-4a1f-9a80-da3411cff96a" />
+            <flowNodeTargets>
+              <controlFlow Id="4936bd26-8980-4152-83f2-4f5d82bed0b7" isLeaf="false">
+                <opaqueActionMoniker Id="e382dfea-4a72-493d-a2f3-6c558c454da7" LastKnownName="Loose event" />
+                <elementDefinition Id="36f50219-2c27-450d-adf8-ccf61a957748" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c65df987-e42a-40c7-8397-790996d18f97" name="Hond gaat schuur binnen" isLeaf="false">
+            <elementDefinition Id="d2ee1a5e-1ce4-456e-be83-9f6e349ecb0e" />
+            <flowNodeTargets>
+              <controlFlow Id="1c5ab2f2-5366-4e55-9985-9d6f71812ddc" isLeaf="false">
+                <opaqueActionMoniker Id="793370c4-d3eb-4e9b-8809-56cd98ef0f72" LastKnownName="Win event" />
+                <elementDefinition Id="a6688b58-59d4-4023-a8f2-7f401df56a05" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" name="Score verandert" isLeaf="false">
+            <elementDefinition Id="af1b0a80-211b-4163-8620-0e50b982d2c9" />
+            <flowNodeTargets>
+              <controlFlow Id="4fe3ab67-fbf7-450e-8841-385819e0f04e" isLeaf="false">
+                <forkNodeMoniker Id="34ab3275-4dd1-4388-9284-db580a90528b" LastKnownName="Fork2" />
+                <elementDefinition Id="7a350a2b-8cf8-4d41-ad62-36f50f2f037f" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="793370c4-d3eb-4e9b-8809-56cd98ef0f72" name="Win event" isLeaf="false">
+            <elementDefinition Id="10a4c71e-c100-4316-8479-132482ccba6e" />
+            <flowNodeTargets>
+              <controlFlow Id="7f10fb11-0a08-4d95-acbb-b29f6ef72e73" isLeaf="false">
+                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score verandert" />
+                <elementDefinition Id="c5329b5a-017f-44ab-88f1-01d2015a5dcd" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="e382dfea-4a72-493d-a2f3-6c558c454da7" name="Loose event" isLeaf="false">
+            <elementDefinition Id="28d0bc01-c409-4977-b24f-31f795e70ab1" />
+            <flowNodeTargets>
+              <controlFlow Id="541ec170-87c0-48f3-b0f1-fd0bc0db87db" isLeaf="false">
+                <opaqueActionMoniker Id="0d09fc19-ab7b-45bb-88ae-328dd79bf95c" LastKnownName="Score verandert" />
+                <elementDefinition Id="cfe79701-4e8d-4ca0-8cd4-c12b9c86d8f2" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="97f29722-bbfc-49f5-85a5-210af817866a" name="GameOver" isLeaf="false">
+            <elementDefinition Id="b52899b4-c4ec-46ed-9c0a-c69ca3fd9083" />
+            <flowNodeTargets>
+              <controlFlow Id="d41c7144-b586-42b2-9434-048986dfe95e" isLeaf="false">
+                <joinNodeMoniker Id="f7a7652e-b2dd-461c-bf5e-ecc77f8b8581" LastKnownName="Join1" />
+                <elementDefinition Id="3fcdb1d2-df1d-4350-96b6-91cae0f1c4e0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="c8c1d99c-3871-4b31-b195-aaa95b616244" name="Level gewonnen" isLeaf="false">
+            <elementDefinition Id="d544c7c6-a7cc-4942-ab5f-8831ffba6b7e" />
+            <flowNodeTargets>
+              <controlFlow Id="48b501e5-54da-42f2-b2d7-231ad53475ff" isLeaf="false">
+                <joinNodeMoniker Id="f7a7652e-b2dd-461c-bf5e-ecc77f8b8581" LastKnownName="Join1" />
+                <elementDefinition Id="cda21c0e-f669-4bc4-b0a6-09cbdf0a9b5b" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode Id="34ab3275-4dd1-4388-9284-db580a90528b" name="Fork2" isLeaf="false">
+            <elementDefinition Id="80e3f448-29a5-4009-a4e4-7f333ed9ace9" />
+            <flowNodeTargets>
+              <controlFlow Id="8b5bbc77-ce0d-4024-9ef6-183b15eed713" isLeaf="false">
+                <opaqueActionMoniker Id="97f29722-bbfc-49f5-85a5-210af817866a" LastKnownName="GameOver" />
+                <elementDefinition Id="e43939d9-872b-4052-a5f0-09bd154f688f" />
+              </controlFlow>
+              <controlFlow Id="33c3257e-fd40-405d-9d73-fa3062a5db4a" isLeaf="false">
+                <opaqueActionMoniker Id="c8c1d99c-3871-4b31-b195-aaa95b616244" LastKnownName="Level gewonnen" />
+                <elementDefinition Id="d3ea13c7-8655-4a99-b457-450de3d4b41b" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <joinNode Id="f7a7652e-b2dd-461c-bf5e-ecc77f8b8581" name="Join1" isLeaf="false">
+            <elementDefinition Id="61f2a405-42d1-48bd-9395-cabc2efa9ab9" />
+            <objectFlowTargets>
+              <objectFlow Id="a90b67cc-80c9-4f7f-acbd-e642eda195e8" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <objectNodeMoniker Id="c08e64f6-d972-4bdd-bdb5-7a29c4540e65" LastKnownName="LevelScene" />
+                <elementDefinition Id="496ab62b-dbdd-4122-9eff-0bd7952cfc94" />
+              </objectFlow>
+            </objectFlowTargets>
+          </joinNode>
+          <activityFinalNode Id="e75515a0-a98b-48c7-adff-917e9672a676" name="ActivityFinal1" isLeaf="false">
+            <elementDefinition Id="98d14128-65e8-45b5-8c96-703fb5c2b427" />
+          </activityFinalNode>
+          <objectNode Id="c08e64f6-d972-4bdd-bdb5-7a29c4540e65" name="LevelScene" isLeaf="false" ordering="Unordered" isControlType="false">
+            <elementDefinition Id="04384f88-c706-43e8-a736-6beeeacc8016" />
+            <objectFlowTargets>
+              <objectFlow Id="530cabf8-13c3-479b-958a-37d061f14384" isLeaf="false" isMulticast="false" isMultireceive="false">
+                <activityFinalNodeMoniker Id="e75515a0-a98b-48c7-adff-917e9672a676" LastKnownName="ActivityFinal1" />
+                <elementDefinition Id="0cce4c61-7ced-4b67-999b-706f1d759721" />
+              </objectFlow>
+            </objectFlowTargets>
+            <upperBound>
+              <literalInteger Id="ae8b9c48-ad61-44c9-ae38-9103f077b531" name="2147483647" value="2147483647">
+                <elementDefinition Id="8ddb1044-52bb-480d-a0cd-fd26b4bbbd3c" />
+              </literalInteger>
+            </upperBound>
+          </objectNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="e7ae1532-3553-46fb-bf32-50cf81f98e28" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</activityRootModel>
