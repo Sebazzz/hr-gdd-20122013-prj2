@@ -73,7 +73,7 @@ public static partial class CheatImplementation {
         GameObject[] sheepArr = GameObject.FindGameObjectsWithTag(Tags.Sheep);
 
         foreach (GameObject sheep in sheepArr) {
-            CheatControlledByKeysBehaviour c = sheep.AddComponent<CheatControlledByKeysBehaviour>();
+            ControlledByKeysBehaviour c = sheep.AddComponent<ControlledByKeysBehaviour>();
             c.SetMarker(selectionMarker);
             c.JumpForce = 1f;
 
@@ -105,7 +105,7 @@ public static partial class CheatImplementation {
             }
 
             // add component
-            CheatControlledByKeysBehaviour c = dog.AddComponent<CheatControlledByKeysBehaviour>();
+            ControlledByKeysBehaviour c = dog.AddComponent<ControlledByKeysBehaviour>();
             c.SetMarker(selectionMarker);
 
             if (selectionMarker == null) {

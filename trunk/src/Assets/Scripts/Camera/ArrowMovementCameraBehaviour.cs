@@ -84,19 +84,30 @@ public class ArrowMovementCameraBehaviour : MonoBehaviour {
         }
 
         if (this.AutoDetectScrollPointDistance) {
-            // get a point on the terrain for scroll distance
-            Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
-            RaycastHit terrainPositionHit;
-            if (!Physics.Raycast(r, out terrainPositionHit, Mathf.Infinity)) {
-                Debug.LogError("Could not detect a proper scroll distance");
-                return;
-            }
-
-            this.ScrollPointDistance = Vector3.Distance(this.transform.position, terrainPositionHit.point);
+            this.DetectScrollPointDistance();
         }
 	}
-	
-	/// <summary>
+
+    /// <summary>
+    /// Recalibrates the camera for detecting scroll point distance
+    /// </summary>
+    public void RedetectScrollPointDistance() {
+        this.DetectScrollPointDistance();
+    }
+
+    private void DetectScrollPointDistance() {
+// get a point on the terrain for scroll distance
+        Ray r = new Ray(this.transform.position, this.transform.TransformDirection(Vector3.forward));
+        RaycastHit terrainPositionHit;
+        if (!Physics.Raycast(r, out terrainPositionHit, Mathf.Infinity)) {
+            Debug.LogError("Could not detect a proper scroll distance");
+            return;
+        }
+
+        this.ScrollPointDistance = Vector3.Distance(this.transform.position, terrainPositionHit.point);
+    }
+
+    /// <summary>
 	/// Update is called once per frame
 	/// </summary>
 	private void Update () {
