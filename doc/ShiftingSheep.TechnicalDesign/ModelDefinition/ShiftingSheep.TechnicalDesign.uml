@@ -1,8 +1,92 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/dsltools/SimpleShapesModel" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner"
   dslVersion="1.0.0.0"
   Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2"
   name="ShiftingSheep.TechnicalDesign" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="17575827-c504-4ca4-b914-a87a247bb30e">
+      <body>Check mouse button state
+</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="c7a39869-3911-4845-a15c-a9a78bb0e5a5"
+          LastKnownName="Decision11"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="2a4e376e-e35d-4e9a-b9dd-c42be72423b2">
+      <body>Check detectered mouse position is not too far and not too close to previous mouse position</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="c6ef75d5-b1a3-425c-b5f9-8fbba904fc9e"
+          LastKnownName="Decision2"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="e46c83e6-6900-4649-8aaf-89fcc8301a95">
+      <body>Check if current position is within accept distance</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="7250b8d7-2a6d-4618-937c-5035dc16b96d"
+          LastKnownName="Decision3"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="85809e39-7c67-4e59-be27-cfaafc168e5e">
+      <body>Check if walking velocity is not too low</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="5de95842-deab-4c66-9c22-4dca49bfadfa"
+          LastKnownName="Decision4"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="071fb082-06a5-4299-8074-2ab30fac4bb7">
+      <body>Check mouse button state
+</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="a252f512-9e86-4da3-822d-363745ba44e1"
+          LastKnownName="Decision5"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="56cad9a6-de56-4c04-8b6e-facab4c6a9d4">
+      <body>Calculates the dog look rotation</body>
+      <annotatedElements>
+        <opaqueActionMoniker
+          Id="7e56889a-adcb-4d32-bfa6-d1c54dbc21ee"
+          LastKnownName="Calculate dog rotation"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="f295331b-0aba-4dcd-8d12-841dbb27a96a">
+      <body>Check difference between dog rotation and look rotation of jump zone</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="b5238a72-b92e-4429-b2a8-387a062be5b8"
+          LastKnownName="Decision1"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+    <comment
+      Id="84b73313-267f-4484-a7fc-44c06d69b947">
+      <body>Check if the dog path trajectory is across the jump zone</body>
+      <annotatedElements>
+        <decisionNodeMoniker
+          Id="fb416d4d-1879-4398-bf5a-c7407734440e"
+          LastKnownName="Decision2"
+          LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <referencesInternal>
     <reference
       Id="4dd1b7d3-b8a7-49b5-a073-a7cd8e2981ef"
@@ -2589,12 +2673,6 @@
                       handle="viewcode://./CodeSchema_Parameter?Assembly%3Dfile:%2F%2F%2FF:%2FBACKUP%2FSVN%2Fsrc%2FTemp%2Fbin%2FDebug%2FAssembly-CSharp.dll Type%3DLevel Member%3D(Name%3DEquals OverloadingParameters%3D[(Assembly%3Dfile:%2F%2F%2FC:%2FWindows%2FMicrosoft.NET%2FFramework%2Fv2.0.50727%2Fmscorlib.dll Namespace%3DSystem Type%3DObject)]) ParameterIdentifier%3Dobj"
                       tag="ViewCode" />
                   </referencesInternal>
-                  <type_NamedElement>
-                    <classMoniker
-                      Id="12b8c03d-369d-4d0f-ba72-2c941dfb9568"
-                      LastKnownName="Object"
-                      LastKnownLocation="Package_1334.uml" />
-                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -20711,12 +20789,6 @@
       </enumeration>
     </packageHasNamedElement>
     <packageHasNamedElement>
-      <packageMoniker
-        Id="c271767b-0cc6-4aa1-9133-f7b1d24199f7"
-        LastKnownName="Package8"
-        LastKnownLocation="Package_1557.uml" />
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <class
         Id="d5203e10-3a78-4858-947c-c17c725ab142"
         name="Levels"
@@ -21586,6 +21658,415 @@
           </stereotypeInstance>
         </appliedStereotypesInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="faf04e24-cda7-42e5-a9b3-8e9407895053"
+        name="DogControl"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="8ac8b077-8c2f-4757-8290-85b2282b0727"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6eb18b19-f82e-41b0-858b-b3441887a4a4"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ea05be12-37dd-4f5e-8f1a-36cf9bd06a6d"
+                  LastKnownName="Check for input"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="f821ad7f-13f6-49b0-bd65-f74535a1acb8"
+            name="Add mouse position on terrain to path"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6bbff4c8-1e3e-4c6d-90e0-b04fa5f7bbff"
+                isLeaf="false">
+                <mergeNodeMoniker
+                  Id="cdaec4e7-6a8b-4b63-bf0a-fc7c349c6159"
+                  LastKnownName="Merge1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="ea05be12-37dd-4f5e-8f1a-36cf9bd06a6d"
+            name="Check for input"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8fdc981c-ff39-4f0f-8a0c-ef1a48ac2d7d"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="0566afb5-573b-41e9-bf95-914591f0a50b"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="0566afb5-573b-41e9-bf95-914591f0a50b"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="ae1040d9-5856-4bd7-a9d5-b50524d0ae96"
+                guard="Mouse button up on dog"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ea05be12-37dd-4f5e-8f1a-36cf9bd06a6d"
+                  LastKnownName="Check for input"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="3875877d-25f2-479e-b294-53d44ade5364"
+                guard="Mouse button down on dog"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="d2fbbc23-a0ed-48a5-ab49-601192b82800"
+                  LastKnownName="Show selection marker"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="cda889cd-5296-42bc-9052-365493f967c8"
+            name="Walk towards point"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="235d023a-5afb-4b39-b494-639ce2984562"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="7250b8d7-2a6d-4618-937c-5035dc16b96d"
+                  LastKnownName="Decision3"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="c7a39869-3911-4845-a15c-a9a78bb0e5a5"
+            name="Decision11"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0739a6fd-af0f-491c-ad85-064c4865113e"
+                guard="Mouse button up"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="cda889cd-5296-42bc-9052-365493f967c8"
+                  LastKnownName="Walk towards point"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="b42aa022-8098-4f1c-87b0-225d01c3cda7"
+                guard="Mouse button down"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="c8963c0a-243f-4a4d-98bc-96f380bc1f37"
+                  LastKnownName="Get mouse position on terrain"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="d2fbbc23-a0ed-48a5-ab49-601192b82800"
+            name="Show selection marker"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="3b63f429-9aea-4e2b-9bed-922526da1f5a"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="f821ad7f-13f6-49b0-bd65-f74535a1acb8"
+                  LastKnownName="Add mouse position on terrain to path"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="c8963c0a-243f-4a4d-98bc-96f380bc1f37"
+            name="Get mouse position on terrain"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="5460e70f-5837-4df4-9b9e-e1929bfd6c87"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="c6ef75d5-b1a3-425c-b5f9-8fbba904fc9e"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="c6ef75d5-b1a3-425c-b5f9-8fbba904fc9e"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="835df2a7-d0b4-4a53-9798-c07bee7b5760"
+                guard="Mouse position not within acceptable distance"
+                isLeaf="false">
+                <mergeNodeMoniker
+                  Id="cdaec4e7-6a8b-4b63-bf0a-fc7c349c6159"
+                  LastKnownName="Merge1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="cc7c74ed-c257-4c51-834c-90826116bcdd"
+                guard="Mouse position within acceptable distance"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="f821ad7f-13f6-49b0-bd65-f74535a1acb8"
+                  LastKnownName="Add mouse position on terrain to path"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <mergeNode
+            Id="cdaec4e7-6a8b-4b63-bf0a-fc7c349c6159"
+            name="Merge1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a678393b-0d42-44e9-99c6-e8549aca2688"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="c7a39869-3911-4845-a15c-a9a78bb0e5a5"
+                  LastKnownName="Decision11"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </mergeNode>
+          <decisionNode
+            Id="7250b8d7-2a6d-4618-937c-5035dc16b96d"
+            name="Decision3"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="c5e84a5e-9985-4c46-96d3-28b014d01865"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="4743ce82-4ada-4ad5-9cac-a5c8c0df9d22"
+                  LastKnownName="Calculate walking velocity"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="4743ce82-4ada-4ad5-9cac-a5c8c0df9d22"
+            name="Calculate walking velocity"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="6374890f-f9c8-4702-b77a-bd291357d795"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="5de95842-deab-4c66-9c22-4dca49bfadfa"
+                  LastKnownName="Decision4"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="5de95842-deab-4c66-9c22-4dca49bfadfa"
+            name="Decision4"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b07ba5ca-3786-4181-99b0-b4ed3cc81121"
+                guard="Walking velocity too low"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="82d46e3c-29b0-403d-ac12-36b678b19de2"
+                  LastKnownName="Cancel trajectory"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="c5fb246e-46ce-4f9f-b4a2-3b01773e1f9a"
+                guard="Walking velocity high enough"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="a252f512-9e86-4da3-822d-363745ba44e1"
+                  LastKnownName="Decision5"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="82d46e3c-29b0-403d-ac12-36b678b19de2"
+            name="Cancel trajectory"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="59506b77-a222-4dc1-8241-2dc012600c64"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ea05be12-37dd-4f5e-8f1a-36cf9bd06a6d"
+                  LastKnownName="Check for input"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="a252f512-9e86-4da3-822d-363745ba44e1"
+            name="Decision5"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b2978061-20a9-47c4-a96c-11524ff13e2f"
+                guard="Mouse button down"
+                name="Mouse button down"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="82d46e3c-29b0-403d-ac12-36b678b19de2"
+                  LastKnownName="Cancel trajectory"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="377a9004-064b-4e9c-9a6f-18d13a7d09e4"
+                guard="Mouse button up"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="cda889cd-5296-42bc-9052-365493f967c8"
+                  LastKnownName="Walk towards point"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="6af52fa0-1f7c-441e-b205-b72da41a2612"
+        name="JumpZone"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="4a752e0a-f901-4835-a245-ba8b2c93d1da"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="a4485cfa-afa4-42e3-8cd2-24cd1631d767"
+                guard="Dog enters jump zone"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="7e56889a-adcb-4d32-bfa6-d1c54dbc21ee"
+                  LastKnownName="Calculate dog rotation"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="7e56889a-adcb-4d32-bfa6-d1c54dbc21ee"
+            name="Calculate dog rotation"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="82fa5173-3752-4ce3-94a4-3502755be6b7"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="b5238a72-b92e-4429-b2a8-387a062be5b8"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode
+            Id="b5238a72-b92e-4429-b2a8-387a062be5b8"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="35e859bb-6a6a-4d75-a63e-6227b0ecdd74"
+                guard="Dog rotation within acceptation threshold"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="fb416d4d-1879-4398-bf5a-c7407734440e"
+                  LastKnownName="Decision2"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="4be2c80b-0978-4160-a220-7c628e2e70bc"
+                guard="Dog rotation outside accept threshold"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="86df9a63-237a-4ebf-916e-90539444fc1f"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <decisionNode
+            Id="fb416d4d-1879-4398-bf5a-c7407734440e"
+            name="Decision2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="0321b994-4e78-40ed-b730-a5317509e30c"
+                guard="Dog path crosses jump zone"
+                name="Dog path crosses jump zone"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="71b9dc16-4456-4e49-9b45-e4b52b0b6394"
+                  LastKnownName="Apply up force to dog"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="e6b0cff2-6872-40d5-9cd2-ecf6f9247c1a"
+                guard="Dog path does not cross jump zone"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="86df9a63-237a-4ebf-916e-90539444fc1f"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction
+            Id="71b9dc16-4456-4e49-9b45-e4b52b0b6394"
+            name="Apply up force to dog"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="03361a8c-d3d7-4405-903a-d03b0dc5fa51"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="b0f9432f-5b8b-482c-9550-cb7ec3f8d702"
+                  LastKnownName="ActivityFinal2"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <activityFinalNode
+            Id="86df9a63-237a-4ebf-916e-90539444fc1f"
+            name="ActivityFinal1"
+            isLeaf="false" />
+          <activityFinalNode
+            Id="b0f9432f-5b8b-482c-9550-cb7ec3f8d702"
+            name="ActivityFinal2"
+            isLeaf="false" />
+        </nodes>
+      </activity>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

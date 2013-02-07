@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="5048c479-3742-412b-90b7-4f7e7ad672b3" name="DogControl" linkedPackageId="17dd6a5a-8129-4ed2-be84-b0fc4e3a00e9" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <ownedCommentsInternal>
+    <comment Id="6a3e6374-0a42-4fe8-9e8b-67aedd868853">
+      <elementDefinition Id="17575827-c504-4ca4-b914-a87a247bb30e" />
+      <body>Check mouse button state
+</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="0c9d825c-80b3-4560-8fbb-e6a787172e61" LastKnownName="Decision11" />
+      </annotatedElements>
+    </comment>
+    <comment Id="93352a2f-245b-419f-b181-65ea9298307b">
+      <elementDefinition Id="2a4e376e-e35d-4e9a-b9dd-c42be72423b2" />
+      <body>Check detectered mouse position is not too far and not too close to previous mouse position</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="471e1233-ddc1-4b70-9c3d-5e73d2229d25" LastKnownName="Decision2" />
+      </annotatedElements>
+    </comment>
+    <comment Id="9eec71d8-2c8a-4dd6-8cd3-33817083177f">
+      <elementDefinition Id="e46c83e6-6900-4649-8aaf-89fcc8301a95" />
+      <body>Check if current position is within accept distance</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="18c76986-b404-499c-9aa6-d1a23151e0a2" LastKnownName="Decision3" />
+      </annotatedElements>
+    </comment>
+    <comment Id="dd87455a-4f72-4f60-9914-c8179d000455">
+      <elementDefinition Id="85809e39-7c67-4e59-be27-cfaafc168e5e" />
+      <body>Check if walking velocity is not too low</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="83b3cb9e-9a45-4457-91f1-aa342fae0ac3" LastKnownName="Decision4" />
+      </annotatedElements>
+    </comment>
+    <comment Id="618370c9-e5c2-4270-9d12-a88f00561072">
+      <elementDefinition Id="071fb082-06a5-4299-8074-2ab30fac4bb7" />
+      <body>Check mouse button state
+</body>
+      <annotatedElements>
+        <decisionNodeMoniker Id="8b090000-b933-4f3d-a7be-da20415878bc" LastKnownName="Decision5" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances Id="9d9afb6a-64e3-4318-9965-efa0c51e356e">
+      <profileInstance Id="7b1f025a-153a-4fa3-b2bb-823df0cd560d" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="06e2b115-f905-4fcc-9eb3-1a382b15f6c8">
+      <profileInstance Id="9603cfbd-eda4-4f4a-815c-94ef41ab0eec" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="ec228bb8-b626-4b97-8ba1-d297ad236975">
+      <profileInstance Id="4f83a3cc-37e5-48ca-829d-de7fd0efd015" name="CSharpProfile">
+        <elementDefinition Id="3841ac51-9c5d-421f-9a1b-a55831152330" />
+      </profileInstance>
+      <elementDefinition Id="5491e218-9cd4-4068-9bdd-6d55854cd3d9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="405f40c6-29f3-4e72-9a1a-5837e83c8797" name="DogControl" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="faf04e24-cda7-42e5-a9b3-8e9407895053" />
+        <nodes>
+          <initialNode Id="eb5738d4-e34a-4dd2-b20f-eaff8d14789f" name="Initial1" isLeaf="false">
+            <elementDefinition Id="8ac8b077-8c2f-4757-8290-85b2282b0727" />
+            <flowNodeTargets>
+              <controlFlow Id="1827d1ec-7b3a-4085-aad8-e05df8317214" isLeaf="false">
+                <opaqueActionMoniker Id="ccbcc315-b429-4569-af01-451f334061e8" LastKnownName="Check for input" />
+                <elementDefinition Id="6eb18b19-f82e-41b0-858b-b3441887a4a4" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="76b7e215-d7a2-4b53-a355-a1a2d5fe2ba3" name="Add mouse position on terrain to path" isLeaf="false">
+            <elementDefinition Id="f821ad7f-13f6-49b0-bd65-f74535a1acb8" />
+            <flowNodeTargets>
+              <controlFlow Id="a0fa4971-e837-453f-8751-09c4bf3d3391" isLeaf="false">
+                <mergeNodeMoniker Id="3e1c8a8e-bd78-4916-bc80-89ade7be7286" LastKnownName="Merge1" />
+                <elementDefinition Id="6bbff4c8-1e3e-4c6d-90e0-b04fa5f7bbff" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="ccbcc315-b429-4569-af01-451f334061e8" name="Check for input" isLeaf="false">
+            <elementDefinition Id="ea05be12-37dd-4f5e-8f1a-36cf9bd06a6d" />
+            <flowNodeTargets>
+              <controlFlow Id="2fb3bdae-9f9b-4c85-b878-4bcb0b50227e" isLeaf="false">
+                <decisionNodeMoniker Id="520e3546-cc72-4398-99ec-4204cd804aca" LastKnownName="Decision1" />
+                <elementDefinition Id="8fdc981c-ff39-4f0f-8a0c-ef1a48ac2d7d" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="520e3546-cc72-4398-99ec-4204cd804aca" name="Decision1" isLeaf="false">
+            <elementDefinition Id="0566afb5-573b-41e9-bf95-914591f0a50b" />
+            <flowNodeTargets>
+              <controlFlow Id="051ff7c9-a07f-41fe-b991-43e344ac27ff" guard="Mouse button up on dog" isLeaf="false">
+                <opaqueActionMoniker Id="ccbcc315-b429-4569-af01-451f334061e8" LastKnownName="Check for input" />
+                <elementDefinition Id="ae1040d9-5856-4bd7-a9d5-b50524d0ae96" />
+              </controlFlow>
+              <controlFlow Id="258f9a25-5c9d-4c4e-8381-ca8730f3b8fc" guard="Mouse button down on dog" isLeaf="false">
+                <opaqueActionMoniker Id="7788d8a6-b68a-4834-8e11-a66d0de93170" LastKnownName="Show selection marker" />
+                <elementDefinition Id="3875877d-25f2-479e-b294-53d44ade5364" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="8fc9c76c-117b-4f35-ae0a-fda401eca1f9" name="Walk towards point" isLeaf="false">
+            <elementDefinition Id="cda889cd-5296-42bc-9052-365493f967c8" />
+            <flowNodeTargets>
+              <controlFlow Id="dd0fb706-6666-40d3-b750-f114daad505e" isLeaf="false">
+                <decisionNodeMoniker Id="18c76986-b404-499c-9aa6-d1a23151e0a2" LastKnownName="Decision3" />
+                <elementDefinition Id="235d023a-5afb-4b39-b494-639ce2984562" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="0c9d825c-80b3-4560-8fbb-e6a787172e61" name="Decision11" isLeaf="false">
+            <elementDefinition Id="c7a39869-3911-4845-a15c-a9a78bb0e5a5" />
+            <flowNodeTargets>
+              <controlFlow Id="67314617-562a-430f-8c90-053862097557" guard="Mouse button up" isLeaf="false">
+                <opaqueActionMoniker Id="8fc9c76c-117b-4f35-ae0a-fda401eca1f9" LastKnownName="Walk towards point" />
+                <elementDefinition Id="0739a6fd-af0f-491c-ad85-064c4865113e" />
+              </controlFlow>
+              <controlFlow Id="e17e747d-1a67-4fe5-ba84-351673ae6962" guard="Mouse button down" isLeaf="false">
+                <opaqueActionMoniker Id="7f849172-de3e-47f3-b178-c98727ab015d" LastKnownName="Get mouse position on terrain" />
+                <elementDefinition Id="b42aa022-8098-4f1c-87b0-225d01c3cda7" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="7788d8a6-b68a-4834-8e11-a66d0de93170" name="Show selection marker" isLeaf="false">
+            <elementDefinition Id="d2fbbc23-a0ed-48a5-ab49-601192b82800" />
+            <flowNodeTargets>
+              <controlFlow Id="caa73641-bc61-4eb3-a821-7e880d70a3fb" isLeaf="false">
+                <opaqueActionMoniker Id="76b7e215-d7a2-4b53-a355-a1a2d5fe2ba3" LastKnownName="Add mouse position on terrain to path" />
+                <elementDefinition Id="3b63f429-9aea-4e2b-9bed-922526da1f5a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="7f849172-de3e-47f3-b178-c98727ab015d" name="Get mouse position on terrain" isLeaf="false">
+            <elementDefinition Id="c8963c0a-243f-4a4d-98bc-96f380bc1f37" />
+            <flowNodeTargets>
+              <controlFlow Id="2a779ce9-8ded-4599-bb43-cde1d0a663bc" isLeaf="false">
+                <decisionNodeMoniker Id="471e1233-ddc1-4b70-9c3d-5e73d2229d25" LastKnownName="Decision2" />
+                <elementDefinition Id="5460e70f-5837-4df4-9b9e-e1929bfd6c87" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="471e1233-ddc1-4b70-9c3d-5e73d2229d25" name="Decision2" isLeaf="false">
+            <elementDefinition Id="c6ef75d5-b1a3-425c-b5f9-8fbba904fc9e" />
+            <flowNodeTargets>
+              <controlFlow Id="74f85131-0b69-4f76-a5ae-a2bfa11fc40a" guard="Mouse position not within acceptable distance" isLeaf="false">
+                <mergeNodeMoniker Id="3e1c8a8e-bd78-4916-bc80-89ade7be7286" LastKnownName="Merge1" />
+                <elementDefinition Id="835df2a7-d0b4-4a53-9798-c07bee7b5760" />
+              </controlFlow>
+              <controlFlow Id="aeef4255-f0ef-4b53-847c-90027bb477e8" guard="Mouse position within acceptable distance" isLeaf="false">
+                <opaqueActionMoniker Id="76b7e215-d7a2-4b53-a355-a1a2d5fe2ba3" LastKnownName="Add mouse position on terrain to path" />
+                <elementDefinition Id="cc7c74ed-c257-4c51-834c-90826116bcdd" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <mergeNode Id="3e1c8a8e-bd78-4916-bc80-89ade7be7286" name="Merge1" isLeaf="false">
+            <elementDefinition Id="cdaec4e7-6a8b-4b63-bf0a-fc7c349c6159" />
+            <flowNodeTargets>
+              <controlFlow Id="d0192bc7-774f-4f47-8394-8495b2671bf0" isLeaf="false">
+                <decisionNodeMoniker Id="0c9d825c-80b3-4560-8fbb-e6a787172e61" LastKnownName="Decision11" />
+                <elementDefinition Id="a678393b-0d42-44e9-99c6-e8549aca2688" />
+              </controlFlow>
+            </flowNodeTargets>
+          </mergeNode>
+          <decisionNode Id="18c76986-b404-499c-9aa6-d1a23151e0a2" name="Decision3" isLeaf="false">
+            <elementDefinition Id="7250b8d7-2a6d-4618-937c-5035dc16b96d" />
+            <flowNodeTargets>
+              <controlFlow Id="e648bb2f-fe4f-48f5-848c-34da38e1836d" isLeaf="false">
+                <opaqueActionMoniker Id="cb1b58c3-96b7-42c6-9a91-e9b1d1d2b8b5" LastKnownName="Calculate walking velocity" />
+                <elementDefinition Id="c5e84a5e-9985-4c46-96d3-28b014d01865" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="cb1b58c3-96b7-42c6-9a91-e9b1d1d2b8b5" name="Calculate walking velocity" isLeaf="false">
+            <elementDefinition Id="4743ce82-4ada-4ad5-9cac-a5c8c0df9d22" />
+            <flowNodeTargets>
+              <controlFlow Id="627419f0-f7ed-41b1-be90-5a98afd4453e" isLeaf="false">
+                <decisionNodeMoniker Id="83b3cb9e-9a45-4457-91f1-aa342fae0ac3" LastKnownName="Decision4" />
+                <elementDefinition Id="6374890f-f9c8-4702-b77a-bd291357d795" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="83b3cb9e-9a45-4457-91f1-aa342fae0ac3" name="Decision4" isLeaf="false">
+            <elementDefinition Id="5de95842-deab-4c66-9c22-4dca49bfadfa" />
+            <flowNodeTargets>
+              <controlFlow Id="aa6218bf-c831-4aab-92a2-86e7dfdb1d79" guard="Walking velocity too low" isLeaf="false">
+                <opaqueActionMoniker Id="8925ef81-4cc9-4d9f-9271-4b2c6cd292f3" LastKnownName="Cancel trajectory" />
+                <elementDefinition Id="b07ba5ca-3786-4181-99b0-b4ed3cc81121" />
+              </controlFlow>
+              <controlFlow Id="e36864bd-52cd-4eb1-9902-1413044d004a" guard="Walking velocity high enough" isLeaf="false">
+                <decisionNodeMoniker Id="8b090000-b933-4f3d-a7be-da20415878bc" LastKnownName="Decision5" />
+                <elementDefinition Id="c5fb246e-46ce-4f9f-b4a2-3b01773e1f9a" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+          <opaqueAction Id="8925ef81-4cc9-4d9f-9271-4b2c6cd292f3" name="Cancel trajectory" isLeaf="false">
+            <elementDefinition Id="82d46e3c-29b0-403d-ac12-36b678b19de2" />
+            <flowNodeTargets>
+              <controlFlow Id="ab2681e1-3484-471c-8cf0-94d9a020a13b" isLeaf="false">
+                <opaqueActionMoniker Id="ccbcc315-b429-4569-af01-451f334061e8" LastKnownName="Check for input" />
+                <elementDefinition Id="59506b77-a222-4dc1-8241-2dc012600c64" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <decisionNode Id="8b090000-b933-4f3d-a7be-da20415878bc" name="Decision5" isLeaf="false">
+            <elementDefinition Id="a252f512-9e86-4da3-822d-363745ba44e1" />
+            <flowNodeTargets>
+              <controlFlow Id="1ccfeb6f-4d20-4b54-b9f4-2b9bb5ff4c7c" guard="Mouse button down" name="Mouse button down" isLeaf="false">
+                <opaqueActionMoniker Id="8925ef81-4cc9-4d9f-9271-4b2c6cd292f3" LastKnownName="Cancel trajectory" />
+                <elementDefinition Id="b2978061-20a9-47c4-a96c-11524ff13e2f" />
+              </controlFlow>
+              <controlFlow Id="b0ecc388-6637-47b9-90db-a2d8bea127cb" guard="Mouse button up" isLeaf="false">
+                <opaqueActionMoniker Id="8fc9c76c-117b-4f35-ae0a-fda401eca1f9" LastKnownName="Walk towards point" />
+                <elementDefinition Id="377a9004-064b-4e9c-9a6f-18d13a7d09e4" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="17dd6a5a-8129-4ed2-be84-b0fc4e3a00e9" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</activityRootModel>
