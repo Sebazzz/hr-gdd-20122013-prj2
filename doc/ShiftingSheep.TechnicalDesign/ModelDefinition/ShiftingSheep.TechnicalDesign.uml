@@ -22068,6 +22068,55 @@
         </nodes>
       </activity>
     </packageHasNamedElement>
+    <packageHasNamedElement>
+      <activity
+        Id="b4f22709-128b-4fab-accc-bab5340dd225"
+        name="CameraZoom"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false"
+        isReentrant="false"
+        isReadOnly="false"
+        isSingleExecution="false">
+        <nodes>
+          <initialNode
+            Id="92b262c1-28c1-4c9b-ae8d-5bd131435cfb"
+            name="Initial1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="7e44fae6-c20b-4bb4-b370-1b455dd16dc3"
+                guard="Level start"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="83f46105-0d0b-4a87-81f1-ad36a4da7310"
+                  LastKnownName="Set camera position to zoom in position"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction
+            Id="83f46105-0d0b-4a87-81f1-ad36a4da7310"
+            name="Set camera position to zoom in position"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="8126e292-2b99-4fa1-9866-07bb4b804eb0"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="0e1ec111-ac96-43ce-a586-e0f64482736b"
+                  LastKnownName="TODO"
+                  LastKnownLocation="ShiftingSheep.TechnicalDesign.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction
+            Id="0e1ec111-ac96-43ce-a586-e0f64482736b"
+            name="TODO"
+            isLeaf="false" />
+        </nodes>
+      </activity>
+    </packageHasNamedElement>
   </packagedElements>
   <primitiveType
     Id="220a3521-e091-4221-bae9-3ef9018e845c"

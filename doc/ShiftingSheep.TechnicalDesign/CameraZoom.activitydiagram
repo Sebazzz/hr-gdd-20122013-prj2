@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityRootModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/SimpleShapesModel" dslVersion="1.0.0.0" Id="898ec542-383a-44a1-ac7d-61244015add6" name="CameraZoom" linkedPackageId="4ead9372-c1dd-484f-9b5c-93e3d303fe9f" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ActivityDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="ec76d580-7f37-485b-bb9b-0e271f03409b">
+      <profileInstance Id="79fcbe26-f46b-4215-bc90-2e5f25dfdd78" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="f6ba849b-fb3d-45a5-9854-cc24575f48c3">
+      <profileInstance Id="692ff475-6191-4e1c-b8bb-3d5c20761d16" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="c0fe64e7-8e35-4e53-8c9f-8406f98beb52">
+      <profileInstance Id="1452ba1c-0ddd-4c7b-b8e3-2842662c1c60" name="CSharpProfile">
+        <elementDefinition Id="3841ac51-9c5d-421f-9a1b-a55831152330" />
+      </profileInstance>
+      <elementDefinition Id="5491e218-9cd4-4068-9bdd-6d55854cd3d9" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <activityRootModelHasActivity>
+      <activity Id="00808d78-4c8d-4453-99a3-73b50f012ff4" name="CameraZoom" isAbstract="false" isLeaf="false" isActiveClass="false" isReentrant="false" isReadOnly="false" isSingleExecution="false">
+        <elementDefinition Id="b4f22709-128b-4fab-accc-bab5340dd225" />
+        <nodes>
+          <initialNode Id="b7e8b944-c3ed-4084-977e-96fa09b89601" name="Initial1" isLeaf="false">
+            <elementDefinition Id="92b262c1-28c1-4c9b-ae8d-5bd131435cfb" />
+            <flowNodeTargets>
+              <controlFlow Id="e1e8cf17-1c12-499c-aa9f-fc882d882764" guard="Level start" isLeaf="false">
+                <opaqueActionMoniker Id="45dbfbea-4ad8-49c7-8202-95f1fee06f42" LastKnownName="Set camera position to zoom in position" />
+                <elementDefinition Id="7e44fae6-c20b-4bb4-b370-1b455dd16dc3" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
+          <opaqueAction Id="45dbfbea-4ad8-49c7-8202-95f1fee06f42" name="Set camera position to zoom in position" isLeaf="false">
+            <elementDefinition Id="83f46105-0d0b-4a87-81f1-ad36a4da7310" />
+            <flowNodeTargets>
+              <controlFlow Id="a13f3ce2-ebd7-46c7-9b79-ee12eb8bbc0b" isLeaf="false">
+                <opaqueActionMoniker Id="75409872-5fff-4c26-be28-b6a96c3afa9b" LastKnownName="TODO" />
+                <elementDefinition Id="8126e292-2b99-4fa1-9866-07bb4b804eb0" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <opaqueAction Id="75409872-5fff-4c26-be28-b6a96c3afa9b" name="TODO" isLeaf="false">
+            <elementDefinition Id="0e1ec111-ac96-43ce-a586-e0f64482736b" />
+          </opaqueAction>
+        </nodes>
+      </activity>
+    </activityRootModelHasActivity>
+  </packagedElements>
+  <package Id="4ead9372-c1dd-484f-9b5c-93e3d303fe9f" name="ShiftingSheep.TechnicalDesign">
+    <elementDefinition Id="01f4cfdb-bb55-4ed9-8d21-fd37f8fceeb2" />
+  </package>
+</activityRootModel>
