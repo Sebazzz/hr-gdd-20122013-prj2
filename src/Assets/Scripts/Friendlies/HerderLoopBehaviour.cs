@@ -136,15 +136,6 @@ public class HerderLoopBehaviour : MonoBehaviour {
             this.desiredSpeed = speedPerUnit;
         }
 
-    //    Debug.Log(
-    //String.Format(
-    //    "distance: {0}; time: {1};  init. speed: {3}; recalc speed: {4}; final speed: {2};",
-    //    totalPathLength,
-    //    totalDrawingTime,
-    //    speedPerUnit,
-    //    totalPathLength / totalDrawingTime,
-    //    totalPathLength / totalDrawingTime * this.MovementSpeedFactor),
-    //    this.gameObject);
     }
 
     /// <summary>
@@ -234,7 +225,6 @@ public class HerderLoopBehaviour : MonoBehaviour {
             return false;
         }
 
-        //Debug.Log(String.Format("Desired speed: {2}; Speed per unit: {0}; Allowable speed: {1}", speedPerUnit, minimalAllowableSpeed, this.desiredSpeed));
         return speedPerUnit < minimalAllowableSpeed;
     }
 

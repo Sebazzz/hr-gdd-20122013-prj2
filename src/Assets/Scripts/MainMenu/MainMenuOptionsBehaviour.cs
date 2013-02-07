@@ -80,7 +80,6 @@ public class MainMenuOptionsBehaviour : MonoBehaviour {
 
 		int res = PlayerPrefs.GetInt("resolution");
         if (resolutions.Length > res) {
-			Debug.Log("resolution");
             if (Screen.height != resolutions[res].height || Screen.width != resolutions[res].width)
                 Screen.SetResolution(resolutions[PlayerPrefs.GetInt("resolution")].width,
                                      resolutions[PlayerPrefs.GetInt("resolution")].height, fullscreen);

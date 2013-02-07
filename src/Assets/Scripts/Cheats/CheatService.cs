@@ -210,8 +210,6 @@ public static class CheatService {
 
         // call
         cheat.Method.Invoke(null, parsedParameters);
-
-        Debug.Log("Applied cheat: " + cheat.Name);
     }
 
     /// <summary>
